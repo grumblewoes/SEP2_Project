@@ -1,7 +1,6 @@
 package mediatorClient;
 
-import .Model;
-import .String;
+.String;
 
 public class Client implements Model, RemoteListener
 {

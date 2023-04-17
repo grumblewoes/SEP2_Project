@@ -1,21 +1,21 @@
 package modelServer;
 
+import java.util.ArrayList;
+
 public class TraineeList {
 
-	private Trainee[] trainee;
 
-	private User[] user;
+	private ArrayList<User> users;
 
 	public TraineeList() {
-
+		users = new ArrayList<>();
 	}
 
 	public void addUser(User user) {
-
+		users.add(user);
 	}
 
 	public int size() {
-		return 0;
+	return users.size();
 	}
-
 }

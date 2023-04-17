@@ -1,6 +1,6 @@
 package viewModel;
 
-import .Model;
+.Model;
 
 public class CreateUserViewModel extends ViewModel implements PropertyChangeListener {
 

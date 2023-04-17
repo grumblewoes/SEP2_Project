@@ -1,7 +1,6 @@
 package view;
 
-import .CreateUserViewModel;
-import .ViewModel;
+.ViewModel;
 
 public class CreateUserViewController extends ViewController
 {

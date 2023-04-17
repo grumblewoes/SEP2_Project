@@ -1,6 +1,6 @@
 package view;
 
-import .CreateUserViewModel;
+.CreateUserViewModel;
 
 public abstract class ViewController {
 
