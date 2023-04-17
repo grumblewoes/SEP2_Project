@@ -1,12 +1,10 @@
 package view;
-
-import .CreateUserViewModel;
+import javafx.scene.layout.Region;
+import viewModel.CreateUserViewModel;
 
 public abstract class ViewController {
 
 	protected Region root;
-
-	private ViewHandler viewHandler;
 
 	private ViewHandler viewHandler;
 

@@ -12,7 +12,7 @@ public class ViewModelFactory {
 	}
 
 	public CreateUserViewModel getCreateUserViewModel() {
-		return null;
+		return createUserViewModel;
 	}
 
 }
