@@ -15,32 +15,37 @@ public abstract class User {
 
 	private int height;
 
-	public User(String firstName, String lastName, String userName, String password, int height, int weight) {
-
+	public User(String firstName, String lastName, String userName, String password, int weight, int height) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.password = password;
+		this.weight = weight;
+		this.height = height;
 	}
 
 	public String getFirstName() {
-		return null;
+		return firstName;
 	}
 
 	public String getLastName() {
-		return null;
+		return lastName;
 	}
 
 	public String getUserName() {
-		return null;
+		return userName;
 	}
 
 	public String getPassword() {
-		return null;
+		return password;
 	}
 
 	public int getWeight() {
-		return 0;
+		return weight;
 	}
 
 	public int getHeight() {
-		return 0;
+		return height;
 	}
 
 }

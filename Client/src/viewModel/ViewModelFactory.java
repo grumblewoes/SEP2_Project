@@ -8,11 +8,11 @@ public class ViewModelFactory {
 	private Model model;
 
 	public ViewModelFactory(Model model) {
-
+		this.createUserViewModel=new CreateUserViewModel(model);
 	}
 
 	public CreateUserViewModel getCreateUserViewModel() {
-		return null;
+		return createUserViewModel;
 	}
 
 }
