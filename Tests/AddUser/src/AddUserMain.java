@@ -1,3 +1,5 @@
+import mediatorClient.RemoteModel;
+
 import java.rmi.Naming;
 
 public class AddUserMain
