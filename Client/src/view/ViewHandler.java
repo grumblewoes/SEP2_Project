@@ -21,7 +21,7 @@ public class ViewHandler {
 	private ViewController viewController;
 
 	public ViewHandler(ViewModelFactory viewFactory) {
-		this.viewModelFactory = viewModelFactory;
+		this.viewModelFactory = viewFactory;
 		currentScene = new Scene(new Region());
 	}
 
@@ -32,14 +32,15 @@ public class ViewHandler {
 
 	public void openView(String id) {
 		Region root = null;
+
 		switch (id)
 		{
 			case "createProfile":
-				root = loadCreateProfileView("createProfile.fxml", , viewModelFactory.getCreateUserViewModel());
+				root = loadCreateProfileView("createProfile.fxml", viewController, viewModelFactory.getCreateUserViewModel());
 				break;
 		}
 		currentScene.setRoot(root);
-		String title = "";
+		String title = "Valhalla Fitness - ";
 		if (root.getUserData() != null)
 		{
 			title += root.getUserData();

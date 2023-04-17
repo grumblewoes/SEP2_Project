@@ -43,22 +43,19 @@ public class CreateUserViewController extends ViewController
 
 	}
 
-	@Override public void init(ViewHandler viewHandler,
-			CreateUserViewModel createUserViewModel, Region root)
-	{
-
-	}
-
 	public void reset() {
-
+		//createUserViewModel.clear();
+		//since we use observers, is there really anything to refresh??
 	}
 
 	private void submitButton() {
-
+		createUserViewModel.createUser();
 	}
 
 	private void cancelButton() {
-
+		//placeholder until we have a screen to swap to
+		//viewHandler.openView("menu");
+		createUserViewModel.clear();
 	}
 
 }
