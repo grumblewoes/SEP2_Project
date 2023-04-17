@@ -6,6 +6,7 @@ public class AddUserMain
   {
     RemoteModel model;
     String firstname, lastname, username, password;
+    int height, weight;
 
     //fetching proxy object
     try {
@@ -22,9 +23,11 @@ public class AddUserMain
     lastname = "Bobson";
     username = "MobsterBob";
     password = "mobbob_1234";
+    height = 157;
+    weight = 56;
     System.out.println("Adding user with correct inputs.");
     try {
-      model.createUser(firstname, lastname, username, password);
+      model.createUser(firstname, lastname, username, password, height, weight);
       System.out.println("Success");
     }
     catch (Exception e) {
@@ -36,9 +39,11 @@ public class AddUserMain
     lastname = "Bobson";
     username = "MobsterBob";
     password = "mobbob_1234";
+    height = 163;
+    weight = 61;
     System.out.println("Adding user with correct inputs.");
     try {
-      model.createUser(firstname, lastname, username, password);
+      model.createUser(firstname, lastname, username, password, height, weight);
       System.out.println("Success");
     }
     catch (Exception e) {
@@ -50,9 +55,11 @@ public class AddUserMain
     lastname = "Crews";
     username = "TerryCrews";
     password = "joeMama_";
+    height = 160;
+    weight = 60;
     System.out.println("Adding user with blank space in firstname.");
     try {
-      model.createUser(firstname, lastname, username, password);
+      model.createUser(firstname, lastname, username, password, height, weight);
       System.out.println("Success");
     }
     catch (Exception e) {
@@ -64,9 +71,11 @@ public class AddUserMain
     lastname = " ";
     username = "DannyPhantom";
     password = "dan_Fan";
+    height = 159;
+    weight = 68;
     System.out.println("Adding user with blank space in lastname.");
     try {
-      model.createUser(firstname, lastname, username, password);
+      model.createUser(firstname, lastname, username, password, height, weight);
       System.out.println("Success");
     }
     catch (Exception e) {
@@ -78,9 +87,11 @@ public class AddUserMain
     lastname = "Tyler";
     username = "";
     password = "tyler_1234";
+    height = 174;
+    weight = 75;
     System.out.println("Adding user with empty field in username.");
     try {
-      model.createUser(firstname, lastname, username, password);
+      model.createUser(firstname, lastname, username, password, height, weight);
       System.out.println("Success");
     }
     catch (Exception e) {
@@ -92,9 +103,11 @@ public class AddUserMain
     lastname = "Polk";
     username = "JamesPolk";
     password = "";
+    height = 160;
+    weight = 60;
     System.out.println("Adding user with empty field in password.");
     try {
-      model.createUser(firstname, lastname, username, password);
+      model.createUser(firstname, lastname, username, password, height, weight);
       System.out.println("Success");
     }
     catch (Exception e) {
@@ -106,9 +119,11 @@ public class AddUserMain
     lastname = "Fillmore";
     username = "MillerFillmore";
     password = "m";
+    height = 160;
+    weight = 64;
     System.out.println("Adding user with short password.");
     try {
-      model.createUser(firstname, lastname, username, password);
+      model.createUser(firstname, lastname, username, password, height, weight);
       System.out.println("Success");
     }
     catch (Exception e) {
@@ -120,9 +135,11 @@ public class AddUserMain
     lastname = "Pierce";
     username = "FranklinPierce";
     password = "Frankie_{Pierce";
+    height = 172;
+    weight = 65;
     System.out.println("Adding user with illegal characters in password");
     try {
-      model.createUser(firstname, lastname, username, password);
+      model.createUser(firstname, lastname, username, password, height, weight);
       System.out.println("Success");
     }
     catch (Exception e) {
@@ -134,9 +151,11 @@ public class AddUserMain
     lastname = "Buchanan";
     username = "JamesBuchanan";
     password = "xX_J4m3s_Buch4n4n@Pr3s1d3ncy_Xx";
+    height = 159;
+    weight = 59;
     System.out.println("Adding user with long password.");
     try {
-      model.createUser(firstname, lastname, username, password);
+      model.createUser(firstname, lastname, username, password, height, weight);
       System.out.println("Success");
     }
     catch (Exception e) {
