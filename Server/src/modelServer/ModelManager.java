@@ -12,8 +12,9 @@ public class ModelManager implements Model
     {
 
         Trainee trainee = new Trainee(firstName, lastName, username, password, height, weight);
-        if (trainee.getFirstName().equals(traineeList.)
-
+        if (!trainee.getUserName().equals(traineeList.getUserByUsername(username))) {
+            return true;
+        }
         return false;
     }
 }
