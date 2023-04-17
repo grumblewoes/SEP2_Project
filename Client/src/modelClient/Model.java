@@ -1,6 +1,9 @@
 package modelClient;
 
-public interface Model {
+import utility.observer.javaobserver.UnnamedPropertyChangeSubject;
+
+public interface Model extends UnnamedPropertyChangeSubject
+{
 
 	public abstract boolean createUser(String firstName, String lastName, String userName, String password, int height, int weight);
 

@@ -1,4 +1,5 @@
 package view;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -20,19 +21,58 @@ public class ViewHandler {
 	private ViewController viewController;
 
 	public ViewHandler(ViewModelFactory viewFactory) {
-
+		this.viewModelFactory = viewModelFactory;
+		currentScene = new Scene(new Region());
 	}
 
 	public void start(Stage primaryStage) {
-
+		this.primaryStage = primaryStage;
+		openView("createProfile");
 	}
 
 	public void openView(String id) {
-
+		Region root = null;
+		switch (id)
+		{
+			case "createProfile":
+				root = loadCreateProfileView("createProfile.fxml", , viewModelFactory.getCreateUserViewModel());
+				break;
+		}
+		currentScene.setRoot(root);
+		String title = "";
+		if (root.getUserData() != null)
+		{
+			title += root.getUserData();
+		}
+		primaryStage.setTitle(title);
+		primaryStage.setScene(currentScene);
+		primaryStage.setWidth(root.getPrefWidth());
+		primaryStage.setHeight(root.getPrefHeight());
+		primaryStage.show();
 	}
 
-	public Region loadViewController(String fxmlFile, ViewController viewController, ViewModel viewModel) {
-		return null;
+	public Region loadCreateProfileView(String fxmlFile, ViewController viewController, ViewModel viewModel) {
+		if (createUserViewController == null)
+		{
+			try
+			{
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(getClass().getResource(fxmlFile));
+				Region root = loader.load();
+				createUserViewController = loader.getController();
+				createUserViewController
+						.init(this, viewModelFactory.getCreateUserViewModel(), root);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			createUserViewController.reset();
+		}
+		return createUserViewController.getRoot();
 	}
 
 }
