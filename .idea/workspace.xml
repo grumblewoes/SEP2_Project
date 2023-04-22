@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cc2d0aa-b1e5-41b1-889f-38c3805302de" name="Changes" comment="Implementation for view">
+    <list default="true" id="2cc2d0aa-b1e5-41b1-889f-38c3805302de" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Client/src/ClientMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/MyApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/Client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/Client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SEP2_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SEP2_Project.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,16 +48,33 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Users/Anna/Documents/VIA/Semester 2/sdj2-exercises",
+    "last_opened_file_path": "C:/Users/Anna/Documents/Code/Github Repos/sdj2-exercises/RMIDesign/Ex17B - RMI-MVVMServer",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Anna\Documents\VIA\Semester 2\SEP2_Project\Client\src\view" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MyApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MyApplication" />
+      <module name="Client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MyApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
