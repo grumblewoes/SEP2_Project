@@ -10,6 +10,12 @@ public class ModelManager implements Model
     @Override public boolean createUser(String firstName, String lastName,
                                         String username, String password, int height, int weight)
     {
+        Trainee trainee = null;
+        try{
+            trainee = new Trainee(firstName, lastName, username, password, height, weight);
+        }catch (Exception e){
+            return false;
+        }
 
             if (!trainee.getUserName().equals(traineeList.getUserByUsername(username))) {
             traineeList.addUser(trainee);

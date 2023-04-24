@@ -27,4 +27,12 @@ public class TraineeList {
 	public int size() {
 		return users.size();
 	}
+
+	public String toString(){
+		String tmp="";
+		for(User user : users)
+			tmp+=user+" : ";
+
+		return tmp;
+	}
 }

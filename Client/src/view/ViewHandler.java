@@ -20,7 +20,6 @@ public class ViewHandler {
 
 	private ViewModelFactory viewModelFactory;
 
-	private ViewController viewController;
 
 	public ViewHandler(ViewModelFactory viewModelFactory) {
 		this.viewModelFactory = viewModelFactory;
