@@ -1,10 +1,6 @@
 package modelClient;
 
-import mediatorClient.Client;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
+import mediator.Client;
 
 public class ModelManager implements Model, PropertyChangeListener
 {

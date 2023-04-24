@@ -1,4 +1,4 @@
-import mediatorClient.RemoteModel;
+import mediator.RemoteModel;
 
 import java.rmi.Naming;
 

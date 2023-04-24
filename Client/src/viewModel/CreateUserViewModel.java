@@ -54,7 +54,7 @@ public class CreateUserViewModel extends ViewModel implements
 		}
 		else
 		{
-			errorLabel.set("Bid was not placed");
+			errorLabel.set("Invalid input.");
 			return false;
 		}
 	}

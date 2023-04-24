@@ -27,7 +27,7 @@ public class ViewHandler {
 
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		openView("createProfile");
+		openView("logIn");
 	}
 
 	public void openView(String id) {
@@ -36,6 +36,9 @@ public class ViewHandler {
 		{
 			case "createProfile":
 				root = loadCreateProfileView("createProfile.fxml", , viewModelFactory.getCreateUserViewModel());
+				break;
+			case "logIn":
+				logInViewController = loadViewController("login.fxml", logInViewController, viewModelFactory.getLoginViewModel());
 				break;
 		}
 		currentScene.setRoot(root);

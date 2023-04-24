@@ -11,8 +11,9 @@ public class ModelManager implements Model
                                         String username, String password, int height, int weight)
     {
 
-        Trainee trainee = new Trainee(firstName, lastName, username, password, height, weight);
-        if (!trainee.getUserName().equals(traineeList.getUserByUsername(username))) {
+            if (!trainee.getUserName().equals(traineeList.getUserByUsername(username))) {
+            traineeList.addUser(trainee);
+            System.out.println(traineeList);
             return true;
         }
         return false;
