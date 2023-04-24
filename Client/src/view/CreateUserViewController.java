@@ -26,6 +26,7 @@ public class CreateUserViewController extends ViewController
 		converter = new IntStringConverter();
 	}
 
+	@Override
 	public void init(ViewHandler viewHandler, ViewModel viewModel, Region root) {
 		this.viewHandler = viewHandler;
 		createUserViewModel = (CreateUserViewModel) viewModel;
@@ -43,22 +44,19 @@ public class CreateUserViewController extends ViewController
 
 	}
 
-	@Override public void init(ViewHandler viewHandler,
-			CreateUserViewModel createUserViewModel, Region root)
-	{
-
+	@Override public void reset() {
+		createUserViewModel.clear();
 	}
 
-	public void reset() {
-
+	@FXML private void submitButton() {
+		if( createUserViewModel.createUser() )
+			viewHandler.openView("logIn");
+		//if true, go to next screen
 	}
 
-	private void submitButton() {
-
-	}
-
-	private void cancelButton() {
-
+	@FXML private void cancelButton() {
+		//to implement later ig
+		viewHandler.openView("logIn");
 	}
 
 }

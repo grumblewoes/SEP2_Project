@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import viewModel.CreateUserViewModel;
 import viewModel.ViewModel;
 import viewModel.ViewModelFactory;
 
@@ -14,13 +15,14 @@ public class ViewHandler {
 
 	private Region root;
 
-	private CreateUserViewController createUserViewController;
+	private ViewController createUserViewController;
+	private ViewController logInViewController;
 
 	private ViewModelFactory viewModelFactory;
 
 	private ViewController viewController;
 
-	public ViewHandler(ViewModelFactory viewFactory) {
+	public ViewHandler(ViewModelFactory viewModelFactory) {
 		this.viewModelFactory = viewModelFactory;
 		currentScene = new Scene(new Region());
 	}
@@ -31,11 +33,10 @@ public class ViewHandler {
 	}
 
 	public void openView(String id) {
-		Region root = null;
 		switch (id)
 		{
 			case "createProfile":
-				root = loadCreateProfileView("createProfile.fxml", , viewModelFactory.getCreateUserViewModel());
+				createUserViewController = loadViewController("createProfile.fxml", createUserViewController, viewModelFactory.getCreateUserViewModel());
 				break;
 			case "logIn":
 				logInViewController = loadViewController("login.fxml", logInViewController, viewModelFactory.getLoginViewModel());
@@ -54,17 +55,17 @@ public class ViewHandler {
 		primaryStage.show();
 	}
 
-	public Region loadCreateProfileView(String fxmlFile, ViewController viewController, ViewModel viewModel) {
-		if (createUserViewController == null)
+	public ViewController loadViewController(String fxmlFile, ViewController viewController, ViewModel viewModel) {
+		if (viewController == null)
 		{
 			try
 			{
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource(fxmlFile));
-				Region root = loader.load();
-				createUserViewController = loader.getController();
-				createUserViewController
-						.init(this, viewModelFactory.getCreateUserViewModel(), root);
+				root = loader.load();
+				viewController = loader.getController();
+				viewController
+						.init(this, viewModel, root);
 			}
 			catch (Exception e)
 			{
@@ -73,9 +74,9 @@ public class ViewHandler {
 		}
 		else
 		{
-			createUserViewController.reset();
+			viewController.reset();
 		}
-		return createUserViewController.getRoot();
+		return viewController;
 	}
 
 }

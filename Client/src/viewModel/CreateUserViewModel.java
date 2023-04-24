@@ -39,7 +39,8 @@ public class CreateUserViewModel extends ViewModel implements
 		this.passwordProperty=new SimpleStringProperty("");
 		this.heightProperty=new SimpleIntegerProperty(0);
 		this.weightProperty=new SimpleIntegerProperty(0);
-		model.addListener(null, this);
+		this.errorLabel = new SimpleStringProperty("");
+		//model.addListener(null, this);
 	}
 
 	public boolean createUser() {
@@ -47,9 +48,6 @@ public class CreateUserViewModel extends ViewModel implements
 				getPasswordProperty().get(), getHeightProperty().get(), getWeightProperty().get());
 		if (userCreated)
 		{
-			model.createUser(getFirstNameProperty().get(), getLastNameProperty().get(), getUserNameProperty().get(),
-					getPasswordProperty().get(), getHeightProperty().get(), getWeightProperty().get());
-			clear();
 			return true;
 		}
 		else

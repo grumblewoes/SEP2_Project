@@ -18,4 +18,22 @@ public class ModelManager implements Model
         }
         return false;
     }
+
+    @Override public boolean login(String username, String password) {
+        Trainee trainee = (Trainee) traineeList.getUserByUsername(username);
+
+        //if trainee doesn't exist on the list
+        if (trainee == null)
+            System.out.println("Server Model Manager: User does not appear to be in the system.");
+
+        else {
+            if (trainee.getPassword().equals(password))
+            {
+                System.out.println("Server Model Manager: User logged in.");
+                return true;
+            }
+            System.out.println("Server Model Manager: Incorrect password.");
+        }
+        return false;
+    }
 }
