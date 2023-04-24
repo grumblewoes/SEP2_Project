@@ -1,0 +1,14 @@
+#create {
+-fx-background-color: rgb(131, 241, 131);
+}
+
+#cancel{
+  -fx-background-color: red;
+}
+
+
+
+.textarea{
+    -fx-background-color: grey;
+}
+

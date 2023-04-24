@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import util.Logger;
 import viewModel.CreateUserViewModel;
 import viewModel.ViewModel;
 
@@ -54,9 +55,11 @@ public class CreateUserViewController extends ViewController
 		//if true, go to next screen
 	}
 
-	@FXML private void cancelButton() {
+	@FXML private void signIn() {
+		Logger.log("lol");
 		//to implement later ig
 		viewHandler.openView("logIn");
+		Logger.log("end");
 	}
 
 }

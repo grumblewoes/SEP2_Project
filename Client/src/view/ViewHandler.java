@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import util.Logger;
 import viewModel.CreateUserViewModel;
 import viewModel.ViewModel;
 import viewModel.ViewModelFactory;
@@ -28,7 +29,7 @@ public class ViewHandler {
 
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		openView("logIn");
+		openView("createProfile");
 	}
 
 	public void openView(String id) {
@@ -54,17 +55,18 @@ public class ViewHandler {
 		primaryStage.show();
 	}
 
-	public ViewController loadViewController(String fxmlFile, ViewController viewController, ViewModel viewModel) {
+	private ViewController loadViewController(String fxmlFile, ViewController viewController, ViewModel viewModel) {
 		if (viewController == null)
 		{
 			try
 			{
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource(fxmlFile));
-				root = loader.load();
+				this.root = loader.load();
 				viewController = loader.getController();
 				viewController
-						.init(this, viewModel, root);
+						.init(this,viewModel, this.root);
+				viewController.reset();
 			}
 			catch (Exception e)
 			{
@@ -73,6 +75,7 @@ public class ViewHandler {
 		}
 		else
 		{
+			root=viewController.getRoot();
 			viewController.reset();
 		}
 		return viewController;
