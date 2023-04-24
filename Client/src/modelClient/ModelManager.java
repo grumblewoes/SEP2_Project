@@ -18,6 +18,12 @@ public class ModelManager implements Model, PropertyChangeListener
 		return client.createUser(firstName, lastName, userName, password, height, weight);
 	}
 
+	public boolean login(String username, String password){
+		return client.login(username, password);
+	}
+
+
+
 	@Override public void addListener(PropertyChangeListener listener)
 	{
 		property.addPropertyChangeListener(listener);
