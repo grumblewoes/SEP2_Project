@@ -22,6 +22,20 @@ public class ModelManager implements Model//, PropertyChangeListener
 		return client.login(username, password);
 	}
 
+	@Override
+	public boolean createFolder(String username, String name) {
+		return client.createFolder(username, name);
+	}
+
+	@Override
+	public boolean removeFolder(String username, String name) {
+		return client.removeFolder(username, name);
+	}
+
+	@Override
+	public boolean editFolder(String username, String oldName, String newName) {
+		return editFolder(username, oldName, newName);
+	}
 
 
 //	@Override public void addListener(PropertyChangeListener listener)
