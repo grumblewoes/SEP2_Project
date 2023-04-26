@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cc2d0aa-b1e5-41b1-889f-38c3805302de" name="Changes" comment="Main classes for client">
-      <change afterPath="$PROJECT_DIR$/Server/src/ServerMain.java" afterDir="false" />
+    <list default="true" id="2cc2d0aa-b1e5-41b1-889f-38c3805302de" name="Changes" comment="Main class for server">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/mediatorClient/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/mediatorClient/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/mediatorClient/RemoteModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/mediatorClient/RemoteModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/modelClient/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/modelClient/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/modelClient/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/modelClient/ModelManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,17 +42,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Anna/Documents/Code/Github Repos/sdj2-exercises/RMIDesign/Ex17B - RMI-MVVMServer&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/Anna/Documents/Code/Github Repos/SEP2_Project",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
@@ -123,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681724593166</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Main class for server">
+      <created>1682229627414</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682229627414</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,6 +164,7 @@
     <MESSAGE value="Test Class for AddUser" />
     <MESSAGE value="Implementation for client-model" />
     <MESSAGE value="Implementation for view" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementation for view" />
+    <MESSAGE value="Main class for server" />
+    <option name="LAST_COMMIT_MESSAGE" value="Main class for server" />
   </component>
 </project>
