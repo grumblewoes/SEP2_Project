@@ -3,6 +3,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import util.Logger;
+import viewModel.CreateUserViewModel;
 import viewModel.ViewModel;
 import viewModel.ViewModelFactory;
 
@@ -14,14 +16,14 @@ public class ViewHandler {
 
 	private Region root;
 
-	private CreateUserViewController createUserViewController;
+	private ViewController createUserViewController;
+	private ViewController logInViewController;
 
 	private ViewModelFactory viewModelFactory;
 
-	private ViewController viewController;
 
-	public ViewHandler(ViewModelFactory viewFactory) {
-		this.viewModelFactory = viewFactory;
+	public ViewHandler(ViewModelFactory viewModelFactory) {
+		this.viewModelFactory = viewModelFactory;
 		currentScene = new Scene(new Region());
 	}
 
@@ -31,16 +33,17 @@ public class ViewHandler {
 	}
 
 	public void openView(String id) {
-		Region root = null;
-
 		switch (id)
 		{
 			case "createProfile":
-				root = loadCreateProfileView("createProfile.fxml", viewController, viewModelFactory.getCreateUserViewModel());
+				createUserViewController = loadViewController("createProfile.fxml", createUserViewController, viewModelFactory.getCreateUserViewModel());
+				break;
+			case "logIn":
+				logInViewController = loadViewController("login.fxml", logInViewController, viewModelFactory.getLoginViewModel());
 				break;
 		}
 		currentScene.setRoot(root);
-		String title = "Valhalla Fitness - ";
+		String title = "";
 		if (root.getUserData() != null)
 		{
 			title += root.getUserData();
@@ -52,17 +55,18 @@ public class ViewHandler {
 		primaryStage.show();
 	}
 
-	public Region loadCreateProfileView(String fxmlFile, ViewController viewController, ViewModel viewModel) {
-		if (createUserViewController == null)
+	private ViewController loadViewController(String fxmlFile, ViewController viewController, ViewModel viewModel) {
+		if (viewController == null)
 		{
 			try
 			{
 				FXMLLoader loader = new FXMLLoader();
 				loader.setLocation(getClass().getResource(fxmlFile));
-				Region root = loader.load();
-				createUserViewController = loader.getController();
-				createUserViewController
-						.init(this, viewModelFactory.getCreateUserViewModel(), root);
+				this.root = loader.load();
+				viewController = loader.getController();
+				viewController
+						.init(this,viewModel, this.root);
+				viewController.reset();
 			}
 			catch (Exception e)
 			{
@@ -71,9 +75,10 @@ public class ViewHandler {
 		}
 		else
 		{
-			createUserViewController.reset();
+			root=viewController.getRoot();
+			viewController.reset();
 		}
-		return createUserViewController.getRoot();
+		return viewController;
 	}
 
 }

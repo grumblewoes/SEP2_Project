@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import util.Logger;
 import viewModel.CreateUserViewModel;
 import viewModel.ViewModel;
 
@@ -26,6 +27,7 @@ public class CreateUserViewController extends ViewController
 		converter = new IntStringConverter();
 	}
 
+	@Override
 	public void init(ViewHandler viewHandler, ViewModel viewModel, Region root) {
 		this.viewHandler = viewHandler;
 		createUserViewModel = (CreateUserViewModel) viewModel;
@@ -43,19 +45,21 @@ public class CreateUserViewController extends ViewController
 
 	}
 
-	public void reset() {
-		//createUserViewModel.clear();
-		//since we use observers, is there really anything to refresh??
-	}
-
-	private void submitButton() {
-		createUserViewModel.createUser();
-	}
-
-	private void cancelButton() {
-		//placeholder until we have a screen to swap to
-		//viewHandler.openView("menu");
+	@Override public void reset() {
 		createUserViewModel.clear();
+	}
+
+	@FXML private void submitButton() {
+		if( createUserViewModel.createUser() )
+			viewHandler.openView("logIn");
+		//if true, go to next screen
+	}
+
+	@FXML private void signIn() {
+		Logger.log("lol");
+		//to implement later ig
+		viewHandler.openView("logIn");
+		Logger.log("end");
 	}
 
 }

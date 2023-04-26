@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="view.LoginViewController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -47,7 +47,7 @@
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Username" />
-                        <TextField fx:id="usernameField" />
+                        <TextField fx:id="username" />
                      </children>
                   </VBox>
                </children>
@@ -57,19 +57,19 @@
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label text="Password" />
-                        <TextField fx:id="passwordField" />
+                        <TextField fx:id="password" />
                      </children>
                   </VBox>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#logIn" text="Log in">
+                  <Button mnemonicParsing="false" onAction="#submitButton" text="Log in">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#signUp" text="Sign up">
+                  <Button mnemonicParsing="false" onAction="#goToSignUpButton" text="Sign up">
                      <HBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
@@ -88,4 +88,4 @@
          </children>
       </VBox>
    </children>
-</Pane>
+</VBox>

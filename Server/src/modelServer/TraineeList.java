@@ -1,21 +1,38 @@
 package modelServer;
 
+import java.util.ArrayList;
+
 public class TraineeList {
 
-	private Trainee[] trainee;
 
-	private User[] user;
+	private ArrayList<User> users;
 
 	public TraineeList() {
-
+		users = new ArrayList<>();
 	}
 
 	public void addUser(User user) {
+		users.add(user);
+	}
+	public User getUserByUsername (String username) {
 
+		if(username == null) return null;
+
+		for(User u: users)
+			if(username.equals(u.getUserName()))
+				return u;
+		return null;
 	}
 
 	public int size() {
-		return 0;
+		return users.size();
 	}
 
+	public String toString(){
+		String tmp="";
+		for(User user : users)
+			tmp+=user+" : ";
+
+		return tmp;
+	}
 }
