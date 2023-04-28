@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cc2d0aa-b1e5-41b1-889f-38c3805302de" name="Changes" comment="Implemented model-client for task 3">
-      <change afterPath="$PROJECT_DIR$/Client/src/viewModel/HomeViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/viewModel/ManageFolderViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/viewModel/ViewState.java" afterDir="false" />
+    <list default="true" id="2cc2d0aa-b1e5-41b1-889f-38c3805302de" name="Changes" comment="Junk addition">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/viewModel/ViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/viewModel/ViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/viewModel/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/viewModel/HomeViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/viewModel/ManageFolderViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/viewModel/ManageFolderViewModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

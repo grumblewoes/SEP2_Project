@@ -22,17 +22,15 @@ public class ManageFolderViewModel extends ViewModel{
     }
 
     private boolean createFolder() {
-
+        //wut
     }
 
-    private boolean editFolderName() {
+    private boolean editFolderName() { //takes a string arg?
 
     }
-
-    private boolean removeFolder() {}
 
     @Override
     public void clear() {
-
+        //change header and name depending on viewstate, clear error label
     }
 }

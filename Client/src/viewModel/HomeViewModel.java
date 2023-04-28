@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import modelClient.Model;
 
 public class HomeViewModel extends ViewModel{
-    private StringProperty usernameProperty, errorProperty;
+    private StringProperty usernameProperty, folderListProperty, errorProperty;
     private BooleanProperty toggleUpdateFoldersProperty;
     private Model model;
     private ViewState viewState;
@@ -26,28 +26,36 @@ public class HomeViewModel extends ViewModel{
     public StringProperty getErrorLabel() { return errorProperty; }
 
     public StringProperty getFoldersProperty() {
-        //???
+        //??? what property is this
         return null;
     }
 
     private void loadFolders() {
         //get folders from the database
+        //put names in arraylist, cast to json, update the folderProperty
     }
 
-    public void createFolder() {}
+    public boolean createFolder() {
+        //pass to viewstate, view will switch to manage folder screen
+    }
 
     public boolean removeFolder(String name) {
+        //call db, then call clear
         return false;
     }
 
-    public void editFolder() {}
+    public void editFolder() {
+        //pass to viewstate, view will switch to manage folder screen
+    }
 
     public void populateFoldersToFolderPane(VBox vbox) {
-
+        //idek
     }
 
     @Override
     public void clear() {
+        //receiving folder names from the database
+        //load folders
 
     }
 }
