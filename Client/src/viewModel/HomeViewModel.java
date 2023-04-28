@@ -1,5 +1,6 @@
 package viewModel;
 
+import com.google.gson.Gson;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -7,11 +8,14 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.layout.VBox;
 import modelClient.Model;
 
+import java.util.ArrayList;
+
 public class HomeViewModel extends ViewModel{
     private StringProperty usernameProperty, folderListProperty, errorProperty;
     private BooleanProperty toggleUpdateFoldersProperty;
     private Model model;
     private ViewState viewState;
+    private Gson gson;
 
     public HomeViewModel(Model model, ViewState viewState) {
         this.model = model;
@@ -19,6 +23,8 @@ public class HomeViewModel extends ViewModel{
         usernameProperty = new SimpleStringProperty();
         toggleUpdateFoldersProperty = new SimpleBooleanProperty();
         errorProperty = new SimpleStringProperty();
+        folderListProperty = new SimpleStringProperty();
+        gson = new Gson();
     }
 
     public StringProperty getUsernameProperty() { return usernameProperty; }
@@ -26,36 +32,70 @@ public class HomeViewModel extends ViewModel{
     public StringProperty getErrorLabel() { return errorProperty; }
 
     public StringProperty getFoldersProperty() {
-        //??? what property is this
-        return null;
+        return folderListProperty;
     }
 
     private void loadFolders() {
-        //get folders from the database
-        //put names in arraylist, cast to json, update the folderProperty
+        //get list of folders from the database
+
+        //SELECT w.title
+        //FROM Trainee t
+        //JOIN WorkoutPlan w ON t.username = w.username
+        //WHERE t.username = usernameProperty;
+
+        ArrayList folders = new ArrayList();
+
+        //can't simply cast string to StringProperty, so I made a temp variable
+        folderListProperty = new SimpleStringProperty(gson.toJson(folders));
     }
 
     public boolean createFolder() {
-        //pass to viewstate, view will switch to manage folder screen
+        //pass to ViewState, view will switch to manage folder screen. DB call will be made there
+        viewState.setUsername(null);
+        viewState.setManageFolderEditable(true);
+        return true; //why a bool here? ig if there's issues with the DB?
     }
 
-    public boolean removeFolder(String name) {
-        //call db, then call clear
-        return false;
+    public boolean removeFolder(String nameOfFolder) {
+        //call DB, then call clear
+        viewState.setUsername(usernameProperty.get());
+        viewState.setManageFolderEditable(false);
+
+        try {
+            //DELETE FROM ExerciseInWorkout
+            //WHERE id = (
+            //  SELECT id
+            //  FROM WorkoutPlan
+            //  WHERE trainee_username = usernameProperty )
+            //AND title = nameOfFolder;
+
+            clear();
+            return true;
+        }
+        catch (Exception e)
+        {
+            errorProperty.set("Error deleting from DB");
+            return false;
+        }
     }
 
     public void editFolder() {
-        //pass to viewstate, view will switch to manage folder screen
+        //pass to ViewState, view will switch to manage folder screen. DB called from there
+        viewState.setUsername(usernameProperty.get());
+        viewState.setManageFolderEditable(true);
     }
 
     public void populateFoldersToFolderPane(VBox vbox) {
-        //idek
+        //waiting on class diagram update
     }
 
     @Override
     public void clear() {
         //receiving folder names from the database
-        //load folders
 
+        viewState.setUsername(null);
+        viewState.setManageFolderEditable(true);
+        errorProperty.set("");
+        loadFolders();
     }
 }
