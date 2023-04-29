@@ -18,15 +18,13 @@ public class ManageFolderViewModel extends ViewModel{
     }
 
     public void submit() {
-        //if no username, then add (no folder created). if editable, then edit. if !editable, then remove?
-        if (viewState.getUsername() == null)
-        createFolder();
+        if (viewState.getNewFolder())
+            createFolder();
         else if (viewState.getManageFolderEditable())
-        editFolderName(nameProperty.get());
+            editFolderName(nameProperty.get());
     }
 
     private boolean createFolder() {
-        //username in this instance is null. won't work
         return model.createFolder(viewState.getUsername(), nameProperty.get());
     }
 
@@ -38,7 +36,7 @@ public class ManageFolderViewModel extends ViewModel{
     public void clear() {
         errorLabel.set("");
         //change header and name depending on viewstate, clear error label
-        if (viewState.getUsername() == null)
+        if (viewState.getNewFolder())
         {
             headerLabel.set("Add Folder");
         }
@@ -47,7 +45,7 @@ public class ManageFolderViewModel extends ViewModel{
             headerLabel.set("Edit Folder");
         }
 
-        else
+        else if (!viewState.getManageFolderEditable())
             headerLabel.set("Remove folder");
     }
 }

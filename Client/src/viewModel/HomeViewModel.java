@@ -31,7 +31,7 @@ public class HomeViewModel extends ViewModel{
 
     public StringProperty getErrorLabel() { return errorProperty; }
 
-    public StringProperty getFoldersProperty() {
+    public StringProperty getFolderListProperty() {
         return folderListProperty;
     }
 
@@ -47,11 +47,13 @@ public class HomeViewModel extends ViewModel{
 
         //can't simply cast string to StringProperty, so I made a temp variable
         folderListProperty = new SimpleStringProperty(gson.toJson(folders));
+        toggleUpdateFoldersProperty = new SimpleBooleanProperty(true);
     }
 
     public boolean createFolder() {
         //pass to ViewState, view will switch to manage folder screen. DB call will be made there
-        viewState.setUsername(null);
+        viewState.setUsername(usernameProperty.get());
+        viewState.setNewFolder(true);
         viewState.setManageFolderEditable(true);
         return true; //why a bool here? ig if there's issues with the DB?
     }
@@ -59,6 +61,7 @@ public class HomeViewModel extends ViewModel{
     public boolean removeFolder(String nameOfFolder) {
         //call DB, then call clear
         viewState.setUsername(usernameProperty.get());
+        viewState.setNewFolder(false);
         viewState.setManageFolderEditable(false);
 
         try {
@@ -82,6 +85,7 @@ public class HomeViewModel extends ViewModel{
     public void editFolder() {
         //pass to ViewState, view will switch to manage folder screen. DB called from there
         viewState.setUsername(usernameProperty.get());
+        viewState.setNewFolder(false);
         viewState.setManageFolderEditable(true);
     }
 
@@ -93,7 +97,7 @@ public class HomeViewModel extends ViewModel{
     public void clear() {
         //receiving folder names from the database
 
-        viewState.setUsername(null);
+        viewState.setNewFolder(true);
         viewState.setManageFolderEditable(true);
         errorProperty.set("");
         loadFolders();
