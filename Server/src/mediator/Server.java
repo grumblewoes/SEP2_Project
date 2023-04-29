@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class Server implements RemoteModel
 {
@@ -32,6 +33,27 @@ public class Server implements RemoteModel
 
   public boolean login(String username, String password) {
     return model.login(username, password);
+  }
+
+  @Override public boolean createFolder(String username, String name)
+  {
+    return model.createFolder(String username, String name);
+  }
+
+  @Override public boolean removeFolder(String username, String name)
+  {
+    return model.removeFolder(String username, String name);
+  }
+
+  @Override public boolean editFolder(String username, String oldName,
+      String newName)
+  {
+    return model.editFolder(String username, String oldName, String newName);
+  }
+
+  @Override public ArrayList<String> getFolderList(String username)
+  {
+    return model.getFolderList(String username);
   }
 
   private void startServer() {
