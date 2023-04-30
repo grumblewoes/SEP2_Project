@@ -1,18 +1,12 @@
 package viewModel;
 
 import com.google.gson.Gson;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.layout.VBox;
 import modelClient.Model;
-
-import java.util.ArrayList;
 
 public class HomeViewModel extends ViewModel{
     private StringProperty usernameProperty, folderListProperty, errorProperty;
-    private BooleanProperty toggleUpdateFoldersProperty;
     private Model model;
     private ViewState viewState;
     private Gson gson;
@@ -21,7 +15,6 @@ public class HomeViewModel extends ViewModel{
         this.model = model;
         this.viewState = viewState;
         usernameProperty = new SimpleStringProperty();
-        toggleUpdateFoldersProperty = new SimpleBooleanProperty();
         errorProperty = new SimpleStringProperty();
         folderListProperty = new SimpleStringProperty();
         gson = new Gson();
@@ -37,17 +30,8 @@ public class HomeViewModel extends ViewModel{
 
     private void loadFolders() {
         //get list of folders from the database
-
-        //SELECT w.title
-        //FROM Trainee t
-        //JOIN WorkoutPlan w ON t.username = w.username
-        //WHERE t.username = usernameProperty;
-
-        ArrayList folders = new ArrayList();
-
         //can't simply cast string to StringProperty, so I made a temp variable
-        folderListProperty = new SimpleStringProperty(gson.toJson(folders));
-        toggleUpdateFoldersProperty = new SimpleBooleanProperty(true);
+        folderListProperty = new SimpleStringProperty(gson.toJson(model.getFolderList()));
     }
 
     public boolean createFolder() {
@@ -65,13 +49,7 @@ public class HomeViewModel extends ViewModel{
         viewState.setManageFolderEditable(false);
 
         try {
-            //DELETE FROM ExerciseInWorkout
-            //WHERE id = (
-            //  SELECT id
-            //  FROM WorkoutPlan
-            //  WHERE trainee_username = usernameProperty )
-            //AND title = nameOfFolder;
-
+            model.removeFolder(usernameProperty.get(), nameOfFolder);
             clear();
             return true;
         }
@@ -87,10 +65,6 @@ public class HomeViewModel extends ViewModel{
         viewState.setUsername(usernameProperty.get());
         viewState.setNewFolder(false);
         viewState.setManageFolderEditable(true);
-    }
-
-    public void populateFoldersToFolderPane(VBox vbox) {
-        //waiting on class diagram update
     }
 
     @Override
