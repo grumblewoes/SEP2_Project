@@ -2,6 +2,8 @@ package modelClient;
 
 import mediator.Client;
 
+import java.util.ArrayList;
+
 public class ModelManager implements Model//, PropertyChangeListener
 {
 	private Client client;
@@ -34,11 +36,15 @@ public class ModelManager implements Model//, PropertyChangeListener
 
 	@Override
 	public boolean editFolder(String username, String oldName, String newName) {
-		return editFolder(username, oldName, newName);
+		return client.editFolder(username, oldName, newName);
 	}
 
+	@Override public ArrayList<String> getFolderList(String username)
+	{
+		return client.getFolderList(username);
+	}
 
-//	@Override public void addListener(PropertyChangeListener listener)
+	//	@Override public void addListener(PropertyChangeListener listener)
 //	{
 //		property.addPropertyChangeListener(listener);
 //	}

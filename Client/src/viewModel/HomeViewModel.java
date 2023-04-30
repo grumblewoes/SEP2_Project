@@ -31,7 +31,7 @@ public class HomeViewModel extends ViewModel{
     private void loadFolders() {
         //get list of folders from the database
         //can't simply cast string to StringProperty, so I made a temp variable
-        folderListProperty = new SimpleStringProperty(gson.toJson(model.getFolderList()));
+        folderListProperty = new SimpleStringProperty(gson.toJson(model.getFolderList(usernameProperty.get())));
     }
 
     public boolean createFolder() {
