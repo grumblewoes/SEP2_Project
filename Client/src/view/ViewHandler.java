@@ -1,6 +1,7 @@
 package view;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import util.Logger;
@@ -53,6 +54,7 @@ public class ViewHandler {
 		primaryStage.setWidth(root.getPrefWidth());
 		primaryStage.setHeight(root.getPrefHeight());
 		primaryStage.show();
+		primaryStage.getIcons().add(0,new Image("/assets/ValhallaFitness.png"));
 	}
 
 	private ViewController loadViewController(String fxmlFile, ViewController viewController, ViewModel viewModel) {
