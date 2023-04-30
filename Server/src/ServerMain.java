@@ -8,6 +8,5 @@ public class ServerMain
   {
     Model model = new ModelManager();
     Server server = new Server(model);
-
   }
 }

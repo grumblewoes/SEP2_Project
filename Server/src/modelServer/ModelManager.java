@@ -1,29 +1,49 @@
 package modelServer;
 
+import modelServer.DAO.implementation.UserDAO;
+
+import java.sql.SQLException;
+
 public class ModelManager implements Model
 {
+    private UserDAO userDAO;
     private TraineeList traineeList;
     public ModelManager() {
-        this.traineeList = new TraineeList();
+            this.userDAO=new UserDAO();
+            this.traineeList=new TraineeList();
 
     }
     @Override public boolean createUser(String firstName, String lastName,
                                         String username, String password, int height, int weight)
     {
-        Trainee trainee = null;
-        try{
-            trainee = new Trainee(firstName, lastName, username, password, height, weight);
-        }catch (Exception e){
+        try
+        {
+            userDAO.createTrainee(username, password, firstName, lastName,
+                height, weight);
+        }
+        catch (SQLException e){
             return false;
         }
-
-            if (!trainee.getUserName().equals(traineeList.getUserByUsername(username))) {
-            traineeList.addUser(trainee);
-            System.out.println(traineeList);
-            return true;
-        }
-        return false;
+        return true;
     }
+
+//    @Override public boolean createUser(String firstName, String lastName,
+//        String username, String password, int height, int weight)
+//    {
+//        Trainee trainee = null;
+//        try{
+//            trainee = new Trainee(firstName, lastName, username, password, height, weight);
+//        }catch (Exception e){
+//            return false;
+//        }
+//
+//        if (!trainee.getUserName().equals(traineeList.getUserByUsername(username))) {
+//            traineeList.addUser(trainee);
+//            System.out.println(traineeList);
+//            return true;
+//        }
+//        return false;
+//    }
 
     @Override public boolean login(String username, String password) {
         Trainee trainee = (Trainee) traineeList.getUserByUsername(username);
