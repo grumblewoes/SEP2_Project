@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cc2d0aa-b1e5-41b1-889f-38c3805302de" name="Changes" comment="task 4 server / remotemodel">
+    <list default="true" id="2cc2d0aa-b1e5-41b1-889f-38c3805302de" name="Changes" comment="task 4 client / remotemodel">
+      <change afterPath="$PROJECT_DIR$/Client/src/assets/manageExercises.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/view/manageExercisesView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/view/searchExercises.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/view/searchExercisesView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/mediator/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/mediator/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/mediator/RemoteModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/mediator/RemoteModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/mediator/RemoteModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/mediator/RemoteModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/mediator/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/mediator/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682843649518</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="task 4 client / remotemodel">
+      <created>1682844176510</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1682844176510</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -204,6 +211,7 @@
     <MESSAGE value="task 3 viewModel WIP" />
     <MESSAGE value="task 3 viewModel" />
     <MESSAGE value="task 4 server / remotemodel" />
-    <option name="LAST_COMMIT_MESSAGE" value="task 4 server / remotemodel" />
+    <MESSAGE value="task 4 client / remotemodel" />
+    <option name="LAST_COMMIT_MESSAGE" value="task 4 client / remotemodel" />
   </component>
 </project>
