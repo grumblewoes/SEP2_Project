@@ -56,9 +56,9 @@ public class Server implements RemoteModel
     return model.getFolderList(String username);
   }
 
-  @Override public void addExercise(String username, String name) throws RemoteException
+  @Override public boolean addExercise(String username, String name) throws RemoteException
   {
-    model.addExercise(username, name);
+    return model.addExercise(username, name);
   }
 
   @Override public boolean removeExercise(String username, String name) throws RemoteException
