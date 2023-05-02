@@ -32,7 +32,7 @@ public class Client implements Model
   {
     try
     {
-      UnicastRemoteObject.exportObject(this, 0);
+      UnicastRemoteObject.exportObject((Remote) this, 0);
     }
     catch (Exception e)
     {
@@ -114,6 +114,38 @@ public class Client implements Model
       throw new RuntimeException(e);
     }
 
+  }
+
+  public boolean addExercise(String username, String name) {
+    try {
+      return server.addExercise(username, name);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public boolean removeExercise(String username, String name) {
+    try
+    {
+      return server.removeExercise(username, name);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public ArrayList<String> getExerciseList(String username) {
+    try
+    {
+      return server.getExerciseList(username);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
   }
 
 }
