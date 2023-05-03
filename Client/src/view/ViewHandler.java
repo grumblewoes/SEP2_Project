@@ -22,6 +22,9 @@ public class ViewHandler {
 
 	private ViewModelFactory viewModelFactory;
 
+	private HomeViewController homeViewController;
+
+
 
 	public ViewHandler(ViewModelFactory viewModelFactory) {
 		this.viewModelFactory = viewModelFactory;
@@ -42,6 +45,8 @@ public class ViewHandler {
 			case "logIn":
 				logInViewController = loadViewController("login.fxml", logInViewController, viewModelFactory.getLoginViewModel());
 				break;
+			case "home":
+				homeViewController = loadViewController("homeView.fxml", homeViewController, viewModelFactory.getHomeViewController());
 		}
 		currentScene.setRoot(root);
 		String title = "";
