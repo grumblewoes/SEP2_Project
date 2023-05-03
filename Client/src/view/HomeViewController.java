@@ -41,7 +41,7 @@ public class HomeViewController extends ViewController
 
     String buttonLabel = ((Button)evt.getSource()).getText();
     if (buttonLabel.equals("Rename")){
-      homeViewModel.rename
+      homeViewModel.rename();
     }
 
   }

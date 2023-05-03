@@ -39,4 +39,124 @@ public class UserDAO implements IUserDAO
     }
   }
 
+  @Override public boolean createFolder(String username, String name)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement("INSERT INTO WorkoutFloder(title, trainee_username) VALUES(?,?);");
+      statement.setString(1, name);
+      statement.setString(2, username);
+
+      statement.executeUpdate();
+      return true;
+    }
+    catch (SQLException e){
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
+
+  @Override public boolean removeFolder(String username, String name)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement("DELETE FROM workoutfolder WHERE username = ? AND name= ?");
+      statement.setString(1, username );
+      statement.setString(2, name);
+
+      statement.executeUpdate();
+      return true;
+    }
+    catch (SQLException e){
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
+
+  @Override public boolean editFolder(String username, String oldName, String newName) throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement("UPDATE workoutfolder SET name = ? WHERE name =? AND username=?");
+      statement.setString(1, newName );
+      statement.setString(2, oldName);
+      statement.setString(3, username);
+
+      statement.executeUpdate();
+      return true;
+    }
+    catch (SQLException e){
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
+
+  @Override public boolean addExercise(String username, String name)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement("INSERT INTO exercise(title) values (?);");
+      statement.setString(1, name);
+
+      statement.executeUpdate();
+      return true;
+    }
+    catch (SQLException e){
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+
+  }
+
+  @Override public boolean removeExercise(String username, String name)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement("DELETE FROM exercise WHERE username = ? AND name= ?");
+      statement.setString(1, username);
+      statement.setString(2, name);
+
+      statement.executeUpdate();
+      return true;
+    }
+    catch (SQLException e){
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
+
 }

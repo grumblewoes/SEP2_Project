@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="sep2">
-      <change afterPath="$PROJECT_DIR$/Client/src/view/HomeViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/view/ManageFolderViewController.java" afterDir="false" />
+    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="task 4 client fxml files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/view/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/ViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/view/ViewHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/ViewHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/ModelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/HomeViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/HomeViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/DAO/implementation/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/DAO/implementation/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/DAO/interfaces/IUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/DAO/interfaces/IUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/view/ViewHandler.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="julia" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,21 +38,25 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2OVQyRzRa4SetaiqiHsyQCCIgNm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Anna/Documents/VIA/Semester 2/SEP2_Project/Server&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/Anna/Documents/VIA/Semester 2/SEP2_Project/Server",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
@@ -63,7 +65,14 @@
       <recent name="C:\Users\Anna\Documents\VIA\Semester 2\SEP2_Project\Client\src\view" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.ClientMain">
+    <configuration name="ClientMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ClientMain" />
+      <module name="Client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MyApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MyApplication" />
       <module name="Client" />
@@ -71,21 +80,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Client" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Client" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ClientMain" />
+        <item itemvalue="Application.MyApplication" />
+        <item itemvalue="Application.MyApplication" />
+        <item itemvalue="Application.MyApplication" />
         <item itemvalue="Application.MyApplication" />
       </list>
     </recent_temporary>
