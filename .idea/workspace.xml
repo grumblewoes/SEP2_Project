@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="sep2">
+      <change afterPath="$PROJECT_DIR$/Client/src/view/HomeViewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Client/src/view/ManageFolderViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/ViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/ViewHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/ViewHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/ModelManager.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/main" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2OVQyRzRa4SetaiqiHsyQCCIgNm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Anna/Documents/VIA/Semester 2/SEP2_Project/Server&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Anna\Documents\VIA\Semester 2\SEP2_Project\Client\src\view" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MyApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MyApplication" />
+      <module name="Client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Client" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MyApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2cc2d0aa-b1e5-41b1-889f-38c3805302de" name="Changes" comment="" />
+      <created>1681643523308</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681643523308</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Draft Test">
+      <created>1681718254718</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681718254718</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Test Class for AddUser">
+      <created>1681718975225</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681718975225</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Implementation for client-model">
+      <created>1681721409845</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1681721409845</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Implementation for view">
+      <created>1681723640475</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681723640475</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Implementation for view">
+      <created>1681724343165</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681724343165</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Implementation for view">
+      <created>1681724593166</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1681724593166</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Main class for server">
+      <created>1682229627414</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682229627414</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Main class for server">
+      <created>1682530154663</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682530154663</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Implemented model-client for task 3">
+      <created>1682530590696</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682530590696</updated>
+    </task>
+    <task id="LOCAL-00010" summary="task 3 viewModel WIP">
+      <created>1682671147704</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682671147705</updated>
+    </task>
+    <task id="LOCAL-00011" summary="task 3 viewModel">
+      <created>1682842657784</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682842657784</updated>
+    </task>
+    <task id="LOCAL-00012" summary="task 4 server / remotemodel">
+      <created>1682843649518</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1682843649518</updated>
+    </task>
+    <task id="LOCAL-00013" summary="task 4 client / remotemodel">
+      <created>1682844176510</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1682844176510</updated>
+    </task>
+    <task id="LOCAL-00014" summary="task 4 client fxml files">
+      <created>1682847140620</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1682847140620</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="anna" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Draft Test" />
+    <MESSAGE value="Test Class for AddUser" />
+    <MESSAGE value="Implementation for client-model" />
+    <MESSAGE value="Implementation for view" />
+    <MESSAGE value="Main class for server" />
+    <MESSAGE value="Implemented model-client for task 3" />
+    <MESSAGE value="task 3 viewModel WIP" />
+    <MESSAGE value="task 3 viewModel" />
+    <MESSAGE value="task 4 server / remotemodel" />
+    <MESSAGE value="task 4 client / remotemodel" />
+    <MESSAGE value="task 4 client fxml files" />
+    <option name="LAST_COMMIT_MESSAGE" value="task 4 client fxml files" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
