@@ -116,6 +116,79 @@ public class Client implements Model
 
   }
 
+
+  @Override
+  public boolean editHeight(int height) {
+    try
+    {
+      return server.editHeight(height);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public boolean editWeight(int weight) {
+    try
+    {
+      return server.editWeight(weight);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public boolean editDob(int dob) {
+    try
+    {
+      return server.editDob(dob);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public boolean editDeadlift(int weight) {
+    try
+    {
+      return server.editDeadLift(weight);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public boolean editBenchPress(int weight) {
+    try
+    {
+      return server.editBenchPress(weight);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public boolean editSquat(int weight) {
+    try
+    {
+      return server.editSquat(weight);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
   public boolean addExercise(String username, String name) {
     try {
       return server.addExercise(username, name);
