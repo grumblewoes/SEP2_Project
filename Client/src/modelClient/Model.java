@@ -11,4 +11,11 @@ public interface Model
 	boolean removeFolder(String username, String name);
 	boolean editFolder(String username, String oldName, String newName);
 	ArrayList<String> getFolderList(String username);
+	boolean editBmi(int bmi);
+	boolean editHeight(int height);
+	boolean editWeight(int weight);
+	boolean editDob(int dob);
+	boolean editDeadlift(int weight);
+	boolean editBenchPress(int weight);
+	boolean editSquat(int weight);
 }

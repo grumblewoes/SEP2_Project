@@ -44,6 +44,41 @@ public class ModelManager implements Model//, PropertyChangeListener
 		return client.getFolderList(username);
 	}
 
+	@Override
+	public boolean editBmi(int bmi) {
+		return client.editBmi(bmi);
+	}
+
+	@Override
+	public boolean editHeight(int height) {
+		return client.editHeight(height);
+	}
+
+	@Override
+	public boolean editWeight(int weight) {
+		return client.editWeight(weight);
+	}
+
+	@Override
+	public boolean editDob(int dob) {
+		return client.editDob(dob);
+	}
+
+	@Override
+	public boolean editDeadlift(int weight) {
+		return client.editDeadlift(weight);
+	}
+
+	@Override
+	public boolean editBenchPress(int weight) {
+		return client.editBenchPress(weight);
+	}
+
+	@Override
+	public boolean editSquat(int weight) {
+		return client.editSquat(weight);
+	}
+
 	//	@Override public void addListener(PropertyChangeListener listener)
 //	{
 //		property.addPropertyChangeListener(listener);
