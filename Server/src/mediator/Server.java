@@ -37,23 +37,23 @@ public class Server implements RemoteModel
 
   @Override public boolean createFolder(String username, String name)
   {
-    return model.createFolder(String username, String name);
+    return model.createFolder(username, name);
   }
 
   @Override public boolean removeFolder(String username, String name)
   {
-    return model.removeFolder(String username, String name);
+    return model.removeFolder(username, name);
   }
 
   @Override public boolean editFolder(String username, String oldName,
       String newName)
   {
-    return model.editFolder(String username, String oldName, String newName);
+    return model.editFolder(username, oldName, newName);
   }
 
   @Override public ArrayList<String> getFolderList(String username)
   {
-    return model.getFolderList(String username);
+    return model.getFolderList(username);
   }
 
   @Override public boolean addExercise(String username, String name) throws RemoteException
