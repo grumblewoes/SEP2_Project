@@ -45,11 +45,6 @@ public class ModelManager implements Model//, PropertyChangeListener
 	}
 
 	@Override
-	public boolean editBmi(int bmi) {
-		return client.editBmi(bmi);
-	}
-
-	@Override
 	public boolean editHeight(int height) {
 		return client.editHeight(height);
 	}

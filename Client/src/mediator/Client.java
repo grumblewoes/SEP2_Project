@@ -116,17 +116,6 @@ public class Client implements Model
 
   }
 
-  @Override
-  public boolean editBmi(int bmi) {
-    try
-    {
-      return server.editBmi(bmi);
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-  }
 
   @Override
   public boolean editHeight(int height) {
