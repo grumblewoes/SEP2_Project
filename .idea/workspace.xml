@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="database implementation">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/modelClient/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/modelClient/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/modelClient/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/modelClient/ModelManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/DAO/implementation/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/DAO/implementation/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/DAO/interfaces/IUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/DAO/interfaces/IUserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/ModelManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/ClientMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/MyApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/mediator/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/mediator/RemoteModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/modelClient/Model.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/modelClient/ModelManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/util/Logger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/view/CreateUserViewController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/view/LoginViewController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/view/ViewController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/viewModel/CreateUserViewModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/viewModel/LoginViewModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/viewModel/ViewModelFactory.class" beforeDir="false" />
-    </list>
+    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="database implementation" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -116,7 +96,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1681643523308</updated>
-      <workItem from="1683284893517" duration="566000" />
+      <workItem from="1683284893517" duration="896000" />
     </task>
     <task id="LOCAL-00001" summary="Draft Test">
       <created>1681718254718</created>
@@ -223,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683108782843</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="database implementation">
+      <created>1683285770283</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1683285770283</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
