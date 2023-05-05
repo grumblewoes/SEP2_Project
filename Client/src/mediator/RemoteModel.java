@@ -14,8 +14,9 @@ public interface RemoteModel extends Remote
 	boolean removeFolder(String username, String name)  throws RemoteException;
 	boolean editFolder(String username, String oldName, String newName)  throws RemoteException;
 	ArrayList<String> getFolderList(String username)  throws RemoteException;
-	boolean addExercise(String username, String name) throws RemoteException;
-	boolean removeExercise(String username, String name) throws RemoteException;
-	ArrayList<String> getExerciseList(String username) throws RemoteException;
+	boolean addExercise(String username, String folderName, String exerciseName, int repetitions, int weight) throws RemoteException;
+	boolean removeExercise(String username, String folderName, String exerciseName) throws RemoteException;
+	ArrayList<String> getExerciseList(String username, String folderName) throws RemoteException;
+	ArrayList<String> getPossibleExercises()  throws RemoteException;
 
 }

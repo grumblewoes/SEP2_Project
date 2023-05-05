@@ -33,7 +33,7 @@ public class FolderViewModel extends ViewModel {
     private void loadExercises(){
         String username = viewState.getUsername();
         String folderName = viewState.getFolderName();
-        ArrayList<String> exercises = model.getExerciseList(username);
+        ArrayList<String> exercises = model.getExerciseList(username, folderName);
         folderTitleProperty.set(gson.toJson(exercises));
     }
 

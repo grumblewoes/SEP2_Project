@@ -77,25 +77,26 @@ public class ModelManager implements Model//, PropertyChangeListener
 	@Override public boolean addExercise(String username, String folderName,
 			String exerciseName, int repetitions, int weight)
 	{
-		return false;
+		return client.addExercise(username, folderName, exerciseName, repetitions, weight);
 	}
 
 	@Override public boolean removeExercise(String username, String folderName,
 			String exerciseName)
 	{
-		return false;
+		return client.removeExercise(username, folderName, exerciseName);
 	}
 
 	@Override public ArrayList<String> getExerciseList(String username,
 			String folderName)
 	{
-		return null;
+		return client.getExerciseList(username, folderName);
 	}
 
 	@Override public ArrayList<String> getPossibleExercises()
 	{
-		return null;
+		return client.getPossibleExercises();
 	}
+
 
 	//	@Override public void addListener(PropertyChangeListener listener)
 //	{
