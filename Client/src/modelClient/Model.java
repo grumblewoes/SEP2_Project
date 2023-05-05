@@ -17,4 +17,9 @@ public interface Model
 	boolean editDeadlift(int weight);
 	boolean editBenchPress(int weight);
 	boolean editSquat(int weight);
+
+	boolean addExercise(String username, String folderName, String exerciseName, int repetitions, int weight);
+	boolean removeExercise(String username, String folderName, String exerciseName);
+	ArrayList<String> getExerciseList(String username, String folderName);
+	ArrayList<String> getPossibleExercises();
 }

@@ -13,7 +13,5 @@ public interface IUserDAO
   boolean createFolder(String username, String name)  throws SQLException;
   boolean removeFolder(String username, String name)  throws SQLException;
   boolean editFolder(String username, String oldName, String newName)  throws SQLException;
-  boolean addExercise(String username, String name) throws SQLException;
-  boolean removeExercise(String username, String name)throws SQLException;
 
 }

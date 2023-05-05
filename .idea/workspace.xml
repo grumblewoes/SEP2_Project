@@ -4,12 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="task 4 client fxml files">
+    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="database implementation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/view/HomeViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/HomeViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/modelClient/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/modelClient/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/modelClient/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/modelClient/ModelManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/modelServer/DAO/implementation/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/DAO/implementation/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/modelServer/DAO/interfaces/IUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/DAO/interfaces/IUserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/view/ViewHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/ModelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/ClientMain.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/MyApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/mediator/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/mediator/RemoteModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/modelClient/Model.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/modelClient/ModelManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/util/Logger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/view/CreateUserViewController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/view/LoginViewController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/view/ViewController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/viewModel/CreateUserViewModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/viewModel/LoginViewModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Client/viewModel/ViewModelFactory.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +43,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="julia" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,12 +63,16 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "17",
     "last_opened_file_path": "C:/Users/Anna/Documents/VIA/Semester 2/SEP2_Project/Server",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -82,22 +100,23 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MyApplication" />
         <item itemvalue="Application.ClientMain" />
         <item itemvalue="Application.MyApplication" />
-        <item itemvalue="Application.MyApplication" />
-        <item itemvalue="Application.MyApplication" />
-        <item itemvalue="Application.MyApplication" />
+        <item itemvalue="Application.ClientMain" />
+        <item itemvalue="Application.ClientMain" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2cc2d0aa-b1e5-41b1-889f-38c3805302de" name="Changes" comment="" />
+      <changelist id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="database implementation" />
       <created>1681643523308</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1681643523308</updated>
+      <workItem from="1683284893517" duration="566000" />
     </task>
     <task id="LOCAL-00001" summary="Draft Test">
       <created>1681718254718</created>
@@ -197,8 +216,18 @@
       <option name="project" value="LOCAL" />
       <updated>1682847140620</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="database implementation">
+      <created>1683108782843</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1683108782843</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -235,7 +264,8 @@
     <MESSAGE value="task 4 server / remotemodel" />
     <MESSAGE value="task 4 client / remotemodel" />
     <MESSAGE value="task 4 client fxml files" />
-    <option name="LAST_COMMIT_MESSAGE" value="task 4 client fxml files" />
+    <MESSAGE value="database implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="database implementation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

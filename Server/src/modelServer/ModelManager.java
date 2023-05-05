@@ -65,38 +65,73 @@ public class ModelManager implements Model
         return false;
     }
 
+//    @Override public boolean createFolder(String username, String name)
+//    {
+//        if (!(traineeList.getUserByUsername(username)==null)){
+//            Folder folder = new Folder(name);
+//            getFolderList(username).add(folder);
+//            System.out.println("New folder created successfully");
+//        }else{
+//            System.out.println("Could not create new folder");
+//        }
+//        return false;
+//    }
+
     @Override public boolean createFolder(String username, String name)
     {
-        if (!(traineeList.getUserByUsername(username)==null)){
-            Folder folder = new Folder(name);
-            getFolderList(username).add(folder);
-            System.out.println("New folder created successfully");
-        }else{
-            System.out.println("Could not create new folder");
+        try
+        {
+            userDAO.createFolder(username,name);
         }
-        return false;
+        catch (SQLException e){
+            return false;
+        }
+        return true;
     }
 
+//    @Override public boolean removeFolder(String username, String name)
+//    {
+//        if (!(traineeList.getUserByUsername(username)==null)){
+//            traineeList.getUserByUsername(username).getFolderList().remove(name);
+//            System.out.println("Folder was successfully removed");
+//        }else{
+//            System.out.println("Folder could not be removed");
+//        }
+//        return false;
+//    }
     @Override public boolean removeFolder(String username, String name)
     {
-        if (!(traineeList.getUserByUsername(username)==null)){
-            traineeList.getUserByUsername(username).getFolderList().remove(name);
-            System.out.println("Folder was successfully removed");
-        }else{
-            System.out.println("Folder could not be removed");
+        try
+        {
+            userDAO.removeFolder(username,name);
         }
-        return false;
+        catch (SQLException e){
+            return false;
+        }
+        return true;
     }
+//
+//    @Override public boolean editFolder(String username, String oldName,
+//        String newName)
+//    {
+//        if (!(traineeList.getUserByUsername(username)==null)){
+//            traineeList.getUserByUsername(username).getFolder().edit(username, oldName, newName);
+//        }else{
+//            System.out.println("Folder could not be edited");
+//        }
+//        return false;
+//    }
 
-    @Override public boolean editFolder(String username, String oldName,
-        String newName)
+    @Override public boolean editFolder(String username, String oldName, String newName)
     {
-        if (!(traineeList.getUserByUsername(username)==null)){
-            traineeList.getUserByUsername(username).getFolder().edit(username, oldName, newName);
-        }else{
-            System.out.println("Folder could not be edited");
+        try
+        {
+            userDAO.editFolder(username,oldName,newName);
         }
-        return false;
+        catch (SQLException e){
+            return false;
+        }
+        return true;
     }
 
     @Override public ArrayList<String> getFolderList(String username)

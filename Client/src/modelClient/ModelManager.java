@@ -74,6 +74,29 @@ public class ModelManager implements Model//, PropertyChangeListener
 		return client.editSquat(weight);
 	}
 
+	@Override public boolean addExercise(String username, String folderName,
+			String exerciseName, int repetitions, int weight)
+	{
+		return false;
+	}
+
+	@Override public boolean removeExercise(String username, String folderName,
+			String exerciseName)
+	{
+		return false;
+	}
+
+	@Override public ArrayList<String> getExerciseList(String username,
+			String folderName)
+	{
+		return null;
+	}
+
+	@Override public ArrayList<String> getPossibleExercises()
+	{
+		return null;
+	}
+
 	//	@Override public void addListener(PropertyChangeListener listener)
 //	{
 //		property.addPropertyChangeListener(listener);
