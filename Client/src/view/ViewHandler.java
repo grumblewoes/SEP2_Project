@@ -23,6 +23,7 @@ public class ViewHandler {
 	private ViewModelFactory viewModelFactory;
 
 	private HomeViewController homeViewController;
+	private ViewController addExerciseViewController;
 
 
 
@@ -47,6 +48,8 @@ public class ViewHandler {
 				break;
 			case "home":
 				homeViewController = loadViewController("homeView.fxml", homeViewController, viewModelFactory.getHomeViewController());
+			case "addExercise":
+				addExerciseViewController = loadViewController("AddExerciseView.fxml", addExerciseViewController, viewModelFactory.getAddExerciseViewModel());
 		}
 		currentScene.setRoot(root);
 		String title = "";

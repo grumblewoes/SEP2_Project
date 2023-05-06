@@ -29,6 +29,9 @@ public class ViewModelFactory {
 		return loginViewModel;
 	}
 
+	public AddExerciseViewModel getAddExerciseViewModel() {
+		return addExerciseViewModel;
+	}
 
 
 }

@@ -26,7 +26,7 @@ public class FolderViewModel extends ViewModel {
         return folderTitleProperty;
     }
 
-    public StringProperty ErrorProperty(){
+    public StringProperty getErrorProperty(){
         return errorProperty;
     }
 
