@@ -13,23 +13,33 @@ public class ManageFolderViewController extends ViewController
 
   @FXML private TextField nameField;
   @FXML private Label headerLabel;
+  @FXML private Label errorLabel;
+  private ManageFolderViewModel folderViewModel;
 
-  private ManageFolderViewModel manageFolderViewModel;
 
-
-  @Override public void init(ViewHandler viewHandler, ViewModel viewModel,
-      Region root, HomeViewModel createUserViewModel, Region root2)
+  @Override public void  init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
+    this.viewHandler = viewHandler;
+    this.folderViewModel = (ManageFolderViewModel) viewModel;
+    this.root= root;
 
+    errorLabel.textProperty().bind( folderViewModel.getErrorProperty() );
+    headerLabel.textProperty().bind(folderViewModel.getHeaderProperty());
+    nameField.textProperty().bindBidirectional(folderViewModel.getNameProperty() );
   }
 
 
-  public void submit(){
-
+  @FXML private void submit(){
+    boolean ans = folderViewModel.submit();
+    if(ans)
+      viewHandler.openView("home");
+  }
+  @FXML private void cancel(){
+    viewHandler.openView("home");
   }
 
   @Override public void reset()
   {
-    manageFolderViewModel.clear();
+    folderViewModel.clear();
   }
 }

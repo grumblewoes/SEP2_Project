@@ -1,6 +1,6 @@
 package modelServer.DAO.interfaces;
 
-import modelServer.User;
+import mediator.User;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
@@ -13,5 +13,9 @@ public interface IUserDAO
   boolean createFolder(String username, String name)  throws SQLException;
   boolean removeFolder(String username, String name)  throws SQLException;
   boolean editFolder(String username, String oldName, String newName)  throws SQLException;
+
+  User getTrainee(String username) throws SQLException;
+
+  boolean updateTrainee(String u, int h, int w,boolean s) throws SQLException;
 
 }

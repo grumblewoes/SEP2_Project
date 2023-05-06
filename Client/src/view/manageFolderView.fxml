@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ManageFolderViewController">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="headerLabel" text="ManageFolder">
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/ValhallaFitness.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="headerLabel" styleClass="fs-6" text="ManageFolder">
                <font>
                   <Font size="24.0" />
                </font>
@@ -22,14 +32,18 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0">
                <children>
-                  <Label text="Folder Name">
+                  <Label styleClass="fs-3" text="Folder Name">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="nameField" />
+                  <TextField fx:id="nameField">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
                </children>
             </VBox>
          </children>
@@ -40,17 +54,29 @@
                <HBox.margin>
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
+               <styleClass>
+                  <String fx:value="btn-success" />
+                  <String fx:value="fs-2" />
+               </styleClass>
             </Button>
             <Button mnemonicParsing="false" onAction="#cancel" text="Cancel">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" />
                </HBox.margin>
+               <styleClass>
+                  <String fx:value="btn-danger" />
+                  <String fx:value="fs-2" />
+               </styleClass>
             </Button>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Label fx:id="errorLabel" text="ErrorLabel" textFill="RED" />
+            <Label fx:id="errorLabel" text="ErrorLabel" textFill="RED">
+               <styleClass>
+                  <String fx:value="fs-2" />
+                  <String fx:value="text-danger" />
+               </styleClass></Label>
          </children>
       </HBox>
    </children>

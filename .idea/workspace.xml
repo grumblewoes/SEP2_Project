@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="database implementation">
+    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="sep2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/mediator/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/mediator/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/mediator/RemoteModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/mediator/RemoteModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/modelClient/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/modelClient/ModelManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/viewModel/FolderViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/viewModel/FolderViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/HomeViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/HomeViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/ManageFolderViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/ManageFolderViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/homeView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/homeView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/manageFolderView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/manageFolderView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/DAO/implementation/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/DAO/implementation/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/DAO/interfaces/IUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/DAO/interfaces/IUserDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +86,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.ClientMain" />
+      <item itemvalue="Application.MyApplication" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MyApplication" />
