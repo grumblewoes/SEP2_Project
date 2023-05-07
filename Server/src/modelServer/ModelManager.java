@@ -136,6 +136,30 @@ public class ModelManager implements Model
 
     @Override public ArrayList<String> getFolderList(String username)
     {
-        return traineeList.getUserByUsername(username).getFolderList();
+        return traineeList.getUserByUsername(username)
     }
+
+    @Override public boolean addExercise(String username, String folderName,
+        int repetitions, int weight)
+    {
+
+    }
+
+    @Override public boolean removeExercise(String username, String folderName,
+        String exerciseName)
+    {
+        return false;
+    }
+
+    @Override public ArrayList<String> getExercise(String username,
+        String folderName)
+    {
+        return null;
+    }
+
+    @Override public ArrayList<String> getPossibleExercises()
+    {
+        return null;
+    }
+
 }

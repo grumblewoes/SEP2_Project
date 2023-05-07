@@ -11,4 +11,8 @@ public interface Model
     boolean removeFolder(String username, String name);
     boolean editFolder(String username, String oldName, String newName);
     ArrayList<String> getFolderList(String username);
+    boolean addExercise(String username, String folderName, int repetitions, int weight);
+    boolean removeExercise(String username, String folderName, String exerciseName);
+    ArrayList<String> getExercise(String username, String folderName);
+    ArrayList<String> getPossibleExercises();
 }

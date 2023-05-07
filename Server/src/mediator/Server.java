@@ -69,7 +69,37 @@ public class Server implements RemoteModel
   @Override public ArrayList<String> getExerciseList(String username)
       throws RemoteException
   {
-    return model.getExerciseList(username);
+    return model.getExercise(username, getFolderList(username).)
+  }
+
+  @Override public double editHeight(double height)
+  {
+    return model.editHeight(height);
+  }
+
+  @Override public double editWeight(double weight)
+  {
+    return model.editWeight(weight);
+  }
+
+  @Override public String editDob(String dob)
+  {
+    return model.editDob(dob);
+  }
+
+  @Override public boolean editDeadlift(int weight)
+  {
+    return model.editDeadlift(weight);
+  }
+
+  @Override public boolean editBenchPress(int weight)
+  {
+    return model.editBenchPress(weight);
+  }
+
+  @Override public boolean editSquat(int weight)
+  {
+    return model.editSquat(weight);
   }
 
   private void startServer() {

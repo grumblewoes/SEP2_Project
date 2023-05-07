@@ -116,7 +116,7 @@ public class Client implements Model
 
   }
 
-  @Override public boolean editHeight(int height)
+  @Override public boolean editHeight(double height)
   {
     try
     {
@@ -128,7 +128,7 @@ public class Client implements Model
     }
   }
 
-  @Override public boolean editWeight(int weight)
+  @Override public boolean editWeight(double weight)
   {
     try
     {
@@ -140,7 +140,7 @@ public class Client implements Model
     }
   }
 
-  @Override public boolean editDob(int dob)
+  @Override public boolean editDob(String dob)
   {
     try
     {
@@ -156,7 +156,7 @@ public class Client implements Model
   {
     try
     {
-      return server.editDeadLift(weight);
+      return server.editDeadlift(weight);
     }
     catch (RemoteException e)
     {

@@ -13,7 +13,7 @@ public interface Model
 	ArrayList<String> getFolderList(String username);
 	boolean editHeight(int height);
 	boolean editWeight(int weight);
-	boolean editDob(int dob);
+	String editDob(String dob);
 	boolean editDeadlift(int weight);
 	boolean editBenchPress(int weight);
 	boolean editSquat(int weight);

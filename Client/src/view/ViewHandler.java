@@ -25,6 +25,8 @@ public class ViewHandler {
 	private HomeViewController homeViewController;
 	private ViewController addExerciseViewController;
 
+	private ViewController viewController;
+
 
 
 	public ViewHandler(ViewModelFactory viewModelFactory) {

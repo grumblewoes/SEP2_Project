@@ -19,4 +19,11 @@ public interface RemoteModel extends Remote
 	ArrayList<String> getExerciseList(String username, String folderName) throws RemoteException;
 	ArrayList<String> getPossibleExercises()  throws RemoteException;
 
+	boolean editHeight(double height);
+	boolean editWeight(double weight);
+	boolean editDob(String dob);
+	boolean editDeadlift(int weight);
+	boolean editBenchPress(int weight);
+	boolean editSquat(int weight);
+
 }

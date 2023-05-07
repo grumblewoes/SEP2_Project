@@ -4,19 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="model-client item 4">
-      <change afterPath="$PROJECT_DIR$/Client/src/view/AddExerciseView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/view/AddExerciseViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/view/FolderViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/view/ModifyOverviewView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Client/src/view/OverviewView.fxml" afterDir="false" />
+    <list default="true" id="6f08bc14-d729-4037-a785-c321b5b9aad6" name="Changes" comment="database implementation">
+      <change afterPath="$PROJECT_DIR$/Server/src/modelServer/DAO/implementation/FolderDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/modelServer/DAO/interfaces/IFolderDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/modelServer/Exercise.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/src/modelServer/Folder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/mediator/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/mediator/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/mediator/RemoteModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/mediator/RemoteModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/modelClient/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/modelClient/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/modelClient/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/modelClient/ModelManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/view/HomeViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/HomeViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/view/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/ViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/view/ViewHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/ViewHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/view/manageExercisesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/FolderView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/viewModel/FolderViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/viewModel/FolderViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/viewModel/ViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/viewModel/ViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/mediator/RemoteModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/mediator/RemoteModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/mediator/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/mediator/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/modelServer/ModelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/modelServer/ModelManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +31,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
-        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -88,6 +91,19 @@
     <configuration name="MyApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MyApplication" />
       <module name="Client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Client" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -224,25 +240,13 @@
       <option name="project" value="LOCAL" />
       <updated>1683285770283</updated>
     </task>
-    <task id="LOCAL-00017" summary="model-client item 4">
-      <created>1683287095886</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1683287095886</updated>
-    </task>
-    <option name="localTasksCounter" value="18" />
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="ca1200e3-1457-4d94-b98c-58c5bb612b25" value="TOOL_WINDOW" />
-      </map>
-    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -262,11 +266,6 @@
             </State>
           </value>
         </entry>
-        <entry key="ca1200e3-1457-4d94-b98c-58c5bb612b25">
-          <value>
-            <State />
-          </value>
-        </entry>
       </map>
     </option>
   </component>
@@ -283,8 +282,7 @@
     <MESSAGE value="task 4 client / remotemodel" />
     <MESSAGE value="task 4 client fxml files" />
     <MESSAGE value="database implementation" />
-    <MESSAGE value="model-client item 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="model-client item 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="database implementation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -293,12 +291,6 @@
           <url>file://$PROJECT_DIR$/Client/src/mediator/Client.java</url>
           <line>184</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/Client/src/view/ViewHandler.java</url>
-          <line>24</line>
-          <properties field="homeViewController" class="view.ViewHandler" />
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

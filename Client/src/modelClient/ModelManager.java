@@ -55,7 +55,7 @@ public class ModelManager implements Model//, PropertyChangeListener
 	}
 
 	@Override
-	public boolean editDob(int dob) {
+	public String editDob(String dob) {
 		return client.editDob(dob);
 	}
 
