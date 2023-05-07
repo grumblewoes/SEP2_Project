@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.profileViewController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/ValhallaFitness.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </ImageView>
+            <Label styleClass="fs-6" text="PERSONAL PROFILE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="fs-3" text="First name" />
+                  <TextField fx:id="firstNameField" disable="true">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="fs-3" text="Last name" />
+                  <TextField fx:id="lastNameField" disable="true">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="fs-3" text="Username" />
+                  <TextField fx:id="usernameField" disable="true">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="fs-3" text="Gender" />
+                  <TextField fx:id="genderField" disable="true">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="fs-3" text="Weight" />
+                  <TextField fx:id="weightField">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="fs-3" text="Bench press" />
+                  <TextField fx:id="benchPressField" disable="true">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="fs-3" text="Height" />
+                  <TextField fx:id="heightField">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="fs-3" text="Squat" />
+                  <TextField fx:id="squatField" disable="true">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="fs-3" text="BMI - result" />
+                  <TextField fx:id="bmiField" disable="true">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label styleClass="fs-3" text="Deadlift" />
+                  <TextField fx:id="deadliftField" disable="true">
+                     <styleClass>
+                        <String fx:value="fs-2" />
+                        <String fx:value="input" />
+                     </styleClass></TextField>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label styleClass="fs-3" text="Share with others">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
+            </Label>
+            <RadioButton fx:id="shareProfileRadio" mnemonicParsing="false" styleClass="fs-2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
+            </RadioButton>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#update" text="Update">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="btn-success" />
+                  <String fx:value="fs-2" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goBack" text="Back">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="btn-danger" />
+                  <String fx:value="fs-2" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>
