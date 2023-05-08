@@ -134,11 +134,7 @@ public class Server implements RemoteModel
     return model.removeFriend(requesterUsername,accepterUsername);
   }
 
-  @Override public FriendList getFriendList(String username)
-      throws RemoteException
-  {
-    return model.getFriendList(username);
-  }
+
 
   private void startServer() {
     try

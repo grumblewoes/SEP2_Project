@@ -158,10 +158,7 @@ public class ModelManager implements Model, LocalListener<String,String>
 
 	}
 
-	@Override public FriendList getFriendList(String username)
-	{
-		return client.getFriendList(username);
-	}
+
 
 	//	@Override
 //	public boolean editHeight(int height) {
