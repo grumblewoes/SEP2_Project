@@ -1,11 +1,9 @@
 package modelServer;
 
-import mediator.ExerciseList;
-import mediator.Folder;
-import mediator.FolderList;
-import mediator.User;
+import mediator.*;
 import modelServer.DAO.implementation.ExerciseDAO;
 import modelServer.DAO.implementation.FolderDAO;
+import modelServer.DAO.implementation.FriendDAO;
 import modelServer.DAO.implementation.UserDAO;
 import util.Logger;
 
@@ -212,6 +210,35 @@ public class ModelManager implements Model
             return new UserDAO().updateTrainee(u,h,w,s);
         }catch(SQLException e){
             return false;
+        }
+    }
+
+    @Override public boolean sendFriendRequest(String requesterUsername,
+        String accepterUsername)
+    {
+        try{
+            return new FriendDAO().sendFriendRequest(requesterUsername,accepterUsername);
+        }catch(SQLException e){
+            return false;
+        }
+    }
+
+    @Override public boolean removeFriend(String requesterUsername,
+        String accepterUsername)
+    {
+        try{
+            return new FriendDAO().removeFriend(requesterUsername,accepterUsername);
+        }catch(SQLException e){
+            return false;
+        }
+    }
+
+    @Override public FriendList getFriendList(String username)
+    {
+        try{
+            return new FriendDAO().getFriendList(username);
+        }catch(SQLException e){
+            return null;
         }
     }
 }

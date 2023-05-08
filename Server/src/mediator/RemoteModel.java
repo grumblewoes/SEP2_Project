@@ -28,4 +28,11 @@ public interface RemoteModel extends Remote
 	User getTrainee(String username) throws RemoteException;
 
 	boolean updateTrainee(String u, int h, int w,boolean s) throws RemoteException;
+
+	boolean sendFriendRequest(String requesterUsername,
+			String accepterUsername) throws RemoteException;
+	boolean removeFriend(String requesterUsername,
+			String accepterUsername) throws RemoteException;
+
+	FriendList getFriendList(String username) throws RemoteException;
 }

@@ -1,9 +1,6 @@
 package modelServer;
 
-import mediator.ExerciseList;
-import mediator.Folder;
-import mediator.FolderList;
-import mediator.User;
+import mediator.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,4 +29,10 @@ public interface Model
     User getTrainee(String username);
 
     boolean updateTrainee(String u, int h, int w,boolean s);
+    boolean sendFriendRequest(String requesterUsername,
+        String accepterUsername);
+    boolean removeFriend(String requesterUsername,
+        String accepterUsername);
+
+    FriendList getFriendList(String username);
 }

@@ -112,6 +112,24 @@ public class Server implements RemoteModel
     return model.updateTrainee(u,h,w,s);
   }
 
+  @Override public boolean sendFriendRequest(String requesterUsername,
+      String accepterUsername) throws RemoteException
+  {
+    return model.sendFriendRequest(requesterUsername,accepterUsername);
+  }
+
+  @Override public boolean removeFriend(String requesterUsername,
+      String accepterUsername) throws RemoteException
+  {
+    return model.removeFriend(requesterUsername,accepterUsername);
+  }
+
+  @Override public FriendList getFriendList(String username)
+      throws RemoteException
+  {
+    return model.getFriendList(username);
+  }
+
   private void startServer() {
     try
     {
