@@ -67,4 +67,3 @@ insert into user_exercise2(trainee_username, exercise_name, folderId, repetition
 insert into user_exercise2(trainee_username, exercise_name, folderId, repetitions, weight) values ('d','talking_to_women',2,3,30);
 
 
-
