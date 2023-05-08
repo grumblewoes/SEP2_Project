@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public interface ICoachDAO
 {
 
-  public boolean addCoach(String coachUsername, String coachPassword, String coachName, String coachLName, double coachHeight, double coachWeight,
-      int pbBench, int pbSquat, int pbLift, boolean share) throws SQLException;
+  public boolean addCoach(String coachUsername, String coachPassword, String coachName, String coachLName, int coachHeight, int coachWeight,
+      int pbBench, int pbSquat, int pbLift, String status, boolean share) throws SQLException;
 
   public boolean removeCoach(String name) throws SQLException;
 

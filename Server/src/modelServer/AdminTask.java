@@ -53,10 +53,10 @@ public class AdminTask implements Runnable
         String coachLName = scan.nextLine();
 
         System.out.println("Enter height >> ");
-        double coachHeight = scan.nextDouble();
+        int coachHeight = scan.nextInt();
 
         System.out.println("Enter weight >> ");
-        double coachWeight = scan.nextDouble();
+        int coachWeight = scan.nextInt();
 
         System.out.println("Enter PB for bench press >> ");
         int pbBench = scan.nextInt();
@@ -68,7 +68,7 @@ public class AdminTask implements Runnable
         int pbLift = scan.nextInt();
 
 
-        if (model.addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, true))
+        if (model.addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, "On that grind", true))
         {
           System.out.println("Coach was added to the system.");
         }

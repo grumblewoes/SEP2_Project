@@ -218,11 +218,11 @@ public class ModelManager implements Model
 
     @Override public boolean addCoach(String coachUsername,
         String coachPassword, String coachName, String coachLName,
-        double coachHeight, double coachWeight, int pbBench, int pbSquat,
-        int pbLift, boolean share)
+        int coachHeight, int coachWeight, int pbBench, int pbSquat,
+        int pbLift, String status, boolean share)
     {
         try {
-            return new CoachDAO().addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, share);
+            return new CoachDAO().addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, status, share);
         }
         catch (SQLException e)
         {

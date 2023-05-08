@@ -14,19 +14,18 @@ public class CoachDAO implements ICoachDAO
 {
   private static CoachDAO instance;
 
-  public boolean addCoach(String coachUsername, String coachPassword, String coachName, String coachLName, double coachHeight, double coachWeight,
-      int pbBench, int pbSquat, int pbLift, boolean share) throws SQLException
+  public boolean addCoach(String coachUsername, String coachPassword, String coachName, String coachLName, int coachHeight, int coachWeight,
+      int pbBench, int pbSquat, int pbLift, String status, boolean share) throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
-    User coach = new User(coachHeight, coachWeight, coachName, coachLName, coachUsername, PLACEHOLDER, share);
 
     try
     {
         PreparedStatement statement = connection.prepareStatement(
             "insert into coach values (" + coachUsername + ", " + coachPassword + ", "
                 + coachName + ", " + coachLName + ", " + coachHeight + ", " + coachWeight
-                + ", " + pbBench + ", " + pbSquat + ", " + pbLift + ");"
+                + ", " + pbBench + ", " + pbSquat + ", " + pbLift + ", " + status + ", true);"
       );
 
       int result = statement.executeUpdate(); //number of modified rows
@@ -71,24 +70,32 @@ public class CoachDAO implements ICoachDAO
   {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
-    User coach;
+    User coach = null;
     try
     {
       PreparedStatement statement = connection.prepareStatement(
-          "select from coach "
-              + "join trainee where username = " + traineeUser + ";"
+          "select * from coach c "
+              + "join trainee2 t on c.username = t.username " +
+                  "where t.username = " + traineeUser + ";"
       );
 
       ResultSet rs = statement.executeQuery();
-
-      while(rs.next())
-        coach = ;
+      if(rs.next()) {
+        int height = rs.getInt("height");
+        int weight = rs.getInt("weight");
+        String firstName = rs.getString("first_name");
+        String lastName = rs.getString("last_name");
+        String username = rs.getString("username");
+        String status = rs.getString("status");
+        boolean shareProfile = rs.getBoolean("share");
+        coach = new User(height, weight, firstName, lastName, username, status, shareProfile);
+      }
 
       return coach;
     }
     catch (SQLException e){
       Logger.log(e);
-      return coach;
+      return null;
     }
     finally
     {
