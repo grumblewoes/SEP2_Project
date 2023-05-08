@@ -1,5 +1,6 @@
 package modelServer.DAO.implementation;
 
+
 import mediator.Friend;
 import mediator.FriendList;
 import modelServer.DAO.interfaces.IFriendDAO;
@@ -12,19 +13,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class FriendDAO implements IFriendDAO
-{
+public class FriendDAO implements IFriendDAO {
 
     @Override
     public boolean acceptFriendRequest(String requester_username, String accepter_username) throws SQLException {
         DBConnection db = DBConnection.getInstance();
         Connection connection = db.getConnection();
 
-        try
-        {
+        try {
 
             PreparedStatement statement = connection.prepareStatement(
-                    "delete from friendship_request where requester_username = '"+ requester_username +"' and accepter_username = '"+accepter_username+"'; "+
+                    "delete from friendship_request where requester_username = '" + requester_username + "' and accepter_username = '" + accepter_username + "'; " +
                             "insert into friendship_list(requester_username, accepter_username) values (?,?);"
             );
             statement.setString(1, requester_username);
@@ -33,14 +32,11 @@ public class FriendDAO implements IFriendDAO
 
 
             return true;
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             Logger.log(e);
             Logger.log("failed to accept");
             return false;
-        }
-        finally
-        {
+        } finally {
             connection.close();
         }
     }
@@ -50,8 +46,7 @@ public class FriendDAO implements IFriendDAO
         DBConnection db = DBConnection.getInstance();
         Connection connection = db.getConnection();
 
-        try
-        {
+        try {
 
             PreparedStatement statement = connection.prepareStatement(
                     "delete from frendship_request where requester_username = ? and accepter_username = ?"
@@ -62,14 +57,11 @@ public class FriendDAO implements IFriendDAO
 
 
             return true;
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             Logger.log(e);
             Logger.log("failed to reject");
             return false;
-        }
-        finally
-        {
+        } finally {
             connection.close();
         }
     }
@@ -80,38 +72,34 @@ public class FriendDAO implements IFriendDAO
         Connection connection = db.getConnection();
         FriendList list = new FriendList();
 
-        try
-        {
+        try {
 
             PreparedStatement statement1 = connection.prepareStatement(
                     "select username, status from trainee2 where username in (select accepter_username from friendship_list where requester_username = ?)"
             );
-            statement1.setString(1,username);
+            statement1.setString(1, username);
             ResultSet rs1 = statement1.executeQuery();
-            while(rs1.next()){
+            while (rs1.next()) {
                 String u = rs1.getString(1);
                 String st = rs1.getString(2);
-                list.add( new Friend(u,st) );
+                list.add(new Friend(u, st));
             }
 
             PreparedStatement statement2 = connection.prepareStatement(
                     "select username, status from trainee2 where username in (select requester_username from friendship_list where accepter_username = ?) "
             );
-            statement2.setString(1,username);
+            statement2.setString(1, username);
             ResultSet rs2 = statement2.executeQuery();
-            while(rs2.next()){
+            while (rs2.next()) {
                 String u = rs2.getString(1);
                 String st = rs2.getString(2);
-                list.add( new Friend(u,st) );
+                list.add(new Friend(u, st));
             }
 
             return list;
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             return list;
-        }
-        finally
-        {
+        } finally {
             connection.close();
         }
     }
@@ -122,22 +110,63 @@ public class FriendDAO implements IFriendDAO
         Connection connection = db.getConnection();
         ArrayList<String> list = new ArrayList<>();
 
-        try
-        {
+        try {
 
             PreparedStatement statement1 = connection.prepareStatement("select requester_username from friendship_request where accepter_username = ?");
-            statement1.setString(1,username);
+            statement1.setString(1, username);
             ResultSet rs1 = statement1.executeQuery();
-            while(rs1.next()) list.add( rs1.getString(1));
+            while (rs1.next()) list.add(rs1.getString(1));
 
             return list;
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             return list;
+        } finally {
+            connection.close();
         }
-        finally
-        {
+    }
+
+    @Override
+    public boolean sendFriendRequest(String requesterUsername,
+                                     String accepterUsername) throws SQLException {
+        DBConnection db = DBConnection.getInstance();
+        Connection connection = db.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("insert into friendship_request(requester_username, accepter_username) values (?,?);");
+            statement.setString(1, requesterUsername);
+            statement.setString(2, accepterUsername);
+
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            Logger.log(e);
+            return false;
+        } finally {
+            connection.close();
+        }
+    }
+
+    @Override
+    public boolean removeFriend(String requesterUsername,
+                                String accepterUsername) throws SQLException {
+        DBConnection db = DBConnection.getInstance();
+        Connection connection = db.getConnection();
+
+        try {
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "delete from friendship_list where requester_username = ? and accepter_username = ?;"
+            );
+            statement.setString(1, requesterUsername);
+            statement.setString(2, accepterUsername);
+
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            Logger.log(e);
+            return false;
+        } finally {
             connection.close();
         }
     }
 }
+

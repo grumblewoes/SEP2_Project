@@ -15,6 +15,7 @@ import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Client implements Model, RemoteListener<String, String>, LocalSubject<String,String> {
@@ -301,5 +302,25 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
     property.addListener(listener,propertyNames);
     return true;
   }
+  @Override public boolean sendFriendRequest(String requesterUsername,
+      String accepterUsername)
+  {
+    try{
+      return server.sendFriendRequest(requesterUsername,accepterUsername);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
+  @Override public boolean removeFriend(String requesterUsername,
+      String accepterUsername)
+  {
+    try{
+      return server.removeFriend(requesterUsername,accepterUsername);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
 }
 

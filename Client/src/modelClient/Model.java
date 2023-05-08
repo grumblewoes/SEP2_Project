@@ -39,6 +39,11 @@ public interface Model extends LocalSubject<String,String>
 
 	FriendList getFriends(String username) ;
 	ArrayList<String> getFriendRequests(String username) ;
+	boolean sendFriendRequest(String requesterUsername,
+			String accepterUsername);
+	boolean removeFriend(String requesterUsername,
+			String accepterUsername);
+
 //	boolean editHeight(int height);
 //	boolean editWeight(int weight);
 //	boolean editDob(int dob);

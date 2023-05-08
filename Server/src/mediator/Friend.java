@@ -9,6 +9,10 @@ public class Friend implements Serializable {
         this.username = username;
         this.status = status;
     }
+    public Friend(String username) {
+        this.username = username;
+        this.status = null;
+    }
 
     public String getUsername() {
         return username;

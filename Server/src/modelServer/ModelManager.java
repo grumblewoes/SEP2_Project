@@ -233,6 +233,16 @@ public class ModelManager implements Model
         }
     }
 
+    @Override public boolean sendFriendRequest(String requesterUsername,
+        String accepterUsername) {
+        try {
+            return new FriendDAO().sendFriendRequest(requesterUsername, accepterUsername);
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+
     @Override
     public FriendList getFriends(String username) {
         try{
@@ -251,4 +261,13 @@ public class ModelManager implements Model
         }
     }
 
+    @Override public boolean removeFriend(String requesterUsername,
+        String accepterUsername)
+    {
+        try{
+            return new FriendDAO().removeFriend(requesterUsername,accepterUsername);
+        }catch(SQLException e){
+            return false;
+        }
+    }
 }

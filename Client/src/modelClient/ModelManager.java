@@ -145,7 +145,25 @@ public class ModelManager implements Model, LocalListener<String,String>
 	}
 
 
-//	@Override
+	@Override public boolean sendFriendRequest(String requesterUsername,
+			String accepterUsername)
+	{
+		return client.sendFriendRequest(requesterUsername,accepterUsername);
+	}
+
+	@Override public boolean removeFriend(String requesterUsername,
+			String accepterUsername)
+	{
+		return client.removeFriend(requesterUsername,accepterUsername);
+
+	}
+
+	@Override public FriendList getFriendList(String username)
+	{
+		return client.getFriendList(username);
+	}
+
+	//	@Override
 //	public boolean editHeight(int height) {
 //		return client.editHeight(height);
 //	}

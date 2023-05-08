@@ -13,4 +13,8 @@ public interface IFriendDAO
 
     FriendList getFriends(String username) throws SQLException;
     ArrayList<String> getFriendRequests(String username) throws SQLException;
+    boolean sendFriendRequest(String requesterUsername, String accepterUsername) throws
+            SQLException;
+    boolean removeFriend(String requesterUsername, String accepterUsername) throws SQLException;
+
 }

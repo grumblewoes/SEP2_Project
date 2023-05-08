@@ -36,4 +36,10 @@ public interface RemoteModel extends RemoteSubject<String,String>
 
 	FriendList getFriends(String username) throws RemoteException;
 	ArrayList<String> getFriendRequests(String username) throws RemoteException;
+
+	boolean sendFriendRequest(String requesterUsername,
+			String accepterUsername) throws RemoteException;
+	boolean removeFriend(String requesterUsername,
+			String accepterUsername) throws RemoteException;
+
 }
