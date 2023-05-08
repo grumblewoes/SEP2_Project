@@ -1,9 +1,6 @@
 package modelClient;
 
-import mediator.ExerciseList;
-import mediator.Folder;
-import mediator.FolderList;
-import mediator.User;
+import mediator.*;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -34,8 +31,13 @@ public interface Model
 
 	User getTrainee(String username);
 
-    boolean updateTrainee(String u, int h, int w,boolean s);
+    boolean updateTrainee(String u, int h, int w,boolean s,String st);
 
+	boolean acceptFriendRequest(String requester_username,String accepter_username)  ;
+	boolean rejectFriendRequest(String requester_username,String accepter_username)  ;
+
+	FriendList getFriends(String username) ;
+	ArrayList<String> getFriendRequests(String username) ;
 //	boolean editHeight(int height);
 //	boolean editWeight(int weight);
 //	boolean editDob(int dob);

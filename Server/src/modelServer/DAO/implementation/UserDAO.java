@@ -83,7 +83,7 @@ public class UserDAO implements IUserDAO
     {
 
       PreparedStatement statement = connection.prepareStatement(
-              "select height,weight,first_name,last_name,username,share_profile " +
+              "select height,weight,first_name,last_name,username,share_profile,status " +
                       "from trainee2 " +
                       "where username = '"+username+"';"
       );
@@ -95,9 +95,9 @@ public class UserDAO implements IUserDAO
         int weight = rs.getInt(2);
         String firstName = rs.getString(3);
         String lastName = rs.getString(4);
-        String gender = "idk";
         boolean shareProfile = rs.getBoolean(6);
-        user= new User(height,weight,firstName,lastName,username,gender,shareProfile);
+        String status = rs.getString(7);
+        user= new User(height,weight,firstName,lastName,username,status,shareProfile);
       }
 
 
@@ -114,7 +114,7 @@ public class UserDAO implements IUserDAO
   }
 
   @Override
-  public boolean updateTrainee(String u, int h, int w,boolean s) throws SQLException {
+  public boolean updateTrainee(String u, int h, int w,boolean s,String st) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
 
@@ -126,6 +126,7 @@ public class UserDAO implements IUserDAO
               "set height = "+ h +" " +
               ", weight = "+ w +" " +
               ", share_profile = "+ s +" " +
+              ", status = '"+ st +"' " +
               "where username = '"+u+"' ;"
       );
 

@@ -14,7 +14,7 @@ public class UserTest {
         assertEquals("John", user.getFirstName());
         assertEquals("Doe", user.getLastName());
         assertEquals("johndoe", user.getUsername());
-        assertEquals("Male", user.getGender());
+        assertEquals("Male", user.getStatus());
         assertTrue(user.isShareProfile());
 
         user.setHeight(175);
@@ -22,7 +22,7 @@ public class UserTest {
         user.setFirstName("Jane");
         user.setLastName("Doe");
         user.setUsername("janedoe");
-        user.setGender("Female");
+        user.setStatus("Female");
         user.setShareProfile(false);
 
         assertEquals(175, user.getHeight());
@@ -30,7 +30,7 @@ public class UserTest {
         assertEquals("Jane", user.getFirstName());
         assertEquals("Doe", user.getLastName());
         assertEquals("janedoe", user.getUsername());
-        assertEquals("Female", user.getGender());
+        assertEquals("Female", user.getStatus());
         assertFalse(user.isShareProfile());
     }
 }

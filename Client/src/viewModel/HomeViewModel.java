@@ -5,12 +5,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import mediator.Folder;
 import mediator.FolderList;
+import mediator.Friend;
+import mediator.FriendList;
 import modelClient.Model;
+import util.Logger;
 
 import java.util.ArrayList;
 
 public class HomeViewModel extends ViewModel{
-    private StringProperty usernameProperty, folderListProperty, errorProperty;
+    private StringProperty usernameProperty, folderListProperty, errorProperty,friendshipListProperty,friendshipRequestListProperty;
     private Model model;
     private ViewState viewState;
     private Gson gson;
@@ -21,6 +24,9 @@ public class HomeViewModel extends ViewModel{
         usernameProperty = new SimpleStringProperty();
         errorProperty = new SimpleStringProperty();
         folderListProperty = new SimpleStringProperty();
+        friendshipListProperty = new SimpleStringProperty();
+        friendshipRequestListProperty = new SimpleStringProperty();
+
         gson = new Gson();
     }
 
@@ -31,6 +37,8 @@ public class HomeViewModel extends ViewModel{
     public StringProperty getFolderListProperty() {
         return folderListProperty;
     }
+    public StringProperty getFriendshipRequestListProperty() {     return friendshipRequestListProperty;  }
+    public StringProperty getFriendshipListProperty() {     return friendshipListProperty;  }
 
     private void loadFolders() {
         //get list of folders from the database
@@ -76,13 +84,14 @@ public class HomeViewModel extends ViewModel{
     @Override
     public void clear() {
         //receiving folder names from the database
-
+        Logger.log("reseting the home");
         usernameProperty.set(viewState.getUsername());
 
         viewState.setNewFolder(true);
         viewState.setManageFolderEditable(true);
         errorProperty.set("");
         loadFolders();
+        loadFriendships();
     }
 
     public void setupOpenFolder(String folderName,int folderId) {
@@ -93,5 +102,29 @@ public class HomeViewModel extends ViewModel{
 
     public void setupProfile() {
         viewState.setProfileUsername(viewState.getUsername() );
+    }
+    public void setupProfile(String username) {
+        viewState.setProfileUsername(username );
+    }
+
+    private void loadFriendships(){
+        FriendList friends = model.getFriends(viewState.getUsername());
+
+        ArrayList<String> requests = model.getFriendRequests(viewState.getUsername());
+//        Logger.log(model.getFriends(viewState.getUsername()));
+//        Logger.log(model.getFriendRequests(viewState.getUsername()));
+
+        Logger.log(friends);
+        friendshipRequestListProperty.set(gson.toJson(requests) );
+        friendshipListProperty.set( gson.toJson(friends) );
+
+    }
+
+    public void acceptRequest(String username) {
+        Logger.log("accepting");
+        model.acceptFriendRequest(username, viewState.getUsername());
+    }
+    public void rejectRequest(String username) {
+        model.acceptFriendRequest(username, viewState.getUsername());
     }
 }

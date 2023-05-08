@@ -1,6 +1,7 @@
 package mediator;
 
 import modelServer.Model;
+import util.Logger;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -108,8 +109,8 @@ public class Server implements RemoteModel
   }
 
   @Override
-  public boolean updateTrainee(String u, int h, int w,boolean s) throws RemoteException {
-    return model.updateTrainee(u,h,w,s);
+  public boolean updateTrainee(String u, int h, int w,boolean s,String st) throws RemoteException {
+    return model.updateTrainee(u,h,w,s,st);
   }
 
   private void startServer() {
@@ -143,5 +144,28 @@ public class Server implements RemoteModel
     } catch (RemoteException e) {
       throw new Exception("Registry already started? " + e.getMessage());
     }
+  }
+
+  @Override
+  public boolean acceptFriendRequest(String requester_username, String accepter_username) {
+      return model.acceptFriendRequest(requester_username, accepter_username);
+
+  }
+
+  @Override
+  public boolean rejectFriendRequest(String requester_username, String accepter_username) {
+      return model.rejectFriendRequest(requester_username, accepter_username);
+
+
+  }
+
+  @Override
+  public FriendList getFriends(String username) {
+      return model.getFriends(username);
+  }
+
+  @Override
+  public ArrayList<String> getFriendRequests(String username) {
+      return model.getFriendRequests(username);
   }
 }

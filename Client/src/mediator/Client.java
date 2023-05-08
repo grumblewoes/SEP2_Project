@@ -283,13 +283,48 @@ public class Client implements Model
     }
   }
 
-  @Override public boolean updateTrainee(String u, int h, int w,boolean s){
+  @Override public boolean updateTrainee(String u, int h, int w,boolean s,String st){
     try{
-      return server.updateTrainee(u,h,w,s);
+      return server.updateTrainee(u,h,w,s,st);
     }catch (RemoteException e){
       throw new RuntimeException(e);
     }
   }
 
+  @Override
+  public boolean acceptFriendRequest(String requester_username, String accepter_username) {
+    try{
+      return server.acceptFriendRequest(requester_username, accepter_username);
+    }catch (RemoteException e){
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public boolean rejectFriendRequest(String requester_username, String accepter_username) {
+    try{
+      return server.rejectFriendRequest(requester_username, accepter_username);
+    }catch (RemoteException e){
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public FriendList getFriends(String username) {
+    try{
+      return server.getFriends(username);
+    }catch (RemoteException e){
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public ArrayList<String> getFriendRequests(String username) {
+    try{
+      return server.getFriendRequests(username);
+    }catch (RemoteException e){
+      throw new RuntimeException(e);
+    }
+  }
 }
 

@@ -1,6 +1,8 @@
 package view;
 
 import com.google.gson.Gson;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import mediator.Folder;
 import mediator.FolderList;
+import mediator.Friend;
+import mediator.FriendList;
 import util.Logger;
 import viewModel.HomeViewModel;
 import viewModel.ViewModel;
@@ -19,10 +23,11 @@ import java.util.ArrayList;
 public class HomeViewController extends ViewController
 {
   @FXML private Label usernameLabel;
-  @FXML private VBox folderBox;
+  @FXML private VBox folderBox, friendshipBox;
   private ViewHandler viewHandler;
 
   private HomeViewModel homeViewModel;
+  private StringProperty friendRequestList;
   private Gson gson;
 
   @Override public void init(ViewHandler viewHandler, ViewModel viewModel, Region root)
@@ -32,11 +37,16 @@ public class HomeViewController extends ViewController
     this.root = root;
     this.gson = new Gson();
 
+    friendRequestList = new SimpleStringProperty();
+    friendRequestList.bind(homeViewModel.getFriendshipRequestListProperty());
     usernameLabel.textProperty().bind(homeViewModel.getUsernameProperty() );
     homeViewModel.getFolderListProperty().addListener( (obs,oldVal,newVal) -> {
       populateFolders(newVal);
     });
 
+    homeViewModel.getFriendshipListProperty().addListener( (obs,oldVal,newVal)->{
+      populateFriendships(newVal);
+    });
 
   }
 
@@ -72,9 +82,78 @@ public class HomeViewController extends ViewController
         Logger.log(title+" "+folderId);
     }
 
-
   }
 
+  private void populateFriendships(String friendListJson){
+    FriendList friends = gson.fromJson(friendListJson,FriendList.class);
+    ArrayList<String> requests = gson.fromJson(friendRequestList.get(),ArrayList.class);
+
+    friendshipBox.getChildren().remove(0, friendshipBox.getChildren().size());
+    for(String username: requests)
+      friendshipBox.getChildren().add( createFriendRequestComponent(username) );
+    for(int i=0;i<friends.size();++i){
+      Friend friend = friends.get(i);
+      friendshipBox.getChildren().add( createFriendComponent(friend.getUsername(),friend.getStatus()) );
+    }
+
+
+
+//    Logger.log(friends);
+//    Logger.log(requests);
+  }
+
+  private HBox createFriendComponent(String username,String status){
+    HBox hBox = new HBox();
+
+    hBox.getStyleClass().addAll("bg-primary","fs-2");
+    hBox.setAlignment(Pos.CENTER_LEFT);
+    hBox.setPadding( new Insets(10,10,10,10));
+
+    Button seeBtn = new Button(username);
+    seeBtn.getStyleClass().addAll("btn-info");
+    seeBtn.onActionProperty().setValue( (evt)-> manageFriendOpen(username));
+    Label statusLabel = new Label(status);
+    statusLabel.getStyleClass().addAll("fs-2","btn-success","cursor-default");
+
+    hBox.getChildren().addAll(seeBtn,statusLabel);
+
+    return hBox;
+  }
+  private HBox createFriendRequestComponent(String username){
+    HBox hBox = new HBox();
+
+    hBox.getStyleClass().addAll("bg-primary","fs-2");
+    hBox.setPadding( new Insets(10,10,10,10));
+
+    Label label = new Label(username);
+    label.getStyleClass().addAll("btn-warning","cursor-default");
+
+    Button acceptBtn = new Button("✓");
+    Button rejectBtn = new Button("X");
+    acceptBtn.getStyleClass().addAll("btn-success");
+    rejectBtn.getStyleClass().addAll("btn-danger");
+
+    acceptBtn.onActionProperty().setValue((evt)->acceptRequest(username));
+    rejectBtn.onActionProperty().setValue((evt)->rejectRequest(username));
+
+    hBox.getChildren().addAll(label,acceptBtn,rejectBtn);
+
+    return hBox;
+  }
+
+  private void acceptRequest(String username) {
+    homeViewModel.acceptRequest(username);
+    reset();
+  }
+  private void rejectRequest(String username) {
+    homeViewModel.rejectRequest(username);
+    reset();
+  }
+
+  private void manageFriendOpen(String username){
+    homeViewModel.setupProfile(username);
+    viewHandler.openView("profile");
+  }
   private HBox createFolderElement(String title,int id){
     HBox hBox = new HBox();
 

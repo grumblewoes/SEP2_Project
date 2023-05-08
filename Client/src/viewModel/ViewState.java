@@ -8,7 +8,7 @@ public class ViewState {
 
 
     public ViewState(){
-        this.username=null;
+        this.username="d";
         this.folderName=null;
         this.exerciseName=null;
         this.folderId=0;

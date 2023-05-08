@@ -93,7 +93,28 @@ public class ModelManager implements Model//, PropertyChangeListener
 	public User getTrainee(String username){return client.getTrainee(username);}
 
 	@Override
-	public boolean updateTrainee(String u, int h, int w,boolean s){return client.updateTrainee(u,h,w,s);}
+	public boolean updateTrainee(String u, int h, int w,boolean s,String st){return client.updateTrainee(u,h,w,s,st);}
+
+	@Override
+	public boolean acceptFriendRequest(String requester_username, String accepter_username) {
+		return client.acceptFriendRequest(requester_username, accepter_username);
+	}
+
+	@Override
+	public boolean rejectFriendRequest(String requester_username, String accepter_username) {
+		return client.rejectFriendRequest(requester_username,accepter_username);
+	}
+
+	@Override
+	public FriendList getFriends(String username) {
+		return client.getFriends(username);
+	}
+
+	@Override
+	public ArrayList<String> getFriendRequests(String username) {
+		return client.getFriendRequests(username);
+	}
+
 
 //	@Override
 //	public boolean editHeight(int height) {
