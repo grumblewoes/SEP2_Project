@@ -80,10 +80,11 @@ class CoachDAOTest {
 
     @Test
     void getCoachZero() {
-        cdao.getCoach()
+        assertThrows(SQLException.class, ()-> cdao.getCoach("noobMan27"));
     }
     @Test
     void getCoachOne() {
+        assertDoesNotThrow(()-> cdao.getCoach("noobMan27"));
     }
     @Test
     void getCoachMany() {
@@ -94,7 +95,9 @@ class CoachDAOTest {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        assertDoesNotThrow(()-> cdao.getCoach("noobMan27"));
+        assertDoesNotThrow(()-> cdao.getCoach("noobMan28"));
+        assertDoesNotThrow(()-> cdao.getCoach("noobMan29"));
     }
     @Test
     void getCoachBoundary() {
