@@ -1,33 +1,55 @@
 package mediator;
 
 import modelClient.Model;
+import util.Logger;
+import utility.observer.event.ObserverEvent;
+import utility.observer.javaobserver.NamedPropertyChangeSubject;
+import utility.observer.listener.GeneralListener;
+import utility.observer.listener.RemoteListener;
+import utility.observer.subject.LocalSubject;
+import utility.observer.subject.PropertyChangeHandler;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Client implements Model
-{
+public class Client implements Model, RemoteListener<String, String>, LocalSubject<String,String> {
 
   private RemoteModel server;
-
+  private PropertyChangeHandler<String,String> property;
   public Client()
   {
+    this.property= new PropertyChangeHandler<>(this);
     try
     {
       start();
       server = (RemoteModel) Naming.lookup(
           "rmi://localhost:1099/ValhallaServer");
-      //remoteModel.addListener(this);
+
     }
     catch (Exception e)
     {
       e.printStackTrace();
     }
   }
-
+  public void connectListener(String username)  {
+    try{
+      server.addListener(this,username);
+    }catch (RemoteException e){
+      Logger.log("Unable to connect listener");
+    }
+  }
+  public void disconnectListener(String username)  {
+    try{
+      server.removeListener(this,username);
+    }catch (RemoteException e){
+      Logger.log("Unable to disconnect with listener");
+    }
+  }
   public void start()
   {
     try
@@ -58,7 +80,9 @@ public class Client implements Model
   {
     try
     {
-      return server.login(username, password);
+      boolean logged = server.login(username, password);
+      if(logged) connectListener(username);
+      return logged;
     }
     catch (RemoteException e)
     {
@@ -116,78 +140,6 @@ public class Client implements Model
 
   }
 
-//
-//  @Override
-//  public boolean editHeight(int height) {
-//    try
-//    {
-//      return server.editHeight(height);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-//  @Override
-//  public boolean editWeight(int weight) {
-//    try
-//    {
-//      return server.editWeight(weight);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-//  @Override
-//  public boolean editDob(int dob) {
-//    try
-//    {
-//      return server.editDob(dob);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-//  @Override
-//  public boolean editDeadlift(int weight) {
-//    try
-//    {
-//      return server.editDeadLift(weight);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-//  @Override
-//  public boolean editBenchPress(int weight) {
-//    try
-//    {
-//      return server.editBenchPress(weight);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-//  @Override
-//  public boolean editSquat(int weight) {
-//    try
-//    {
-//      return server.editSquat(weight);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
 
 
   public ExerciseList getExerciseList(int folderId) {
@@ -325,6 +277,29 @@ public class Client implements Model
     }catch (RemoteException e){
       throw new RuntimeException(e);
     }
+  }
+
+  @Override
+  public void propertyChange(ObserverEvent<String, String> event) {
+    String name = event.getPropertyName();
+    String val1 = event.getValue1();
+    String val2 = event.getValue2();
+    Logger.log("Received notification: "+name+", "+val1+", "+val2);
+    property.firePropertyChange(name,val1,val2);
+  }
+
+
+
+  @Override
+  public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) {
+    property.addListener(listener,propertyNames);
+    return true;
+  }
+
+  @Override
+  public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) {
+    property.addListener(listener,propertyNames);
+    return true;
   }
 }
 

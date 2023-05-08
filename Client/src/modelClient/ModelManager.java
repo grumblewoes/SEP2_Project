@@ -1,16 +1,26 @@
 package modelClient;
 
 import mediator.*;
+import utility.observer.event.ObserverEvent;
+import utility.observer.javaobserver.NamedPropertyChangeSubject;
+import utility.observer.listener.GeneralListener;
+import utility.observer.listener.LocalListener;
+import utility.observer.subject.LocalSubject;
+import utility.observer.subject.PropertyChangeHandler;
 
+import java.beans.PropertyChangeListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class ModelManager implements Model//, PropertyChangeListener
+public class ModelManager implements Model, LocalListener<String,String>
 {
 	private Client client;
-	//private PropertyChangeSupport property;
+	private PropertyChangeHandler<String,String> property;
 
 	public ModelManager(Client client) {
 		this.client = client;
+		this.property= new PropertyChangeHandler<>(this);
+		this.client.addListener(this);
 		//property = new PropertyChangeSupport(this);
 		//listens for new info from the server
 		//client.addListener(this);
@@ -113,6 +123,25 @@ public class ModelManager implements Model//, PropertyChangeListener
 	@Override
 	public ArrayList<String> getFriendRequests(String username) {
 		return client.getFriendRequests(username);
+	}
+
+	@Override
+	public void propertyChange(ObserverEvent<String, String> event) {
+		property.firePropertyChange(event);
+	}
+
+
+
+	@Override
+	public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) {
+		property.addListener(listener,propertyNames);
+		return true;
+	}
+
+	@Override
+	public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) {
+		property.addListener(listener,propertyNames);
+		return true;
 	}
 
 

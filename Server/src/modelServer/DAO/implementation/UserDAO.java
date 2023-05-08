@@ -117,7 +117,10 @@ public class UserDAO implements IUserDAO
   public boolean updateTrainee(String u, int h, int w,boolean s,String st) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
-
+    if( (st!=null && st.length()>10) || h==0 || w==0){
+      Logger.log("Unable to update trainee");
+      return false;
+    }
     try
     {
 

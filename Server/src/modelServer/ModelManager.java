@@ -227,7 +227,7 @@ public class ModelManager implements Model
     public boolean rejectFriendRequest(String requester_username,String accepter_username) {
         try{
             Logger.log("rejecting "+ requester_username + " , "+ accepter_username);
-            return new FriendDAO().acceptFriendRequest(requester_username,accepter_username);
+            return new FriendDAO().rejectFriendRequest(requester_username,accepter_username);
         }catch(SQLException e){
             return false;
         }

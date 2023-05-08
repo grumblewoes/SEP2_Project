@@ -2,6 +2,8 @@ package mediator;
 
 import modelServer.Model;
 import util.Logger;
+import utility.observer.listener.GeneralListener;
+import utility.observer.subject.PropertyChangeHandler;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -14,9 +16,10 @@ import java.util.ArrayList;
 public class Server implements RemoteModel
 {
   private Model model;
-
+  private PropertyChangeHandler<String,String> property;
   public Server(Model model){
     this.model = model;
+    this.property = new PropertyChangeHandler<>(this);
     try
     {
       startRegistry();
@@ -110,7 +113,13 @@ public class Server implements RemoteModel
 
   @Override
   public boolean updateTrainee(String u, int h, int w,boolean s,String st) throws RemoteException {
-    return model.updateTrainee(u,h,w,s,st);
+    boolean result = model.updateTrainee(u,h,w,s,st);
+    if(!result) {
+      Logger.log("firing property to : " + u );
+      property.firePropertyChange(u,null,"Failed to update profile.");
+    }
+    else property.firePropertyChange(u,null,"Successfully updated profile.");
+    return result;
   }
 
   private void startServer() {
@@ -167,5 +176,17 @@ public class Server implements RemoteModel
   @Override
   public ArrayList<String> getFriendRequests(String username) {
       return model.getFriendRequests(username);
+  }
+
+  @Override
+  public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) throws RemoteException {
+    property.addListener(listener,propertyNames);
+    return true;
+  }
+
+  @Override
+  public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) throws RemoteException {
+    property.removeListener(listener,propertyNames);
+    return true;
   }
 }

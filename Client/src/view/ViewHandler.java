@@ -47,7 +47,7 @@ public class ViewHandler {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		createCustomTitleBar();
-		openView("home");
+		openView("logIn");
 	}
 
 	public void openView(String id) {

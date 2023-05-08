@@ -1,10 +1,12 @@
 package mediator;
 
+import utility.observer.subject.RemoteSubject;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface RemoteModel extends Remote
+public interface RemoteModel extends RemoteSubject<String,String>
 {
 
 	boolean createUser(String firstName, String lastName, String userName, String password, int height, int weight) throws

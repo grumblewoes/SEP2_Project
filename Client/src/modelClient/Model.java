@@ -1,11 +1,12 @@
 package modelClient;
 
 import mediator.*;
+import utility.observer.subject.LocalSubject;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface Model
+public interface Model extends LocalSubject<String,String>
 {
 
 	public abstract boolean createUser(String firstName, String lastName, String userName, String password, int height, int weight);

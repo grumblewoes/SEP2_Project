@@ -15,7 +15,8 @@ public class profileViewController extends  ViewController{
     @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField;
     @FXML private RadioButton shareProfileRadio;
     @FXML private Button updateBtn;
-    @FXML private Label shareInfoLabel;
+    @FXML private Label shareInfoLabel,errorLabel;
+
     private ProfileViewModel profileViewModel;
     @Override
     public void init(ViewHandler viewHandler, ViewModel viewModel, Region root) {
@@ -28,6 +29,7 @@ public class profileViewController extends  ViewController{
         lastNameField.textProperty().bind(profileViewModel.lastNameProperty());
         usernameField.textProperty().bind(profileViewModel.usernameProperty());
         statusField.textProperty().bindBidirectional(profileViewModel.statusProperty());
+        errorLabel.textProperty().bind(profileViewModel.errorProperty());
 
         Bindings.bindBidirectional(
                 heightField.textProperty(),

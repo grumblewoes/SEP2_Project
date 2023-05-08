@@ -121,10 +121,9 @@ public class HomeViewModel extends ViewModel{
     }
 
     public void acceptRequest(String username) {
-        Logger.log("accepting");
         model.acceptFriendRequest(username, viewState.getUsername());
     }
     public void rejectRequest(String username) {
-        model.acceptFriendRequest(username, viewState.getUsername());
+        model.rejectFriendRequest(username, viewState.getUsername());
     }
 }

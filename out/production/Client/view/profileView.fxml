@@ -201,6 +201,16 @@
             </RadioButton>
          </children>
       </HBox>
+      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="1000.0">
+         <children>
+            <Label fx:id="errorLabel" text="Label">
+               <styleClass>
+                  <String fx:value="fs-2" />
+                  <String fx:value="text-danger" />
+               </styleClass>
+            </Label>
+         </children>
+      </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#update" text="Update">

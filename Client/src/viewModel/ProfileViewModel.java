@@ -1,12 +1,15 @@
 package viewModel;
 
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import mediator.Exercise;
 import mediator.User;
 import modelClient.Model;
 import util.Logger;
+import utility.observer.event.ObserverEvent;
+import utility.observer.listener.LocalListener;
 
-public class ProfileViewModel extends ViewModel{
+public class ProfileViewModel extends ViewModel implements LocalListener<String,String> {
     private Model model;
     private ViewState viewState;
 
@@ -18,6 +21,7 @@ public class ProfileViewModel extends ViewModel{
 
     public ProfileViewModel(Model model, ViewState viewState){
         this.model = model;
+        this.model.addListener(this);
         this.viewState = viewState;
 
         firstNameProperty= new SimpleStringProperty();
@@ -171,5 +175,14 @@ public class ProfileViewModel extends ViewModel{
         String b = viewState.getGoBack();
 
         return b==null ? "home" : b;
+    }
+
+    @Override
+    public void propertyChange(ObserverEvent<String, String> event) {
+        String name = event.getPropertyName();
+        String value = event.getValue2();
+        Platform.runLater(()->{
+            errorProperty.set(value);
+        });
     }
 }
