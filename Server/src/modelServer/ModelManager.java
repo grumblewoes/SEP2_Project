@@ -4,6 +4,7 @@ import mediator.ExerciseList;
 import mediator.Folder;
 import mediator.FolderList;
 import mediator.User;
+import modelServer.DAO.implementation.CoachDAO;
 import modelServer.DAO.implementation.ExerciseDAO;
 import modelServer.DAO.implementation.FolderDAO;
 import modelServer.DAO.implementation.UserDAO;
@@ -211,6 +212,31 @@ public class ModelManager implements Model
         try{
             return new UserDAO().updateTrainee(u,h,w,s);
         }catch(SQLException e){
+            return false;
+        }
+    }
+
+    @Override public boolean addCoach(String coachUsername,
+        String coachPassword, String coachName, String coachLName,
+        double coachHeight, double coachWeight, int pbBench, int pbSquat,
+        int pbLift, boolean share)
+    {
+        try {
+            return new CoachDAO().addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, share);
+        }
+        catch (SQLException e)
+        {
+            return false;
+        }
+    }
+
+    @Override public boolean removeCoach(String name)
+    {
+        try {
+            return new CoachDAO().removeCoach(name);
+        }
+        catch (SQLException e)
+        {
             return false;
         }
     }

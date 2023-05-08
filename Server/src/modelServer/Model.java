@@ -32,4 +32,7 @@ public interface Model
     User getTrainee(String username);
 
     boolean updateTrainee(String u, int h, int w,boolean s);
+  boolean addCoach(String coachUsername, String coachPassword, String coachName, String coachLName, double coachHeight, double coachWeight, int pbBench,
+      int pbSquat, int pbLift, boolean share);
+    boolean removeCoach(String name);
 }
