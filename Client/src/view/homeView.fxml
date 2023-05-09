@@ -43,6 +43,20 @@
                      </HBox.margin></Label>
                </children>
             </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label styleClass="fs-3" text="Friends" />
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0">
+               <children>
+                  <ScrollPane prefHeight="300.0" prefWidth="200.0">
+                     <content>
+                        <VBox fx:id="friendshipBox" prefWidth="140.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
          </children>
          <styleClass>
             <String fx:value="bg-secondary" />

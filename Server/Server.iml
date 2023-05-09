@@ -10,5 +10,6 @@
     <orderEntry type="library" exported="" name="postgresql-42.2.11" level="project" />
     <orderEntry type="library" name="postgresql-42.6.0" level="project" />
     <orderEntry type="module" module-name="Client" />
+    <orderEntry type="library" name="MyObserver-1.4" level="project" />
   </component>
 </module>
