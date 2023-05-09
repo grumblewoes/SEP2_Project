@@ -33,6 +33,7 @@ public class ViewHandler {
 	private ViewController manageSpecificExercisesViewController;
 	private ViewController addExerciseViewController;
 	private ViewController profileViewController;
+	private ViewController manageCoachViewController;
 
 	private ViewModelFactory viewModelFactory;
 
@@ -77,6 +78,8 @@ public class ViewHandler {
 			case "profile":
 				profileViewController = loadViewController("profileView.fxml", profileViewController, viewModelFactory.getProfileViewModel());
 				break;
+			case "manageCoach":
+				manageCoachViewController = loadViewController("manageCoachView.fxml", manageCoachViewController, viewModelFactory.getManageCoachViewModel());
 		}
 		currentScene.setRoot(root);
 		String title = "";

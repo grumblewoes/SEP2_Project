@@ -87,4 +87,9 @@ public class profileViewController extends  ViewController{
     public void goBack(ActionEvent actionEvent) {
         viewHandler.openView(profileViewModel.getGoBack());
     }
+
+    @FXML
+    void manageCoach(ActionEvent event) {
+        viewHandler.openView("manageCoach");
+    }
 }

@@ -20,7 +20,7 @@ public class ManageCoachViewController extends ViewController{
         viewModel.clear();
     }
 
-    public void requestCoach() {
+    private void requestCoach() {
         viewModel.requestCoach();
     }
 }
