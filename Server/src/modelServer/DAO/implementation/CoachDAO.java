@@ -22,10 +22,13 @@ public class CoachDAO implements ICoachDAO
 
     try
     {
+        //calculating bmi here??
+
+
         PreparedStatement statement = connection.prepareStatement(
-            "insert into coach values (" + coachUsername + ", " + coachPassword + ", "
+            "insert into coach(username, password, first_name, last_name, height, weight, bmi, bench_best, squat_best, deadlift_best, status, share) values (" + coachUsername + ", " + coachPassword + ", "
                 + coachName + ", " + coachLName + ", " + coachHeight + ", " + coachWeight
-                + ", " + pbBench + ", " + pbSquat + ", " + pbLift + ", " + status + ", true);"
+                + ", " + + pbBench + ", " + pbSquat + ", " + pbLift + ", " + status + ", true);"
       );
 
       int result = statement.executeUpdate(); //number of modified rows
