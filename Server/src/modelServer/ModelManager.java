@@ -240,4 +240,15 @@ public class ModelManager implements Model
             return false;
         }
     }
+
+    @Override
+    public User getCoach(String traineeUsername) {
+        try {
+            return new CoachDAO().getCoach(traineeUsername);
+        }
+        catch (SQLException e)
+        {
+            return null;
+        }
+    }
 }

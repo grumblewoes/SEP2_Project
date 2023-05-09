@@ -23,8 +23,7 @@ public class AdminTask implements Runnable
     return false;
   }
 
-  @Override public void run()
-  {
+  public void promptLogin() {
     do {
       System.out.print("Enter username >> ");
       String username = scan.nextLine();
@@ -32,61 +31,77 @@ public class AdminTask implements Runnable
       String password = scan.nextLine();
     }
     while (!validateLogin(username, password));
+  }
 
-    System.out.println("What would you like to do?\n1 - Add Coach\n2 - Remove Coach\nType the number of your request >> ");
-    String choice = scan.nextLine();
+  public void coachManagement() {
+    String choice;
 
-    String name;
+    do {
+      System.out.println("What would you like to do?\n1 - Add Coach\n2 - Remove Coach\n3 - Exit\nType the number of your request >> ");
+      choice = scan.nextLine();
 
-    switch (choice) {
-      case "1":
-        System.out.print("Enter username for Coach >> ");
-        String coachUsername = scan.nextLine();
+      String name;
 
-        System.out.println("Enter password for Coach >> ");
-        String coachPassword = scan.nextLine();
+      switch (choice) {
+        case "1":
+          System.out.print("Enter username for Coach >> ");
+          String coachUsername = scan.nextLine();
 
-        System.out.println("Enter first name >> ");
-        String coachName = scan.nextLine();
+          System.out.print("Enter password for Coach >> ");
+          String coachPassword = scan.nextLine();
 
-        System.out.println("Enter last name >> ");
-        String coachLName = scan.nextLine();
+          System.out.print("Enter first name >> ");
+          String coachName = scan.nextLine();
 
-        System.out.println("Enter height >> ");
-        int coachHeight = scan.nextInt();
+          System.out.print("Enter last name >> ");
+          String coachLName = scan.nextLine();
 
-        System.out.println("Enter weight >> ");
-        int coachWeight = scan.nextInt();
+          System.out.print("Enter height >> ");
+          int coachHeight = scan.nextInt();
 
-        System.out.println("Enter PB for bench press >> ");
-        int pbBench = scan.nextInt();
+          System.out.print("Enter weight >> ");
+          int coachWeight = scan.nextInt();
 
-        System.out.println("Enter PB for squat >> ");
-        int pbSquat = scan.nextInt();
+          System.out.print("Enter PB for bench press >> ");
+          int pbBench = scan.nextInt();
 
-        System.out.println("Enter PB for deadlift >> ");
-        int pbLift = scan.nextInt();
+          System.out.print("Enter PB for squat >> ");
+          int pbSquat = scan.nextInt();
+
+          System.out.print("Enter PB for deadlift >> ");
+          int pbLift = scan.nextInt();
 
 
-        if (model.addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, "On that grind", true))
-        {
-          System.out.println("Coach was added to the system.");
-        }
-        else {
-          System.out.println("An error occurred while trying to add coach.");
-        }
-        break;
+          if (model.addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, "On that grind", true))
+          {
+            System.out.println("Coach was added to the system.");
+          }
+          else {
+            System.out.println("An error occurred while trying to add coach.");
+          }
+          break;
 
-      case "2":
-        System.out.println("Enter the name of the Coach you'd like to remove >> ");
-        name = scan.nextLine();
+        case "2":
+          System.out.print("Enter the name of the Coach you'd like to remove >> ");
+          name = scan.nextLine();
 
-        if (model.removeCoach(name))
-          System.out.println("Removal succeeded.");
-        else {
-          System.out.println("An error occurred while trying to remove coach.");
-        }
-        break;
+          if (model.removeCoach(name))
+            System.out.println("Removal succeeded.");
+          else {
+            System.out.println("An error occurred while trying to remove coach.");
+          }
+          break;
+      }
+    }
+    while (!choice.equals("3"));
+  }
+
+  @Override public void run()
+  {
+    while (true)
+    {
+      promptLogin();
+      coachManagement();
     }
   }
 }

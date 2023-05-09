@@ -22,14 +22,20 @@ public class CoachDAO implements ICoachDAO
 
     try
     {
-        //calculating bmi here??
-
-
         PreparedStatement statement = connection.prepareStatement(
-            "insert into coach(username, password, first_name, last_name, height, weight, bmi, bench_best, squat_best, deadlift_best, status, share) values (" + coachUsername + ", " + coachPassword + ", "
-                + coachName + ", " + coachLName + ", " + coachHeight + ", " + coachWeight
-                + ", " + + pbBench + ", " + pbSquat + ", " + pbLift + ", " + status + ", true);"
+                "insert into coach(username, password, first_name, last_name, height, weight, bench_best, squat_best, deadlift_best, status, share) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
       );
+        statement.setString(1, coachUsername);
+        statement.setString(2, coachPassword);
+        statement.setString(3, coachName);
+        statement.setString(4, coachLName);
+        statement.setInt(5, coachHeight);
+        statement.setInt(6, coachWeight);
+        statement.setInt(7, pbBench);
+        statement.setInt(8, pbSquat);
+        statement.setInt(9, pbLift);
+        statement.setString(10, status);
+        statement.setBoolean(11, share);
 
       int result = statement.executeUpdate(); //number of modified rows
       return result > 0; //to hit this statement, technically would always be true? cuz otherwise it is caught?
@@ -53,9 +59,9 @@ public class CoachDAO implements ICoachDAO
     {
             PreparedStatement statement = connection.prepareStatement(
                 "delete from coach "
-                    + "where coachName = " + name + ";"
-      );
-
+                    + "where username = ?;"
+            );
+      statement.setString(1, name);
       int result = statement.executeUpdate();
       return result > 0;
     }
@@ -79,7 +85,7 @@ public class CoachDAO implements ICoachDAO
       PreparedStatement statement = connection.prepareStatement(
           "select * from coach c "
               + "join trainee2 t on c.username = t.username " +
-                  "where t.username = " + traineeUser + ";"
+                  "where t.username = '" + traineeUser + "';"
       );
 
       ResultSet rs = statement.executeQuery();

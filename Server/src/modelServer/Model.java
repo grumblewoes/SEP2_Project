@@ -34,5 +34,6 @@ public interface Model
     boolean updateTrainee(String u, int h, int w,boolean s);
   boolean addCoach(String coachUsername, String coachPassword, String coachName, String coachLName, int coachHeight, int coachWeight, int pbBench,
       int pbSquat, int pbLift, String status, boolean share);
-    boolean removeCoach(String name);
+  boolean removeCoach(String name);
+  User getCoach(String traineeUsername);
 }
