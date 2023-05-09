@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private int height,weight;
-    private String firstName,lastName,username,gender;
+    private String firstName,lastName,username,status;
     private boolean shareProfile;
 
-    public User(int height, int weight, String firstName, String lastName, String username, String gender,boolean shareProfile) {
+    public User(int height, int weight, String firstName, String lastName, String username, String status,boolean shareProfile) {
         this.height = height;
         this.weight = weight;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
-        this.gender = gender;
+        this.status = status;
         this.shareProfile = shareProfile;
     }
 
@@ -57,11 +57,11 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String getGender() {
-        return gender;
+    public String getStatus() {
+        return status;
     }
 
-    public void setGender(String gender) {this.gender = gender;  }
+    public void setStatus(String status) {this.status = status;  }
 
     public boolean isShareProfile() { return shareProfile; }
 

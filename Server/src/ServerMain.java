@@ -19,6 +19,7 @@ public class ServerMain
 //    server.createFolder("d","nope");
 //    server.editFolder("d","nope","nope2");
 //    server.removeFolder("d","nope2");
-//    Logger.log(server.getFolderList("d"));
+//    Logger.log(server.getFriendRequests("e"));
+//    server.acceptFriendRequest("e","d");
   }
 }

@@ -1,12 +1,9 @@
 package modelServer;
 
-import mediator.ExerciseList;
-import mediator.Folder;
-import mediator.FolderList;
-import mediator.User;
-import modelServer.DAO.implementation.CoachDAO;
+import mediator.*;
 import modelServer.DAO.implementation.ExerciseDAO;
 import modelServer.DAO.implementation.FolderDAO;
+import modelServer.DAO.implementation.FriendDAO;
 import modelServer.DAO.implementation.UserDAO;
 import util.Logger;
 
@@ -208,9 +205,67 @@ public class ModelManager implements Model
         }
     }
 
-    @Override public  boolean updateTrainee(String u, int h, int w,boolean s){
+    @Override public  boolean updateTrainee(String u, int h, int w,boolean s,String st){
         try{
-            return new UserDAO().updateTrainee(u,h,w,s);
+            return new UserDAO().updateTrainee(u,h,w,s,st);
+        }catch(SQLException e){
+            return false;
+        }
+    }
+
+
+    @Override
+    public boolean acceptFriendRequest(String requester_username,String accepter_username) {
+        Logger.log("accepting "+ requester_username + " , "+ accepter_username);
+        try{
+            return new FriendDAO().acceptFriendRequest(requester_username,accepter_username);
+        }catch(SQLException e){
+            return false;
+        }
+    }
+    @Override
+    public boolean rejectFriendRequest(String requester_username,String accepter_username) {
+        try{
+            Logger.log("rejecting "+ requester_username + " , "+ accepter_username);
+            return new FriendDAO().rejectFriendRequest(requester_username,accepter_username);
+        }catch(SQLException e){
+            return false;
+        }
+    }
+
+    @Override public boolean sendFriendRequest(String requesterUsername,
+        String accepterUsername) {
+        try {
+            return new FriendDAO().sendFriendRequest(requesterUsername, accepterUsername);
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+
+    @Override
+    public FriendList getFriends(String username) {
+        try{
+            return new FriendDAO().getFriends(username);
+        }catch(SQLException e){
+            return new FriendList();
+        }
+    }
+
+    @Override
+    public ArrayList<String> getFriendRequests(String username) {
+        try{
+            return new FriendDAO().getFriendRequests(username);
+        }catch(SQLException e){
+            return new ArrayList<>();
+        }
+    }
+
+    @Override public boolean removeFriend(String requesterUsername,
+        String accepterUsername)
+    {
+        try{
+            return new FriendDAO().removeFriend(requesterUsername,accepterUsername);
         }catch(SQLException e){
             return false;
         }

@@ -1,6 +1,9 @@
 package mediator;
 
 import modelServer.Model;
+import util.Logger;
+import utility.observer.listener.GeneralListener;
+import utility.observer.subject.PropertyChangeHandler;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -13,9 +16,10 @@ import java.util.ArrayList;
 public class Server implements RemoteModel
 {
   private Model model;
-
+  private PropertyChangeHandler<String,String> property;
   public Server(Model model){
     this.model = model;
+    this.property = new PropertyChangeHandler<>(this);
     try
     {
       startRegistry();
@@ -108,9 +112,29 @@ public class Server implements RemoteModel
   }
 
   @Override
-  public boolean updateTrainee(String u, int h, int w,boolean s) throws RemoteException {
-    return model.updateTrainee(u,h,w,s);
+  public boolean updateTrainee(String u, int h, int w,boolean s,String st) throws RemoteException {
+    boolean result = model.updateTrainee(u,h,w,s,st);
+    if(!result) {
+      Logger.log("firing property to : " + u );
+      property.firePropertyChange(u,null,"Failed to update profile.");
+    }
+    else property.firePropertyChange(u,null,"Successfully updated profile.");
+    return result;
   }
+
+  @Override public boolean sendFriendRequest(String requesterUsername,
+      String accepterUsername) throws RemoteException
+  {
+    return model.sendFriendRequest(requesterUsername,accepterUsername);
+  }
+
+  @Override public boolean removeFriend(String requesterUsername,
+      String accepterUsername) throws RemoteException
+  {
+    return model.removeFriend(requesterUsername,accepterUsername);
+  }
+
+
 
   private void startServer() {
     try
@@ -143,5 +167,40 @@ public class Server implements RemoteModel
     } catch (RemoteException e) {
       throw new Exception("Registry already started? " + e.getMessage());
     }
+  }
+
+  @Override
+  public boolean acceptFriendRequest(String requester_username, String accepter_username) {
+      return model.acceptFriendRequest(requester_username, accepter_username);
+
+  }
+
+  @Override
+  public boolean rejectFriendRequest(String requester_username, String accepter_username) {
+      return model.rejectFriendRequest(requester_username, accepter_username);
+
+
+  }
+
+  @Override
+  public FriendList getFriends(String username) {
+      return model.getFriends(username);
+  }
+
+  @Override
+  public ArrayList<String> getFriendRequests(String username) {
+      return model.getFriendRequests(username);
+  }
+
+  @Override
+  public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) throws RemoteException {
+    property.addListener(listener,propertyNames);
+    return true;
+  }
+
+  @Override
+  public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) throws RemoteException {
+    property.removeListener(listener,propertyNames);
+    return true;
   }
 }

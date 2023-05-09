@@ -13,7 +13,7 @@ public interface IUserDAO
 
   User getTrainee(String username) throws SQLException;
 
-  boolean updateTrainee(String u, int h, int w,boolean s) throws SQLException;
+  boolean updateTrainee(String u, int h, int w,boolean s,String st) throws SQLException;
 
   boolean deleteTrainee(String username) throws SQLException;
 }
