@@ -111,4 +111,54 @@ public class CoachDAO implements ICoachDAO
       connection.close();
     }
   }
+
+  @Override
+  public boolean requestCoach(String traineeUser, String coachUser) throws SQLException {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+              "insert into coach_request(requester_username, accepter_username) values (?,?);"
+      );
+
+      statement.setString(1, traineeUser);
+      statement.setString(2, coachUser);
+      int rs = statement.executeUpdate();
+
+      return rs > 0;
+    }
+    catch (SQLException e){
+      Logger.log(e);
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
+
+  @Override
+  public boolean isCoach(String username) throws SQLException {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+              "select * from coach where username = ?;"
+      );
+
+      statement.setString(1, username);
+      ResultSet rs = statement.executeQuery();
+      return rs.next();
+    }
+    catch (SQLException e){
+      Logger.log(e);
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
 }
