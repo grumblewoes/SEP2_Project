@@ -171,6 +171,18 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         return success;
     }
 
+    public boolean removeFriend(){
+        String username = viewState.getUsername();
+        String friendUsername = viewState.getProfileUsername();
+
+
+        boolean success =  model.removeFriend(username,friendUsername);
+        if(!success)
+            errorProperty.set("An error has occurred.");
+
+        return success;
+    }
+
     public String getGoBack(){
         String b = viewState.getGoBack();
 

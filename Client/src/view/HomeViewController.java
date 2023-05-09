@@ -84,6 +84,10 @@ public class HomeViewController extends ViewController
 
   }
 
+  @FXML private void sendRequest(){
+    viewHandler.openView("addFriend");
+  }
+
   private void populateFriendships(String friendListJson){
     FriendList friends = gson.fromJson(friendListJson,FriendList.class);
     ArrayList<String> requests = gson.fromJson(friendRequestList.get(),ArrayList.class);

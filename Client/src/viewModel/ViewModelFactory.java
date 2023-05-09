@@ -12,7 +12,7 @@ public class ViewModelFactory {
 	private ManageFolderViewModel manageFolderViewModel;
 	private ManageSpecificExercisesViewModel manageSpecificExercisesViewModel;
 	private ProfileViewModel profileViewModel;
-
+private AddFriendViewModel addFriendViewModel;
 	public ViewModelFactory(Model model) {
 		ViewState viewState = new ViewState();
 		this.createUserViewModel=new CreateUserViewModel(model);
@@ -23,6 +23,7 @@ public class ViewModelFactory {
 		manageFolderViewModel = new ManageFolderViewModel(model, viewState);
 		manageSpecificExercisesViewModel = new ManageSpecificExercisesViewModel(model, viewState);
 		profileViewModel = new ProfileViewModel(model, viewState);
+		this.addFriendViewModel = new AddFriendViewModel(model,viewState);
 	}
 
 	public CreateUserViewModel getCreateUserViewModel() {
@@ -37,4 +38,9 @@ public class ViewModelFactory {
 	public AddExerciseViewModel getAddExerciseViewModel() { return  addExerciseViewModel; }
     public ManageSpecificExercisesViewModel getManageSpecificExercisesViewModel() { return  manageSpecificExercisesViewModel; }
     public ProfileViewModel getProfileViewModel() { return  profileViewModel; }
+
+	public AddFriendViewModel getAddFriendViewModel()
+	{
+		return addFriendViewModel;
+	}
 }

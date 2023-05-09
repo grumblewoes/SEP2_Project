@@ -12,9 +12,9 @@ import viewModel.ProfileViewModel;
 import viewModel.ViewModel;
 
 public class profileViewController extends  ViewController{
-    @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField;
+    @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField, coachField;
     @FXML private RadioButton shareProfileRadio;
-    @FXML private Button updateBtn;
+    @FXML private Button updateBtn, removeBtn, goBackView, goBackUpdate, removeCoachBtn, sendBtn;
     @FXML private Label shareInfoLabel,errorLabel;
 
     private ProfileViewModel profileViewModel;
@@ -30,6 +30,8 @@ public class profileViewController extends  ViewController{
         usernameField.textProperty().bind(profileViewModel.usernameProperty());
         statusField.textProperty().bindBidirectional(profileViewModel.statusProperty());
         errorLabel.textProperty().bind(profileViewModel.errorProperty());
+        removeBtn.setVisible(false);
+        goBackView.setVisible(false);
 
         Bindings.bindBidirectional(
                 heightField.textProperty(),
@@ -69,7 +71,13 @@ public class profileViewController extends  ViewController{
             weightField.setDisable(!newVal);
             shareProfileRadio.setVisible(newVal);
             shareInfoLabel.setVisible(newVal);
-            updateBtn.setDisable(!newVal);
+            coachField.setDisable(!newVal);
+            removeCoachBtn.setVisible(newVal);
+            sendBtn.setVisible(newVal);
+            updateBtn.setVisible(newVal);
+            goBackUpdate.setVisible(newVal);
+            removeBtn.setVisible(!newVal);
+            goBackView.setVisible(!newVal);
             statusField.setDisable(!newVal);
         });
 
@@ -87,4 +95,12 @@ public class profileViewController extends  ViewController{
     public void goBack(ActionEvent actionEvent) {
         viewHandler.openView(profileViewModel.getGoBack());
     }
+
+    @FXML private void remove(){
+        boolean ans = profileViewModel.removeFriend();
+        if(ans)
+            viewHandler.openView("home");
+    }
+    @FXML private void sendCoachRequest(){}
+    @FXML private void removeCoach(){}
 }

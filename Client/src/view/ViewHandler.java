@@ -33,6 +33,7 @@ public class ViewHandler {
 	private ViewController manageSpecificExercisesViewController;
 	private ViewController addExerciseViewController;
 	private ViewController profileViewController;
+	private ViewController addFriendViewController;
 
 	private ViewModelFactory viewModelFactory;
 
@@ -76,6 +77,10 @@ public class ViewHandler {
 				break;
 			case "profile":
 				profileViewController = loadViewController("profileView.fxml", profileViewController, viewModelFactory.getProfileViewModel());
+				break;
+			case "addFriend":
+				addFriendViewController =loadViewController("sendFriendRequest.fxml", addFriendViewController,
+						viewModelFactory.getAddFriendViewModel());
 				break;
 		}
 		currentScene.setRoot(root);
