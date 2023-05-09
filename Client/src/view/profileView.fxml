@@ -181,27 +181,82 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="70.0" prefWidth="1000.0">
          <children>
-            <Label fx:id="shareInfoLabel" styleClass="fs-3" text="Share with others">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+            <VBox alignment="CENTER" prefHeight="50.0" prefWidth="440.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="shareInfoLabel" styleClass="fs-3" text="Share with others">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <RadioButton fx:id="shareProfileRadio" mnemonicParsing="false" styleClass="fs-2">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </RadioButton>
+                        <Button fx:id="manageCoach" mnemonicParsing="false" onAction="#manageCoach" prefHeight="40.0" prefWidth="110.0" text="Manage Coach">
+                           <styleClass>
+                              <String fx:value="btn-success" />
+                              <String fx:value="fs-2" />
+                           </styleClass>
+                           <HBox.margin>
+                              <Insets left="150.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+               </children>
                <HBox.margin>
-                  <Insets />
+                  <Insets right="30.0" />
                </HBox.margin>
-            </Label>
-            <RadioButton fx:id="shareProfileRadio" mnemonicParsing="false" styleClass="fs-2">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="50.0" prefWidth="440.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="sendBtn" mnemonicParsing="false" onAction="#sendCoachRequest" prefHeight="40.0" prefWidth="110.0" text="Send">
+                           <styleClass>
+                              <String fx:value="btn-success" />
+                              <String fx:value="fs-2" />
+                           </styleClass>
+                        </Button>
+                        <TextField fx:id="coachField" prefHeight="40.0">
+                           <styleClass>
+                              <String fx:value="fs-2" />
+                              <String fx:value="input" />
+                           </styleClass>
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button fx:id="removeCoachBtn" mnemonicParsing="false" onAction="#removeCoach" prefHeight="40.0" prefWidth="110.0" text="Remove">
+                           <styleClass>
+                              <String fx:value="btn-danger" />
+                              <String fx:value="fs-2" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
                <HBox.margin>
-                  <Insets left="20.0" right="20.0" />
+                  <Insets left="30.0" />
                </HBox.margin>
-            </RadioButton>
+            </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="1000.0">
+      <HBox alignment="CENTER" prefHeight="35.0" prefWidth="1000.0">
          <children>
             <Label fx:id="errorLabel" text="Label">
                <styleClass>
@@ -211,32 +266,54 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="TOP_CENTER" prefHeight="71.0" prefWidth="841.0">
          <children>
-            <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#update" text="Update">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-               <styleClass>
-                  <String fx:value="btn-success" />
-                  <String fx:value="fs-2" />
-               </styleClass>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#manageCoach" text="Manage Coach">
-               <styleClass>
-                  <String fx:value="btn-warning" />
-                  <String fx:value="fs-2" />
-               </styleClass>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#goBack" text="Back">
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-               <styleClass>
-                  <String fx:value="btn-danger" />
-                  <String fx:value="fs-2" />
-               </styleClass>
-            </Button>
+            <VBox alignment="CENTER" prefHeight="46.0" prefWidth="260.0">
+               <children>
+                  <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#remove" prefHeight="40.0" prefWidth="150.0" text="REMOVE FRIEND">
+                     <styleClass>
+                        <String fx:value="btn-danger" />
+                        <String fx:value="fs-2" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="46.0" prefWidth="260.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="46.0" prefWidth="230.0">
+                     <children>
+                        <Button fx:id="updateBtn" mnemonicParsing="false" onAction="#update" prefHeight="40.0" prefWidth="110.0" text="Update">
+                           <styleClass>
+                              <String fx:value="btn-success" />
+                              <String fx:value="fs-2" />
+                           </styleClass>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="goBackUpdate" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="110.0" text="Back">
+                           <styleClass>
+                              <String fx:value="btn-warning" />
+                              <String fx:value="fs-2" />
+                           </styleClass>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="46.0" prefWidth="259.0">
+               <children>
+                  <Button fx:id="goBackView" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="150.0" text="Back">
+                     <styleClass>
+                        <String fx:value="btn-warning" />
+                        <String fx:value="fs-2" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </VBox>
          </children>
       </HBox>
    </children>
