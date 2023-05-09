@@ -1,10 +1,7 @@
 package modelServer;
 
 import mediator.*;
-import modelServer.DAO.implementation.ExerciseDAO;
-import modelServer.DAO.implementation.FolderDAO;
-import modelServer.DAO.implementation.FriendDAO;
-import modelServer.DAO.implementation.UserDAO;
+import modelServer.DAO.implementation.*;
 import util.Logger;
 
 import java.sql.SQLException;
@@ -205,7 +202,12 @@ public class ModelManager implements Model
         }
     }
 
-    @Override public  boolean updateTrainee(String u, int h, int w,boolean s,String st){
+    @Override
+    public boolean updateTrainee(String u, int h, int w, boolean s) {
+        return false;
+    }
+
+    @Override public boolean updateTrainee(String u, int h, int w,boolean s,String st){
         try{
             return new UserDAO().updateTrainee(u,h,w,s,st);
         }catch(SQLException e){
