@@ -89,12 +89,15 @@ public class HomeViewController extends ViewController
     ArrayList<String> requests = gson.fromJson(friendRequestList.get(),ArrayList.class);
 
     friendshipBox.getChildren().remove(0, friendshipBox.getChildren().size());
-    for(String username: requests)
-      friendshipBox.getChildren().add( createFriendRequestComponent(username) );
-    for(int i=0;i<friends.size();++i){
-      Friend friend = friends.get(i);
-      friendshipBox.getChildren().add( createFriendComponent(friend.getUsername(),friend.getStatus()) );
-    }
+
+    if(friends!=null)
+      for(String username: requests)
+        friendshipBox.getChildren().add( createFriendRequestComponent(username) );
+    if(requests!=null)
+      for(int i=0;i<friends.size();++i){
+        Friend friend = friends.get(i);
+        friendshipBox.getChildren().add( createFriendComponent(friend.getUsername(),friend.getStatus()) );
+      }
 
 
 

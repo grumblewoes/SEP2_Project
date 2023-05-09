@@ -49,7 +49,7 @@ public class FriendDAO implements IFriendDAO {
         try {
 
             PreparedStatement statement = connection.prepareStatement(
-                    "delete from frendship_request where requester_username = ? and accepter_username = ?"
+                    "delete from friendship_request where requester_username = ? and accepter_username = ?"
             );
             statement.setString(1, requester_username);
             statement.setString(2, accepter_username);

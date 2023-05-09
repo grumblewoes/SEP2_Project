@@ -115,6 +115,8 @@ public class HomeViewModel extends ViewModel{
 //        Logger.log(model.getFriendRequests(viewState.getUsername()));
 
         Logger.log(friends);
+        friendshipRequestListProperty.set("");
+        friendshipListProperty.set("");
         friendshipRequestListProperty.set(gson.toJson(requests) );
         friendshipListProperty.set( gson.toJson(friends) );
 
