@@ -134,6 +134,20 @@ public class Server implements RemoteModel
     return model.removeFriend(requesterUsername,accepterUsername);
   }
 
+  @Override
+  public boolean requestCoach(String requesterUsername, String accepterUsername) throws RemoteException {
+    return model.requestCoach(requesterUsername, accepterUsername);
+  }
+
+  @Override
+  public User getCoach(String traineeUsername) throws RemoteException {
+    return model.getCoach(traineeUsername);
+  }
+
+  @Override
+  public boolean isCoach(String username) throws RemoteException {
+    return model.isCoach(username);
+  }
 
 
   private void startServer() {

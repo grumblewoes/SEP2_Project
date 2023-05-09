@@ -45,4 +45,7 @@ public interface Model
     boolean removeFriend(String requesterUsername,
         String accepterUsername);
 
+    boolean requestCoach(String requesterUsername, String accepterUsername);
+
+    boolean isCoach(String username);
 }

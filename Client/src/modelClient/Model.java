@@ -43,6 +43,9 @@ public interface Model extends LocalSubject<String,String>
 			String accepterUsername);
 	boolean removeFriend(String requesterUsername,
 			String accepterUsername);
+	boolean requestCoach(String requesterUsername, String accepterUsername);
+	User getCoach(String traineeUsername);
+	boolean isCoach(String username);
 
 //	boolean editHeight(int height);
 //	boolean editWeight(int weight);

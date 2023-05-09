@@ -195,4 +195,100 @@ class CoachDAOTest {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    void isCoachZero() {
+        try {
+            assertFalse(cdao.isCoach(null));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void isCoachOne() {
+        try {
+            assertTrue(cdao.isCoach("TheLegend27"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void isCoachMany() {
+        try {
+            assertTrue(cdao.isCoach("TheLegend27"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertTrue(cdao.isCoach("TheLegend28"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertTrue(cdao.isCoach("TheLegend29"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void isCoachBoundary() {
+        //no boundary
+    }
+    @Test
+    void isCoachException() {
+        //coach that does not exist in the system, aka random or trainee
+        try {
+            assertFalse(cdao.isCoach("coolguy67"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void requestCoachZero() {
+        try {
+            assertNull(cdao.requestCoach(null, null));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void requestCoachOne() {
+        try { //change this
+            assertNotNull(cdao.requestCoach("noobMan67", "TheLegend27"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void requestCoachMany() {
+        try { //change these plz
+            assertNotNull(cdao.requestCoach("noobMan67", "TheLegend27"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertNotNull(cdao.requestCoach("noobMan67", "TheLegend27"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertNotNull(cdao.requestCoach("noobMan67", "TheLegend27"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void requestCoachBoundary() {
+        //?? no boundary
+    }
+    @Test
+    void requestCoachException() {
+        //user already requested a coach. change this plz
+        try {
+            assertNull(cdao.requestCoach("noobMan68", "TheLegend69"));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -273,6 +273,24 @@ public class ModelManager implements Model
         }
     }
 
+    @Override
+    public boolean requestCoach(String requesterUsername, String accepterUsername) {
+        try{
+            return new CoachDAO().requestCoach(requesterUsername,accepterUsername);
+        }catch(SQLException e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean isCoach(String username) {
+        try{
+            return new CoachDAO().isCoach(username);
+        }catch(SQLException e){
+            return false;
+        }
+    }
+
     @Override public boolean addCoach(String coachUsername,
         String coachPassword, String coachName, String coachLName,
         int coachHeight, int coachWeight, int pbBench, int pbSquat,

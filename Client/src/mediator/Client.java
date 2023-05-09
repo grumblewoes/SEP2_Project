@@ -322,5 +322,33 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
     }
   }
 
+  @Override
+  public boolean requestCoach(String requesterUsername, String accepterUsername) {
+    try{
+      return server.requestCoach(requesterUsername, accepterUsername);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
+  @Override
+  public User getCoach(String traineeUsername) {
+    try{
+      return server.getCoach(traineeUsername);
+    }catch(RemoteException e){
+      return null;
+    }
+
+  }
+
+  @Override
+  public boolean isCoach(String username) {
+    try{
+      return server.isCoach(username);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
 }
 
