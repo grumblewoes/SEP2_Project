@@ -12,5 +12,6 @@ create table coach (
                           coach_username varchar(50),
                           height numeric(5,2),
                           weight numeric(5,2),
+                          status varchar(50),
                           share boolean
 );
