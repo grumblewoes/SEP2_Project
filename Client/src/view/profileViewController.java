@@ -83,7 +83,7 @@ public class profileViewController extends  ViewController{
         removeCoachBtn.visibleProperty().bind(
             profileViewModel.editableProperty().and(profileViewModel.coachStateProperty()));
         sendBtn.visibleProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()));
-
+        coachField.editableProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()));
     }
 
     @Override

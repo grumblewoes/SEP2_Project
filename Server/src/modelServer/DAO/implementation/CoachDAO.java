@@ -84,7 +84,7 @@ public class CoachDAO implements ICoachDAO
     {
       PreparedStatement statement = connection.prepareStatement(
           "select * from coach c "
-              + "join trainee2 t on c.username = t.username " +
+              + "join trainee2 t on c.username = t.coach_username " +
                   "where t.username = '" + traineeUser + "';"
       );
 

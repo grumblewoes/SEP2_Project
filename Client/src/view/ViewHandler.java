@@ -78,9 +78,7 @@ public class ViewHandler {
 			case "profile":
 				profileViewController = loadViewController("profileView.fxml", profileViewController, viewModelFactory.getProfileViewModel());
 				break;
-//			case "manageCoach":
-//				manageCoachViewController = loadViewController("manageCoachView.fxml", manageCoachViewController, viewModelFactory.getManageCoachViewModel());
-		}
+}
 		currentScene.setRoot(root);
 		String title = "";
 		if (root.getUserData() != null)
