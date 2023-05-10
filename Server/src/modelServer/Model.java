@@ -49,4 +49,8 @@ public interface Model
 
     boolean isCoach(String username);
   boolean removeCoachAssignment(String traineeUsername);
+
+  boolean acceptRequest(String traineeUsername, String coachUsername);
+  boolean denyRequest(String traineeUsername);
+  boolean removeTraineeFromRoster(String traineeUsername);
 }

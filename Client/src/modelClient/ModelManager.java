@@ -178,11 +178,22 @@ public class ModelManager implements Model, LocalListener<String,String>
 		return client.removeCoachAssignment(traineeUsername);
 	}
 
+  @Override public boolean acceptRequest(String traineeUsername,
+      String coachUsername)
+  {
+    return client.acceptRequest(traineeUsername, coachUsername);
+  }
 
-	@Override public boolean isRosterUpdated()
-	{
-		return client.isRosterUpdated();
-	}
+  @Override public boolean denyRequest(String traineeUsername)
+  {
+    return client.denyRequest(traineeUsername);
+  }
+
+  @Override public boolean removeTraineeFromRoster(String traineeUsername)
+  {
+    return client.removeTraineeFromRoster(traineeUsername);
+  }
+
 
 
 	//	@Override

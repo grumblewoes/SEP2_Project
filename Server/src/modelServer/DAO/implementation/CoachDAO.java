@@ -186,4 +186,94 @@ public class CoachDAO implements ICoachDAO
       connection.close();
     }
   }
+
+  @Override public boolean acceptRequest(String traineeUsername, String coachUsername)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "delete from coach_request where trainee_username = ?"
+      );
+      statement.setString(1, traineeUsername);
+      int result = statement.executeUpdate();
+
+      PreparedStatement statement1 = connection.prepareStatement(
+          "update trainee2 set coach_username = ? where username = ?");
+      statement1.setString(1, coachUsername);
+      statement1.setString(2, traineeUsername);
+      int result2 = statement1.executeUpdate();
+      return result > 0 && result2>0;
+
+    }
+    catch (SQLException e){
+      Logger.log(e);
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+
+
+  }
+
+  @Override public boolean denyRequest(String traineeUsername)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "delete from coach_request where trainee_username = ?"
+      );
+      statement.setString(1, traineeUsername);
+      int result = statement.executeUpdate();
+
+      return result > 0;
+
+    }
+    catch (SQLException e){
+      Logger.log(e);
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+
+
+  }
+
+  @Override public boolean removeTraineeFromRoster(String traineeUsername)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "update trainee2 set coach_username = null where username = ?"
+      );
+      statement.setString(1, traineeUsername);
+      int result = statement.executeUpdate();
+
+      return result > 0;
+
+    }
+    catch (SQLException e){
+      Logger.log(e);
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
 }

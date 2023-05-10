@@ -16,4 +16,8 @@ public interface ICoachDAO
   public boolean requestCoach(String traineeUser, String coachUser) throws SQLException;
   public boolean isCoach(String username) throws SQLException;
   boolean removeCoachAssignment(String traineeUsername) throws SQLException;
+  boolean acceptRequest(String traineeUsername, String coachUsername) throws  SQLException;
+  boolean denyRequest(String traineeUsername) throws  SQLException;
+  boolean removeTraineeFromRoster(String traineeUsername) throws  SQLException;
+
 }

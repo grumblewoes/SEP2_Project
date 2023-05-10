@@ -300,6 +300,43 @@ public class ModelManager implements Model
         }
     }
 
+    @Override public boolean acceptRequest(String traineeUsername,
+        String coachUsername)
+    {
+        try
+        {
+            return new CoachDAO().acceptRequest(traineeUsername, coachUsername);
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override public boolean denyRequest(String traineeUsername)
+    {
+        try
+        {
+            return new CoachDAO().denyRequest(traineeUsername);
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override public boolean removeTraineeFromRoster(String traineeUsername)
+    {
+        try
+        {
+            return new CoachDAO().removeTraineeFromRoster(traineeUsername);
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override public boolean addCoach(String coachUsername,
         String coachPassword, String coachName, String coachLName,
         int coachHeight, int coachWeight, int pbBench, int pbSquat,
