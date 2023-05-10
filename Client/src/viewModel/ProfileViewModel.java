@@ -143,16 +143,18 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
             shareProfileProperty.set(profileUser.isShareProfile() );
             bmiProperty.set( String.valueOf( 1.0*w/(1.0*h*h/100/100) ) );
 
-            if (model.getCoach(pUsername) != null)
-            {
-                coachStateProperty.set(true);
-                coachProperty.set(model.getCoach(viewState.getProfileUsername()).getUsername());
-            }
-            else
-            {
-                coachStateProperty.set(false);
-                coachProperty.set("");
-            }
+//            if (model.getCoach(viewState.getProfileUsername()) != null)
+//            {
+////                coachStateProperty.set(true);
+////                coachProperty.set(model.getCoach(viewState.getProfileUsername()));
+//            }
+//            else
+//            {
+//                coachStateProperty.set(false);
+//                coachProperty.set("");
+//            }
+            System.out.println("Coach: " + model.getCoach(
+                usernameProperty.get()) + "\nhas coach: " + coachStateProperty.get());
 
         }
         else //does not own and does not want to share
@@ -183,6 +185,7 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
                 coachProperty.set("");
             }
         }
+        System.out.println("");
     }
 
     public boolean update() {

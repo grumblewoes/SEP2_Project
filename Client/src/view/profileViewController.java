@@ -78,9 +78,11 @@ public class profileViewController extends  ViewController{
             updateBtn.setDisable(!newVal);
             statusField.setDisable(!newVal);
             coachField.setDisable(!newVal);
-            removeCoachBtn.setVisible(!newVal);
-            sendBtn.setVisible(!newVal);
         });
+
+        removeCoachBtn.visibleProperty().bind(
+            profileViewModel.editableProperty().and(profileViewModel.coachStateProperty()));
+        sendBtn.visibleProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()));
 
     }
 
