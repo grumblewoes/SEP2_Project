@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.profileViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.profileViewController">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -203,15 +203,6 @@
                               <Insets />
                            </HBox.margin>
                         </RadioButton>
-                        <Button fx:id="manageCoach" mnemonicParsing="false" onAction="#manageCoach" prefHeight="40.0" prefWidth="110.0" text="Manage Coach">
-                           <styleClass>
-                              <String fx:value="btn-success" />
-                              <String fx:value="fs-2" />
-                           </styleClass>
-                           <HBox.margin>
-                              <Insets left="150.0" />
-                           </HBox.margin>
-                        </Button>
                      </children>
                      <VBox.margin>
                         <Insets />

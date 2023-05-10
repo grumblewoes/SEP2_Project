@@ -48,4 +48,5 @@ public interface Model
     boolean requestCoach(String requesterUsername, String accepterUsername);
 
     boolean isCoach(String username);
+  boolean removeCoachAssignment(String traineeUsername);
 }

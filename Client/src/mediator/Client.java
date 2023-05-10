@@ -350,5 +350,14 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
     }
   }
 
+  @Override public boolean removeCoachAssignment(String traineeUsername)
+  {
+    try{
+      return server.removeCoachAssignment(traineeUsername);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
 }
 

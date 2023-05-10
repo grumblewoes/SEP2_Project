@@ -12,10 +12,14 @@ import viewModel.ProfileViewModel;
 import viewModel.ViewModel;
 
 public class profileViewController extends  ViewController{
-    @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField;
+    @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField, coachField;
     @FXML private RadioButton shareProfileRadio;
     @FXML private Button updateBtn;
     @FXML private Label shareInfoLabel,errorLabel;
+    @FXML
+    private Button removeCoachBtn;
+    @FXML
+    private Button sendBtn;
 
     private ProfileViewModel profileViewModel;
     @Override
@@ -30,6 +34,8 @@ public class profileViewController extends  ViewController{
         usernameField.textProperty().bind(profileViewModel.usernameProperty());
         statusField.textProperty().bindBidirectional(profileViewModel.statusProperty());
         errorLabel.textProperty().bind(profileViewModel.errorProperty());
+        coachField.textProperty().bindBidirectional(profileViewModel.coachProperty());
+
 
         Bindings.bindBidirectional(
                 heightField.textProperty(),
@@ -71,6 +77,16 @@ public class profileViewController extends  ViewController{
             shareInfoLabel.setVisible(newVal);
             updateBtn.setDisable(!newVal);
             statusField.setDisable(!newVal);
+            coachField.setDisable(!newVal);
+            removeCoachBtn.setVisible(!newVal);
+            sendBtn.setVisible(!newVal);
+        });
+
+        //binding for coach buttons. true is coach, false is no coach
+        profileViewModel.coachStateProperty().addListener((obs,oldVal,newVal)->{
+            coachField.setDisable(!newVal);
+            removeCoachBtn.setVisible(!newVal);
+            sendBtn.setVisible(!newVal);
         });
 
     }
@@ -89,7 +105,19 @@ public class profileViewController extends  ViewController{
     }
 
     @FXML
-    void manageCoach(ActionEvent event) {
-        viewHandler.openView("manageCoach");
+    void removeCoach(ActionEvent event) {
+        profileViewModel.removeCoach();
     }
+
+    @FXML
+    void sendCoachRequest(ActionEvent event) {
+        profileViewModel.requestCoach();
+    }
+
+    @FXML void remove() {}
+
+//    @FXML
+//    void manageCoach(ActionEvent event) {
+//        viewHandler.openView("manageCoach");
+//    }
 }

@@ -149,6 +149,11 @@ public class Server implements RemoteModel
     return model.isCoach(username);
   }
 
+  @Override public boolean removeCoachAssignment(String traineeUsername)
+      throws RemoteException
+  {
+    return model.removeCoachAssignment(traineeUsername);
+  }
 
   private void startServer() {
     try

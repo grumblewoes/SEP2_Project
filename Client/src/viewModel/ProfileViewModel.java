@@ -1,6 +1,7 @@
 package viewModel;
 
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.beans.property.*;
 import mediator.Exercise;
 import mediator.User;
@@ -13,11 +14,11 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     private Model model;
     private ViewState viewState;
 
-    private StringProperty firstNameProperty, lastNameProperty,usernameProperty, statusProperty,bmiProperty,errorProperty;
+    private StringProperty firstNameProperty, lastNameProperty,usernameProperty, statusProperty,bmiProperty,errorProperty, coachProperty;
 
     private IntegerProperty weightProperty,heightProperty,benchPressProperty,deadliftProperty,squatProperty;
 
-    private BooleanProperty shareProfileProperty,editableProperty;
+    private BooleanProperty shareProfileProperty,editableProperty, coachStateProperty;
 
     public ProfileViewModel(Model model, ViewState viewState){
         this.model = model;
@@ -38,6 +39,8 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         deadliftProperty = new SimpleIntegerProperty();
         squatProperty = new SimpleIntegerProperty();
         shareProfileProperty = new SimpleBooleanProperty();
+        coachProperty = new SimpleStringProperty();
+        coachStateProperty = new SimpleBooleanProperty();
 
     }
 
@@ -86,8 +89,6 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     public IntegerProperty heightProperty() {
         return heightProperty;
     }
-
-
     public IntegerProperty benchPressProperty() {
         return benchPressProperty;
     }
@@ -104,6 +105,10 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         return squatProperty;
     }
     public BooleanProperty shareProfileProperty() {  return shareProfileProperty;  }
+    public BooleanProperty coachStateProperty() { return coachStateProperty; }
+    public StringProperty coachProperty() {
+        return coachProperty;
+    }
 
     @Override
     public void clear() {
@@ -115,7 +120,7 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         editableProperty.set(owns);
 
 
-        if(  owns || wantsToShare){
+        if( owns || wantsToShare){
 
             int benchPressBest = model.getBestBenchPress(u);
             int squatBest = model.getBestSquat(u);
@@ -138,7 +143,16 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
             shareProfileProperty.set(profileUser.isShareProfile() );
             bmiProperty.set( String.valueOf( 1.0*w/(1.0*h*h/100/100) ) );
 
-        }else{
+            if (model.getCoach(pUsername) != null)
+            {
+                coachStateProperty.set(true);
+            }
+            else coachStateProperty.set(false);
+
+            coachProperty.set(model.getCoach(pUsername).getUsername());
+        }
+        else //does not own and does not want to share
+        {
             usernameProperty.set(pUsername);
             errorProperty.set("");
             deadliftProperty.set(0);
@@ -153,10 +167,15 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
             weightProperty.set(0);
             shareProfileProperty.set(false );
             bmiProperty.set( "" );
+
+            if (model.getCoach(pUsername) != null)
+            {
+                coachStateProperty.set(true);
+            }
+            else coachStateProperty.set(false);
+
+            coachProperty.set(model.getCoach(pUsername).getUsername());
         }
-
-
-
     }
 
     public boolean update() {
@@ -185,4 +204,34 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
             errorProperty.set(value);
         });
     }
+
+    public void removeCoach()
+    {
+        //if the request goes through
+        if (model.removeCoachAssignment(viewState.getProfileUsername()))
+        {
+            errorProperty.set("Removed");
+        }
+        else
+        {
+            errorProperty.set("An error occurred during removal.");
+            coachProperty.set("");
+        }
+    }
+
+    public void requestCoach()
+    {
+        //if the request goes through
+        if (model.requestCoach(viewState.getUsername(), coachProperty.get()))
+        {
+            errorProperty.set("Pending");
+        }
+        else
+        {
+            errorProperty.set("An error occurred during request transaction.");
+            coachProperty.set("");
+        }
+    }
+
+
 }

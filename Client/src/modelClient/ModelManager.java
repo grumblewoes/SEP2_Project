@@ -173,6 +173,11 @@ public class ModelManager implements Model, LocalListener<String,String>
 		return client.isCoach(username);
 	}
 
+	@Override
+	public boolean removeCoachAssignment(String traineeUsername) {
+		return client.removeCoachAssignment(traineeUsername);
+	}
+
 
 	//	@Override
 //	public boolean editHeight(int height) {

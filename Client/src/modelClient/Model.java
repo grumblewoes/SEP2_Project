@@ -46,8 +46,9 @@ public interface Model extends LocalSubject<String,String>
 	boolean requestCoach(String requesterUsername, String accepterUsername);
 	User getCoach(String traineeUsername);
 	boolean isCoach(String username);
+  boolean removeCoachAssignment(String traineeUsername);
 
-//	boolean editHeight(int height);
+  //	boolean editHeight(int height);
 //	boolean editWeight(int weight);
 //	boolean editDob(int dob);
 //	boolean editDeadlift(int weight);

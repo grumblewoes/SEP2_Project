@@ -291,6 +291,15 @@ public class ModelManager implements Model
         }
     }
 
+    @Override public boolean removeCoachAssignment(String traineeUsername)
+    {
+        try{
+            return new CoachDAO().removeCoachAssignment(traineeUsername);
+        }catch(SQLException e){
+            return false;
+        }
+    }
+
     @Override public boolean addCoach(String coachUsername,
         String coachPassword, String coachName, String coachLName,
         int coachHeight, int coachWeight, int pbBench, int pbSquat,

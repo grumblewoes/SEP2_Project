@@ -119,7 +119,7 @@ public class CoachDAO implements ICoachDAO
     try
     {
       PreparedStatement statement = connection.prepareStatement(
-              "insert into coach_request(requester_username, accepter_username) values (?,?);"
+              "insert into coach_request(trainee_username, coach_username) values (?,?);"
       );
 
       statement.setString(1, traineeUser);
@@ -151,6 +151,31 @@ public class CoachDAO implements ICoachDAO
       statement.setString(1, username);
       ResultSet rs = statement.executeQuery();
       return rs.next();
+    }
+    catch (SQLException e){
+      Logger.log(e);
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
+
+  @Override public boolean removeCoachAssignment(String traineeUsername)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "update trainee2 set coach_username = null where username = ? and coach_username is not null"
+      );
+      statement.setString(1, traineeUsername);
+      int result = statement.executeUpdate();
+      return result > 0;
     }
     catch (SQLException e){
       Logger.log(e);

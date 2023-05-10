@@ -247,7 +247,7 @@ class CoachDAOTest {
     @Test
     void requestCoachZero() {
         try {
-            assertNull(cdao.requestCoach(null, null));
+            assertFalse(cdao.requestCoach(null, null));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -255,7 +255,7 @@ class CoachDAOTest {
     @Test
     void requestCoachOne() {
         try { //change this
-            assertNotNull(cdao.requestCoach("noobMan67", "TheLegend27"));
+            assertTrue(cdao.requestCoach("d", "TheLegend27"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -263,17 +263,17 @@ class CoachDAOTest {
     @Test
     void requestCoachMany() {
         try { //change these plz
-            assertNotNull(cdao.requestCoach("noobMan67", "TheLegend27"));
+            assertTrue(cdao.requestCoach("a", "TheLegend28"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         try {
-            assertNotNull(cdao.requestCoach("noobMan67", "TheLegend27"));
+            assertTrue(cdao.requestCoach("j", "TheLegend28"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         try {
-            assertNotNull(cdao.requestCoach("noobMan67", "TheLegend27"));
+            assertTrue(cdao.requestCoach("e", "TheLegend28"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -286,9 +286,77 @@ class CoachDAOTest {
     void requestCoachException() {
         //user already requested a coach. change this plz
         try {
-            assertNull(cdao.requestCoach("noobMan68", "TheLegend69"));
+            assertFalse(cdao.requestCoach("d", "TheLegend27"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    void removeCoachAssignmentZero() {
+        try
+        {
+            assertFalse(cdao.removeCoachAssignment(null));
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void removeCoachAssignmentOne() {
+        try
+        {
+            assertTrue(cdao.removeCoachAssignment("d"));
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void removeCoachAssignmentMany() {
+        try
+        {
+            assertTrue(cdao.removeCoachAssignment("d"));
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        try
+        {
+            assertTrue(cdao.removeCoachAssignment("d"));
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        try
+        {
+            assertTrue(cdao.removeCoachAssignment("d"));
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void removeCoachAssignmentBoundary() {
+        //wut
+    }
+    @Test
+    void removeCoachAssignmentException() {
+        //for trainee who does not have coach. tune this
+        assertFalse(()-> {
+            try
+            {
+                return cdao.removeCoachAssignment("d");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
