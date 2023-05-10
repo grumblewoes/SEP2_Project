@@ -22,10 +22,11 @@ create table trainee2 (
                           dob date,
                           height numeric(5,2),
                           weight numeric(5,2),
-                          share_profile boolean
+                          share_profile boolean,
+                          status varchar(50)
 );
 
-insert into trainee2 values ('d','d','d','d',null,null,null,null,null,181,72,true);
+insert into trainee2 values ('d','d','d','d',null,null,null,null,null,181,72,true,'my status');
 
 drop table if exists folder2 cascade ;
 create table folder2 (
@@ -65,6 +66,5 @@ insert into user_exercise2(trainee_username, exercise_name, folderId, repetition
 insert into user_exercise2(trainee_username, exercise_name, folderId, repetitions, weight) values ('d','deadlift',1,3,150);
 insert into user_exercise2(trainee_username, exercise_name, folderId, repetitions, weight) values ('d','deadlift',1,1,170);
 insert into user_exercise2(trainee_username, exercise_name, folderId, repetitions, weight) values ('d','talking_to_women',2,3,30);
-
 
 

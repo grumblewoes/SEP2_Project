@@ -1,10 +1,12 @@
 package mediator;
 
+import utility.observer.subject.RemoteSubject;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface RemoteModel extends Remote
+public interface RemoteModel extends RemoteSubject<String,String>
 {
 
 	boolean createUser(String firstName, String lastName, String userName, String password, int height, int weight) throws
@@ -27,5 +29,23 @@ public interface RemoteModel extends Remote
 
 	User getTrainee(String username) throws RemoteException;
 
-	boolean updateTrainee(String u, int h, int w,boolean s) throws RemoteException;
+	boolean updateTrainee(String u, int h, int w,boolean s,String st) throws RemoteException;
+
+	boolean acceptFriendRequest(String requester_username,String accepter_username)  throws RemoteException;
+	boolean rejectFriendRequest(String requester_username,String accepter_username)  throws RemoteException;
+
+	FriendList getFriends(String username) throws RemoteException;
+	ArrayList<String> getFriendRequests(String username) throws RemoteException;
+
+	boolean sendFriendRequest(String requesterUsername,
+							  String accepterUsername) throws RemoteException;
+	boolean removeFriend(String requesterUsername,
+						 String accepterUsername) throws RemoteException;
+	boolean requestCoach(String requesterUsername, String accepterUsername) throws RemoteException;
+
+	User getCoach(String traineeUsername) throws RemoteException;
+
+	boolean isCoach(String username) throws RemoteException;
+	boolean removeCoachAssignment(String traineeUsername) throws RemoteException;
+
 }

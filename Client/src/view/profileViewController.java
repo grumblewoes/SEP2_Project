@@ -3,6 +3,8 @@ package view;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
@@ -10,8 +12,15 @@ import viewModel.ProfileViewModel;
 import viewModel.ViewModel;
 
 public class profileViewController extends  ViewController{
-    @FXML private TextField firstNameField, lastNameField,usernameField,genderField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField;
+    @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField, coachField;
     @FXML private RadioButton shareProfileRadio;
+    @FXML private Button updateBtn;
+    @FXML private Label shareInfoLabel,errorLabel;
+    @FXML
+    private Button removeCoachBtn;
+    @FXML
+    private Button sendBtn;
+
     private ProfileViewModel profileViewModel;
     @Override
     public void init(ViewHandler viewHandler, ViewModel viewModel, Region root) {
@@ -23,7 +32,10 @@ public class profileViewController extends  ViewController{
         firstNameField.textProperty().bind(profileViewModel.firstNameProperty());
         lastNameField.textProperty().bind(profileViewModel.lastNameProperty());
         usernameField.textProperty().bind(profileViewModel.usernameProperty());
-        genderField.textProperty().bind(profileViewModel.genderProperty());
+        statusField.textProperty().bindBidirectional(profileViewModel.statusProperty());
+        errorLabel.textProperty().bind(profileViewModel.errorProperty());
+        coachField.textProperty().bindBidirectional(profileViewModel.coachProperty());
+
 
         Bindings.bindBidirectional(
                 heightField.textProperty(),
@@ -58,6 +70,18 @@ public class profileViewController extends  ViewController{
         bmiField.textProperty().bind(profileViewModel.bmiProperty());
         shareProfileRadio.selectedProperty().bindBidirectional(profileViewModel.shareProfileProperty());
 
+        profileViewModel.editableProperty().addListener((obs,oldVal,newVal)->{
+            heightField.setDisable(!newVal);
+            weightField.setDisable(!newVal);
+            shareProfileRadio.setVisible(newVal);
+            shareInfoLabel.setVisible(newVal);
+            updateBtn.setDisable(!newVal);
+            statusField.setDisable(!newVal);
+            coachField.setDisable(!newVal);
+            removeCoachBtn.setVisible(!newVal);
+            sendBtn.setVisible(!newVal);
+        });
+
     }
 
     @Override
@@ -72,4 +96,21 @@ public class profileViewController extends  ViewController{
     public void goBack(ActionEvent actionEvent) {
         viewHandler.openView(profileViewModel.getGoBack());
     }
+
+    @FXML
+    void removeCoach(ActionEvent event) {
+        profileViewModel.removeCoach();
+    }
+
+    @FXML
+    void sendCoachRequest(ActionEvent event) {
+        profileViewModel.requestCoach();
+    }
+
+    @FXML void remove() {}
+
+//    @FXML
+//    void manageCoach(ActionEvent event) {
+//        viewHandler.openView("manageCoach");
+//    }
 }

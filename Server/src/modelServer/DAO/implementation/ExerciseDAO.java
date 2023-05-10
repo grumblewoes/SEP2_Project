@@ -37,7 +37,6 @@ public class ExerciseDAO implements IExerciseDAO
                       "from user_exercise2 " +
                       "where folderId = '" + folderId+"';"
       );
-
       ResultSet rs = statement.executeQuery();
 
       while(rs.next())
@@ -53,7 +52,6 @@ public class ExerciseDAO implements IExerciseDAO
     {
       connection.close();
     }
-
   }
 
   @Override

@@ -1,33 +1,56 @@
 package mediator;
 
 import modelClient.Model;
+import util.Logger;
+import utility.observer.event.ObserverEvent;
+import utility.observer.javaobserver.NamedPropertyChangeSubject;
+import utility.observer.listener.GeneralListener;
+import utility.observer.listener.RemoteListener;
+import utility.observer.subject.LocalSubject;
+import utility.observer.subject.PropertyChangeHandler;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Client implements Model
-{
+public class Client implements Model, RemoteListener<String, String>, LocalSubject<String,String> {
 
   private RemoteModel server;
-
+  private PropertyChangeHandler<String,String> property;
   public Client()
   {
+    this.property= new PropertyChangeHandler<>(this);
     try
     {
       start();
       server = (RemoteModel) Naming.lookup(
           "rmi://localhost:1099/ValhallaServer");
-      //remoteModel.addListener(this);
+
     }
     catch (Exception e)
     {
       e.printStackTrace();
     }
   }
-
+  public void connectListener(String username)  {
+    try{
+      server.addListener(this,username);
+    }catch (RemoteException e){
+      Logger.log("Unable to connect listener");
+    }
+  }
+  public void disconnectListener(String username)  {
+    try{
+      server.removeListener(this,username);
+    }catch (RemoteException e){
+      Logger.log("Unable to disconnect with listener");
+    }
+  }
   public void start()
   {
     try
@@ -58,7 +81,9 @@ public class Client implements Model
   {
     try
     {
-      return server.login(username, password);
+      boolean logged = server.login(username, password);
+      if(logged) connectListener(username);
+      return logged;
     }
     catch (RemoteException e)
     {
@@ -116,78 +141,6 @@ public class Client implements Model
 
   }
 
-//
-//  @Override
-//  public boolean editHeight(int height) {
-//    try
-//    {
-//      return server.editHeight(height);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-//  @Override
-//  public boolean editWeight(int weight) {
-//    try
-//    {
-//      return server.editWeight(weight);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-//  @Override
-//  public boolean editDob(int dob) {
-//    try
-//    {
-//      return server.editDob(dob);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-//  @Override
-//  public boolean editDeadlift(int weight) {
-//    try
-//    {
-//      return server.editDeadLift(weight);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-//  @Override
-//  public boolean editBenchPress(int weight) {
-//    try
-//    {
-//      return server.editBenchPress(weight);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-//  @Override
-//  public boolean editSquat(int weight) {
-//    try
-//    {
-//      return server.editSquat(weight);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
 
 
   public ExerciseList getExerciseList(int folderId) {
@@ -283,7 +236,43 @@ public class Client implements Model
     }
   }
 
-  @Override public boolean updateTrainee(String u, int h, int w,boolean s){
+  @Override public boolean updateTrainee(String u, int h, int w,boolean s,String st){
+    try{
+      return server.updateTrainee(u,h,w,s,st);
+    }catch (RemoteException e){
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public boolean acceptFriendRequest(String requester_username, String accepter_username) {
+    try{
+      return server.acceptFriendRequest(requester_username, accepter_username);
+    }catch (RemoteException e){
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public boolean rejectFriendRequest(String requester_username, String accepter_username) {
+    try{
+      return server.rejectFriendRequest(requester_username, accepter_username);
+    }catch (RemoteException e){
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public FriendList getFriends(String username) {
+    try{
+      return server.getFriends(username);
+    }catch (RemoteException e){
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public ArrayList<String> getFriendRequests(String username) {
     try{
       return server.updateTrainee(u,h,w,s);
     }catch (RemoteException e){
@@ -291,24 +280,83 @@ public class Client implements Model
     }
   }
 
-  @Override public boolean isRosterUpdated()
-  {
-    return server.
+  @Override
+  public void propertyChange(ObserverEvent<String, String> event) {
+    String name = event.getPropertyName();
+    String val1 = event.getValue1();
+    String val2 = event.getValue2();
+    Logger.log("Received notification: "+name+", "+val1+", "+val2);
+    property.firePropertyChange(name,val1,val2);
   }
 
-  @Override public boolean acceptTrainee()
-  {
-    return server.acceptTrainee();
+
+
+  @Override
+  public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) {
+    property.addListener(listener,propertyNames);
+    return true;
   }
 
-  @Override public boolean denyTrainee()
+  @Override
+  public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) {
+    property.addListener(listener,propertyNames);
+    return true;
+  }
+  @Override public boolean sendFriendRequest(String requesterUsername,
+      String accepterUsername)
   {
-    return server.denyTrainee();
+    try{
+      return server.sendFriendRequest(requesterUsername,accepterUsername);
+    }catch(RemoteException e){
+      return false;
+    }
   }
 
-  @Override public User removeTrainee(User trainee)
+  @Override public boolean removeFriend(String requesterUsername,
+      String accepterUsername)
   {
-    return server.removeTrainee(trainee);
+    try{
+      return server.removeFriend(requesterUsername,accepterUsername);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
+  @Override
+  public boolean requestCoach(String requesterUsername, String accepterUsername) {
+    try{
+      return server.requestCoach(requesterUsername, accepterUsername);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
+  @Override
+  public User getCoach(String traineeUsername) {
+    try{
+      return server.getCoach(traineeUsername);
+    }catch(RemoteException e){
+      return null;
+    }
+
+  }
+
+  @Override
+  public boolean isCoach(String username) {
+    try{
+      return server.isCoach(username);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
+  @Override public boolean removeCoachAssignment(String traineeUsername)
+  {
+    try{
+      return server.removeCoachAssignment(traineeUsername);
+    }catch(RemoteException e){
+      return false;
+    }
   }
 
 }

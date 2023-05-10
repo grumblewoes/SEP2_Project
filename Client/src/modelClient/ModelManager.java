@@ -1,16 +1,26 @@
 package modelClient;
 
 import mediator.*;
+import utility.observer.event.ObserverEvent;
+import utility.observer.javaobserver.NamedPropertyChangeSubject;
+import utility.observer.listener.GeneralListener;
+import utility.observer.listener.LocalListener;
+import utility.observer.subject.LocalSubject;
+import utility.observer.subject.PropertyChangeHandler;
 
+import java.beans.PropertyChangeListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public class ModelManager implements Model//, PropertyChangeListener
+public class ModelManager implements Model, LocalListener<String,String>
 {
 	private Client client;
-	//private PropertyChangeSupport property;
+	private PropertyChangeHandler<String,String> property;
 
 	public ModelManager(Client client) {
 		this.client = client;
+		this.property= new PropertyChangeHandler<>(this);
+		this.client.addListener(this);
 		//property = new PropertyChangeSupport(this);
 		//listens for new info from the server
 		//client.addListener(this);
@@ -93,7 +103,81 @@ public class ModelManager implements Model//, PropertyChangeListener
 	public User getTrainee(String username){return client.getTrainee(username);}
 
 	@Override
-	public boolean updateTrainee(String u, int h, int w,boolean s){return client.updateTrainee(u,h,w,s);}
+	public boolean updateTrainee(String u, int h, int w,boolean s,String st){return client.updateTrainee(u,h,w,s,st);}
+
+	@Override
+	public boolean acceptFriendRequest(String requester_username, String accepter_username) {
+		return client.acceptFriendRequest(requester_username, accepter_username);
+	}
+
+	@Override
+	public boolean rejectFriendRequest(String requester_username, String accepter_username) {
+		return client.rejectFriendRequest(requester_username,accepter_username);
+	}
+
+	@Override
+	public FriendList getFriends(String username) {
+		return client.getFriends(username);
+	}
+
+	@Override
+	public ArrayList<String> getFriendRequests(String username) {
+		return client.getFriendRequests(username);
+	}
+
+	@Override
+	public void propertyChange(ObserverEvent<String, String> event) {
+		property.firePropertyChange(event);
+	}
+
+
+
+	@Override
+	public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) {
+		property.addListener(listener,propertyNames);
+		return true;
+	}
+
+	@Override
+	public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) {
+		property.addListener(listener,propertyNames);
+		return true;
+	}
+
+
+	@Override public boolean sendFriendRequest(String requesterUsername,
+			String accepterUsername)
+	{
+		return client.sendFriendRequest(requesterUsername,accepterUsername);
+	}
+
+	@Override public boolean removeFriend(String requesterUsername,
+			String accepterUsername)
+	{
+		return client.removeFriend(requesterUsername,accepterUsername);
+
+	}
+
+	@Override
+	public boolean requestCoach(String requesterUsername, String accepterUsername) {
+		return client.requestCoach(requesterUsername, accepterUsername);
+	}
+
+	@Override
+	public User getCoach(String traineeUsername) {
+		return client.getCoach(traineeUsername);
+	}
+
+	@Override
+	public boolean isCoach(String username) {
+		return client.isCoach(username);
+	}
+
+	@Override
+	public boolean removeCoachAssignment(String traineeUsername) {
+		return client.removeCoachAssignment(traineeUsername);
+	}
+
 
 	@Override public boolean isRosterUpdated()
 	{
@@ -101,6 +185,7 @@ public class ModelManager implements Model//, PropertyChangeListener
 	}
 
 
+	//	@Override
 	//	@Override
 //	public boolean editHeight(int height) {
 //		return client.editHeight(height);

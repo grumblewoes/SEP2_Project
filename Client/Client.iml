@@ -8,5 +8,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="gson-2.8.5" level="application" />
+    <orderEntry type="library" name="MyObserver-1.4" level="project" />
+    <orderEntry type="library" name="RemoteObserver-1.4" level="application" />
+    <orderEntry type="library" name="javafx-swt" level="application" />
   </component>
 </module>

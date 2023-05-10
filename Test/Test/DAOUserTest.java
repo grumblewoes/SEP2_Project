@@ -1,7 +1,7 @@
 import mediator.User;
 import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.IUserDAO;
-import org.junit.After;
+//import org.junit.After;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
@@ -92,23 +92,23 @@ class DAOUserTest {
 
     @Test public void updateZero(){
         assertDoesNotThrow(()->{
-            dao.updateTrainee(null,0,0,false);
+            dao.updateTrainee(null,0,0,false,"");
         });
     }
     @Test public void updateOne(){
         assertDoesNotThrow(()->{
-            dao.updateTrainee(null,0,0,false);
+            dao.updateTrainee(null,0,0,false,"");
         });
     }
     @Test public void updateMany(){
         assertDoesNotThrow(()->{
-            dao.updateTrainee(username1,212,50,false);
+            dao.updateTrainee(username1,212,50,false,"");
         });
         assertDoesNotThrow(()->{
-            dao.updateTrainee(username1,132,60,false);
+            dao.updateTrainee(username1,132,60,false,"");
         });
         assertDoesNotThrow(()->{
-            dao.updateTrainee(username2,200,70,true);
+            dao.updateTrainee(username2,200,70,true,"");
         });
     }
 

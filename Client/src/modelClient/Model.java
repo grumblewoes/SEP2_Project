@@ -1,14 +1,12 @@
 package modelClient;
 
-import mediator.ExerciseList;
-import mediator.Folder;
-import mediator.FolderList;
-import mediator.User;
+import mediator.*;
+import utility.observer.subject.LocalSubject;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface Model
+public interface Model extends LocalSubject<String,String>
 {
 
 	public abstract boolean createUser(String firstName, String lastName, String userName, String password, int height, int weight);
@@ -34,9 +32,23 @@ public interface Model
 
 	User getTrainee(String username);
 
-    boolean updateTrainee(String u, int h, int w,boolean s);
+    boolean updateTrainee(String u, int h, int w,boolean s,String st);
 
-//	boolean editHeight(int height);
+	boolean acceptFriendRequest(String requester_username,String accepter_username)  ;
+	boolean rejectFriendRequest(String requester_username,String accepter_username)  ;
+
+	FriendList getFriends(String username) ;
+	ArrayList<String> getFriendRequests(String username) ;
+	boolean sendFriendRequest(String requesterUsername,
+			String accepterUsername);
+	boolean removeFriend(String requesterUsername,
+			String accepterUsername);
+	boolean requestCoach(String requesterUsername, String accepterUsername);
+	User getCoach(String traineeUsername);
+	boolean isCoach(String username);
+  boolean removeCoachAssignment(String traineeUsername);
+
+  //	boolean editHeight(int height);
 //	boolean editWeight(int weight);
 //	boolean editDob(int dob);
 //	boolean editDeadlift(int weight);
