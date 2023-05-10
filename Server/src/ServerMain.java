@@ -1,4 +1,5 @@
 import mediator.Server;
+import modelServer.Admin;
 import modelServer.Model;
 import modelServer.ModelManager;
 import util.Logger;
@@ -9,6 +10,8 @@ public class ServerMain
   {
     Model model = new ModelManager();
     Server server = new Server(model);
+    Admin admin = new Admin(model);
+    admin.run();
 
 //    server.createFolder("d","nope");
 //    server.editFolder("d","nope","nope2");

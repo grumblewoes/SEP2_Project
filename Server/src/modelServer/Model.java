@@ -32,4 +32,8 @@ public interface Model
     User getTrainee(String username);
 
     boolean updateTrainee(String u, int h, int w,boolean s);
+
+
+    boolean addExercise(String title);
+    boolean removeExercise(String title);
 }
