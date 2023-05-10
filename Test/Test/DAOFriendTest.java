@@ -1,3 +1,5 @@
+import mediator.Friend;
+import mediator.FriendList;
 import mediator.User;
 import modelServer.DAO.implementation.FriendDAO;
 import modelServer.DAO.implementation.UserDAO;
@@ -110,7 +112,34 @@ class DAOFriendTest {
             assert !s.equals(usernames[3]);
     }
 
+    @Test public void sendAndRemoveZOMBIE() throws SQLException{
+        //Zero
+        assertDoesNotThrow(()-> fao.sendFriendRequest(null,null));
+        assertDoesNotThrow(()-> fao.sendFriendRequest(null,usernames[0]));
 
+        //One
+        assertDoesNotThrow(()-> fao.sendFriendRequest(usernames[0], usernames[1]));
+
+        //Many
+        assertDoesNotThrow(()-> fao.sendFriendRequest(usernames[1], usernames[2]));
+        assertDoesNotThrow(()-> fao.sendFriendRequest(usernames[3], usernames[4]));
+
+        fao.acceptFriendRequest(usernames[0], usernames[1]);
+        fao.acceptFriendRequest(usernames[1], usernames[2]);
+        fao.acceptFriendRequest(usernames[3], usernames[4]);
+
+        //Zero
+        assertDoesNotThrow(()-> fao.removeFriend(null,null));
+        assertDoesNotThrow(()-> fao.removeFriend(null,usernames[0]));
+
+        //One
+        assertDoesNotThrow(()-> fao.removeFriend(usernames[0], usernames[1]));
+
+        //Many
+        assertDoesNotThrow(()-> fao.removeFriend(usernames[1], usernames[2]));
+        assertDoesNotThrow(()-> fao.removeFriend(usernames[3], usernames[4]));
+
+    }
 
 
 }
