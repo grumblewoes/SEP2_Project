@@ -82,13 +82,6 @@ public class profileViewController extends  ViewController{
             sendBtn.setVisible(!newVal);
         });
 
-        //binding for coach buttons. true is coach, false is no coach
-        profileViewModel.coachStateProperty().addListener((obs,oldVal,newVal)->{
-            coachField.setDisable(!newVal);
-            removeCoachBtn.setVisible(!newVal);
-            sendBtn.setVisible(!newVal);
-        });
-
     }
 
     @Override

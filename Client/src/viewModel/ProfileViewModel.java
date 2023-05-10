@@ -146,10 +146,14 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
             if (model.getCoach(pUsername) != null)
             {
                 coachStateProperty.set(true);
+                coachProperty.set(model.getCoach(viewState.getProfileUsername()).getUsername());
             }
-            else coachStateProperty.set(false);
+            else
+            {
+                coachStateProperty.set(false);
+                coachProperty.set("");
+            }
 
-            coachProperty.set(model.getCoach(pUsername).getUsername());
         }
         else //does not own and does not want to share
         {
@@ -171,10 +175,13 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
             if (model.getCoach(pUsername) != null)
             {
                 coachStateProperty.set(true);
+                coachProperty.set(model.getCoach(viewState.getProfileUsername()).getUsername());
             }
-            else coachStateProperty.set(false);
-
-            coachProperty.set(model.getCoach(pUsername).getUsername());
+            else
+            {
+                coachStateProperty.set(false);
+                coachProperty.set("");
+            }
         }
     }
 
