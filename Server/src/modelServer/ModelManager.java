@@ -1,11 +1,11 @@
 package modelServer;
 
 import mediator.ExerciseList;
-import mediator.Folder;
 import mediator.FolderList;
 import mediator.User;
 import modelServer.DAO.implementation.ExerciseDAO;
 import modelServer.DAO.implementation.FolderDAO;
+import modelServer.DAO.implementation.RosterDAO;
 import modelServer.DAO.implementation.UserDAO;
 import util.Logger;
 
@@ -213,5 +213,26 @@ public class ModelManager implements Model
         }catch(SQLException e){
             return false;
         }
+    }
+
+    @Override public boolean acceptTrainee()
+    {
+       return new RosterDAO().acceptTrainee();
+
+    }
+
+    @Override public boolean denyTrainee()
+    {
+        return new RosterDAO().denyTrainee();
+    }
+
+    @Override public User removeTrainee(User trainee)
+    {
+        return new RosterDAO().removeTrainee();
+    }
+
+    @Override public boolean isRosterUpdated()
+    {
+        return new RosterDAO().isRosterUpdated();
     }
 }

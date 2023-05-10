@@ -1,9 +1,13 @@
 package viewModel;
 
+import mediator.User;
+
 public class ViewState {
     private String username,folderName,exerciseName,goBack,profileUsername;
     private int folderId;
     private boolean manageFolderEditable, newFolder;
+
+    private User trainee;
 
 
 
@@ -56,4 +60,8 @@ public class ViewState {
     public void setGoBack(String goBack) { this.goBack = goBack; }
     public String getProfileUsername() { return profileUsername; }
     public void setProfileUsername(String profileUsername) { this.profileUsername = profileUsername; }
+
+    public User getTrainee(User trainee){
+        return trainee;
+    }
 }

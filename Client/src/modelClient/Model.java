@@ -42,4 +42,7 @@ public interface Model
 //	boolean editDeadlift(int weight);
 //	boolean editBenchPress(int weight);
 //	boolean editSquat(int weight);
+
+
+	boolean isRosterUpdated();
 }

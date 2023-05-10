@@ -112,6 +112,10 @@ public class Server implements RemoteModel
     return model.updateTrainee(u,h,w,s);
   }
 
+  public boolean isRosterUpdated(){
+    return model.isRosterUpdated();
+  }
+
   private void startServer() {
     try
     {

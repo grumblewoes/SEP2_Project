@@ -28,4 +28,7 @@ public interface RemoteModel extends Remote
 	User getTrainee(String username) throws RemoteException;
 
     boolean updateTrainee(String u, int h, int w,boolean s) throws RemoteException;
+	boolean acceptTrainee();
+	boolean denyTrainee();
+	User removeTrainee(User trainee);
 }

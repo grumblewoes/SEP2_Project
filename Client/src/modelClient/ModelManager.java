@@ -95,7 +95,13 @@ public class ModelManager implements Model//, PropertyChangeListener
 	@Override
 	public boolean updateTrainee(String u, int h, int w,boolean s){return client.updateTrainee(u,h,w,s);}
 
-//	@Override
+	@Override public boolean isRosterUpdated()
+	{
+		return client.isRosterUpdated();
+	}
+
+
+	//	@Override
 //	public boolean editHeight(int height) {
 //		return client.editHeight(height);
 //	}

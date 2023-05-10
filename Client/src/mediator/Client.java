@@ -291,5 +291,25 @@ public class Client implements Model
     }
   }
 
+  @Override public boolean isRosterUpdated()
+  {
+    return server.
+  }
+
+  @Override public boolean acceptTrainee()
+  {
+    return server.acceptTrainee();
+  }
+
+  @Override public boolean denyTrainee()
+  {
+    return server.denyTrainee();
+  }
+
+  @Override public User removeTrainee(User trainee)
+  {
+    return server.removeTrainee(trainee);
+  }
+
 }
 

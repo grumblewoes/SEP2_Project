@@ -1,11 +1,9 @@
 package modelServer;
 
 import mediator.ExerciseList;
-import mediator.Folder;
 import mediator.FolderList;
 import mediator.User;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface Model
@@ -32,4 +30,9 @@ public interface Model
     User getTrainee(String username);
 
     boolean updateTrainee(String u, int h, int w,boolean s);
+
+    boolean acceptTrainee();
+    boolean denyTrainee();
+    User removeTrainee(User trainee);
+    boolean isRosterUpdated();
 }
