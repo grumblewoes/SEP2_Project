@@ -6,6 +6,7 @@ import mediator.Exercise;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Admin implements Runnable
@@ -33,21 +34,39 @@ public class Admin implements Runnable
   @Override public void run()
   {
     Scanner scanner = new Scanner(System.in);
-    while (true)
+
+    System.out.print("Enter username: ");
+    String username = scanner.nextLine();
+
+    System.out.print("Enter password: ");
+    String password = scanner.nextLine();
+
+    while (!validateLogin(username, password))
     {
 
       System.out.print("Enter username: ");
-      String username = scanner.nextLine();
+      username = scanner.nextLine();
 
       System.out.print("Enter password: ");
-      String password = scanner.nextLine();
+      password = scanner.nextLine();
+    }
 
-      if (validateLogin(username, password))
-      {
-        System.out.println("1) Add an exercise");
-        System.out.println("2) Remove an exercise");
+    while (true)
+    {
 
-        int choice = scanner.nextInt();
+      System.out.println("1) Add an exercise");
+      System.out.println("2) Remove an exercise");
+
+        int choice = 0;
+        try
+        {
+          choice = scanner.nextInt();
+        }
+        catch (InputMismatchException e ) {
+
+          scanner.next();
+        }
+
 
         switch (choice)
         {
@@ -55,18 +74,25 @@ public class Admin implements Runnable
             scanner.nextLine();
             System.out.print("Enter the title of the exercise: ");
             String name = scanner.nextLine();
-            try
+
+            if (!name.trim().isEmpty())
             {
-              model.addExercise(name);
-              System.out.println("The exercise was added");
+              try
+              {
+                model.addExercise(name);
+
+              }
+              catch (Exception e)
+              {
+                System.out.println(
+                    "An error occurred while trying to add this exercise" + e.getMessage());
+              }
             }
-            catch (Exception e)
-            {
-              System.out.println(
-                  "An error occurred while trying to add this exercise"
-                      + e.getMessage());
+            else {
+              System.out.println("It cannot be empty");
             }
-            break;
+              break;
+
 
           case 2:
 
@@ -77,25 +103,28 @@ public class Admin implements Runnable
             try
             {
               model.removeExercise(name2);
-              System.out.println("The exercise was removed");
             }
             catch (Exception e)
             {
               System.out.println(
-                  "An error occurred while trying to remove this exercise"
-                      + e.getMessage());
+                  "An error occurred while trying to remove this exercise" + e.getMessage());
             }
             break;
 
           default:
-            break;
+                  try
+                  {
+                    throw new InputMismatchException("Invalid input");
+                  }
+                  catch (InputMismatchException e)
+                  {
+                    System.out.println("You can type only 1 or 2");
+                  }
 
         }
+      }
 
-      }
-      else
-      {
-      }
     }
   }
-}
+
+

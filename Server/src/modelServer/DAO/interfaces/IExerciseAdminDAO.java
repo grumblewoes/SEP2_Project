@@ -1,5 +1,7 @@
 package modelServer.DAO.interfaces;
 
+import mediator.Exercise;
+
 import java.sql.SQLException;
 
 public interface IExerciseAdminDAO

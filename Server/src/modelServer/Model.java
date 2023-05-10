@@ -1,11 +1,7 @@
 package modelServer;
 
-import mediator.ExerciseList;
-import mediator.Folder;
-import mediator.FolderList;
-import mediator.User;
+import mediator.*;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface Model

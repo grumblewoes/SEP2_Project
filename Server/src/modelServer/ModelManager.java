@@ -1,9 +1,6 @@
 package modelServer;
 
-import mediator.ExerciseList;
-import mediator.Folder;
-import mediator.FolderList;
-import mediator.User;
+import mediator.*;
 import modelServer.DAO.implementation.ExerciseAdminDAO;
 import modelServer.DAO.implementation.ExerciseDAO;
 import modelServer.DAO.implementation.FolderDAO;
@@ -16,6 +13,7 @@ import java.util.ArrayList;
 public class ModelManager implements Model
 {
   private UserDAO userDAO;
+  private ExerciseAdminDAO exerciseAdminDAO;
 
   public ModelManager()
   {
@@ -155,7 +153,6 @@ public class ModelManager implements Model
 
   @Override public boolean removeExercise(int exerciseId)
   {
-
     try
     {
       return new ExerciseDAO().removeExercise(exerciseId);
@@ -164,7 +161,6 @@ public class ModelManager implements Model
     {
       return false;
     }
-
   }
 
   @Override public boolean removeExercisesByName(String name, int folderId)
@@ -280,6 +276,7 @@ public class ModelManager implements Model
 
   @Override public boolean addExercise(String title)
   {
+
     try
     {
       return new ExerciseAdminDAO().addExercise(title);
@@ -301,4 +298,5 @@ public class ModelManager implements Model
       return false;
     }
   }
+
 }
