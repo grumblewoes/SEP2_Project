@@ -46,24 +46,43 @@ public class EditRosterViewController extends ViewController
     errorLabel.textProperty().bindBidirectional(editRosterViewModel.getErrorProperty());
 
   }
-
-  private void populateFolders(String traineeListString){
+  private void populateFolders(String traineeListString, String username, String status) {
     TraineeList traineeList = gson.fromJson(traineeListString, TraineeList.class);
-
-
     traineeBox.getChildren().remove(0, traineeBox.getChildren().size());
-    //fix the loop
-    for(int i=0;i<traineeList.getSize();++i){
-      int folderId = traineeList.getTrainee(i).getId();
-      String title = TraineeList.getTrainee(i).getTitle();
-      folderBox.getChildren().add( createFolderElement(title,folderId) );
-      Logger.log(title+" "+folderId);
+    for (int i = 0; i < traineeList.getSize(); ++i) {
+      int folderId = traineeList.getTraineeId(i);
+      String title = traineeList.getTrainee(i);
+      traineeBox.getChildren().add(createTraineeComponent(title, status));
+      Logger.log(title + " " + folderId);
+      createTraineeComponent(username, status);
     }
+  }
 
+  private HBox createFriendRequestComponent(String username){
+    HBox hBox = new HBox();
+
+    hBox.getStyleClass().addAll("bg-primary","fs-2");
+    hBox.setPadding( new Insets(10,10,10,10));
+
+    Label label = new Label(username);
+    label.getStyleClass().addAll("btn-warning","cursor-default");
+
+    Button acceptBtn = new Button("Accept");
+    Button rejectBtn = new Button("Deny");
+    acceptBtn.getStyleClass().addAll("btn-success");
+    rejectBtn.getStyleClass().addAll("btn-danger");
+
+    acceptBtn.onActionProperty().setValue((evt)->acceptButton(username));
+    rejectBtn.onActionProperty().setValue((evt)->denyButton(username));
+
+    hBox.getChildren().addAll(label,acceptBtn,rejectBtn);
+
+    return hBox;
   }
 
   //combine the create friend request component with create folder
-  private HBox createFriendComponent(String username,String status){
+
+  private HBox createTraineeComponent(String username,String status){
     HBox hBox = new HBox();
 
     hBox.getStyleClass().addAll("bg-primary","fs-2");
@@ -72,13 +91,18 @@ public class EditRosterViewController extends ViewController
 
     Button seeBtn = new Button(username);
     seeBtn.getStyleClass().addAll("btn-info");
-    seeBtn.onActionProperty().setValue( (evt)-> manageFriendOpen(username));
+    seeBtn.onActionProperty().setValue( (evt)-> manageTraineeOpen(username));
     Label statusLabel = new Label(status);
     statusLabel.getStyleClass().addAll("fs-2","btn-success","cursor-default");
 
     hBox.getChildren().addAll(seeBtn,statusLabel);
 
     return hBox;
+  }
+
+  private void manageTraineeOpen(String username)
+  {
+    viewHandler.openView("profile");
   }
 
   public boolean acceptButton(String username){

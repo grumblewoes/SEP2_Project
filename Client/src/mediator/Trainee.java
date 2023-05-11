@@ -3,18 +3,23 @@ package mediator;
 public class Trainee
 {
 
+  private String username;
   private int id;
 
-  public Trainee(int id){
-    this.id = id;
+  public Trainee(String username, int id){
+    this.username = username;
+  }
+
+  public String getUsername(){
+    return username;
   }
 
   public int getId(){
     return id;
   }
 
-  public void setId(int id){
-    this.id = id;
+  public String toString(){
+    return "The trainee's username: " + username;
   }
 
 
