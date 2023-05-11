@@ -1,5 +1,6 @@
 import mediator.Server;
 import modelServer.AdminTask;
+import modelServer.Admin;
 import modelServer.Model;
 import modelServer.ModelManager;
 import util.Logger;
@@ -10,6 +11,8 @@ public class ServerMain
   {
     Model model = new ModelManager();
     Server server = new Server(model);
+    Admin admin = new Admin(model);
+    admin.run();
 
     AdminTask task = new AdminTask(model);
     Thread t1 = new Thread(task);

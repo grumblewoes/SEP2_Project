@@ -30,7 +30,8 @@ public class ExerciseListTest {
     }
 
     @Test
-    public void testExerciseListFilterByName() {
+    public void testExerciseListFilterByName()
+    {
         ExerciseList filteredList = exerciseList.filterByName("Bicep Curls");
         assertEquals(1, filteredList.size());
         assertEquals(new Exercise(1, 50.0, 10, "Bicep Curls").getName(), filteredList.get(0).getName());
