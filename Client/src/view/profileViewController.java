@@ -72,13 +72,17 @@ public class profileViewController extends  ViewController{
             shareProfileRadio.setVisible(newVal);
             shareInfoLabel.setVisible(newVal);
             coachField.setDisable(!newVal);
-            updateBtn.setVisible(newVal);
-            goBackUpdate.setVisible(newVal);
-            removeBtn.setVisible(!newVal);
+
+
+
             goBackView.setVisible(!newVal);
             statusField.setDisable(!newVal);
             coachField.setDisable(!newVal);
         });
+
+        removeBtn.visibleProperty().bind(profileViewModel.editableProperty().not());
+        updateBtn.visibleProperty().bind(profileViewModel.editableProperty());
+        goBackUpdate.visibleProperty().bind(profileViewModel.editableProperty());
 
         //only seen if profile is editable, you have a coach, and you yourself are not a coach
         removeCoachBtn.visibleProperty().bind(
