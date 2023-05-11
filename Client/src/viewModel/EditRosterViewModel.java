@@ -20,7 +20,7 @@ public class EditRosterViewModel extends ViewModel
   private Button denyButton;
   private Button removeButton;
 
-  private StringProperty errorProperty, traineeList;
+  private StringProperty errorProperty, traineeList, usernameProperty;
 
   private Model model;
   private ViewState viewState;
@@ -38,17 +38,18 @@ public class EditRosterViewModel extends ViewModel
     gson = new Gson();
   }
 
-  public Button getAcceptButton(){
-    return acceptButton;
-  }
-
-  public Button getDenyButton(){
-    return denyButton;
-  }
-
-  public Button getRemoveButton(){
-    return removeButton;
-  }
+  //these don't follow MVVM, since viewmodel does not know view components
+//  public Button getAcceptButton(){
+//    return acceptButton;
+//  }
+//
+//  public Button getDenyButton(){
+//    return denyButton;
+//  }
+//
+//  public Button getRemoveButton(){
+//    return removeButton;
+//  }
 
   public StringProperty getErrorProperty(){
     return errorProperty;
@@ -104,5 +105,9 @@ public class EditRosterViewModel extends ViewModel
   {
     loadTrainee();
     errorProperty.set("");
+  }
+
+  public StringProperty getUsernameProperty() {
+    return usernameProperty;
   }
 }

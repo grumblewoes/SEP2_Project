@@ -34,7 +34,10 @@ public class LoginViewController extends ViewController
 
   @FXML private void submitButton() {
     if( loginViewModel.login() ){
-      viewHandler.openView("home");
+      if (!loginViewModel.isCoach())
+        viewHandler.openView("home");
+      else
+        viewHandler.openView("manageRoster");
     }
 
     //if true, go to next screen

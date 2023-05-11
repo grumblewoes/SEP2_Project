@@ -42,6 +42,9 @@ public class LoginViewModel extends ViewModel
   public StringProperty getErrorLabel() {
     return errorLabel;
   }
+  public boolean isCoach() {
+    return model.isCoach(usernameProperty.get());
+  }
   public void clear(){
     Platform.runLater(() -> {
       errorLabel.set("");
