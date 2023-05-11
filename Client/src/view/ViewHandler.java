@@ -83,8 +83,11 @@ public class ViewHandler {
 			case "manageRoster":
 				editRosterViewController = loadViewController("editRosterView.fxml", editRosterViewController, viewModelFactory.getEditRosterViewModel());
 				break;
-//			case "manageCoach":
-//				manageCoachViewController = loadViewController("manageCoachView.fxml", manageCoachViewController, viewModelFactory.getManageCoachViewModel());
+
+			case "addFriend":
+				addFriendViewController =loadViewController("sendFriendRequest.fxml", addFriendViewController,
+						viewModelFactory.getAddFriendViewModel());
+				break;
 		}
 		currentScene.setRoot(root);
 		String title = "";

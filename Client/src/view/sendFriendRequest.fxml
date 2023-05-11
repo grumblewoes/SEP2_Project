@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ManageCoachViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddFriendViewController">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -23,7 +23,7 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Label fx:id="headerLabel" styleClass="fs-6" text="Manage Coach">
+            <Label fx:id="headerLabel" styleClass="fs-6" text="Add Friend">
                <font>
                   <Font size="24.0" />
                </font>
@@ -34,12 +34,12 @@
          <children>
             <VBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0">
                <children>
-                  <Label styleClass="fs-3" text="Coach Username">
+                  <Label styleClass="fs-3" text="Friend Username">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="coachField">
+                  <TextField fx:id="nameField">
                      <styleClass>
                         <String fx:value="fs-2" />
                         <String fx:value="input" />

@@ -18,7 +18,7 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     private IntegerProperty weightProperty,heightProperty,benchPressProperty,deadliftProperty,squatProperty;
 
-    private BooleanProperty shareProfileProperty,editableProperty, coachStateProperty;
+    private BooleanProperty shareProfileProperty,editableProperty, coachStateProperty, isCoachProperty;
 
     public ProfileViewModel(Model model, ViewState viewState){
         this.model = model;
@@ -41,6 +41,7 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         shareProfileProperty = new SimpleBooleanProperty();
         coachProperty = new SimpleStringProperty();
         coachStateProperty = new SimpleBooleanProperty();
+        isCoachProperty = new SimpleBooleanProperty();
 
     }
 
@@ -72,7 +73,7 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     }
     public BooleanProperty editableProperty() {  return editableProperty;  }
 
-
+public BooleanProperty isCoachProperty() { return isCoachProperty; }
 
     public StringProperty errorProperty() {
         return errorProperty;
@@ -113,7 +114,8 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     @Override
     public void clear() {
         String u = viewState.getProfileUsername();
-        User profileUser = model.getTrainee(u);
+        //is the user a coach or trainee? -> changes depending on which one
+        User profileUser = viewState.isCoach() ? model.getCoach(u): model.getTrainee(u);
         String pUsername = profileUser.getUsername();
         boolean wantsToShare = profileUser.isShareProfile();
         boolean owns = viewState.getProfileUsername().equals(viewState.getUsername());
@@ -142,8 +144,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
             weightProperty.set(w);
             shareProfileProperty.set(profileUser.isShareProfile() );
             bmiProperty.set( String.valueOf( 1.0*w/(1.0*h*h/100/100) ) );
+            isCoachProperty.set(viewState.isCoach());
 
-            if (model.getCoach(pUsername) != null)
+            if (model.getCoach(viewState.getProfileUsername()) != null)
             {
                 coachStateProperty.set(true);
                 coachProperty.set(model.getCoach(viewState.getProfileUsername()).getUsername());
@@ -153,7 +156,6 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
                 coachStateProperty.set(false);
                 coachProperty.set("");
             }
-
         }
         else //does not own and does not want to share
         {
@@ -172,7 +174,7 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
             shareProfileProperty.set(false );
             bmiProperty.set( "" );
 
-            if (model.getCoach(pUsername) != null)
+            if (model.getCoach(viewState.getProfileUsername()) != null)
             {
                 coachStateProperty.set(true);
                 coachProperty.set(model.getCoach(viewState.getProfileUsername()).getUsername());
@@ -197,6 +199,18 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         return success;
     }
 
+    public boolean removeFriend(){
+        String username = viewState.getUsername();
+        String friendUsername = viewState.getProfileUsername();
+
+
+        boolean success =  model.removeFriend(username,friendUsername);
+        if(!success)
+            errorProperty.set("An error has occurred.");
+
+        return success;
+    }
+
     public String getGoBack(){
         String b = viewState.getGoBack();
 
@@ -218,6 +232,8 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         if (model.removeCoachAssignment(viewState.getProfileUsername()))
         {
             errorProperty.set("Removed");
+            coachProperty.set("");
+            coachStateProperty.set(false);
         }
         else
         {
@@ -235,7 +251,7 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         }
         else
         {
-            errorProperty.set("An error occurred during request transaction.");
+            errorProperty.set("Can only request one coach at a time.");
             coachProperty.set("");
         }
     }

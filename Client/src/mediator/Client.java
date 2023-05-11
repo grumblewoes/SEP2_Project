@@ -8,7 +8,6 @@ import utility.observer.listener.GeneralListener;
 import utility.observer.listener.RemoteListener;
 import utility.observer.subject.LocalSubject;
 import utility.observer.subject.PropertyChangeHandler;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.Naming;

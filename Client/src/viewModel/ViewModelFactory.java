@@ -14,6 +14,7 @@ public class ViewModelFactory {
 	private ProfileViewModel profileViewModel;
 	//private ManageCoachViewModel manageCoachViewModel;
 
+	private AddFriendViewModel addFriendViewModel;
 	private EditRosterViewModel editRosterViewModel;
 
 	public ViewModelFactory(Model model) {
@@ -26,6 +27,9 @@ public class ViewModelFactory {
 		manageFolderViewModel = new ManageFolderViewModel(model, viewState);
 		manageSpecificExercisesViewModel = new ManageSpecificExercisesViewModel(model, viewState);
 		profileViewModel = new ProfileViewModel(model, viewState);
+
+		this.addFriendViewModel = new AddFriendViewModel(model,viewState);
+
 		editRosterViewModel = new EditRosterViewModel(model, viewState);
 		//manageCoachViewModel = new ManageCoachViewModel(model, viewState);
 	}
@@ -42,6 +46,10 @@ public class ViewModelFactory {
 	public AddExerciseViewModel getAddExerciseViewModel() { return  addExerciseViewModel; }
     public ManageSpecificExercisesViewModel getManageSpecificExercisesViewModel() { return  manageSpecificExercisesViewModel; }
     public ProfileViewModel getProfileViewModel() { return  profileViewModel; }
+	public AddFriendViewModel getAddFriendViewModel()
+	{
+		return addFriendViewModel;
+	}
 
 	public EditRosterViewModel getEditRosterViewModel(){
 		return editRosterViewModel;
