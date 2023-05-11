@@ -14,7 +14,7 @@ import viewModel.ViewModel;
 public class profileViewController extends  ViewController{
     @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField, coachField;
     @FXML private RadioButton shareProfileRadio;
-    @FXML private Button updateBtn, removeBtn, goBackView, goBackUpdate, removeCoachBtn, sendBtn;
+    @FXML private Button updateBtn, removeBtn, goBackView, removeCoachBtn, sendBtn;
     @FXML private Label shareInfoLabel,errorLabel;
 
     private ProfileViewModel profileViewModel;
@@ -82,7 +82,6 @@ public class profileViewController extends  ViewController{
 
         removeBtn.visibleProperty().bind(profileViewModel.editableProperty().not());
         updateBtn.visibleProperty().bind(profileViewModel.editableProperty());
-        goBackUpdate.visibleProperty().bind(profileViewModel.editableProperty());
 
         //only seen if profile is editable, you have a coach, and you yourself are not a coach
         removeCoachBtn.visibleProperty().bind(

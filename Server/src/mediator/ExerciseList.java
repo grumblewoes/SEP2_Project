@@ -12,7 +12,6 @@ public class ExerciseList implements Serializable {
     public void add(Exercise exercise){
         list.add(exercise);
     }
-
     public Exercise get(int i){return list.get(i);}
     public int size(){return list.size();}
 
