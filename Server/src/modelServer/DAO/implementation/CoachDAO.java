@@ -77,6 +77,7 @@ public class CoachDAO implements ICoachDAO
 
   @Override public User getCoach(String traineeUser) throws SQLException
   {
+    //has two ways of working. checks trainee table first, and if that doesn't work, it knows to check coach table
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
     User coach = null;
@@ -87,8 +88,11 @@ public class CoachDAO implements ICoachDAO
               + "join trainee2 t on c.username = t.coach_username " +
                   "where t.username = '" + traineeUser + "';"
       );
+      PreparedStatement statementCoach = connection.prepareStatement("select * from coach "
+              + "where username = '" + traineeUser + "';");
 
       ResultSet rs = statement.executeQuery();
+      ResultSet rs1 = statementCoach.executeQuery();
       if(rs.next()) {
         int height = rs.getInt("height");
         int weight = rs.getInt("weight");
@@ -99,7 +103,16 @@ public class CoachDAO implements ICoachDAO
         boolean shareProfile = rs.getBoolean("share");
         coach = new User(height, weight, firstName, lastName, username, status, shareProfile);
       }
-
+      else if (rs1.next()) {
+        int height = rs1.getInt("height");
+        int weight = rs1.getInt("weight");
+        String firstName = rs1.getString("first_name");
+        String lastName = rs1.getString("last_name");
+        String username = rs1.getString("username");
+        String status = rs1.getString("status");
+        boolean shareProfile = rs1.getBoolean("share");
+        coach = new User(height, weight, firstName, lastName, username, status, shareProfile);
+      }
       return coach;
     }
     catch (SQLException e){

@@ -80,10 +80,12 @@ public class profileViewController extends  ViewController{
             coachField.setDisable(!newVal);
         });
 
+        //only seen if profile is editable, you have a coach, and you yourself are not a coach
         removeCoachBtn.visibleProperty().bind(
-            profileViewModel.editableProperty().and(profileViewModel.coachStateProperty()));
-        sendBtn.visibleProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()));
-        coachField.editableProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()));
+            profileViewModel.editableProperty().and(profileViewModel.coachStateProperty()).and(profileViewModel.isCoachProperty().not()));
+        sendBtn.visibleProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()).and(profileViewModel.isCoachProperty().not()));
+        coachField.editableProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()).and(profileViewModel.isCoachProperty().not()));
+        coachField.visibleProperty().bind(profileViewModel.isCoachProperty().not());
     }
 
     @Override

@@ -54,14 +54,18 @@ public class UserDAO implements IUserDAO
                 "from trainee2 " +
                 "where username = '"+username+"';"
       );
+      PreparedStatement statementCoach = connection.prepareStatement("select username, password"
+          + " from coach where username = '"+username+"';");
 
       ResultSet rs = statement.executeQuery();
+      ResultSet rs1 = statementCoach.executeQuery();
 
       if( rs.next() ){
-        if(password.equals(rs.getString(2)))
-          return true;
+        return password.equals(rs.getString(2));
       }
-
+      else if (rs1.next()) {
+        return password.equals(rs1.getString(2));
+      }
       return false;
     }
     catch (SQLException e){
@@ -134,8 +138,6 @@ public class UserDAO implements IUserDAO
       );
 
       statement.executeUpdate();
-
-
       return true;
     }
     catch (SQLException e){
