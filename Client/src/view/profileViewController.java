@@ -72,8 +72,6 @@ public class profileViewController extends  ViewController{
             shareProfileRadio.setVisible(newVal);
             shareInfoLabel.setVisible(newVal);
             coachField.setDisable(!newVal);
-            removeCoachBtn.setVisible(newVal);
-            sendBtn.setVisible(newVal);
             updateBtn.setVisible(newVal);
             goBackUpdate.setVisible(newVal);
             removeBtn.setVisible(!newVal);
