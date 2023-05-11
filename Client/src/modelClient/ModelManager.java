@@ -16,7 +16,6 @@ public class ModelManager implements Model, LocalListener<String,String>
 {
   private Client client;
   //private PropertyChangeSupport property;
-	private Client client;
 	private PropertyChangeHandler<String,String> property;
 
 	public ModelManager(Client client) {

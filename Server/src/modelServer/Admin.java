@@ -1,6 +1,5 @@
 package modelServer;
 
-import com.google.gson.Gson;
 import mediator.Exercise;
 
 import java.io.BufferedReader;
@@ -56,6 +55,8 @@ public class Admin implements Runnable
 
       System.out.println("1) Add an exercise");
       System.out.println("2) Remove an exercise");
+      System.out.println("3) Add a coach");
+      System.out.println("4) Remove a coach");
 
         int choice = 0;
         try
@@ -110,7 +111,55 @@ public class Admin implements Runnable
                   "An error occurred while trying to remove this exercise" + e.getMessage());
             }
             break;
+          case 3:
+            scanner.nextLine();
+            System.out.print("Enter username for Coach >> ");
+            String coachUsername = scanner.nextLine();
 
+            System.out.print("Enter password for Coach >> ");
+            String coachPassword = scanner.nextLine();
+
+            System.out.print("Enter first name >> ");
+            String coachName = scanner.nextLine();
+
+            System.out.print("Enter last name >> ");
+            String coachLName = scanner.nextLine();
+
+            System.out.print("Enter height >> ");
+            int coachHeight = scanner.nextInt();
+
+            System.out.print("Enter weight >> ");
+            int coachWeight = scanner.nextInt();
+
+            System.out.print("Enter PB for bench press >> ");
+            int pbBench = scanner.nextInt();
+
+            System.out.print("Enter PB for squat >> ");
+            int pbSquat = scanner.nextInt();
+
+            System.out.print("Enter PB for deadlift >> ");
+            int pbLift = scanner.nextInt();
+
+
+            if (model.addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, "On that grind", true))
+            {
+              System.out.println("Coach was added to the system.");
+            }
+            else {
+              System.out.println("An error occurred while trying to add coach.");
+            }
+            break;
+          case 4:
+            scanner.nextLine();
+            System.out.print("Enter the name of the Coach you'd like to remove >> ");
+            name = scanner.nextLine();
+
+            if (model.removeCoach(name))
+              System.out.println("Removal succeeded.");
+            else {
+              System.out.println("An error occurred while trying to remove coach.");
+            }
+            break;
           default:
                   try
                   {
@@ -118,7 +167,7 @@ public class Admin implements Runnable
                   }
                   catch (InputMismatchException e)
                   {
-                    System.out.println("You can type only 1 or 2");
+                    System.out.println("You can type only 1, 2, 3, or 4.");
                   }
 
         }

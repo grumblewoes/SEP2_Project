@@ -264,12 +264,25 @@ public class ModelManager implements Model
     }
   }
 
-    @Override
-    public boolean updateTrainee(String u, int h, int w, boolean s) {
-        return false;
+  @Override public boolean addExercise(String title)
+  {
+    try{
+      return new ExerciseAdminDAO().addExercise(title);
+    }catch(SQLException e){
+      return false;
     }
+  }
 
-    @Override public boolean updateTrainee(String u, int h, int w,boolean s,String st){
+  @Override public boolean removeExercise(String title)
+  {
+    try{
+      return new ExerciseAdminDAO().removeExercise(title);
+    }catch(SQLException e){
+      return false;
+    }
+  }
+
+  @Override public boolean updateTrainee(String u, int h, int w,boolean s,String st){
         try{
             return new UserDAO().updateTrainee(u,h,w,s,st);
         }catch(SQLException e){

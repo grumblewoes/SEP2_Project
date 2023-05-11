@@ -14,11 +14,6 @@ public class ServerMain
     Admin admin = new Admin(model);
     admin.run();
 
-    AdminTask task = new AdminTask(model);
-    Thread t1 = new Thread(task);
-    t1.setDaemon(true);
-    t1.start();
-
 //    server.createFolder("d","nope");
 //    server.editFolder("d","nope","nope2");
 //    server.removeFolder("d","nope2");
