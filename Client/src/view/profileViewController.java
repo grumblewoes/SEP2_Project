@@ -30,8 +30,8 @@ public class profileViewController extends  ViewController{
         usernameField.textProperty().bind(profileViewModel.usernameProperty());
         statusField.textProperty().bindBidirectional(profileViewModel.statusProperty());
         errorLabel.textProperty().bind(profileViewModel.errorProperty());
-        removeBtn.setVisible(false);
-        goBackView.setVisible(false);
+        coachField.textProperty().bindBidirectional(profileViewModel.coachProperty());
+
 
         Bindings.bindBidirectional(
                 heightField.textProperty(),
@@ -79,8 +79,15 @@ public class profileViewController extends  ViewController{
             removeBtn.setVisible(!newVal);
             goBackView.setVisible(!newVal);
             statusField.setDisable(!newVal);
+            coachField.setDisable(!newVal);
         });
 
+        //only seen if profile is editable, you have a coach, and you yourself are not a coach
+        removeCoachBtn.visibleProperty().bind(
+            profileViewModel.editableProperty().and(profileViewModel.coachStateProperty()).and(profileViewModel.isCoachProperty().not()));
+        sendBtn.visibleProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()).and(profileViewModel.isCoachProperty().not()));
+        coachField.editableProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()).and(profileViewModel.isCoachProperty().not()));
+        coachField.visibleProperty().bind(profileViewModel.isCoachProperty().not());
     }
 
     @Override
@@ -96,11 +103,21 @@ public class profileViewController extends  ViewController{
         viewHandler.openView(profileViewModel.getGoBack());
     }
 
+    @FXML
+    void removeCoach(ActionEvent event) {
+        profileViewModel.removeCoach();
+    }
+
+    @FXML
+    void sendCoachRequest(ActionEvent event) {
+        profileViewModel.requestCoach();
+    }
+
+
     @FXML private void remove(){
         boolean ans = profileViewModel.removeFriend();
         if(ans)
             viewHandler.openView("home");
     }
-    @FXML private void sendCoachRequest(){}
-    @FXML private void removeCoach(){}
+
 }

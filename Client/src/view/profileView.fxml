@@ -199,6 +199,10 @@
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+
                         </RadioButton>
                      </children>
                      <VBox.margin>

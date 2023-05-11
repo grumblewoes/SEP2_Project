@@ -1,5 +1,6 @@
 import mediator.Server;
 import modelServer.AdminTask;
+import modelServer.Admin;
 import modelServer.Model;
 import modelServer.ModelManager;
 import util.Logger;
@@ -10,11 +11,8 @@ public class ServerMain
   {
     Model model = new ModelManager();
     Server server = new Server(model);
-
-    AdminTask task = new AdminTask(model);
-    Thread t1 = new Thread(task);
-    t1.setDaemon(true);
-    t1.start();
+    Admin admin = new Admin(model);
+    admin.run();
 
 //    server.createFolder("d","nope");
 //    server.editFolder("d","nope","nope2");
