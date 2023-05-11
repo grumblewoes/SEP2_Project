@@ -44,17 +44,24 @@ public class EditRosterViewController extends ViewController
     removeTraineeLabel.labelForProperty().bindBidirectional(
         (Property<Node>) editRosterViewModel.getRemoveButton());
     errorLabel.textProperty().bindBidirectional(editRosterViewModel.getErrorProperty());
-
+    editRosterViewModel.getTraineeList().addListener( (obs,oldVal,newVal) -> {
+      populateTrainees(newVal);
+    });
   }
-  private void populateTrainee(String traineeListString, String username, String status) {
+  private void populateTrainees(String traineeListString) {
+    //gets the list from a gson string
     TraineeList traineeList = gson.fromJson(traineeListString, TraineeList.class);
+
+    //resets the list to 0 so it can refresh
     traineeBox.getChildren().remove(0, traineeBox.getChildren().size());
+
+    //loops through the list, adding each element
     for (int i = 0; i < traineeList.getSize(); ++i) {
-      int folderId = traineeList.getTraineeId(i);
+      int traineeId = traineeList.getTraineeId(i);
       String title = traineeList.getTrainee(i);
-      traineeBox.getChildren().add(createTraineeComponent(title, status));
-      Logger.log(title + " " + folderId);
-      createTraineeComponent(username, status);
+      traineeBox.getChildren().add(createTraineeComponent(traineeList.getUsername(i)));
+      Logger.log(title + " " + traineeId);
+      createTraineeComponent(traineeList.getUsername(i));
     }
   }
 
@@ -82,7 +89,7 @@ public class EditRosterViewController extends ViewController
 
   //combine the create friend request component with create folder
 
-  private HBox createTraineeComponent(String username,String status){
+  private HBox createTraineeComponent(String username){
     HBox hBox = new HBox();
 
     hBox.getStyleClass().addAll("bg-primary","fs-2");
@@ -92,7 +99,7 @@ public class EditRosterViewController extends ViewController
     Button seeBtn = new Button(username);
     seeBtn.getStyleClass().addAll("btn-info");
     seeBtn.onActionProperty().setValue( (evt)-> manageTraineeOpen(username));
-    Label statusLabel = new Label(status);
+    Label statusLabel = new Label("");
     statusLabel.getStyleClass().addAll("fs-2","btn-success","cursor-default");
 
     hBox.getChildren().addAll(seeBtn,statusLabel);

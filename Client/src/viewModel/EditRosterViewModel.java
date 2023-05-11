@@ -20,14 +20,12 @@ public class EditRosterViewModel extends ViewModel
   private Button denyButton;
   private Button removeButton;
 
-  private StringProperty errorProperty;
+  private StringProperty errorProperty, traineeList;
 
   private Model model;
   private ViewState viewState;
 
   private StringProperty traineeRequestList;
-
-  private StringProperty traineeList;
 
   private Gson gson;
 

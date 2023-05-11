@@ -26,6 +26,7 @@ public class ViewModelFactory {
 		manageFolderViewModel = new ManageFolderViewModel(model, viewState);
 		manageSpecificExercisesViewModel = new ManageSpecificExercisesViewModel(model, viewState);
 		profileViewModel = new ProfileViewModel(model, viewState);
+		editRosterViewModel = new EditRosterViewModel(model, viewState);
 		//manageCoachViewModel = new ManageCoachViewModel(model, viewState);
 	}
 
