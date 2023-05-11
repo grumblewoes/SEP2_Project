@@ -14,6 +14,8 @@ public class ViewModelFactory {
 	private ProfileViewModel profileViewModel;
 	//private ManageCoachViewModel manageCoachViewModel;
 
+	private EditRosterViewModel editRosterViewModel;
+
 	public ViewModelFactory(Model model) {
 		ViewState viewState = new ViewState();
 		this.createUserViewModel=new CreateUserViewModel(model);
@@ -39,6 +41,10 @@ public class ViewModelFactory {
 	public AddExerciseViewModel getAddExerciseViewModel() { return  addExerciseViewModel; }
     public ManageSpecificExercisesViewModel getManageSpecificExercisesViewModel() { return  manageSpecificExercisesViewModel; }
     public ProfileViewModel getProfileViewModel() { return  profileViewModel; }
+
+	public EditRosterViewModel getEditRosterViewModel(){
+		return editRosterViewModel;
+	}
 
 //	public ViewModel getManageCoachViewModel() {
 //		return manageCoachViewModel;

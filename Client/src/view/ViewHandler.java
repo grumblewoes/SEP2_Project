@@ -35,6 +35,8 @@ public class ViewHandler {
 	private ViewController profileViewController;
 	//private ViewController manageCoachViewController;
 
+	private ViewController editRosterViewController;
+
 	private ViewModelFactory viewModelFactory;
 
 
@@ -48,7 +50,7 @@ public class ViewHandler {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		createCustomTitleBar();
-		openView("logIn");
+		openView("manageRoster");
 	}
 
 	public void openView(String id) {
@@ -77,6 +79,9 @@ public class ViewHandler {
 				break;
 			case "profile":
 				profileViewController = loadViewController("profileView.fxml", profileViewController, viewModelFactory.getProfileViewModel());
+				break;
+			case "manageRoster":
+				editRosterViewController = loadViewController("editRosterView.fxml", editRosterViewController, viewModelFactory.getEditRosterViewModel());
 				break;
 //			case "manageCoach":
 //				manageCoachViewController = loadViewController("manageCoachView.fxml", manageCoachViewController, viewModelFactory.getManageCoachViewModel());
