@@ -7,11 +7,12 @@ public class TraineeList implements Serializable
 {
   private ArrayList<Trainee> traineeList;
 
-  private int id;
-
-  public TraineeList(int id){
+  public TraineeList(){
     traineeList = new ArrayList<>();
-    this.id = id;
+  }
+
+  public void addTrainee(Trainee t) {
+    traineeList.add(t);
   }
 
   public int getSize(){
@@ -23,9 +24,6 @@ public class TraineeList implements Serializable
     return traineeList.get(i).getUsername();
   }
 
-  public int getTraineeId(int i){
-    return traineeList.get(i).getId();
-  }
 
   public String getUsername(int i){
     return traineeList.get(i).getUsername();

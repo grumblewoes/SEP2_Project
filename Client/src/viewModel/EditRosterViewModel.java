@@ -7,6 +7,8 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import mediator.FriendList;
+import mediator.Trainee;
+import mediator.TraineeList;
 import modelClient.Model;
 import util.Logger;
 import view.ViewController;
@@ -54,20 +56,28 @@ public class EditRosterViewModel extends ViewModel
 
   private void loadTrainee()
   {
-    ArrayList<String> trainees = null;
-    ArrayList<String> requests = null;
     try
     {
-      trainees = model.getTraineeList(viewState.getUsername());
-      requests = model.getTraineeRequest(viewState.getUsername());
+      ArrayList<String> traineesArrayList = model.getTraineeList(viewState.getUsername());
+      TraineeList trainees = new TraineeList();
+      for (String s : traineesArrayList) {
+        trainees.addTrainee(new Trainee(model.getTrainee(s).getUsername()));
+      }
+
+      ArrayList<String> requestArrayList = model.getTraineeRequest(
+          viewState.getUsername());
+      TraineeList requests = new TraineeList();
+      for (String s : requestArrayList) {
+        requests.addTrainee(new Trainee(s));
+      }
+
+      traineeRequestList.set(gson.toJson(requests));
+      traineeList.set(gson.toJson(trainees));
     }
     catch (RemoteException e)
     {
       throw new RuntimeException(e);
     }
-
-    traineeRequestList.set(gson.toJson(requests));
-    traineeList.set(gson.toJson(trainees));
   }
 
   public boolean acceptRequest(String username) {

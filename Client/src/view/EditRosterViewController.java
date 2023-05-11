@@ -71,9 +71,26 @@ public class EditRosterViewController extends ViewController {
     editRosterViewModel.getTraineeList().addListener( (obs,oldVal,newVal) -> {
       populateTrainees(newVal);
     });
-//    editRosterViewModel.getTraineeRequestList().addListener((obs, oldVal, newVal) -> {
-//      populateTraineeRequests(newVal);
-//    });
+    editRosterViewModel.getTraineeRequestList().addListener((obs, oldVal, newVal) -> {
+      populateTraineeRequests(newVal);
+    });
+  }
+
+  private void populateTraineeRequests(String requestListString)
+  {
+    //gets the list from a gson string
+    TraineeList traineeList = gson.fromJson(requestListString, TraineeList.class);
+
+    //resets the list to 0 so it can refresh
+    traineeBox.getChildren().remove(0, traineeBox.getChildren().size());
+
+    //loops through the list, adding each element
+    for (int i = 0; i < traineeList.getSize(); ++i) {
+      String title = traineeList.getTrainee(i);
+      traineeBox.getChildren().add(createTraineeComponent(traineeList.getUsername(i)));
+      Logger.log(title + " ");
+      createRequestComponent(traineeList.getUsername(i));
+    }
   }
 
   private void populateTrainees(String traineeListString) {
@@ -86,10 +103,9 @@ public class EditRosterViewController extends ViewController {
 
     //loops through the list, adding each element
     for (int i = 0; i < traineeList.getSize(); ++i) {
-      int traineeId = traineeList.getTraineeId(i);
       String title = traineeList.getTrainee(i);
       traineeBox.getChildren().add(createTraineeComponent(traineeList.getUsername(i)));
-      Logger.log(title + " " + traineeId);
+      Logger.log(title + " ");
       createTraineeComponent(traineeList.getUsername(i));
     }
   }
@@ -104,10 +120,25 @@ public class EditRosterViewController extends ViewController {
     Button seeBtn = new Button(username);
     seeBtn.getStyleClass().addAll("btn-info");
     seeBtn.onActionProperty().setValue( (evt)-> manageTraineeOpen(username));
-    Label statusLabel = new Label("");
+    Label statusLabel = new Label("On dat grind");
     statusLabel.getStyleClass().addAll("fs-2","btn-success","cursor-default");
 
     hBox.getChildren().addAll(seeBtn,statusLabel);
+
+    return hBox;
+  }
+
+  private HBox createRequestComponent(String username) {
+    HBox hBox = new HBox();
+
+    hBox.getStyleClass().addAll("bg-primary","fs-2");
+    hBox.setAlignment(Pos.CENTER_LEFT);
+    hBox.setPadding( new Insets(10,10,10,10));
+
+    Label nameLabel = new Label(username);
+    nameLabel.getStyleClass().addAll("fs-2","btn-warning","cursor-default");
+
+    hBox.getChildren().addAll(nameLabel);
 
     return hBox;
   }
