@@ -32,24 +32,12 @@ public class EditRosterViewModel extends ViewModel
   public EditRosterViewModel(Model model, ViewState viewState){
     this.model =model;
     this.viewState = viewState;
+    usernameProperty = new SimpleStringProperty();
     errorProperty = new SimpleStringProperty();
     traineeRequestList = new SimpleStringProperty();
     traineeList = new SimpleStringProperty();
     gson = new Gson();
   }
-
-  //these don't follow MVVM, since viewmodel does not know view components
-//  public Button getAcceptButton(){
-//    return acceptButton;
-//  }
-//
-//  public Button getDenyButton(){
-//    return denyButton;
-//  }
-//
-//  public Button getRemoveButton(){
-//    return removeButton;
-//  }
 
   public StringProperty getErrorProperty(){
     return errorProperty;
@@ -67,18 +55,10 @@ public class EditRosterViewModel extends ViewModel
   private void loadTrainee()
   {
     ArrayList<String> trainees = null;
-    try
-    {
-      trainees = model.getTraineeList(viewState.getUsername());
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-
     ArrayList<String> requests = null;
     try
     {
+      trainees = model.getTraineeList(viewState.getUsername());
       requests = model.getTraineeRequest(viewState.getUsername());
     }
     catch (RemoteException e)
@@ -105,6 +85,7 @@ public class EditRosterViewModel extends ViewModel
   {
     loadTrainee();
     errorProperty.set("");
+    usernameProperty.set(viewState.getUsername());
   }
 
   public StringProperty getUsernameProperty() {
