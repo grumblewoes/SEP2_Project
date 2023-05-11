@@ -63,6 +63,7 @@ public class EditRosterViewController extends ViewController {
     this.viewHandler = viewHandler;
     editRosterViewModel = (EditRosterViewModel) viewModel;
     this.root = root;
+    gson = new Gson();
 
     usernameLabel.textProperty().bind(editRosterViewModel.getUsernameProperty());
 
@@ -73,13 +74,11 @@ public class EditRosterViewController extends ViewController {
 //    editRosterViewModel.getTraineeRequestList().addListener((obs, oldVal, newVal) -> {
 //      populateTraineeRequests(newVal);
 //    });
-//    editRosterViewModel.getMeetingList().addListener( (obs,oldVal,newVal) -> {
-//      populateMeetings(newVal);
-//    });
   }
 
   private void populateTrainees(String traineeListString) {
     //gets the list from a gson string
+    System.out.println(traineeListString);
     TraineeList traineeList = gson.fromJson(traineeListString, TraineeList.class);
 
     //resets the list to 0 so it can refresh

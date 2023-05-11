@@ -1,8 +1,9 @@
 package mediator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TraineeList
+public class TraineeList implements Serializable
 {
   private ArrayList<Trainee> traineeList;
 
