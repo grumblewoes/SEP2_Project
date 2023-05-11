@@ -274,7 +274,7 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
   @Override
   public ArrayList<String> getFriendRequests(String username) {
     try{
-      return server.updateTrainee(u,h,w,s);
+      return server.getFriendRequests(username);
     }catch (RemoteException e){
       throw new RuntimeException(e);
     }

@@ -46,7 +46,7 @@ public class EditRosterViewController extends ViewController
     errorLabel.textProperty().bindBidirectional(editRosterViewModel.getErrorProperty());
 
   }
-  private void populateFolders(String traineeListString, String username, String status) {
+  private void populateTrainee(String traineeListString, String username, String status) {
     TraineeList traineeList = gson.fromJson(traineeListString, TraineeList.class);
     traineeBox.getChildren().remove(0, traineeBox.getChildren().size());
     for (int i = 0; i < traineeList.getSize(); ++i) {
@@ -58,7 +58,7 @@ public class EditRosterViewController extends ViewController
     }
   }
 
-  private HBox createFriendRequestComponent(String username){
+  private HBox createTraineeRequestComponent(String username){
     HBox hBox = new HBox();
 
     hBox.getStyleClass().addAll("bg-primary","fs-2");
