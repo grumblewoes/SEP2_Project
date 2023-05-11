@@ -8,7 +8,6 @@ import utility.observer.listener.GeneralListener;
 import utility.observer.listener.RemoteListener;
 import utility.observer.subject.LocalSubject;
 import utility.observer.subject.PropertyChangeHandler;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.Naming;
@@ -317,6 +316,43 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
   {
     try{
       return server.removeFriend(requesterUsername,accepterUsername);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
+  @Override
+  public boolean requestCoach(String requesterUsername, String accepterUsername) {
+    try{
+      return server.requestCoach(requesterUsername, accepterUsername);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
+  @Override
+  public User getCoach(String traineeUsername) {
+    try{
+      return server.getCoach(traineeUsername);
+    }catch(RemoteException e){
+      return null;
+    }
+
+  }
+
+  @Override
+  public boolean isCoach(String username) {
+    try{
+      return server.isCoach(username);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
+  @Override public boolean removeCoachAssignment(String traineeUsername)
+  {
+    try{
+      return server.removeCoachAssignment(traineeUsername);
     }catch(RemoteException e){
       return false;
     }

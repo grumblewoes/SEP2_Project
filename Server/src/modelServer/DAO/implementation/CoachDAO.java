@@ -77,6 +77,7 @@ public class CoachDAO implements ICoachDAO
 
   @Override public User getCoach(String traineeUser) throws SQLException
   {
+    //has two ways of working. checks trainee table first, and if that doesn't work, it knows to check coach table
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
     User coach = null;
@@ -84,11 +85,14 @@ public class CoachDAO implements ICoachDAO
     {
       PreparedStatement statement = connection.prepareStatement(
           "select * from coach c "
-              + "join trainee2 t on c.username = t.username " +
+              + "join trainee2 t on c.username = t.coach_username " +
                   "where t.username = '" + traineeUser + "';"
       );
+      PreparedStatement statementCoach = connection.prepareStatement("select * from coach "
+              + "where username = '" + traineeUser + "';");
 
       ResultSet rs = statement.executeQuery();
+      ResultSet rs1 = statementCoach.executeQuery();
       if(rs.next()) {
         int height = rs.getInt("height");
         int weight = rs.getInt("weight");
@@ -99,12 +103,96 @@ public class CoachDAO implements ICoachDAO
         boolean shareProfile = rs.getBoolean("share");
         coach = new User(height, weight, firstName, lastName, username, status, shareProfile);
       }
-
+      else if (rs1.next()) {
+        int height = rs1.getInt("height");
+        int weight = rs1.getInt("weight");
+        String firstName = rs1.getString("first_name");
+        String lastName = rs1.getString("last_name");
+        String username = rs1.getString("username");
+        String status = rs1.getString("status");
+        boolean shareProfile = rs1.getBoolean("share");
+        coach = new User(height, weight, firstName, lastName, username, status, shareProfile);
+      }
       return coach;
     }
     catch (SQLException e){
       Logger.log(e);
       return null;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
+
+  @Override
+  public boolean requestCoach(String traineeUser, String coachUser) throws SQLException {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+              "insert into coach_request(trainee_username, coach_username) values (?,?);"
+      );
+
+      statement.setString(1, traineeUser);
+      statement.setString(2, coachUser);
+      int rs = statement.executeUpdate();
+
+      return rs > 0;
+    }
+    catch (SQLException e){
+      Logger.log(e);
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
+
+  @Override
+  public boolean isCoach(String username) throws SQLException {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+              "select * from coach where username = ?;"
+      );
+
+      statement.setString(1, username);
+      ResultSet rs = statement.executeQuery();
+      return rs.next();
+    }
+    catch (SQLException e){
+      Logger.log(e);
+      return false;
+    }
+    finally
+    {
+      connection.close();
+    }
+  }
+
+  @Override public boolean removeCoachAssignment(String traineeUsername)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "update trainee2 set coach_username = null where username = ? and coach_username is not null"
+      );
+      statement.setString(1, traineeUsername);
+      int result = statement.executeUpdate();
+      return result > 0;
+    }
+    catch (SQLException e){
+      Logger.log(e);
+      return false;
     }
     finally
     {

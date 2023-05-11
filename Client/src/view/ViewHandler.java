@@ -78,6 +78,7 @@ public class ViewHandler {
 			case "profile":
 				profileViewController = loadViewController("profileView.fxml", profileViewController, viewModelFactory.getProfileViewModel());
 				break;
+
 			case "addFriend":
 				addFriendViewController =loadViewController("sendFriendRequest.fxml", addFriendViewController,
 						viewModelFactory.getAddFriendViewModel());

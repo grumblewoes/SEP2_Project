@@ -14,7 +14,8 @@ import java.util.ArrayList;
 
 public class ModelManager implements Model, LocalListener<String,String>
 {
-	private Client client;
+  private Client client;
+  //private PropertyChangeSupport property;
 	private PropertyChangeHandler<String,String> property;
 
 	public ModelManager(Client client) {
@@ -158,6 +159,25 @@ public class ModelManager implements Model, LocalListener<String,String>
 
 	}
 
+	@Override
+	public boolean requestCoach(String requesterUsername, String accepterUsername) {
+		return client.requestCoach(requesterUsername, accepterUsername);
+	}
+
+	@Override
+	public User getCoach(String traineeUsername) {
+		return client.getCoach(traineeUsername);
+	}
+
+	@Override
+	public boolean isCoach(String username) {
+		return client.isCoach(username);
+	}
+
+	@Override
+	public boolean removeCoachAssignment(String traineeUsername) {
+		return client.removeCoachAssignment(traineeUsername);
+	}
 
 
 	//	@Override
