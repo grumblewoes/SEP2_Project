@@ -1,5 +1,7 @@
 package modelServer.DbContext;
 
+import util.Logger;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,8 +39,11 @@ public class DBConnection {
     String url = "";
     url="jdbc:postgresql://balarama.db.elephantsql.com:5432/dmzntfyy?currentSchema=valhalla_fitness";
     Connection connection = null;
-    connection = DriverManager.getConnection(url, user, pw);
-
+    try {
+      connection = DriverManager.getConnection(url, user, pw);
+    } catch (SQLException e) {
+      throw new RuntimeException("Failed to establish a database connection", e);
+    }
     return connection;
   }
 }

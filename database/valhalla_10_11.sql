@@ -2,13 +2,15 @@ set schema 'valhalla_fitness';
 
 drop table if exists friendship_list cascade ;
 create table friendship_list(
-    requester_username varchar(50) references trainee2(username),
-    accepter_username varchar(50) references trainee2(username)
+    requester_username varchar(50) references trainee2(username)  ,
+    accepter_username varchar(50)  references trainee2(username),
+    primary key (requester_username,accepter_username)
 );
 drop table if exists friendship_request cascade ;
 create table friendship_request(
-    requester_username varchar(50) references trainee2(username),
-    accepter_username varchar(50) references trainee2(username)
+    requester_username varchar(50)  references trainee2(username)   ,
+    accepter_username varchar(50) references trainee2(username),
+    primary key  (requester_username,accepter_username)
 );
 
 
