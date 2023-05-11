@@ -1,7 +1,6 @@
 package modelServer.DAO.implementation;
 
-import mediator.Exercise;
-import mediator.User;
+import mediator.*;
 import modelServer.DAO.interfaces.ICoachDAO;
 import modelServer.DbContext.DBConnection;
 import util.Logger;
@@ -9,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CoachDAO implements ICoachDAO
 {
@@ -273,6 +273,52 @@ public class CoachDAO implements ICoachDAO
     }
     finally
     {
+      connection.close();
+    }
+  }
+
+  @Override public ArrayList<String> getTraineeList(String username)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+    ArrayList<String> list = new ArrayList<>();
+
+    try {
+
+      PreparedStatement statement1 = connection.prepareStatement(
+          "select username from trainee2 where coach_username = ?"
+      );
+      statement1.setString(1, username);
+      ResultSet rs1 = statement1.executeQuery();
+      while (rs1.next()) list.add(rs1.getString(1));
+
+      return list;
+    } catch (SQLException e) {
+      return list;
+    } finally {
+      connection.close();
+    }
+  }
+
+  @Override public ArrayList<String> getTraineeRequest(String username)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+    ArrayList<String> list = new ArrayList<>();
+
+    try {
+
+      PreparedStatement statement1 = connection.prepareStatement("select trainee_username from coach_request where coach_username = ?");
+      statement1.setString(1, username);
+      ResultSet rs1 = statement1.executeQuery();
+      while (rs1.next()) list.add(rs1.getString(1));
+
+      return list;
+    } catch (SQLException e) {
+      return list;
+    } finally {
       connection.close();
     }
   }

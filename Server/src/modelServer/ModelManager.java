@@ -337,6 +337,30 @@ public class ModelManager implements Model
         }
     }
 
+    @Override public ArrayList<String> getTraineeList(String username)
+    {
+        try
+        {
+            return new CoachDAO().getTraineeList(username);
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override public ArrayList<String> getTraineeRequest(String username)
+    {
+        try
+        {
+            return new CoachDAO().getTraineeRequest(username);
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override public boolean addCoach(String coachUsername,
         String coachPassword, String coachName, String coachLName,
         int coachHeight, int coachWeight, int pbBench, int pbSquat,

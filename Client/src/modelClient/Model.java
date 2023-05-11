@@ -51,4 +51,7 @@ public interface Model extends LocalSubject<String,String>
 	boolean acceptRequest(String traineeUsername, String coachUsername);
 	boolean denyRequest(String traineeUsername);
 	boolean removeTraineeFromRoster(String traineeUsername);
+
+	ArrayList<String> getTraineeList(String username) throws RemoteException;
+	ArrayList<String> getTraineeRequest(String username) throws RemoteException;
 }

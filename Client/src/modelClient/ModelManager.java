@@ -194,7 +194,17 @@ public class ModelManager implements Model, LocalListener<String,String>
     return client.removeTraineeFromRoster(traineeUsername);
   }
 
+	@Override public ArrayList<String> getTraineeList(String username)
+			throws RemoteException
+	{
+		return client.getTraineeList(username);
+	}
 
+	@Override public ArrayList<String> getTraineeRequest(String username)
+			throws RemoteException
+	{
+		return client.getTraineeRequest(username);
+	}
 
 	//	@Override
 	//	@Override
