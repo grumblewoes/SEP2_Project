@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class DAOFriendTest {
     private IUserDAO dao;
@@ -168,35 +167,56 @@ class DAOFriendTest {
         for(String s : list)
             assert !s.equals(usernames[3]);
     }
-
-    @Test public void sendAndRemoveZOMBIE() throws SQLException{
+    @Test public void sendZOMBIE() throws SQLException{
         //Zero
         assertDoesNotThrow(()-> fao.sendFriendRequest(null,null));
         assertDoesNotThrow(()-> fao.sendFriendRequest(null,usernames[0]));
 
         //One
-        assertDoesNotThrow(()-> fao.sendFriendRequest(usernames[0], usernames[1]));
+        assertDoesNotThrow(()-> fao.sendFriendRequest(usernames[1], usernames[6]));
+        ArrayList<String> oneList = fao.getFriendRequests(usernames[1]);
+        for(String s : oneList)
+            assert oneList.size()==1;
 
         //Many
-        assertDoesNotThrow(()-> fao.sendFriendRequest(usernames[1], usernames[2]));
-        assertDoesNotThrow(()-> fao.sendFriendRequest(usernames[3], usernames[4]));
+        fao.sendFriendRequest(usernames[1], usernames[2]);
+        assertDoesNotThrow(()-> fao.sendFriendRequest(usernames[1], usernames[4]));
 
-        fao.acceptFriendRequest(usernames[0], usernames[1]);
-        fao.acceptFriendRequest(usernames[1], usernames[2]);
-        fao.acceptFriendRequest(usernames[3], usernames[4]);
+
+        ArrayList<String> list = fao.getFriendRequests(usernames[1]);
+        for(String s : list)
+            assert list.size()==3;
+    }
+    @Test public void removeZOMBIE() throws SQLException{
+        fao.sendFriendRequest(usernames[6], usernames[1]);
+        fao.sendFriendRequest(usernames[6], usernames[2]);
+        fao.sendFriendRequest(usernames[6], usernames[3]);
+        fao.sendFriendRequest(usernames[6], usernames[4]);
+
+        fao.acceptFriendRequest(usernames[6], usernames[1]);
+        fao.acceptFriendRequest(usernames[6], usernames[2]);
+        fao.acceptFriendRequest(usernames[6], usernames[3]);
+        fao.acceptFriendRequest(usernames[6], usernames[4]);
 
         //Zero
         assertDoesNotThrow(()-> fao.removeFriend(null,null));
-        assertDoesNotThrow(()-> fao.removeFriend(null,usernames[0]));
+        assertDoesNotThrow(()-> fao.removeFriend(null,usernames[1]));
 
         //One
-        assertDoesNotThrow(()-> fao.removeFriend(usernames[0], usernames[1]));
+        assertDoesNotThrow(()-> fao.removeFriend(usernames[6], usernames[1]));
+        FriendList list = fao.getFriends(usernames[6]);
+        assert list.size()==3;
 
         //Many
-        assertDoesNotThrow(()-> fao.removeFriend(usernames[1], usernames[2]));
-        assertDoesNotThrow(()-> fao.removeFriend(usernames[3], usernames[4]));
+        fao.removeFriend(usernames[6], usernames[2]);
+        assertDoesNotThrow(()-> fao.removeFriend(usernames[6], usernames[3]));
+
+        FriendList friendList=fao.getFriends(usernames[6]);
+        assert friendList.size()==1;
+
 
     }
+
 
 
 }
