@@ -173,10 +173,12 @@ public class FriendDAO implements IFriendDAO {
         try {
 
             PreparedStatement statement = connection.prepareStatement(
-                    "delete from friendship_list where requester_username = ? and accepter_username = ?;"
+                    "delete from friendship_list where requester_username = ? and accepter_username = ? or requester_username = ? and accepter_username = ?;"
             );
             statement.setString(1, requesterUsername);
             statement.setString(2, accepterUsername);
+            statement.setString(3, accepterUsername);
+            statement.setString(4, requesterUsername);
 
             statement.executeUpdate();
             return true;
