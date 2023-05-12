@@ -50,19 +50,19 @@ public class EditRosterViewController extends ViewController {
 
   @FXML
   void removeTrainee(ActionEvent event) {
-
-    //editRosterViewModel.removeTrainee();
+    editRosterViewModel.removeTrainee();
   }
 
   @FXML
   void usernameLabelClicked(MouseEvent event) {
-
+    viewHandler.openView(editRosterViewModel.getUsernameProperty().get());
   }
 
   public void init(ViewHandler viewHandler, ViewModel viewModel, Region root){
     this.viewHandler = viewHandler;
     editRosterViewModel = (EditRosterViewModel) viewModel;
     this.root = root;
+    gson = new Gson();
 
     usernameLabel.textProperty().bind(editRosterViewModel.getUsernameProperty());
 
@@ -105,8 +105,11 @@ public class EditRosterViewController extends ViewController {
     Button seeBtn = new Button(username);
     seeBtn.getStyleClass().addAll("btn-info");
     seeBtn.onActionProperty().setValue( (evt)-> manageTraineeOpen(username));
-    Label statusLabel = new Label("");
+
+    //figure out how to load status
+    Label statusLabel = new Label("On dat grind");
     statusLabel.getStyleClass().addAll("fs-2","btn-success","cursor-default");
+    statusLabel.textProperty().bind(editRosterViewModel.getSelectedTraineeName());
 
     hBox.getChildren().addAll(seeBtn,statusLabel);
 

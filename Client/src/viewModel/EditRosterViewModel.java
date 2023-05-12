@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import mediator.FriendList;
@@ -20,7 +21,7 @@ public class EditRosterViewModel extends ViewModel
   private Button denyButton;
   private Button removeButton;
 
-  private StringProperty errorProperty, traineeList, usernameProperty;
+  private StringProperty errorProperty, traineeList, usernameProperty, selectedTraineeName;
 
   private Model model;
   private ViewState viewState;
@@ -36,6 +37,7 @@ public class EditRosterViewModel extends ViewModel
     errorProperty = new SimpleStringProperty();
     traineeRequestList = new SimpleStringProperty();
     traineeList = new SimpleStringProperty();
+    selectedTraineeName = new SimpleStringProperty();
     gson = new Gson();
   }
 
@@ -77,8 +79,8 @@ public class EditRosterViewModel extends ViewModel
     return model.denyRequest(username);
   }
 
-  public boolean removeTrainee(String username){
-    return model.removeTraineeFromRoster(username);
+  public boolean removeTrainee(){
+    return model.removeTraineeFromRoster(selectedTraineeName.get());
   }
 
   @Override public void clear()
@@ -90,5 +92,13 @@ public class EditRosterViewModel extends ViewModel
 
   public StringProperty getUsernameProperty() {
     return usernameProperty;
+  }
+
+  public StringProperty getSelectedTraineeName() {
+    return selectedTraineeName;
+  }
+
+  public void setSelectedTraineeName(StringProperty selectedTraineeName) {
+    this.selectedTraineeName = selectedTraineeName;
   }
 }
