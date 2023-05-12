@@ -14,9 +14,6 @@ public class Exercise implements Serializable {
         this.repetitions = repetitions;
         this.name = name;
     }
-    public Exercise(String name) {
-        this.name = name;
-    }
 
     public int getId() {
         return id;

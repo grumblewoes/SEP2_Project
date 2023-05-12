@@ -178,12 +178,15 @@ public class ModelManager implements Model, LocalListener<String,String>
 	public boolean removeCoachAssignment(String traineeUsername) {
 		return client.removeCoachAssignment(traineeUsername);
 	}
-
+ 
   @Override public boolean acceptRequest(String traineeUsername,
       String coachUsername)
   {
     return client.acceptRequest(traineeUsername, coachUsername);
   }
+	@Override
+	public void disconnectListener(String username){client.disconnectListener(username);}
+
 
   @Override public boolean denyRequest(String traineeUsername)
   {

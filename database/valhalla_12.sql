@@ -14,3 +14,7 @@ create table coach (
                           status varchar(50),
                           share boolean
 );
+
+
+insert into coach(username,password,first_name,last_name,height,weight) values ('coach','coach','dasdasd','dasdasd',120,120);
+insert into coach(username,password,first_name,last_name,height,weight) values ('c','c','dasdasd','dasdasd',120,120);

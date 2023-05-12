@@ -54,4 +54,7 @@ public interface Model extends LocalSubject<String,String>
 
 	ArrayList<String> getTraineeList(String username) throws RemoteException;
 	ArrayList<String> getTraineeRequest(String username) throws RemoteException;
+
+  void disconnectListener(String username);
+
 }
