@@ -131,9 +131,28 @@ public class FriendDAO implements IFriendDAO {
         DBConnection db = DBConnection.getInstance();
         Connection connection = db.getConnection();
         try {
-            PreparedStatement statement = connection.prepareStatement("insert into friendship_request(requester_username, accepter_username) values (?,?);");
+            PreparedStatement statement = connection.prepareStatement(
+                "INSERT INTO friendship_request(requester_username, accepter_username)"
+                    + "SELECT ?, ?"
+                    + "WHERE NOT EXISTS ("
+                    + "    SELECT 1 FROM friendship_request"
+                    + "    WHERE (requester_username = ? AND accepter_username = ?) OR (requester_username = ? AND accepter_username = ?)"
+                    + ") AND NOT EXISTS ("
+                    + "    SELECT 1 FROM friendship_list"
+                    + "    WHERE (requester_username = ? AND accepter_username = ?) OR (requester_username = ? AND accepter_username = ?)"
+                    + ") AND ? <> ?;");
             statement.setString(1, requesterUsername);
             statement.setString(2, accepterUsername);
+            statement.setString(3, requesterUsername);
+            statement.setString(4, accepterUsername);
+            statement.setString(5, accepterUsername);
+            statement.setString(6, requesterUsername);
+            statement.setString(7, requesterUsername);
+            statement.setString(8, accepterUsername);
+            statement.setString(9, accepterUsername);
+            statement.setString(10, requesterUsername);
+            statement.setString(11, accepterUsername);
+            statement.setString(12, requesterUsername);
 
             statement.executeUpdate();
             return true;

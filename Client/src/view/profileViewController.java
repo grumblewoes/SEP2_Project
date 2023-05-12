@@ -14,12 +14,8 @@ import viewModel.ViewModel;
 public class profileViewController extends  ViewController{
     @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField, coachField;
     @FXML private RadioButton shareProfileRadio;
-    @FXML private Button updateBtn;
+    @FXML private Button updateBtn, removeBtn, goBackView, removeCoachBtn, sendBtn;
     @FXML private Label shareInfoLabel,errorLabel;
-    @FXML
-    private Button removeCoachBtn;
-    @FXML
-    private Button sendBtn;
 
     private ProfileViewModel profileViewModel;
     @Override
@@ -75,13 +71,23 @@ public class profileViewController extends  ViewController{
             weightField.setDisable(!newVal);
             shareProfileRadio.setVisible(newVal);
             shareInfoLabel.setVisible(newVal);
-            updateBtn.setDisable(!newVal);
+            coachField.setDisable(!newVal);
+
             statusField.setDisable(!newVal);
             coachField.setDisable(!newVal);
-            removeCoachBtn.setVisible(!newVal);
-            sendBtn.setVisible(!newVal);
         });
 
+        removeBtn.managedProperty().bind(profileViewModel.editableProperty().not());
+        updateBtn.managedProperty().bind(profileViewModel.editableProperty());
+        removeBtn.visibleProperty().bind(profileViewModel.editableProperty().not());
+        updateBtn.visibleProperty().bind(profileViewModel.editableProperty());
+
+        //only seen if profile is editable, you have a coach, and you yourself are not a coach
+        removeCoachBtn.visibleProperty().bind(
+            profileViewModel.editableProperty().and(profileViewModel.coachStateProperty()).and(profileViewModel.isCoachProperty().not()));
+        sendBtn.visibleProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()).and(profileViewModel.isCoachProperty().not()));
+        coachField.editableProperty().bind(profileViewModel.editableProperty().and(profileViewModel.coachStateProperty().not()).and(profileViewModel.isCoachProperty().not()));
+        coachField.visibleProperty().bind(profileViewModel.isCoachProperty().not());
     }
 
     @Override
@@ -107,10 +113,11 @@ public class profileViewController extends  ViewController{
         profileViewModel.requestCoach();
     }
 
-    @FXML void remove() {}
 
-//    @FXML
-//    void manageCoach(ActionEvent event) {
-//        viewHandler.openView("manageCoach");
-//    }
+    @FXML private void remove(){
+        boolean ans = profileViewModel.removeFriend();
+        if(ans)
+            viewHandler.openView("home");
+    }
+
 }

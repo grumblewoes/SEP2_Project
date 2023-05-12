@@ -6,6 +6,7 @@ public class ViewState {
     private String username,folderName,exerciseName,goBack,profileUsername;
     private int folderId;
     private boolean manageFolderEditable, newFolder;
+    private boolean isCoach;
 
     private User trainee;
 
@@ -20,6 +21,7 @@ public class ViewState {
         this.newFolder=false;
         this.goBack=null;
         this.profileUsername=null;
+        isCoach = false;
     }
 
     public String getUsername() {
@@ -55,6 +57,13 @@ public class ViewState {
     }
     public void setExerciseName(String exerciseName) {
         this.exerciseName = exerciseName;
+    }
+
+    public void setIsCoach(boolean isCoach) {
+        this.isCoach = isCoach;
+    }
+    public boolean isCoach() {
+        return isCoach;
     }
     public String getGoBack() { return goBack; }
     public void setGoBack(String goBack) { this.goBack = goBack; }

@@ -218,5 +218,4 @@ public class ExerciseDAO implements IExerciseDAO
   public int getBestBenchPress(String username) throws SQLException {
     return getBestWeightFromExerciseByName(username,"bench_press");
   }
-
 }

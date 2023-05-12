@@ -14,7 +14,8 @@ import java.util.ArrayList;
 
 public class ModelManager implements Model, LocalListener<String,String>
 {
-	private Client client;
+  private Client client;
+  //private PropertyChangeSupport property;
 	private PropertyChangeHandler<String,String> property;
 
 	public ModelManager(Client client) {
@@ -178,11 +179,9 @@ public class ModelManager implements Model, LocalListener<String,String>
 		return client.removeCoachAssignment(traineeUsername);
 	}
 
-  @Override public boolean acceptRequest(String traineeUsername,
-      String coachUsername)
-  {
-    return client.acceptRequest(traineeUsername, coachUsername);
-  }
+	@Override
+	public void disconnectListener(String username){client.disconnectListener(username);}
+
 
   @Override public boolean denyRequest(String traineeUsername)
   {

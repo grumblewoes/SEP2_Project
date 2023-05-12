@@ -25,6 +25,7 @@ public class LoginViewModel extends ViewModel
     if (model.login(usernameProperty.get(), passwordProperty.get()))
     {
       viewState.setUsername(usernameProperty.get());
+      viewState.setIsCoach(model.isCoach(usernameProperty.get()));
       return true;
     }else{
       errorLabel.set("An error occurred during login.");

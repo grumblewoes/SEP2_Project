@@ -169,7 +169,7 @@ class CoachDAOTest {
     }
     @Test
     void getCoachOne() {
-        assertDoesNotThrow(()-> cdao.getCoach("noobMan27"));
+        assertDoesNotThrow(()-> cdao.getCoach("d"));
     }
     @Test
     void getCoachMany() {

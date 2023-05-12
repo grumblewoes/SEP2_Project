@@ -37,7 +37,7 @@ public class AdminTask implements Runnable
     String choice;
 
     do {
-      System.out.println("What would you like to do?\n1 - Add Coach\n2 - Remove Coach\n3 - Exit\nType the number of your request >> ");
+      System.out.println("What would you like to do?\n1 - Add Coach\n2 - Remove Coach\nType the number of your request >> ");
       choice = scan.nextLine();
 
       String name;
@@ -91,9 +91,12 @@ public class AdminTask implements Runnable
             System.out.println("An error occurred while trying to remove coach.");
           }
           break;
+        default:
+          System.out.println("Error in input, please try again.");
+          break;
       }
     }
-    while (!choice.equals("3"));
+    while (!choice.equals("exit"));
   }
 
   @Override public void run()

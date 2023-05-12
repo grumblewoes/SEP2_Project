@@ -1,5 +1,6 @@
 package viewModel;
 
+
 import com.google.gson.Gson;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -127,5 +128,12 @@ public class HomeViewModel extends ViewModel{
     }
     public void rejectRequest(String username) {
         model.rejectFriendRequest(username, viewState.getUsername());
+    }
+
+    public void logout() {
+        model.disconnectListener(viewState.getUsername());
+        viewState.setUsername(null);
+        viewState.setProfileUsername(null);
+        viewState.setIsCoach(false);
     }
 }

@@ -7,3 +7,4 @@ create table coach_request (
     coach_username varchar(50) references coach(username)
 );
 
+insert into coach_request(trainee_username,coach_username) values ('d','coach');

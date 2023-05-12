@@ -42,7 +42,14 @@
     -fx-alignment: center;
 }
 .nav{
-    -fx-pref-width: 150px;
+    -fx-pref-width: 250px;
+}
+.nav-friend-box{
+    -fx-pref-width: 247px;
+}
+
+.menu-display{
+    -fx-pref-width: 680px;
 }
 
 .cursor-default{
@@ -50,8 +57,10 @@
 }
 
 
+
 .btn-danger{ -fx-cursor: hand; -fx-padding: 8px; -fx-border-color: white;-fx-border-width: 1px; -fx-border-style: solid; -fx-background-color: #ff7171; }
 .btn-success{ -fx-cursor: hand; -fx-padding: 8px; -fx-border-color: white;-fx-border-width: 1px; -fx-border-style: solid; -fx-background-color: #9dd780; -fx-text-fill: #324228;}
 .btn-info{ -fx-cursor: hand; -fx-padding: 8px; -fx-border-color: white;-fx-border-width: 1px; -fx-border-style: solid; -fx-background-color: #3effdc; }
 .btn-warning{ -fx-cursor: hand; -fx-padding: 8px; -fx-border-color: white;-fx-border-width: 1px; -fx-border-style: solid; -fx-background-color: #ffc83e; }
 .btn-primary{ -fx-cursor: hand; -fx-padding: 8px; -fx-border-color: white;-fx-border-width: 1px; -fx-border-style: solid; -fx-background-color: #3e65ff; }
+.btn-logout{ -fx-cursor: hand; -fx-padding: 8px; -fx-border-color: white;-fx-border-width: 1px; -fx-border-style: solid; -fx-background-color: #ffbebe; }

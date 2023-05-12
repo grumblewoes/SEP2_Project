@@ -1,8 +1,10 @@
 package view;
 
+
 import com.google.gson.Gson;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -82,6 +84,10 @@ public class HomeViewController extends ViewController
         Logger.log(title+" "+folderId);
     }
 
+  }
+
+  @FXML private void sendRequest(){
+    viewHandler.openView("addFriend");
   }
 
   private void populateFriendships(String friendListJson){
@@ -205,4 +211,9 @@ public class HomeViewController extends ViewController
     homeViewModel.setupProfile();
     viewHandler.openView("profile");
   }
+
+    @FXML private void logout() {
+      homeViewModel.logout();
+      viewHandler.openView("logIn");
+    }
 }

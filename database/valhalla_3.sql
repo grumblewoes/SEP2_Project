@@ -1,4 +1,4 @@
-set schema 'valhalla_fitness';
+ set schema 'valhalla_fitness';
 
 
 -- insert into

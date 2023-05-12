@@ -10,11 +10,27 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HomeViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="156.0">
          <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/box-arrow-left.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
@@ -43,16 +59,37 @@
                      </HBox.margin></Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="150.0">
                <children>
-                  <Label styleClass="fs-3" text="Friends" />
+                  <Label styleClass="fs-3" text="Friends">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin></Label>
+                  <Button mnemonicParsing="false" onAction="#sendRequest" prefHeight="30.0" prefWidth="35.0" text="+">
+                     <styleClass>
+                        <String fx:value="btn-success" />
+                        <String fx:value="fs-2" />
+                     </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
             </HBox>
             <HBox prefWidth="200.0">
                <children>
-                  <ScrollPane prefHeight="300.0" prefWidth="200.0">
+                  <ScrollPane prefHeight="379.0" prefWidth="251.0" styleClass="nav">
                      <content>
-                        <VBox fx:id="friendshipBox" prefWidth="140.0" />
+                        <VBox fx:id="friendshipBox" prefWidth="140.0" styleClass="nav-friend-box" />
                      </content>
                   </ScrollPane>
                </children>
@@ -96,7 +133,7 @@
                <children>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <content>
-                        <VBox fx:id="folderBox" prefHeight="200.0" prefWidth="774.0">
+                        <VBox fx:id="folderBox" prefHeight="200.0" prefWidth="684.0" styleClass="menu-display">
                            <children>
                               <HBox prefHeight="100.0" prefWidth="647.0" style="-fx-background-color: #93ff87;">
                                  <children>

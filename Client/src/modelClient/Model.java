@@ -48,7 +48,5 @@ public interface Model extends LocalSubject<String,String>
 	boolean isCoach(String username);
   boolean removeCoachAssignment(String traineeUsername);
 
-	boolean acceptRequest(String traineeUsername, String coachUsername);
-	boolean denyRequest(String traineeUsername);
-	boolean removeTraineeFromRoster(String traineeUsername);
+  void disconnectListener(String username);
 }
