@@ -1,4 +1,3 @@
-import mediator.User;
 import modelServer.DAO.implementation.CoachDAO;
 import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.ICoachDAO;
@@ -10,7 +9,8 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CoachDAOTest {
+class DAOMeetingTest
+{
     private ICoachDAO cdao;
     private IUserDAO udao;
 
