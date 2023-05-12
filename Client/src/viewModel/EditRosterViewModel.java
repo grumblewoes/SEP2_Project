@@ -90,7 +90,11 @@ public class EditRosterViewModel extends ViewModel
   }
 
   public boolean removeTrainee(){
-    return model.removeTraineeFromRoster(selectedTraineeName.get());
+    if (model.removeTraineeFromRoster(selectedTraineeName.get()))
+      return true;
+    else
+      errorProperty.set("An error occurred while trying to remove trainee.");
+      return false;
   }
 
   @Override public void clear()
@@ -108,7 +112,8 @@ public class EditRosterViewModel extends ViewModel
     return selectedTraineeName;
   }
 
-  public void setSelectedTraineeName(StringProperty selectedTraineeName) {
-    this.selectedTraineeName = selectedTraineeName;
+  public void setSelectedTraineeName(String selectedTraineeName) {
+    System.out.println("Clicked");
+    this.selectedTraineeName = new SimpleStringProperty(selectedTraineeName);
   }
 }

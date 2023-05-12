@@ -50,7 +50,8 @@ public class EditRosterViewController extends ViewController {
 
   @FXML
   void removeTrainee(ActionEvent event) {
-    editRosterViewModel.removeTrainee();
+    if (editRosterViewModel.removeTrainee());
+    editRosterViewModel.clear();
   }
 
   @FXML
@@ -123,7 +124,9 @@ public class EditRosterViewController extends ViewController {
     //figure out how to load status
     Label statusLabel = new Label("On dat grind");
     statusLabel.getStyleClass().addAll("fs-2","btn-success","cursor-default");
-    statusLabel.textProperty().bind(editRosterViewModel.getSelectedTraineeName());
+    statusLabel.setOnMouseClicked(event -> {
+      editRosterViewModel.setSelectedTraineeName(username);
+    });
 
     hBox.getChildren().addAll(seeBtn,statusLabel);
 
