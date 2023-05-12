@@ -63,15 +63,15 @@ public class EditRosterViewModel extends ViewModel
       ArrayList<String> traineesArrayList = model.getTraineeList(viewState.getUsername());
       TraineeList trainees = new TraineeList();
       for (String s : traineesArrayList) {
-        trainees.addTrainee(new Trainee(model.getTrainee(s).getUsername()));
+        trainees.addTrainee(new Trainee(s));
       }
-
-      ArrayList<String> requestArrayList = model.getTraineeRequest(
-          viewState.getUsername());
+      String coachUsername = viewState.getUsername();
+      ArrayList<String> requestArrayList = model.getTraineeRequest( coachUsername);
       TraineeList requests = new TraineeList();
       for (String s : requestArrayList) {
         requests.addTrainee(new Trainee(s));
       }
+      Logger.log(coachUsername+" "+requests);
 
       traineeRequestList.set(gson.toJson(requests));
       traineeList.set(gson.toJson(trainees));

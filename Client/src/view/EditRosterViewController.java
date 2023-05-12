@@ -33,6 +33,23 @@ public class EditRosterViewController extends ViewController {
 
   private Gson gson;
 
+  public void init(ViewHandler viewHandler, ViewModel viewModel, Region root){
+    this.viewHandler = viewHandler;
+    editRosterViewModel = (EditRosterViewModel) viewModel;
+    this.root = root;
+    gson = new Gson();
+
+    usernameLabel.textProperty().bind(editRosterViewModel.getUsernameProperty());
+
+    errorLabel.textProperty().bind(editRosterViewModel.getErrorProperty());//not bidirectional, because you are not editing it from view
+    editRosterViewModel.getTraineeList().addListener( (obs,oldVal,newVal) -> {
+      populateTrainees(newVal);
+    });
+    editRosterViewModel.getTraineeRequestList().addListener((obs, oldVal, newVal) -> {
+      populateTraineeRequests(newVal);
+    });
+  }
+
   @FXML
   void acceptRequest(ActionEvent event) {
     //editRosterViewModel.acceptRequest();
@@ -59,22 +76,7 @@ public class EditRosterViewController extends ViewController {
     viewHandler.openView(editRosterViewModel.getUsernameProperty().get());
   }
 
-  public void init(ViewHandler viewHandler, ViewModel viewModel, Region root){
-    this.viewHandler = viewHandler;
-    editRosterViewModel = (EditRosterViewModel) viewModel;
-    this.root = root;
-    gson = new Gson();
 
-    usernameLabel.textProperty().bind(editRosterViewModel.getUsernameProperty());
-
-    errorLabel.textProperty().bind(editRosterViewModel.getErrorProperty());//not bidirectional, because you are not editing it from view
-    editRosterViewModel.getTraineeList().addListener( (obs,oldVal,newVal) -> {
-      populateTrainees(newVal);
-    });
-    editRosterViewModel.getTraineeRequestList().addListener((obs, oldVal, newVal) -> {
-      populateTraineeRequests(newVal);
-    });
-  }
 
   private void populateTraineeRequests(String requestListString)
   {
@@ -83,13 +85,12 @@ public class EditRosterViewController extends ViewController {
 
     //resets the list to 0 so it can refresh
     traineeBox.getChildren().remove(0, traineeBox.getChildren().size());
+    requestBox.getChildren().remove(0, requestBox.getChildren().size());
 
     //loops through the list, adding each element
     for (int i = 0; i < traineeList.getSize(); ++i) {
-      String title = traineeList.getTrainee(i);
-      traineeBox.getChildren().add(createTraineeComponent(traineeList.getUsername(i)));
-      Logger.log(title + " ");
-      createRequestComponent(traineeList.getUsername(i));
+      String u = traineeList.getTrainee(i);
+      requestBox.getChildren().add(createTraineeRequestComponent(u));
     }
   }
 
@@ -103,10 +104,8 @@ public class EditRosterViewController extends ViewController {
 
     //loops through the list, adding each element
     for (int i = 0; i < traineeList.getSize(); ++i) {
-      String title = traineeList.getTrainee(i);
-      traineeBox.getChildren().add(createTraineeComponent(traineeList.getUsername(i)));
-      Logger.log(title + " ");
-      createTraineeComponent(traineeList.getUsername(i));
+      String u = traineeList.getTrainee(i);
+      traineeBox.getChildren().add(createTraineeComponent(u));
     }
   }
 
@@ -133,19 +132,39 @@ public class EditRosterViewController extends ViewController {
     return hBox;
   }
 
-  private HBox createRequestComponent(String username) {
+  private HBox createTraineeRequestComponent(String username){
     HBox hBox = new HBox();
 
     hBox.getStyleClass().addAll("bg-primary","fs-2");
-    hBox.setAlignment(Pos.CENTER_LEFT);
     hBox.setPadding( new Insets(10,10,10,10));
 
-    Label nameLabel = new Label(username);
-    nameLabel.getStyleClass().addAll("fs-2","btn-warning","cursor-default");
+    Label label = new Label(username);
+    label.getStyleClass().addAll("btn-warning","cursor-default");
 
-    hBox.getChildren().addAll(nameLabel);
+    Button acceptBtn = new Button("✓");
+    Button rejectBtn = new Button("X");
+    acceptBtn.getStyleClass().addAll("btn-success");
+    rejectBtn.getStyleClass().addAll("btn-danger");
+
+    acceptBtn.onActionProperty().setValue((evt)->acceptTraineeRequest(username));
+    rejectBtn.onActionProperty().setValue((evt)->rejectTraineeRequest(username));
+
+    hBox.getChildren().addAll(label,acceptBtn,rejectBtn);
 
     return hBox;
+  }
+
+  private void rejectTraineeRequest(String username) {
+    Logger.log("acceptning :" + username);
+    editRosterViewModel.denyRequest(username);
+
+    reset();
+  }
+
+  private void acceptTraineeRequest(String username) {
+    Logger.log("rejecting :" + username);
+    editRosterViewModel.acceptRequest(username);
+    reset();
   }
 
   private void manageTraineeOpen(String username)

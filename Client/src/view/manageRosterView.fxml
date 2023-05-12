@@ -53,40 +53,13 @@
                      <font>
                         <Font size="10.0" />
                      </font></Label>
-                  <Button mnemonicParsing="false" onAction="#acceptRequest" prefHeight="39.0" prefWidth="18.0" text="+">
-                     <styleClass>
-                        <String fx:value="btn-success" />
-                        <String fx:value="fs-2" />
-                     </styleClass>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#denyRequest" prefHeight="39.0" prefWidth="18.0" text="-">
-                     <styleClass>
-                        <String fx:value="btn-danger" />
-                        <String fx:value="fs-2" />
-                     </styleClass>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
                </children>
             </HBox>
-            <HBox prefWidth="200.0">
+            <HBox prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <ScrollPane prefHeight="300.0" prefWidth="200.0">
+                  <ScrollPane prefHeight="300.0" prefWidth="200.0" styleClass="nav">
                      <content>
-                        <VBox fx:id="requestBox" prefWidth="140.0" />
+                        <VBox fx:id="requestBox" prefWidth="140.0" styleClass="nav-friend-box" />
                      </content>
                   </ScrollPane>
                </children>

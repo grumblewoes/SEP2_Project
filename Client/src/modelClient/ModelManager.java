@@ -178,7 +178,7 @@ public class ModelManager implements Model, LocalListener<String,String>
 	public boolean removeCoachAssignment(String traineeUsername) {
 		return client.removeCoachAssignment(traineeUsername);
 	}
- 
+
   @Override public boolean acceptRequest(String traineeUsername,
       String coachUsername)
   {

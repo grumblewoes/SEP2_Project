@@ -317,6 +317,7 @@ public class CoachDAO implements ICoachDAO
   @Override public ArrayList<String> getTraineeRequest(String username)
       throws SQLException
   {
+    Logger.log(username);
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
     ArrayList<String> list = new ArrayList<>();
