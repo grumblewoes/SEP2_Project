@@ -10,6 +10,7 @@ import utility.observer.subject.PropertyChangeHandler;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ModelManager implements Model, LocalListener<String,String>
@@ -181,6 +182,28 @@ public class ModelManager implements Model, LocalListener<String,String>
 
 	@Override
 	public void disconnectListener(String username){client.disconnectListener(username);}
+
+	@Override public MeetingList getTraineeMeetingList(String traineeUsername)
+	{
+		return client.getTraineeMeetingList(traineeUsername);
+	}
+
+	@Override public MeetingList getTraineeMeetingRequests(String traineeUsername)
+	{
+		return client.getTraineeMeetingRequests(traineeUsername);
+	}
+
+	@Override public boolean sendMeetingRequest(String traineeUsername,
+			String coachUsername, LocalDate dateOfMeeting)
+	{
+		return client.sendMeetingRequest(traineeUsername,coachUsername,dateOfMeeting);
+	}
+
+	@Override public boolean removeMeeting(String traineeUsername,
+			String coachUsername, LocalDate dateOfMeeting)
+	{
+		return client.removeMeeting(traineeUsername,coachUsername,dateOfMeeting);
+	}
 
 	//	@Override
 //	public boolean editHeight(int height) {

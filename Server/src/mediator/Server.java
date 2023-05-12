@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Server implements RemoteModel
@@ -153,6 +154,30 @@ public class Server implements RemoteModel
       throws RemoteException
   {
     return model.removeCoachAssignment(traineeUsername);
+  }
+
+  @Override public MeetingList getTraineeMeetingList(String traineeUsername)
+      throws RemoteException
+  {
+    return model.getTraineeMeetingList(traineeUsername);
+  }
+
+  @Override public MeetingList getTraineeMeetingRequests(String traineeUsername)
+      throws RemoteException
+  {
+    return model.getTraineeMeetingRequests(traineeUsername);
+  }
+
+  @Override public boolean sendMeetingRequest(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting) throws RemoteException
+  {
+    return model.sendMeetingRequest(traineeUsername,coachUsername,dateOfMeeting);
+  }
+
+  @Override public boolean removeMeeting(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting) throws RemoteException
+  {
+    return model.removeMeeting(traineeUsername,coachUsername,dateOfMeeting);
   }
 
   private void startServer() {

@@ -4,6 +4,7 @@ import mediator.*;
 import utility.observer.subject.LocalSubject;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface Model extends LocalSubject<String,String>
@@ -49,6 +50,12 @@ public interface Model extends LocalSubject<String,String>
   boolean removeCoachAssignment(String traineeUsername);
 
   void disconnectListener(String username);
+
+
+	MeetingList getTraineeMeetingList(String traineeUsername);
+	MeetingList getTraineeMeetingRequests(String traineeUsername);
+	boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
+	boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
 
   //	boolean editHeight(int height);
 //	boolean editWeight(int weight);

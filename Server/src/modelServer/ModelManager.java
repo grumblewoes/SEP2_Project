@@ -10,6 +10,7 @@ import modelServer.DAO.implementation.UserDAO;
 import util.Logger;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ModelManager implements Model
@@ -375,7 +376,9 @@ public class ModelManager implements Model
         }
     }
 
-    @Override public boolean addCoach(String coachUsername,
+
+
+  @Override public boolean addCoach(String coachUsername,
         String coachPassword, String coachName, String coachLName,
         int coachHeight, int coachWeight, int pbBench, int pbSquat,
         int pbLift, String status, boolean share)
@@ -410,4 +413,50 @@ public class ModelManager implements Model
             return null;
         }
     }
+
+  @Override public MeetingList getTraineeMeetingList(String traineeUsername)
+  {
+    try {
+      return new MeetingDAO().getTraineeMeetingList(traineeUsername);
+    }
+    catch (SQLException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public MeetingList getTraineeMeetingRequests(String traineeUsername)
+  {
+    try {
+      return new MeetingDAO().getTraineeMeetingRequests(traineeUsername);
+    }
+    catch (SQLException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public boolean sendMeetingRequest(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting)
+  {
+    try {
+      return new MeetingDAO().sendMeetingRequest(traineeUsername,coachUsername,dateOfMeeting);
+    }
+    catch (SQLException e)
+    {
+      return false;
+    }
+  }
+
+  @Override public boolean removeMeeting(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting)
+  {
+    try {
+      return new MeetingDAO().removeMeeting(traineeUsername,coachUsername,dateOfMeeting);
+    }
+    catch (SQLException e)
+    {
+      return false;
+    }
+  }
 }

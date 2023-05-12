@@ -15,6 +15,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Client implements Model, RemoteListener<String, String>, LocalSubject<String,String> {
@@ -354,6 +355,56 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
     try{
       return server.removeCoachAssignment(traineeUsername);
     }catch(RemoteException e){
+      return false;
+    }
+  }
+
+  @Override public MeetingList getTraineeMeetingList(String traineeUsername)
+  {
+    try
+    {
+      return server.getTraineeMeetingList(traineeUsername);
+    }
+    catch (RemoteException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public MeetingList getTraineeMeetingRequests(String traineeUsername)
+  {
+    try
+    {
+      return server.getTraineeMeetingRequests(traineeUsername);
+    }
+    catch (RemoteException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public boolean sendMeetingRequest(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting)
+  {
+    try
+    {
+      return server.sendMeetingRequest(traineeUsername,coachUsername,dateOfMeeting);
+    }
+    catch (RemoteException e)
+    {
+      return false;
+    }
+  }
+
+  @Override public boolean removeMeeting(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting)
+  {
+    try
+    {
+      return server.removeMeeting(traineeUsername,coachUsername,dateOfMeeting);
+    }
+    catch (RemoteException e)
+    {
       return false;
     }
   }
