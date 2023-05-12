@@ -92,7 +92,7 @@
                <children>
                   <ScrollPane prefHeight="303.0" prefWidth="500.0" HBox.hgrow="ALWAYS">
                      <content>
-                        <VBox fx:id="exerciseBox" prefHeight="200.0" prefWidth="774.0" />
+                        <VBox fx:id="exerciseBox" prefHeight="200.0" prefWidth="774.0" styleClass="menu-display" />
                      </content>
                   </ScrollPane>
                </children>

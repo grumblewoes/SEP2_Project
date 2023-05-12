@@ -73,13 +73,12 @@ public class profileViewController extends  ViewController{
             shareInfoLabel.setVisible(newVal);
             coachField.setDisable(!newVal);
 
-
-
-            goBackView.setVisible(!newVal);
             statusField.setDisable(!newVal);
             coachField.setDisable(!newVal);
         });
 
+        removeBtn.managedProperty().bind(profileViewModel.editableProperty().not());
+        updateBtn.managedProperty().bind(profileViewModel.editableProperty());
         removeBtn.visibleProperty().bind(profileViewModel.editableProperty().not());
         updateBtn.visibleProperty().bind(profileViewModel.editableProperty());
 
