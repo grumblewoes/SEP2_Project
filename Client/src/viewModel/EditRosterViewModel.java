@@ -23,7 +23,7 @@ public class EditRosterViewModel extends ViewModel
   private Button denyButton;
   private Button removeButton;
 
-  private StringProperty errorProperty, traineeList, usernameProperty, selectedTraineeName;
+  private StringProperty errorProperty, traineeList, usernameProperty, selectedTraineeName, selectedMtg;
 
   private Model model;
   private ViewState viewState;
@@ -40,6 +40,7 @@ public class EditRosterViewModel extends ViewModel
     traineeRequestList = new SimpleStringProperty();
     traineeList = new SimpleStringProperty();
     selectedTraineeName = new SimpleStringProperty();
+    selectedMtg = new SimpleStringProperty();
     gson = new Gson();
   }
 
@@ -58,8 +59,6 @@ public class EditRosterViewModel extends ViewModel
 
   private void loadTrainee()
   {
-    try
-    {
       ArrayList<String> traineesArrayList = model.getTraineeList(viewState.getUsername());
       TraineeList trainees = new TraineeList();
       for (String s : traineesArrayList) {
@@ -75,11 +74,6 @@ public class EditRosterViewModel extends ViewModel
 
       traineeRequestList.set(gson.toJson(requests));
       traineeList.set(gson.toJson(trainees));
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
   }
 
   public boolean acceptRequest(String username) {
@@ -97,6 +91,22 @@ public class EditRosterViewModel extends ViewModel
       return false;
   }
 
+  public boolean approveMeeting() {
+    if (model.approveMeeting(uhh, usernameProperty.get(), uhh))
+      return true;
+    else
+      errorProperty.set("An error occurred while trying to approve the meeting request.");
+    return false;
+  }
+
+  public boolean denyMeeting() {
+    if (model.denyMeeting(uh, usernameProperty.get(), uh))
+      return true;
+    else
+      errorProperty.set("An error occurred while trying to deny the meeting request.");
+    return false;
+  }
+
   @Override public void clear()
   {
     loadTrainee();
@@ -108,12 +118,11 @@ public class EditRosterViewModel extends ViewModel
     return usernameProperty;
   }
 
-  public StringProperty getSelectedTraineeName() {
-    return selectedTraineeName;
+  public void setSelectedMtg(String s) {
+    selectedMtg = new SimpleStringProperty(s);
   }
 
   public void setSelectedTraineeName(String selectedTraineeName) {
-    System.out.println("Clicked");
     this.selectedTraineeName = new SimpleStringProperty(selectedTraineeName);
   }
 

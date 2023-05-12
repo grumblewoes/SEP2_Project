@@ -10,6 +10,7 @@ import modelServer.DAO.implementation.UserDAO;
 import util.Logger;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ModelManager implements Model
@@ -469,6 +470,26 @@ public class ModelManager implements Model
         catch (SQLException e)
         {
             return null;
+        }
+    }
+
+    @Override
+    public boolean approveMeeting(String trainee, String coach, LocalDate date) {
+        try {
+            return new MeetingDAO().approveMeeting(trainee, coach, date);
+        }
+        catch (SQLException e)
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean denyMeeting(String trainee, String coach, LocalDate date) {
+        try {
+            return new MeetingDAO().denyMeeting(trainee, coach, date);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

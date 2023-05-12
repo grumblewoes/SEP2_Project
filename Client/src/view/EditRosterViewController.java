@@ -51,18 +51,7 @@ public class EditRosterViewController extends ViewController {
   }
 
   @FXML
-  void acceptRequest(ActionEvent event) {
-    //editRosterViewModel.acceptRequest();
-  }
-
-  @FXML
-  void denyRequest(ActionEvent event) {
-    //editRosterViewModel.denyRequest();
-  }
-
-  @FXML
   void removeMeeting(ActionEvent event) {
-
   }
 
   @FXML
@@ -76,7 +65,13 @@ public class EditRosterViewController extends ViewController {
     viewHandler.openView(editRosterViewModel.getUsernameProperty().get());
   }
 
+  private void populateMeetingRequests(String meetingString) {
 
+  }
+
+  private void createMeetingComponent(String date) {
+
+  }
 
   private void populateTraineeRequests(String requestListString)
   {
