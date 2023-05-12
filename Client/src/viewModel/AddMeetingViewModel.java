@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class AddMeetingViewModel extends ViewModel
 {
-  private StringProperty errorProperty, headerLabel;
+  private StringProperty errorProperty, coachProperty;
   private ObjectProperty<LocalDate> dateOfMeeting;
   private Model model;
   private ViewState viewState;
@@ -21,13 +21,13 @@ public class AddMeetingViewModel extends ViewModel
   public AddMeetingViewModel(Model model, ViewState viewState){
     this.model=model;
     this.viewState = viewState;
-    headerLabel = new SimpleStringProperty("Add Friend");
+    coachProperty = new SimpleStringProperty(model.getCoach(viewState.getUsername()).getUsername());
     errorProperty = new SimpleStringProperty();
     dateOfMeeting = new SimpleObjectProperty<>();
   }
   public boolean sendMeetingRequest(){
     String traineeUsername = viewState.getUsername();
-    String coachUsername = traineeUsername;
+    String coachUsername = model.getCoach(viewState.getUsername()).getUsername();
     LocalDate date= dateOfMeeting.get();
 
     boolean successAddition = model.sendMeetingRequest(traineeUsername,coachUsername, date);
@@ -43,4 +43,9 @@ public class AddMeetingViewModel extends ViewModel
   }
   public StringProperty getErrorProperty() {return errorProperty;}
   public ObjectProperty<LocalDate> getDateOfMeeting(){return dateOfMeeting;}
+
+  public StringProperty coachPropertyProperty()
+  {
+    return coachProperty;
+  }
 }

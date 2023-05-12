@@ -34,6 +34,7 @@ public class ViewHandler {
 	private ViewController addExerciseViewController;
 	private ViewController profileViewController;
 	private ViewController addFriendViewController;
+	private ViewController addMeetingViewController;
 
 	private ViewModelFactory viewModelFactory;
 
@@ -79,6 +80,10 @@ public class ViewHandler {
 				profileViewController = loadViewController("profileView.fxml", profileViewController, viewModelFactory.getProfileViewModel());
 				break;
 
+			case "addMeeting":
+				addMeetingViewController =loadViewController("addMeeting.fxml", addMeetingViewController,
+						viewModelFactory.getAddMeetingViewModel());
+				break;
 			case "addFriend":
 				addFriendViewController =loadViewController("sendFriendRequest.fxml", addFriendViewController,
 						viewModelFactory.getAddFriendViewModel());

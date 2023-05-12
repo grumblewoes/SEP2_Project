@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private int height,weight;
-    private String firstName,lastName,username,status;
+    private String firstName,lastName,username,status, coach;
     private boolean shareProfile;
 
     public User(int height, int weight, String firstName, String lastName, String username, String status,boolean shareProfile) {
@@ -15,6 +15,7 @@ public class User implements Serializable {
         this.username = username;
         this.status = status;
         this.shareProfile = shareProfile;
+        this.coach=null;
     }
 
     public int getHeight() {

@@ -4,17 +4,15 @@ package viewModel;
 import com.google.gson.Gson;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import mediator.Folder;
-import mediator.FolderList;
-import mediator.Friend;
-import mediator.FriendList;
+import mediator.*;
 import modelClient.Model;
 import util.Logger;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class HomeViewModel extends ViewModel{
-    private StringProperty usernameProperty, folderListProperty, errorProperty,friendshipListProperty,friendshipRequestListProperty;
+    private StringProperty usernameProperty, folderListProperty, errorProperty,friendshipListProperty,friendshipRequestListProperty,meetingListProperty,meetingRequestListProperty;
     private Model model;
     private ViewState viewState;
     private Gson gson;
@@ -27,7 +25,8 @@ public class HomeViewModel extends ViewModel{
         folderListProperty = new SimpleStringProperty();
         friendshipListProperty = new SimpleStringProperty();
         friendshipRequestListProperty = new SimpleStringProperty();
-
+        meetingListProperty = new SimpleStringProperty();
+        meetingRequestListProperty = new SimpleStringProperty();
         gson = new Gson();
     }
 
@@ -93,6 +92,7 @@ public class HomeViewModel extends ViewModel{
         errorProperty.set("");
         loadFolders();
         loadFriendships();
+        loadMeetings();
     }
 
     public void setupOpenFolder(String folderName,int folderId) {
@@ -135,5 +135,30 @@ public class HomeViewModel extends ViewModel{
         viewState.setUsername(null);
         viewState.setProfileUsername(null);
         viewState.setIsCoach(false);
+    }
+
+    private void loadMeetings(){
+        MeetingList meetingList = model.getTraineeMeetingList(viewState.getUsername());
+
+        MeetingList meetingRequests = model.getTraineeMeetingRequests(viewState.getUsername());
+
+        meetingListProperty.set("");
+        meetingRequestListProperty.set("");
+        meetingRequestListProperty.set(gson.toJson(meetingRequests) );
+        meetingListProperty.set( gson.toJson(meetingList) );
+
+    }
+
+    public StringProperty meetingListPropertyProperty()
+    {
+        return meetingListProperty;
+    }
+    public StringProperty meetingRequestListPropertyProperty()
+    {
+        return meetingRequestListProperty;
+    }
+
+    public boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting){
+        return model.removeMeeting(traineeUsername,coachUsername,dateOfMeeting);
     }
 }
