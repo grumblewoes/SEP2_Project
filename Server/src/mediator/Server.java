@@ -197,8 +197,6 @@ public class Server implements RemoteModel
   @Override
   public boolean rejectFriendRequest(String requester_username, String accepter_username) {
       return model.rejectFriendRequest(requester_username, accepter_username);
-
-
   }
 
   @Override

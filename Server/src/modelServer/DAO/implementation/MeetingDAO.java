@@ -8,11 +8,12 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class MeetingDAO implements IMeetingDAO
 {
   @Override public boolean approveMeeting(String trainee, String coach,
-      Date date) throws SQLException
+      LocalDate date) throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -24,7 +25,7 @@ public class MeetingDAO implements IMeetingDAO
       );
       statement.setString(1, trainee);
       statement.setString(2, coach);
-      statement.setDate(3, date);
+      statement.setDate(3, Date.valueOf(date));
       statement.executeUpdate();
 
       PreparedStatement statement1 = connection.prepareStatement(
@@ -32,7 +33,7 @@ public class MeetingDAO implements IMeetingDAO
       );
       statement1.setString(1, trainee);
       statement1.setString(2, coach);
-      statement1.setDate(3, date);
+      statement1.setDate(3, Date.valueOf(date));
       statement1.executeUpdate();
       return true;
 
@@ -45,7 +46,7 @@ public class MeetingDAO implements IMeetingDAO
     }
   }
 
-  @Override public boolean denyMeeting(String trainee, String coach, Date date)
+  @Override public boolean denyMeeting(String trainee, String coach, LocalDate date)
       throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
@@ -58,7 +59,7 @@ public class MeetingDAO implements IMeetingDAO
       );
       statement.setString(1, trainee);
       statement.setString(2, coach);
-      statement.setDate(3, date);
+      statement.setDate(3, Date.valueOf(date));
       statement.executeUpdate();
 
       return true;
