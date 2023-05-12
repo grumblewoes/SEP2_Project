@@ -273,7 +273,7 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
   @Override
   public ArrayList<String> getFriendRequests(String username) {
     try{
-      return server.getFriendRequests(username);
+      return server.updateTrainee(u,h,w,s);
     }catch (RemoteException e){
       throw new RuntimeException(e);
     }
@@ -357,6 +357,23 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
       return false;
     }
   }
+
+  @Override public boolean acceptRequest(String traineeUsername,
+      String coachUsername)
+  {
+    return server.acceptRequest(traineeUsername, coachUsername);
+  }
+
+  @Override public boolean denyRequest(String traineeUsername)
+  {
+    return server.denyRequest(traineeUsername);
+  }
+
+  @Override public boolean removeTraineeFromRoster(String traineeUsername)
+  {
+    return server.removeTraineeFromRoster(traineeUsername);
+  }
+
 
 }
 

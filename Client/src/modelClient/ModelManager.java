@@ -182,6 +182,20 @@ public class ModelManager implements Model, LocalListener<String,String>
 	@Override
 	public void disconnectListener(String username){client.disconnectListener(username);}
 
+
+  @Override public boolean denyRequest(String traineeUsername)
+  {
+    return client.denyRequest(traineeUsername);
+  }
+
+  @Override public boolean removeTraineeFromRoster(String traineeUsername)
+  {
+    return client.removeTraineeFromRoster(traineeUsername);
+  }
+
+
+
+	//	@Override
 	//	@Override
 //	public boolean editHeight(int height) {
 //		return client.editHeight(height);

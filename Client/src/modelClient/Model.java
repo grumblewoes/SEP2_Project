@@ -49,11 +49,4 @@ public interface Model extends LocalSubject<String,String>
   boolean removeCoachAssignment(String traineeUsername);
 
   void disconnectListener(String username);
-
-  //	boolean editHeight(int height);
-//	boolean editWeight(int weight);
-//	boolean editDob(int dob);
-//	boolean editDeadlift(int weight);
-//	boolean editBenchPress(int weight);
-//	boolean editSquat(int weight);
 }
