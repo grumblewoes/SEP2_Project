@@ -116,4 +116,17 @@ public class EditRosterViewModel extends ViewModel
     System.out.println("Clicked");
     this.selectedTraineeName = new SimpleStringProperty(selectedTraineeName);
   }
+
+  public void logout() {
+    model.disconnectListener(viewState.getUsername());
+    viewState.setIsCoach(false);
+    viewState.setUsername(null);
+    viewState.setProfileUsername(null);
+    viewState.setGoBack(null);
+    viewState.setExerciseName(null);
+    viewState.setFolderName(null);
+    viewState.setFolderId(0);
+    viewState.setNewFolder(false);
+    viewState.setManageFolderEditable(false);
+  }
 }

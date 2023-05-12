@@ -13,7 +13,7 @@ public class ViewState {
 
 
     public ViewState(){
-        this.username="coach";
+        this.username=null;
         this.folderName=null;
         this.exerciseName=null;
         this.folderId=0;
@@ -21,7 +21,7 @@ public class ViewState {
         this.newFolder=false;
         this.goBack=null;
         this.profileUsername=null;
-        this.isCoach = true;
+        this.isCoach = false;
     }
 
     public String getUsername() {

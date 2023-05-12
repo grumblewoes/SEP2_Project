@@ -176,5 +176,10 @@ public class EditRosterViewController extends ViewController {
   public void reset() {
     editRosterViewModel.clear();
   }
+
+  public void logout(MouseEvent mouseEvent) {
+    editRosterViewModel.logout();
+    viewHandler.openView("logIn");
+  }
 }
 
