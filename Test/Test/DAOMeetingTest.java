@@ -359,4 +359,222 @@ class DAOMeetingTest
             }
         });
     }
+
+    @Test
+    void acceptRequestZero() {
+       assertFalse(()-> {
+           try
+           {
+               return cdao.acceptRequest(null, null);
+           }
+           catch (SQLException e)
+           {
+               throw new RuntimeException(e);
+           }
+       });
+    }
+    @Test
+    void acceptRequestOne() {
+        assertTrue(()-> {
+            try
+            {
+                return cdao.acceptRequest("a", "TheLegend28");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+    @Test
+    void acceptRequestMany() {
+
+        assertTrue(()-> {
+            try
+            {
+                return cdao.acceptRequest("j", "TheLegend28");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+        assertTrue(()-> {
+            try
+            {
+                return cdao.acceptRequest("e", "TheLegend28");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+        assertTrue(()-> {
+            try
+            {
+                return cdao.acceptRequest("d", "TheLegend28");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+    @Test
+    void acceptRequestBoundary() {
+        //no boundary, no test
+    }
+    @Test
+    void acceptRequestException() {
+        //already tested
+    }
+    @Test
+    void denyRequestZero() {
+        assertFalse(()-> {
+            try
+            {
+                return cdao.denyRequest(null);
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+    @Test
+    void denyRequestOne() {
+
+        assertTrue(()-> {
+            try
+            {
+                return cdao.denyRequest("username0.11755701897640713");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+    @Test
+    void denyRequestMany() {
+
+        assertTrue(()-> {
+            try
+            {
+                return cdao.denyRequest("username0.8860545108206384");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+        assertTrue(()-> {
+            try
+            {
+                return cdao.denyRequest("username0.9951104767484433");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+        assertTrue(()-> {
+            try
+            {
+                return cdao.denyRequest("username0.353358245436485");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+
+
+
+
+
+
+    }
+    @Test
+    void denyRequestBoundary(String traineeUsername) {
+        //no boundary, no test
+    }
+    @Test
+    void denyRequestException(String traineeUsername) {
+        //already tested
+    }
+    @Test
+    void removeTraineeZero() {
+
+        assertFalse(()-> {
+            try
+            {
+                return cdao.removeTraineeFromRoster(null);
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+    @Test
+    void removeTraineeOne() {
+
+        assertTrue(()-> {
+            try
+            {
+                return cdao.removeTraineeFromRoster("d");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+    @Test
+    void removeTraineeMany()
+    {
+
+        assertTrue(() -> {
+            try
+            {
+                return cdao.removeTraineeFromRoster("a");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+        assertTrue(()-> {
+            try
+            {
+                return cdao.removeTraineeFromRoster("b");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+
+        assertTrue(()-> {
+            try
+            {
+                return cdao.removeTraineeFromRoster("d");
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        });
+
+
+    }
+    @Test
+    void removeTraineeBoundary(String traineeUsername) {
+        //no boundary, no test
+    }
+    @Test
+    void removeTraineeException(String traineeUsername) {
+        //trainee is not associated with coach
+    }
 }

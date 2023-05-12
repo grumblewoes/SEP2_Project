@@ -34,6 +34,9 @@ public class ViewHandler {
 	private ViewController addExerciseViewController;
 	private ViewController profileViewController;
 	private ViewController addFriendViewController;
+	//private ViewController manageCoachViewController;
+
+	private ViewController editRosterViewController;
 
 	private ViewModelFactory viewModelFactory;
 
@@ -77,6 +80,9 @@ public class ViewHandler {
 				break;
 			case "profile":
 				profileViewController = loadViewController("profileView.fxml", profileViewController, viewModelFactory.getProfileViewModel());
+				break;
+			case "manageRoster":
+				editRosterViewController = loadViewController("manageRosterView.fxml", editRosterViewController, viewModelFactory.getEditRosterViewModel());
 				break;
 
 			case "addFriend":

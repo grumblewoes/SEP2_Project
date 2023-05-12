@@ -155,6 +155,36 @@ public class Server implements RemoteModel
     return model.removeCoachAssignment(traineeUsername);
   }
 
+  @Override public boolean acceptRequest(String traineeUsername,
+      String coachUsername) throws RemoteException
+  {
+    return model.acceptRequest(traineeUsername, coachUsername);
+  }
+
+  @Override public boolean denyRequest(String traineeUsername)
+      throws RemoteException
+  {
+    return model.denyRequest(traineeUsername);
+  }
+
+  @Override public boolean removeTraineeFromRoster(String traineeUsername)
+      throws RemoteException
+  {
+    return model.removeTraineeFromRoster(traineeUsername);
+  }
+
+  @Override public ArrayList<String> getTraineeList(String username)
+      throws RemoteException
+  {
+    return model.getTraineeList(username);
+  }
+
+  @Override public ArrayList<String> getTraineeRequest(String username)
+      throws RemoteException
+  {
+    return model.getTraineeRequest(username);
+  }
+
   private void startServer() {
     try
     {

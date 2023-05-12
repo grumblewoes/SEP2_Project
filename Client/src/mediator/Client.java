@@ -358,5 +358,63 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
     }
   }
 
+  @Override public boolean acceptRequest(String traineeUsername,
+      String coachUsername)
+  {
+    try
+    {
+      return server.acceptRequest(traineeUsername, coachUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public boolean denyRequest(String traineeUsername)
+  {
+    try
+    {
+      return server.denyRequest(traineeUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public boolean removeTraineeFromRoster(String traineeUsername)
+  {
+    try
+    {
+      return server.removeTraineeFromRoster(traineeUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+   public ArrayList<String> getTraineeList(String username){
+     try
+     {
+       return server.getTraineeList(username);
+     }
+     catch (RemoteException e)
+     {
+       throw new RuntimeException(e);
+     }
+   }
+  public ArrayList<String> getTraineeRequest(String username) {
+    try
+    {
+      return server.getTraineeRequest(username);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
 }
 

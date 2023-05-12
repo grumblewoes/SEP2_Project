@@ -179,9 +179,38 @@ public class ModelManager implements Model, LocalListener<String,String>
 		return client.removeCoachAssignment(traineeUsername);
 	}
 
+  @Override public boolean acceptRequest(String traineeUsername,
+      String coachUsername)
+  {
+    return client.acceptRequest(traineeUsername, coachUsername);
+  }
 	@Override
 	public void disconnectListener(String username){client.disconnectListener(username);}
 
+
+  @Override public boolean denyRequest(String traineeUsername)
+  {
+    return client.denyRequest(traineeUsername);
+  }
+
+  @Override public boolean removeTraineeFromRoster(String traineeUsername)
+  {
+    return client.removeTraineeFromRoster(traineeUsername);
+  }
+
+	@Override public ArrayList<String> getTraineeList(String username)
+			throws RemoteException
+	{
+		return client.getTraineeList(username);
+	}
+
+	@Override public ArrayList<String> getTraineeRequest(String username)
+			throws RemoteException
+	{
+		return client.getTraineeRequest(username);
+	}
+
+	//	@Override
 	//	@Override
 //	public boolean editHeight(int height) {
 //		return client.editHeight(height);

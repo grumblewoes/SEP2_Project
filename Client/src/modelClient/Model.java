@@ -48,12 +48,13 @@ public interface Model extends LocalSubject<String,String>
 	boolean isCoach(String username);
   boolean removeCoachAssignment(String traineeUsername);
 
+	boolean acceptRequest(String traineeUsername, String coachUsername);
+	boolean denyRequest(String traineeUsername);
+	boolean removeTraineeFromRoster(String traineeUsername);
+
+	ArrayList<String> getTraineeList(String username) throws RemoteException;
+	ArrayList<String> getTraineeRequest(String username) throws RemoteException;
+
   void disconnectListener(String username);
 
-  //	boolean editHeight(int height);
-//	boolean editWeight(int weight);
-//	boolean editDob(int dob);
-//	boolean editDeadlift(int weight);
-//	boolean editBenchPress(int weight);
-//	boolean editSquat(int weight);
 }
