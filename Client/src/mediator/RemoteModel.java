@@ -4,6 +4,7 @@ import utility.observer.subject.RemoteSubject;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface RemoteModel extends RemoteSubject<String,String>
@@ -54,4 +55,6 @@ public interface RemoteModel extends RemoteSubject<String,String>
 	boolean removeTraineeFromRoster(String traineeUsername) throws RemoteException;
 	ArrayList<String> getTraineeList(String username) throws RemoteException;
 	ArrayList<String> getTraineeRequest(String username) throws RemoteException;
+	boolean removeMeeting(String coachName, LocalDate date) throws RemoteException;
+	MeetingList getCoachMeetingList(String coachUsername) throws RemoteException;
 }

@@ -7,16 +7,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import mediator.Meeting;
+import mediator.MeetingList;
 import mediator.TraineeList;
 import util.Logger;
 import viewModel.EditRosterViewModel;
 import viewModel.ViewModel;
+
+import java.time.LocalDate;
 
 public class EditRosterViewController extends ViewController {
 
@@ -48,6 +54,53 @@ public class EditRosterViewController extends ViewController {
     editRosterViewModel.getTraineeRequestList().addListener((obs, oldVal, newVal) -> {
       populateTraineeRequests(newVal);
     });
+    editRosterViewModel.getMeetingsListProperty().addListener((obs, oldVal, newVal) -> {
+      populateMeetings(newVal);
+    });
+  }
+
+  private void populateMeetings(String meetingsListString)
+  {
+
+    MeetingList meetingList = gson.fromJson(meetingsListString, MeetingList.class);
+
+    meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
+
+
+    for (int i = 0; i < meetingList.size(); ++i)
+    {
+      String title = String.valueOf(meetingList.get(i).getDateOfMeeting());
+      meetingBox.getChildren().add(createMeetingComponent(
+          String.valueOf(meetingList.get(i))));
+      Logger.log(title + " ");
+    }
+  }
+
+  private HBox createMeetingComponent(String date) {
+    HBox hBox = new HBox();
+
+    hBox.getStyleClass().addAll("bg-primary","fs-2");
+    hBox.setPadding( new Insets(10,10,10,10));
+    VBox v1 = new VBox();
+    HBox.setHgrow(v1, Priority.ALWAYS);
+    v1.setAlignment(Pos.CENTER_LEFT);
+
+    Label label = new Label(date);
+
+    Button removeBtn = new Button("Remove");
+    removeBtn.getStyleClass().addAll("btn-danger");
+    removeBtn.onActionProperty().setValue((evt)->removeMeeting(
+        LocalDate.parse(date)));
+
+
+    int r = 5,l=5;
+    HBox.setMargin(removeBtn,new Insets(0,r,0,l));
+
+    hBox.getChildren().add(v1);
+    v1.getChildren().add(label);
+    hBox.getChildren().add(removeBtn);
+
+    return hBox;
   }
 
   @FXML
@@ -60,9 +113,10 @@ public class EditRosterViewController extends ViewController {
     //editRosterViewModel.denyRequest();
   }
 
-  @FXML
-  void removeMeeting(ActionEvent event) {
-
+  @FXML void removeMeeting(LocalDate date)
+  {
+    editRosterViewModel.removeMeeting(date);
+    reset();
   }
 
   @FXML

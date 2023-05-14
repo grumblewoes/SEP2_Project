@@ -1,6 +1,8 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import mediator.Client;
+import mediator.Meeting;
+import mediator.MeetingList;
 import modelClient.Model;
 import modelClient.ModelManager;
 import view.ViewHandler;
@@ -16,7 +18,8 @@ public class MyApplication extends Application
     Model model = new ModelManager(client);
     ViewModelFactory viewModelFactory = new ViewModelFactory(model);
     ViewHandler view = new ViewHandler(viewModelFactory);
-
+    MeetingList list = new MeetingList();
     view.start(primaryStage);
+
   }
 }

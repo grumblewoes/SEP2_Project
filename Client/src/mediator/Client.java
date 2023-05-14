@@ -15,6 +15,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Client implements Model, RemoteListener<String, String>, LocalSubject<String,String> {
@@ -50,6 +51,7 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
       Logger.log("Unable to disconnect with listener");
     }
   }
+
   public void start()
   {
     try
@@ -415,6 +417,31 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
       throw new RuntimeException(e);
     }
   }
+
+  @Override public MeetingList getCoachMeetingList(String coachUsername)
+  {
+    try
+    {
+      return server.getCoachMeetingList(coachUsername);
+    }
+    catch (RemoteException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public boolean removeMeeting(String coachName, LocalDate date)
+  {
+    try
+    {
+      return server.removeMeeting(coachName, date);
+    }
+    catch (RemoteException e)
+    {
+      return false;
+    }
+  }
+
 
 }
 

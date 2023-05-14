@@ -16,24 +16,27 @@ public class FolderDAO implements IFolderDAO
 {
   private static FolderDAO instance;
 
-  public FolderDAO(){}
+  public FolderDAO()
+  {
+  }
 
-
-
-  @Override
-  public boolean createFolder(String username, String title) throws SQLException {
+  @Override public boolean createFolder(String username, String title)
+      throws SQLException
+  {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
     try
     {
-      PreparedStatement statement = connection.prepareStatement("insert into folder2(title,trainee_username) values (?,?);");
-      statement.setString(1,title);
-      statement.setString(2,username);
+      PreparedStatement statement = connection.prepareStatement(
+          "insert into folder2(title,trainee_username) values (?,?);");
+      statement.setString(1, title);
+      statement.setString(2, username);
 
       statement.executeUpdate();
       return true;
     }
-    catch (SQLException e){
+    catch (SQLException e)
+    {
       Logger.log(e);
       return false;
     }
@@ -43,8 +46,9 @@ public class FolderDAO implements IFolderDAO
     }
   }
 
-  @Override
-  public boolean renameFolder(String username, int folderId, String newTitle) throws SQLException {
+  @Override public boolean renameFolder(String username, int folderId,
+      String newTitle) throws SQLException
+  {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
 
@@ -52,17 +56,16 @@ public class FolderDAO implements IFolderDAO
     {
 
       PreparedStatement statement = connection.prepareStatement(
-              "update folder2 " +
-                  "set title = '"+ newTitle +"' " +
-                  "where trainee_username = '"+username+"' and id = '" + folderId +  "';"
-      );
+          "update folder2 " + "set title = '" + newTitle + "' "
+              + "where trainee_username = '" + username + "' and id = '"
+              + folderId + "';");
 
       statement.executeUpdate();
 
-
       return true;
     }
-    catch (SQLException e){
+    catch (SQLException e)
+    {
       Logger.log(e);
       return false;
     }
@@ -72,28 +75,29 @@ public class FolderDAO implements IFolderDAO
     }
   }
 
-  @Override
-  public boolean removeFolder(String username, int folderId) throws SQLException {
+  @Override public boolean removeFolder(String username, int folderId)
+      throws SQLException
+  {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
 
     try
     {
-      String sql = "delete from user_exercise2 where folderid = ? ; "+
-              "delete from folder2 where trainee_username = ? and id = ? ; ";
-      sql=sql.replaceFirst("\\?",""+folderId);
-      sql=sql.replaceFirst("\\?","'"+username+"'");
-      sql=sql.replaceFirst("\\?",""+folderId);
+      String sql = "delete from user_exercise2 where folderid = ? ; "
+          + "delete from folder2 where trainee_username = ? and id = ? ; ";
+      sql = sql.replaceFirst("\\?", "" + folderId);
+      sql = sql.replaceFirst("\\?", "'" + username + "'");
+      sql = sql.replaceFirst("\\?", "" + folderId);
       Logger.log(sql);
 
       PreparedStatement statement = connection.prepareStatement(sql);
 
       statement.executeUpdate();
 
-
       return true;
     }
-    catch (SQLException e){
+    catch (SQLException e)
+    {
       Logger.log(e);
       return false;
     }
@@ -103,7 +107,8 @@ public class FolderDAO implements IFolderDAO
     }
   }
 
-  public FolderList getFolderList(String username) throws SQLException {
+  public FolderList getFolderList(String username) throws SQLException
+  {
     FolderList folderList = new FolderList();
 
     DBConnection db = DBConnection.getInstance();
@@ -113,19 +118,19 @@ public class FolderDAO implements IFolderDAO
     {
 
       PreparedStatement statement = connection.prepareStatement(
-              "select id,title,trainee_username " +
-                      "from folder2 " +
-                      "where trainee_username = '"+username+"';"
-      );
+          "select id,title,trainee_username " + "from folder2 "
+              + "where trainee_username = '" + username + "';");
 
       ResultSet rs = statement.executeQuery();
 
-      while(rs.next())
-        folderList.add( new Folder( rs.getInt(1),rs.getString(2),rs.getString(3) ) );
+      while (rs.next())
+        folderList.add(
+            new Folder(rs.getInt(1), rs.getString(2), rs.getString(3)));
 
       return folderList;
     }
-    catch (SQLException e){
+    catch (SQLException e)
+    {
       Logger.log(e);
       return folderList;
     }
