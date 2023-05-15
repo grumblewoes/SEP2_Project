@@ -9,6 +9,7 @@ import modelClient.Model;
 import util.Logger;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class EditRosterViewModel extends ViewModel
@@ -102,10 +103,14 @@ public class EditRosterViewModel extends ViewModel
 
   }
 
-  public boolean removeMeeting()
+  public boolean removeMeeting(String traineeName, LocalDate date)
+
+      //selectedMeeting.get()))
   {
-    if (model.removeMeeting(selectedMeeting.get()))
+    if (model.removeMeeting(viewState.getUsername(), traineeName, date))
+    {
       return true;
+    }
     else
     {
       errorProperty.set(
@@ -113,7 +118,6 @@ public class EditRosterViewModel extends ViewModel
       return false;
     }
   }
-
   public boolean acceptRequest(String username)
   {
     return model.acceptRequest(username, viewState.getUsername());

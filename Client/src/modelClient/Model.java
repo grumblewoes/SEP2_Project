@@ -59,6 +59,6 @@ public interface Model extends LocalSubject<String,String>
   void disconnectListener(String username);
 
 	MeetingList getCoachMeetingList(String s);
-//	boolean removeMeeting(String coachName, LocalDate date, String traineeUsername);
-	boolean removeMeeting(String coachName);
+	boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
+
 }

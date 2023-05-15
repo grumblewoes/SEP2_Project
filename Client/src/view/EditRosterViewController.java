@@ -20,6 +20,9 @@ import util.Logger;
 import viewModel.EditRosterViewModel;
 import viewModel.ViewModel;
 
+import java.rmi.RemoteException;
+import java.time.LocalDate;
+
 public class EditRosterViewController extends ViewController {
 
   @FXML
@@ -92,20 +95,22 @@ public class EditRosterViewController extends ViewController {
     label.setOnMouseClicked(event -> {
       editRosterViewModel.setSelectedMeeting(date, trainee);
     });
+
     hBox.getChildren().add(v1);
     v1.getChildren().add(label);
 
     return hBox;
   }
 
-  @FXML private void removeMeeting(ActionEvent event)
+  @FXML private void removeMeeting(ActionEvent event) throws RemoteException
   {
-    if (editRosterViewModel.removeMeeting());
+    if (editRosterViewModel.removeMeeting(editRosterViewModel.));
     editRosterViewModel.clear();
   }
-
+///editRosterViewModel.getUsernameProperty().get(),
+//      LocalDate.parse(editRosterViewModel.getSelectedMeeting().get()))
   @FXML
-  void removeTrainee(ActionEvent event) {
+  void removeTrainee() {
     if (editRosterViewModel.removeTrainee());
     editRosterViewModel.clear();
   }

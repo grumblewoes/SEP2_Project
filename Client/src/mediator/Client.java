@@ -429,31 +429,20 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
       return null;
     }
   }
-//
-//  @Override public boolean removeMeeting(String coachName, LocalDate date, String traineeUsername)
-//  {
-//    try
-//    {
-//      return server.removeMeeting(coachName, date, traineeUsername);
-//    }
-//    catch (RemoteException e)
-//    {
-//      return false;
-//    }
-//  }
-  @Override public boolean removeMeeting(String coachName)
+
+
+  @Override public boolean removeMeeting(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting)
   {
     try
     {
-      return server.removeMeeting(coachName);
+      return server.removeMeeting(traineeUsername, coachUsername, dateOfMeeting);
     }
     catch (RemoteException e)
     {
       return false;
     }
   }
-
-
 
 }
 
