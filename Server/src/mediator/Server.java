@@ -192,10 +192,27 @@ public class Server implements RemoteModel
     return model.removeMeeting(coachName, traineeUsername, date);
   }
 
-  @Override public MeetingList getCoachMeetingList(String coachName)
+
+  @Override public ArrayList<String> getMeetingRequests(String coach)
       throws RemoteException
   {
-    return model.getCoachMeetingList(coachName);
+    return model.getMeetingRequests(coach);
+  }
+
+  @Override public ArrayList<String> getCoachMeetings(String coach)
+      throws RemoteException
+  {
+    return model.getCoachMeetings(coach);
+  }
+
+  @Override
+  public boolean approveMeeting(String trainee, String coach, LocalDate date) throws RemoteException {
+    return model.approveMeeting(trainee, coach, date);
+  }
+
+  @Override
+  public boolean denyMeeting(String trainee, String coach, LocalDate date) throws RemoteException {
+    return model.denyMeeting(trainee, coach, date);
   }
 
   private void startServer() {
@@ -240,8 +257,6 @@ public class Server implements RemoteModel
   @Override
   public boolean rejectFriendRequest(String requester_username, String accepter_username) {
       return model.rejectFriendRequest(requester_username, accepter_username);
-
-
   }
 
   @Override

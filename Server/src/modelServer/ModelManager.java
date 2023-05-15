@@ -372,6 +372,18 @@ public class ModelManager implements Model
     }
   }
 
+  @Override public ArrayList<String> getMeetingRequests(String coach)
+  {
+    try
+    {
+      return new MeetingDAO().getTraineeMeetingRequests(coach);
+    }
+    catch (SQLException e)
+    {
+      return new ArrayList<>();
+    }
+  }
+
   @Override public boolean removeFriend(String requesterUsername,
       String accepterUsername)
   {
@@ -483,7 +495,8 @@ public class ModelManager implements Model
     }
   }
 
-  @Override public boolean removeMeeting(String coachName, String traineeUsername, LocalDate date)
+  @Override public boolean removeMeeting(String coachName,
+      String traineeUsername, LocalDate date)
   {
     try
     {
@@ -492,18 +505,6 @@ public class ModelManager implements Model
     catch (SQLException e)
     {
       return false;
-    }
-  }
-
-  @Override public MeetingList getCoachMeetingList(String coachName)
-  {
-    try
-    {
-      return new MeetingDAO().getCoachMeetingList(coachName);
-    }
-    catch (SQLException e)
-    {
-      return null;
     }
   }
 
@@ -544,6 +545,44 @@ public class ModelManager implements Model
     catch (SQLException e)
     {
       return null;
+    }
+  }
+
+  @Override public boolean approveMeeting(String trainee, String coach,
+      LocalDate date)
+  {
+    try
+    {
+      return new MeetingDAO().approveMeeting(trainee, coach, date);
+    }
+    catch (SQLException e)
+    {
+      return false;
+    }
+  }
+
+  @Override public boolean denyMeeting(String trainee, String coach,
+      LocalDate date)
+  {
+    try
+    {
+      return new MeetingDAO().denyMeeting(trainee, coach, date);
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public ArrayList<String> getCoachMeetings(String coach)
+  {
+    try
+    {
+      return new MeetingDAO().getCoachMeetings(coach);
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
     }
   }
 }

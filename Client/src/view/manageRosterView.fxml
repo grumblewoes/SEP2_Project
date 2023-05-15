@@ -119,9 +119,9 @@
                <children>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <content>
-                        <VBox fx:id="meetingBox" prefHeight="200.0" prefWidth="774.0">
+                        <VBox prefHeight="200.0" prefWidth="774.0">
                            <children>
-                              <HBox prefHeight="100.0" prefWidth="647.0" style="-fx-background-color: #93ff87;">
+                              <HBox fx:id="meetingBox" prefHeight="100.0" prefWidth="647.0" style="-fx-background-color: #93ff87;">
                                  <children>
                                     <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                                     <VBox prefHeight="200.0" prefWidth="107.0" />

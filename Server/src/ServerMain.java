@@ -24,6 +24,5 @@ public class ServerMain
 //    Logger.log(server.getFriendRequests("e"));
 //    server.acceptFriendRequest("e","d");
 
-
   }
 }

@@ -418,6 +418,54 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
     }
   }
 
+  public ArrayList<String> getMeetingRequests(String coach) {
+    try
+    {
+      return server.getMeetingRequests(coach);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public ArrayList<String> getCoachMeetings(String coach) {
+    try
+    {
+      return server.getCoachMeetings(coach);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public boolean approveMeeting(String trainee, String coach,
+      LocalDate date)
+  {
+    try
+    {
+      return server.approveMeeting(trainee, coach, date);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public boolean denyMeeting(String trainee, String coach,
+      LocalDate date)
+  {
+    try
+    {
+      return server.denyMeeting(trainee, coach, date);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
   @Override public MeetingList getCoachMeetingList(String coachUsername)
   {
     try

@@ -8,10 +8,10 @@ public class Meeting implements Serializable
   private String traineeUsername, coachUsername;
   private LocalDate dateOfMeeting;
 
-  public Meeting(String coachUsername, LocalDate dateOfMeeting) {
-    setTraineeUsername(null);
+  public Meeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) {
+    setTraineeUsername(traineeUsername);
     setDateOfMeeting(dateOfMeeting);
-    setCoachUsername(coachUsername);
+    setCoachUsername(null);
   }
   public Meeting(LocalDate dateOfMeeting) {
     setTraineeUsername(null);
