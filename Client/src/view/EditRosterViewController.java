@@ -73,7 +73,8 @@ public class EditRosterViewController extends ViewController {
 
   @FXML
   void usernameLabelClicked(MouseEvent event) {
-    viewHandler.openView(editRosterViewModel.getUsernameProperty().get());
+    editRosterViewModel.setupOpenProfile();
+    viewHandler.openView("profile");
   }
 
 
@@ -169,6 +170,7 @@ public class EditRosterViewController extends ViewController {
 
   private void manageTraineeOpen(String username)
   {
+    editRosterViewModel.manageTraineeOpen(username);
     viewHandler.openView("profile");
   }
 

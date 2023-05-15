@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import util.Logger;
 import viewModel.ProfileViewModel;
 import viewModel.ViewModel;
 
@@ -76,10 +77,10 @@ public class profileViewController extends  ViewController{
             statusField.setDisable(!newVal);
             coachField.setDisable(!newVal);
         });
-
-        removeBtn.managedProperty().bind(profileViewModel.editableProperty().not());
+        Logger.log(profileViewModel.isCoachProperty().get());
+        removeBtn.managedProperty().bind(profileViewModel.editableProperty().not().and(profileViewModel.isCoachProperty().not()));
         updateBtn.managedProperty().bind(profileViewModel.editableProperty());
-        removeBtn.visibleProperty().bind(profileViewModel.editableProperty().not());
+        removeBtn.visibleProperty().bind(profileViewModel.editableProperty().not().and(profileViewModel.isCoachProperty().not()));
         updateBtn.visibleProperty().bind(profileViewModel.editableProperty());
 
         //only seen if profile is editable, you have a coach, and you yourself are not a coach

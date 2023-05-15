@@ -102,6 +102,7 @@ public class EditRosterViewModel extends ViewModel
     loadTrainee();
     errorProperty.set("");
     usernameProperty.set(viewState.getUsername());
+    Logger.log("is a coach: "+viewState.isCoach());
   }
 
   public StringProperty getUsernameProperty() {
@@ -128,5 +129,15 @@ public class EditRosterViewModel extends ViewModel
     viewState.setFolderId(0);
     viewState.setNewFolder(false);
     viewState.setManageFolderEditable(false);
+  }
+
+  public void manageTraineeOpen(String username) {
+    viewState.setProfileUsername(username);
+    viewState.setGoBack("manageRoster");
+  }
+
+  public void setupOpenProfile() {
+    viewState.setProfileUsername(viewState.getUsername() );
+    viewState.setGoBack("manageRoster");
   }
 }

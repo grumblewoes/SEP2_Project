@@ -163,7 +163,9 @@ public class CoachDAO implements ICoachDAO
 
       statement.setString(1, username);
       ResultSet rs = statement.executeQuery();
-      return rs.next();
+      boolean success = rs.next();
+      Logger.log("is a coach: "+ success);
+      return success;
     }
     catch (SQLException e){
       Logger.log(e);
