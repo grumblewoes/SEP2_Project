@@ -87,7 +87,7 @@ public class UserDAO implements IUserDAO
     {
 
       PreparedStatement statement = connection.prepareStatement(
-              "select height,weight,first_name,last_name,username,share_profile,status " +
+              "select height,weight,first_name,last_name,username,share_profile,status, coach " +
                       "from trainee2 " +
                       "where username = '"+username+"';"
       );
@@ -101,7 +101,8 @@ public class UserDAO implements IUserDAO
         String lastName = rs.getString(4);
         boolean shareProfile = rs.getBoolean(6);
         String status = rs.getString(7);
-        user= new User(height,weight,firstName,lastName,username,status,shareProfile);
+        String coachUsername = rs.getString(8);
+        user= new User(height,weight,firstName,lastName,username,status,shareProfile,coachUsername);
       }
 
 

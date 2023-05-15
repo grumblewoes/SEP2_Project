@@ -39,14 +39,16 @@ public class HomeViewModel extends ViewModel{
     }
     public StringProperty getFriendshipRequestListProperty() {     return friendshipRequestListProperty;  }
     public StringProperty getFriendshipListProperty() {     return friendshipListProperty;  }
-
-    private void loadFolders() {
-        //get list of folders from the database
-        //can't simply cast string to StringProperty, so I made a temp variable
-        FolderList folderList = model.getFolderList(usernameProperty.get());
-
-        folderListProperty.set(gson.toJson(folderList));
+    public StringProperty getMeetingListProperty()
+    {
+        return meetingListProperty;
     }
+    public StringProperty getMeetingRequestListProperty()
+    {
+        return meetingRequestListProperty;
+    }
+
+
 
     public boolean createFolder() {
         //pass to ViewState, view will switch to manage folder screen. DB call will be made there
@@ -54,6 +56,7 @@ public class HomeViewModel extends ViewModel{
         viewState.setManageFolderEditable(true);
         return true; //why a bool here? ig if there's issues with the DB?
     }
+
 
     public boolean removeFolder(int folderId) {
         //call DB, then call clear
@@ -122,19 +125,12 @@ public class HomeViewModel extends ViewModel{
         friendshipListProperty.set( gson.toJson(friends) );
 
     }
+    private void loadFolders() {
+        //get list of folders from the database
+        //can't simply cast string to StringProperty, so I made a temp variable
+        FolderList folderList = model.getFolderList(usernameProperty.get());
 
-    public void acceptRequest(String username) {
-        model.acceptFriendRequest(username, viewState.getUsername());
-    }
-    public void rejectRequest(String username) {
-        model.rejectFriendRequest(username, viewState.getUsername());
-    }
-
-    public void logout() {
-        model.disconnectListener(viewState.getUsername());
-        viewState.setUsername(null);
-        viewState.setProfileUsername(null);
-        viewState.setIsCoach(false);
+        folderListProperty.set(gson.toJson(folderList));
     }
 
     private void loadMeetings(){
@@ -149,16 +145,26 @@ public class HomeViewModel extends ViewModel{
 
     }
 
-    public StringProperty meetingListPropertyProperty()
-    {
-        return meetingListProperty;
+    public void acceptRequest(String username) {
+        model.acceptFriendRequest(username, viewState.getUsername());
     }
-    public StringProperty meetingRequestListPropertyProperty()
-    {
-        return meetingRequestListProperty;
+    public void rejectRequest(String username) {
+        model.rejectFriendRequest(username, viewState.getUsername());
     }
 
-    public boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting){
-        return model.removeMeeting(traineeUsername,coachUsername,dateOfMeeting);
+    public boolean removeMeeting(LocalDate dateOfMeeting){
+        return model.removeMeeting(viewState.getUsername(),
+            model.getCoach(viewState.getUsername()).getUsername(), dateOfMeeting);
     }
+
+    public void logout() {
+        model.disconnectListener(viewState.getUsername());
+        viewState.setUsername(null);
+        viewState.setProfileUsername(null);
+        viewState.setIsCoach(false);
+    }
+
+
+
+
 }

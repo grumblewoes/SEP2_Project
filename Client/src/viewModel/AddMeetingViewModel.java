@@ -21,13 +21,13 @@ public class AddMeetingViewModel extends ViewModel
   public AddMeetingViewModel(Model model, ViewState viewState){
     this.model=model;
     this.viewState = viewState;
-    coachProperty = new SimpleStringProperty(model.getCoach(viewState.getUsername()).getUsername());
+    coachProperty = new SimpleStringProperty();
     errorProperty = new SimpleStringProperty();
     dateOfMeeting = new SimpleObjectProperty<>();
   }
   public boolean sendMeetingRequest(){
     String traineeUsername = viewState.getUsername();
-    String coachUsername = model.getCoach(viewState.getUsername()).getUsername();
+    String coachUsername = model.getCoach(viewState.getProfileUsername()).getCoach();
     LocalDate date= dateOfMeeting.get();
 
     boolean successAddition = model.sendMeetingRequest(traineeUsername,coachUsername, date);
@@ -44,7 +44,7 @@ public class AddMeetingViewModel extends ViewModel
   public StringProperty getErrorProperty() {return errorProperty;}
   public ObjectProperty<LocalDate> getDateOfMeeting(){return dateOfMeeting;}
 
-  public StringProperty coachPropertyProperty()
+  public StringProperty getCoachProperty()
   {
     return coachProperty;
   }

@@ -14,3 +14,5 @@ create table meeting_request(
                                 date_of_meeting date not null ,
                                 primary key (trainee_username,coach_username, date_of_meeting)
 );
+
+insert into

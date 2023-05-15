@@ -15,8 +15,18 @@ public class User implements Serializable {
         this.username = username;
         this.status = status;
         this.shareProfile = shareProfile;
-        this.coach=null;
     }
+    public User(int height, int weight, String firstName, String lastName, String username, String status,boolean shareProfile,String coach) {
+        this.height = height;
+        this.weight = weight;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.status = status;
+        this.shareProfile = shareProfile;
+        this.coach=coach;
+    }
+
 
     public int getHeight() {
         return height;
@@ -67,4 +77,9 @@ public class User implements Serializable {
     public boolean isShareProfile() { return shareProfile; }
 
     public void setShareProfile(boolean shareProfile) {  this.shareProfile = shareProfile;  }
+
+    public String getCoach()
+    {
+        return coach;
+    }
 }

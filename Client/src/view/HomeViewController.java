@@ -11,25 +11,23 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import mediator.Folder;
-import mediator.FolderList;
-import mediator.Friend;
-import mediator.FriendList;
+import mediator.*;
 import util.Logger;
 import viewModel.HomeViewModel;
 import viewModel.ViewModel;
 
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class HomeViewController extends ViewController
 {
-  @FXML private Label usernameLabel;
-  @FXML private VBox folderBox, friendshipBox;
+  @FXML private Label usernameLabel, errorLabel;
+  @FXML private VBox folderBox, friendshipBox, meetingBox;
   private ViewHandler viewHandler;
 
   private HomeViewModel homeViewModel;
-  private StringProperty friendRequestList;
+  private StringProperty friendRequestList, meetingRequestsList;
   private Gson gson;
 
   @Override public void init(ViewHandler viewHandler, ViewModel viewModel, Region root)
@@ -41,7 +39,10 @@ public class HomeViewController extends ViewController
 
     friendRequestList = new SimpleStringProperty();
     friendRequestList.bind(homeViewModel.getFriendshipRequestListProperty());
+    meetingRequestsList=new SimpleStringProperty();
+    meetingRequestsList.bind(homeViewModel.getMeetingRequestListProperty());
     usernameLabel.textProperty().bind(homeViewModel.getUsernameProperty() );
+    errorLabel.textProperty().bind(homeViewModel.getErrorLabel());
     homeViewModel.getFolderListProperty().addListener( (obs,oldVal,newVal) -> {
       populateFolders(newVal);
     });
@@ -49,7 +50,9 @@ public class HomeViewController extends ViewController
     homeViewModel.getFriendshipListProperty().addListener( (obs,oldVal,newVal)->{
       populateFriendships(newVal);
     });
-
+    homeViewModel.getMeetingListProperty().addListener( (obs,oldVal,newVal)->{
+      populateMeetings(newVal);
+    });
   }
 
   @FXML private void createFolder(){
@@ -85,9 +88,64 @@ public class HomeViewController extends ViewController
     }
 
   }
+  private HBox createFolderElement(String title,int id){
+    HBox hBox = new HBox();
 
-  @FXML private void sendRequest(){
+    hBox.getStyleClass().addAll("bg-primary","fs-2");
+    hBox.setPadding( new Insets(10,10,10,10));
+    HBox.setMargin(hBox,new Insets(0,0,5,0));
+    VBox v1 = new VBox();
+    HBox.setHgrow(v1, Priority.ALWAYS);
+    v1.setAlignment(Pos.CENTER_LEFT);
+
+    Label label = new Label(title);
+    Button renameBtn = new Button("Rename");
+    renameBtn.getStyleClass().addAll("btn-warning");
+    renameBtn.onActionProperty().setValue((evt)->renameFolder(title,id));
+
+
+    Button removeBtn = new Button("Remove");
+    removeBtn.getStyleClass().addAll("btn-danger");
+    removeBtn.onActionProperty().setValue((evt)->removeFolder(id));
+
+    Button openBtn = new Button("Open");
+    openBtn.getStyleClass().addAll("btn-success");
+    openBtn.onActionProperty().setValue((evt)->openFolder(title,id));
+
+    int r = 5,l=5;
+    HBox.setMargin(renameBtn,new Insets(0,r,0,l));
+    HBox.setMargin(openBtn,new Insets(0,r,0,l));
+    HBox.setMargin(removeBtn,new Insets(0,r,0,l));
+
+    hBox.getChildren().add(v1);
+    v1.getChildren().add(label);
+    hBox.getChildren().add(openBtn);
+    hBox.getChildren().add(renameBtn);
+    hBox.getChildren().add(removeBtn);
+
+    return hBox;
+  }
+
+  @FXML private void sendFriendRequest(){
     viewHandler.openView("addFriend");
+  }
+  @Override public void reset()
+  {
+    homeViewModel.clear();
+  }
+
+  @FXML private void usernameLabelClicked(){
+    homeViewModel.setupProfile();
+    viewHandler.openView("profile");
+  }
+  @FXML private void usernamePictureClicked(){
+    homeViewModel.setupProfile();
+    viewHandler.openView("profile");
+  }
+
+  @FXML private void logout() {
+    homeViewModel.logout();
+    viewHandler.openView("logIn");
   }
 
   private void populateFriendships(String friendListJson){
@@ -96,19 +154,15 @@ public class HomeViewController extends ViewController
 
     friendshipBox.getChildren().remove(0, friendshipBox.getChildren().size());
 
-    if(friends!=null)
+    if(requests!=null)
       for(String username: requests)
         friendshipBox.getChildren().add( createFriendRequestComponent(username) );
-    if(requests!=null)
+    if(friends!=null)
       for(int i=0;i<friends.size();++i){
         Friend friend = friends.get(i);
         friendshipBox.getChildren().add( createFriendComponent(friend.getUsername(),friend.getStatus()) );
       }
 
-
-
-//    Logger.log(friends);
-//    Logger.log(requests);
   }
 
   private HBox createFriendComponent(String username,String status){
@@ -163,7 +217,43 @@ public class HomeViewController extends ViewController
     homeViewModel.setupProfile(username);
     viewHandler.openView("profile");
   }
-  private HBox createFolderElement(String title,int id){
+
+
+  @FXML private void addMeeting(){
+    // if there is no coach write an error message
+    viewHandler.openView("addMeeting");
+  }
+
+  private void populateMeetings(String meetingListString){
+    MeetingList meetingList = gson.fromJson(meetingListString, MeetingList.class);
+    MeetingList meetingRequests = gson.fromJson(meetingRequestsList.get(),MeetingList.class);
+
+    meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
+
+    if (meetingRequests!=null){
+      for(int i=0;i<meetingRequests.size();++i){
+        LocalDate localDate = meetingList.get(i).getDateOfMeeting();
+        DateTimeFormatter formatter =DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate=localDate.format(formatter);
+        String status = "Pending...";
+        folderBox.getChildren().add( createMeetingRequestElement(localDate,formattedDate,status));
+      }
+    }
+    else if (meetingList!=null)
+    {
+      for(int i=0;i<meetingList.size();++i){
+        LocalDate localDate = meetingList.get(i).getDateOfMeeting();
+        DateTimeFormatter formatter =DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate=localDate.format(formatter);
+        folderBox.getChildren().add( createMeetingElement(localDate, formattedDate) );
+      }
+    }
+  }
+
+  private void removeMeeting(LocalDate date){
+    homeViewModel.removeMeeting(date);
+  }
+  private HBox createMeetingElement(LocalDate localDate, String date){
     HBox hBox = new HBox();
 
     hBox.getStyleClass().addAll("bg-primary","fs-2");
@@ -172,48 +262,50 @@ public class HomeViewController extends ViewController
     HBox.setHgrow(v1, Priority.ALWAYS);
     v1.setAlignment(Pos.CENTER_LEFT);
 
-    Label label = new Label(title);
-    Button renameBtn = new Button("Rename");
-    renameBtn.getStyleClass().addAll("btn-warning");
-    renameBtn.onActionProperty().setValue((evt)->renameFolder(title,id));
+    Label dateLabel = new Label(date);
 
 
     Button removeBtn = new Button("Remove");
     removeBtn.getStyleClass().addAll("btn-danger");
-    removeBtn.onActionProperty().setValue((evt)->removeFolder(id));
-
-    Button openBtn = new Button("Open");
-    openBtn.getStyleClass().addAll("btn-success");
-    openBtn.onActionProperty().setValue((evt)->openFolder(title,id));
+    removeBtn.onActionProperty().setValue((evt)->removeMeeting(localDate));
 
     int r = 5,l=5;
-    HBox.setMargin(renameBtn,new Insets(0,r,0,l));
-    HBox.setMargin(openBtn,new Insets(0,r,0,l));
     HBox.setMargin(removeBtn,new Insets(0,r,0,l));
 
     hBox.getChildren().add(v1);
-    v1.getChildren().add(label);
-    hBox.getChildren().add(renameBtn);
+    v1.getChildren().add(dateLabel);
     hBox.getChildren().add(removeBtn);
-    hBox.getChildren().add(openBtn);
-
 
 
     return hBox;
   }
+  private HBox createMeetingRequestElement(LocalDate localDate, String date,String status){
+    HBox hBox = new HBox();
 
-  @Override public void reset()
-  {
-    homeViewModel.clear();
+    hBox.getStyleClass().addAll("bg-light","fs-2");
+    hBox.setPadding( new Insets(10,10,10,10));
+    VBox v1 = new VBox();
+    HBox.setHgrow(v1, Priority.ALWAYS);
+    v1.setAlignment(Pos.CENTER_LEFT);
+
+    Label dateLabel = new Label(date);
+    Label statusLabel = new Label(status);
+
+
+    Button removeBtn = new Button("Remove");
+    removeBtn.getStyleClass().addAll("btn-danger");
+    removeBtn.onActionProperty().setValue((evt)->removeMeeting(localDate));
+
+    int r = 5,l=5;
+    HBox.setMargin(removeBtn,new Insets(0,r,0,l));
+    HBox.setMargin(statusLabel,new Insets(0,r,0,l));
+
+    hBox.getChildren().add(v1);
+    v1.getChildren().add(dateLabel);
+    hBox.getChildren().add(statusLabel);
+    hBox.getChildren().add(removeBtn);
+
+
+    return hBox;
   }
-
-  @FXML private void usernameLabelClicked(){
-    homeViewModel.setupProfile();
-    viewHandler.openView("profile");
-  }
-
-    @FXML private void logout() {
-      homeViewModel.logout();
-      viewHandler.openView("logIn");
-    }
 }

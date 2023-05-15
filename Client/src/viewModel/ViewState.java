@@ -65,4 +65,5 @@ public class ViewState {
     public void setGoBack(String goBack) { this.goBack = goBack; }
     public String getProfileUsername() { return profileUsername; }
     public void setProfileUsername(String profileUsername) { this.profileUsername = profileUsername; }
+
 }
