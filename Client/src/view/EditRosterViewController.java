@@ -66,11 +66,53 @@ public class EditRosterViewController extends ViewController {
   }
 
   private void populateMeetingRequests(String meetingString) {
+    //gets the list from a gson string
+    MeetingList meetingList = gson.fromJson(meetingString, MeetingList.class);
 
+    //resets the list to 0 so it can refresh
+    meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
+    meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
+
+    //loops through the list, adding each element
+    for (int i = 0; i < meetingList.getSize(); ++i) {
+      String u = meetingList.getMeeting(i);
+      meetingBox.getChildren().add(createMeetingComponent());
+    }
   }
 
-  private void createMeetingComponent(String date) {
+  private HBox createMeetingComponent(String date, String trainee) {
+    HBox hBox = new HBox();
 
+    hBox.getStyleClass().addAll("bg-primary","fs-2");
+    hBox.setAlignment(Pos.CENTER_LEFT);
+    hBox.setPadding( new Insets(30,30,30,30));
+
+    Button acceptBtn = new Button("✓");
+    Button rejectBtn = new Button("X");
+    acceptBtn.getStyleClass().addAll("btn-success");
+    rejectBtn.getStyleClass().addAll("btn-danger");
+
+    acceptBtn.onActionProperty().setValue((evt)->acceptMtgRequest());
+    rejectBtn.onActionProperty().setValue((evt)->denyMtgRequest());
+
+    Label meetingLabel = new Label(date + "\n" + trainee);
+    meetingLabel.getStyleClass().addAll("fs-2","btn-success","cursor-default");
+    meetingLabel.setOnMouseClicked(event -> {
+      //comma used as delimiter for string formatting
+      editRosterViewModel.setSelectedMeeting(date + "," + trainee);
+    });
+
+    hBox.getChildren().addAll(meetingLabel);
+
+    return hBox;
+  }
+
+  private void denyMtgRequest() {
+    editRosterViewModel.denyMeeting();
+  }
+
+  private void acceptMtgRequest() {
+    editRosterViewModel.approveMeeting();
   }
 
   private void populateTraineeRequests(String requestListString)

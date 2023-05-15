@@ -15,13 +15,12 @@ import util.Logger;
 import view.ViewController;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class EditRosterViewModel extends ViewModel
 {
-  private Button acceptButton;
-  private Button denyButton;
-  private Button removeButton;
 
   private StringProperty errorProperty, traineeList, usernameProperty, selectedTraineeName, selectedMtg;
 
@@ -31,6 +30,7 @@ public class EditRosterViewModel extends ViewModel
   private StringProperty traineeRequestList;
 
   private Gson gson;
+  private DateTimeFormatter formatter;
 
   public EditRosterViewModel(Model model, ViewState viewState){
     this.model =model;
@@ -42,6 +42,7 @@ public class EditRosterViewModel extends ViewModel
     selectedTraineeName = new SimpleStringProperty();
     selectedMtg = new SimpleStringProperty();
     gson = new Gson();
+    formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
   }
 
   public StringProperty getErrorProperty(){
@@ -92,7 +93,10 @@ public class EditRosterViewModel extends ViewModel
   }
 
   public boolean approveMeeting() {
-    if (model.approveMeeting(uhh, usernameProperty.get(), uhh))
+    String[] s = selectedMtg.get().split(",");
+    LocalDate date = LocalDate.parse(s[0], formatter);
+
+    if (model.approveMeeting(s[1], usernameProperty.get(), date))
       return true;
     else
       errorProperty.set("An error occurred while trying to approve the meeting request.");
@@ -100,7 +104,10 @@ public class EditRosterViewModel extends ViewModel
   }
 
   public boolean denyMeeting() {
-    if (model.denyMeeting(uh, usernameProperty.get(), uh))
+    String[] s = selectedMtg.get().split(",");
+    LocalDate date = LocalDate.parse(s[0], formatter);
+
+    if (model.denyMeeting(s[1], usernameProperty.get(), date))
       return true;
     else
       errorProperty.set("An error occurred while trying to deny the meeting request.");
@@ -118,12 +125,11 @@ public class EditRosterViewModel extends ViewModel
     return usernameProperty;
   }
 
-  public void setSelectedMtg(String s) {
-    selectedMtg = new SimpleStringProperty(s);
-  }
-
   public void setSelectedTraineeName(String selectedTraineeName) {
     this.selectedTraineeName = new SimpleStringProperty(selectedTraineeName);
+  }
+  public void setSelectedMeeting(String mtgString) {
+    this.selectedMtg = new SimpleStringProperty(mtgString);
   }
 
   public void logout() {
