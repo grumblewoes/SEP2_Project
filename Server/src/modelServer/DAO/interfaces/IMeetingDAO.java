@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface IMeetingDAO
 {
-  boolean removeMeeting(String coachUsername, String traineeUsername, LocalDate date) throws SQLException;
+  boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate date) throws SQLException;
 
   boolean approveMeeting(String trainee, String coach, LocalDate date) throws
       SQLException;

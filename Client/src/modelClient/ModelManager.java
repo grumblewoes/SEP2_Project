@@ -188,15 +188,9 @@ public class ModelManager implements Model, LocalListener<String,String>
 	@Override
 	public void disconnectListener(String username){client.disconnectListener(username);}
 
-	@Override public MeetingList getCoachMeetingList(String coachUsername)
+		@Override public boolean removeMeeting(String traineeUsername, String coachName,LocalDate date)
 	{
-		return client.getCoachMeetingList(coachUsername);
-	}
-
-
-		@Override public boolean removeMeeting(String coachName, String traineeUsername, LocalDate date)
-	{
-		return client.removeMeeting(coachName, traineeUsername, date);
+		return client.removeMeeting(traineeUsername, coachName, date);
 	}
 
 	@Override public boolean denyRequest(String traineeUsername)

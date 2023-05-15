@@ -495,12 +495,12 @@ public class ModelManager implements Model
     }
   }
 
-  @Override public boolean removeMeeting(String coachName,
-      String traineeUsername, LocalDate date)
+  @Override public boolean removeMeeting(
+      String traineeUsername, String coachName, LocalDate date)
   {
     try
     {
-      return new MeetingDAO().removeMeeting(coachName, traineeUsername, date);
+      return new MeetingDAO().removeMeeting(traineeUsername, coachName, date);
     }
     catch (SQLException e)
     {
