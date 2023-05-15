@@ -13,17 +13,26 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import mediator.Meeting;
+import mediator.MeetingList;
 import mediator.TraineeList;
 import util.Logger;
 import viewModel.EditRosterViewModel;
 import viewModel.ViewModel;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class EditRosterViewController extends ViewController {
 
   @FXML
   private Label errorLabel;
   @FXML
-  private VBox meetingBox, requestBox, traineeBox;
+  private VBox requestBox, traineeBox;
+
+  @FXML
+  private HBox meetingBox, meetingRequestBox;
 
   @FXML
   private Label usernameLabel;
@@ -48,6 +57,9 @@ public class EditRosterViewController extends ViewController {
     editRosterViewModel.getTraineeRequestList().addListener((obs, oldVal, newVal) -> {
       populateTraineeRequests(newVal);
     });
+    editRosterViewModel.getMeetingRequestList().addListener((obs, oldVal, newVal) -> {
+      populateMeetingRequests(newVal);
+    });
   }
 
   @FXML
@@ -65,22 +77,35 @@ public class EditRosterViewController extends ViewController {
     viewHandler.openView(editRosterViewModel.getUsernameProperty().get());
   }
 
-  private void populateMeetingRequests(String meetingString) {
+  private void populateMeetings(String meetingString) {
     //gets the list from a gson string
-    MeetingList meetingList = gson.fromJson(meetingString, MeetingList.class);
+    ArrayList<String> list = gson.fromJson(meetingString, ArrayList.class);
 
-    //resets the list to 0 so it can refresh
-    meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
     meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
 
-    //loops through the list, adding each element
-    for (int i = 0; i < meetingList.getSize(); ++i) {
-      String u = meetingList.getMeeting(i);
-      meetingBox.getChildren().add(createMeetingComponent());
+    //loops through the list, adding each element. formatted as date,trainee for each entry. delimited by comma
+    for (int i = 0; i < list.size(); ++i) {
+      String[] mtg = list.get(i).split(",");
+      String date = mtg[0];
+      String trainee = mtg[1];
+      meetingBox.getChildren().add(createMeetingComponent(date, trainee));
     }
   }
 
-  private HBox createMeetingComponent(String date, String trainee) {
+  private void populateMeetingRequests(String meetingString) {
+    //gets the list from a gson string
+    ArrayList<String> list = gson.fromJson(meetingString, ArrayList.class);
+
+    //loops through the list, adding each element. formatted as date,trainee for each entry. delimited by comma
+    for (int i = 0; i < list.size(); ++i) {
+      String[] mtg = list.get(i).split(",");
+      String date = mtg[0];
+      String trainee = mtg[1];
+      meetingRequestBox.getChildren().add(createMeetingRequestComponent(date, trainee));
+    }
+  }
+
+  private HBox createMeetingRequestComponent(String date, String trainee) {
     HBox hBox = new HBox();
 
     hBox.getStyleClass().addAll("bg-primary","fs-2");
@@ -92,27 +117,54 @@ public class EditRosterViewController extends ViewController {
     acceptBtn.getStyleClass().addAll("btn-success");
     rejectBtn.getStyleClass().addAll("btn-danger");
 
-    acceptBtn.onActionProperty().setValue((evt)->acceptMtgRequest());
-    rejectBtn.onActionProperty().setValue((evt)->denyMtgRequest());
-
-    Label meetingLabel = new Label(date + "\n" + trainee);
-    meetingLabel.getStyleClass().addAll("fs-2","btn-success","cursor-default");
-    meetingLabel.setOnMouseClicked(event -> {
-      //comma used as delimiter for string formatting
+    acceptBtn.onActionProperty().setValue((evt)->{
       editRosterViewModel.setSelectedMeeting(date + "," + trainee);
+      acceptMtgRequest();
+    });
+    rejectBtn.onActionProperty().setValue((evt)-> {
+      editRosterViewModel.setSelectedMeeting(date + "," + trainee);
+      denyMtgRequest();
     });
 
+    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate dateDispIn = LocalDate.parse(date, inputFormatter);
+    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    String dateDispOut = dateDispIn.format(outputFormatter);
+
+    Label meetingLabel = new Label(dateDispOut + " " + trainee);
+    meetingLabel.getStyleClass().addAll("fs-2","btn-success","cursor-default");
+    hBox.getChildren().addAll(acceptBtn, meetingLabel, rejectBtn);
+
+    return hBox;
+  }
+
+  private HBox createMeetingComponent(String date, String trainee) {
+    HBox hBox = new HBox();
+
+    hBox.getStyleClass().addAll("bg-primary","fs-2");
+    hBox.setAlignment(Pos.CENTER_LEFT);
+    hBox.setPadding( new Insets(30,30,30,30));
+
+    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate dateDispIn = LocalDate.parse(date, inputFormatter);
+    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    String dateDispOut = dateDispIn.format(outputFormatter);
+
+    Label meetingLabel = new Label(dateDispOut + " "  + trainee);
+    meetingLabel.getStyleClass().addAll("fs-2","btn-success","cursor-default");
     hBox.getChildren().addAll(meetingLabel);
 
     return hBox;
   }
 
   private void denyMtgRequest() {
-    editRosterViewModel.denyMeeting();
+    if (editRosterViewModel.denyMeeting())
+      reset();
   }
 
   private void acceptMtgRequest() {
-    editRosterViewModel.approveMeeting();
+    if (editRosterViewModel.approveMeeting())
+      reset();
   }
 
   private void populateTraineeRequests(String requestListString)

@@ -126,6 +126,9 @@ public class ModelManager implements Model, LocalListener<String,String>
 	public ArrayList<String> getFriendRequests(String username) {
 		return client.getFriendRequests(username);
 	}
+	@Override
+	public ArrayList<String> getMeetingRequests(String coach) {
+		return client.getMeetingRequests(coach); }
 
 	@Override
 	public void propertyChange(ObserverEvent<String, String> event) {
@@ -217,6 +220,11 @@ public class ModelManager implements Model, LocalListener<String,String>
 	@Override
 	public boolean denyMeeting(String trainee, String coach, LocalDate date) {
 		return client.denyMeeting(trainee, coach, date);
+	}
+
+	@Override
+	public ArrayList<String> getCoachMeetings(String coach) {
+		return client.getCoachMeetings(coach);
 	}
 
 	//	@Override

@@ -1,6 +1,7 @@
 package viewModel;
 
 import com.google.gson.Gson;
+import javafx.beans.Observable;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -8,12 +9,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import mediator.FriendList;
+import mediator.MeetingList;
 import mediator.Trainee;
 import mediator.TraineeList;
 import modelClient.Model;
 import util.Logger;
 import view.ViewController;
 
+import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,7 +30,7 @@ public class EditRosterViewModel extends ViewModel
   private Model model;
   private ViewState viewState;
 
-  private StringProperty traineeRequestList;
+  private StringProperty traineeRequestList, meetingRequestList, meetingList;
 
   private Gson gson;
   private DateTimeFormatter formatter;
@@ -38,11 +41,13 @@ public class EditRosterViewModel extends ViewModel
     usernameProperty = new SimpleStringProperty();
     errorProperty = new SimpleStringProperty();
     traineeRequestList = new SimpleStringProperty();
+    meetingRequestList = new SimpleStringProperty();
     traineeList = new SimpleStringProperty();
     selectedTraineeName = new SimpleStringProperty();
     selectedMtg = new SimpleStringProperty();
+    meetingList = new SimpleStringProperty();
     gson = new Gson();
-    formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   }
 
   public StringProperty getErrorProperty(){
@@ -52,6 +57,11 @@ public class EditRosterViewModel extends ViewModel
   public StringProperty getTraineeRequestList (){
     return traineeRequestList;
   }
+
+  public StringProperty getMeetingRequestList()
+  { return meetingRequestList; }
+  public StringProperty getMeetingList()
+  { return meetingList; }
 
   public StringProperty getTraineeList(){
     return traineeList;
@@ -77,6 +87,18 @@ public class EditRosterViewModel extends ViewModel
       traineeList.set(gson.toJson(trainees));
   }
 
+  private void loadMtgRequests()
+  {
+    ArrayList<String> mtgList = model.getMeetingRequests(viewState.getUsername());
+    meetingRequestList.set(gson.toJson(mtgList));
+  }
+
+  private void loadMtgs()
+  {
+    ArrayList<String> mtgList = model.getCoachMeetings(viewState.getUsername());
+    meetingList.set(gson.toJson(mtgList));
+  }
+
   public boolean acceptRequest(String username) {
     return model.acceptRequest(username, viewState.getUsername());
   }
@@ -89,11 +111,12 @@ public class EditRosterViewModel extends ViewModel
       return true;
     else
       errorProperty.set("An error occurred while trying to remove trainee.");
-      return false;
+    return false;
   }
 
   public boolean approveMeeting() {
     String[] s = selectedMtg.get().split(",");
+    System.out.println(selectedMtg.get());
     LocalDate date = LocalDate.parse(s[0], formatter);
 
     if (model.approveMeeting(s[1], usernameProperty.get(), date))
@@ -117,9 +140,13 @@ public class EditRosterViewModel extends ViewModel
   @Override public void clear()
   {
     loadTrainee();
+    loadMtgRequests();
+    loadMtgs();
     errorProperty.set("");
     usernameProperty.set(viewState.getUsername());
   }
+
+
 
   public StringProperty getUsernameProperty() {
     return usernameProperty;
@@ -130,6 +157,9 @@ public class EditRosterViewModel extends ViewModel
   }
   public void setSelectedMeeting(String mtgString) {
     this.selectedMtg = new SimpleStringProperty(mtgString);
+  }
+  public StringProperty getSelectedMeeting() {
+    return selectedMtg;
   }
 
   public void logout() {
@@ -144,4 +174,6 @@ public class EditRosterViewModel extends ViewModel
     viewState.setNewFolder(false);
     viewState.setManageFolderEditable(false);
   }
+
+
 }

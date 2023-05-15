@@ -186,6 +186,18 @@ public class Server implements RemoteModel
     return model.getTraineeRequest(username);
   }
 
+  @Override public ArrayList<String> getMeetingRequests(String coach)
+      throws RemoteException
+  {
+    return model.getMeetingRequests(coach);
+  }
+
+  @Override public ArrayList<String> getCoachMeetings(String coach)
+      throws RemoteException
+  {
+    return model.getCoachMeetings(coach);
+  }
+
   @Override
   public boolean approveMeeting(String trainee, String coach, LocalDate date) throws RemoteException {
     return model.approveMeeting(trainee, coach, date);

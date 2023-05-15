@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditRosterViewController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditRosterViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="156.0">
          <children>
@@ -118,9 +118,15 @@
                <children>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                      <content>
-                        <VBox fx:id="meetingBox" prefHeight="200.0" prefWidth="774.0">
+                        <VBox prefHeight="200.0" prefWidth="774.0">
                            <children>
-                              <HBox prefHeight="100.0" prefWidth="647.0" style="-fx-background-color: #93ff87;">
+                              <HBox fx:id="meetingBox" prefHeight="100.0" prefWidth="647.0" style="-fx-background-color: #93ff87;">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+                                    <VBox prefHeight="200.0" prefWidth="107.0" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="meetingRequestBox" prefHeight="100.0" prefWidth="647.0" style="-fx-background-color: #93ff87;">
                                  <children>
                                     <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                                     <VBox prefHeight="200.0" prefWidth="107.0" />

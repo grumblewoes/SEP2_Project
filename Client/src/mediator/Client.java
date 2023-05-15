@@ -15,6 +15,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Client implements Model, RemoteListener<String, String>, LocalSubject<String,String> {
@@ -409,6 +410,54 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
     try
     {
       return server.getTraineeRequest(username);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public ArrayList<String> getMeetingRequests(String coach) {
+    try
+    {
+      return server.getMeetingRequests(coach);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public ArrayList<String> getCoachMeetings(String coach) {
+    try
+    {
+      return server.getCoachMeetings(coach);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public boolean approveMeeting(String trainee, String coach,
+      LocalDate date)
+  {
+    try
+    {
+      return server.approveMeeting(trainee, coach, date);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public boolean denyMeeting(String trainee, String coach,
+      LocalDate date)
+  {
+    try
+    {
+      return server.denyMeeting(trainee, coach, date);
     }
     catch (RemoteException e)
     {
