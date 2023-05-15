@@ -99,8 +99,8 @@
                   </VBox>
                   <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="-">
-<!--                           onAction="#removeMeeting"-->
+                        <Button mnemonicParsing="false"  onAction="#removeMeeting" prefHeight="30.0" prefWidth="40.0" text="-">
+
                            <styleClass>
                               <String fx:value="btn-danger" />
                               <String fx:value="fs-2" />

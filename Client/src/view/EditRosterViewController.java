@@ -89,35 +89,19 @@ public class EditRosterViewController extends ViewController {
 
     Label label = new Label(date);
 
-    Button removeBtn = new Button("Remove");
-    removeBtn.getStyleClass().addAll("btn-danger");
-    removeBtn.onActionProperty().setValue((evt)->removeMeeting(date, trainee));
-
-
-    int r = 5,l=5;
-    HBox.setMargin(removeBtn,new Insets(0,r,0,l));
-
+    label.setOnMouseClicked(event -> {
+      editRosterViewModel.setSelectedMeeting(date, trainee);
+    });
     hBox.getChildren().add(v1);
     v1.getChildren().add(label);
-    hBox.getChildren().add(removeBtn);
 
     return hBox;
   }
 
-  @FXML
-  void acceptRequest(ActionEvent event) {
-    //editRosterViewModel.acceptRequest();
-  }
-
-  @FXML
-  void denyRequest(ActionEvent event) {
-    //editRosterViewModel.denyRequest();
-  }
-
-  @FXML void removeMeeting(String date, String traineeUsername)
+  @FXML private void removeMeeting(ActionEvent event)
   {
-    editRosterViewModel.removeMeeting(date, traineeUsername);
-    reset();
+    if (editRosterViewModel.removeMeeting());
+    editRosterViewModel.clear();
   }
 
   @FXML

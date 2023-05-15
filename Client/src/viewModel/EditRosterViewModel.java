@@ -9,7 +9,6 @@ import modelClient.Model;
 import util.Logger;
 
 import java.rmi.RemoteException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class EditRosterViewModel extends ViewModel
@@ -18,11 +17,10 @@ public class EditRosterViewModel extends ViewModel
   private Button denyButton;
   private Button removeButton;
 
-  private StringProperty errorProperty, traineeList, usernameProperty, selectedTraineeName;
+  private StringProperty errorProperty, traineeList, usernameProperty, selectedTraineeName, selectedMeeting;
 
   private Model model;
   private ViewState viewState;
-
   private StringProperty traineeRequestList;
   private StringProperty meetingsListProperty;
 
@@ -37,6 +35,7 @@ public class EditRosterViewModel extends ViewModel
     traineeRequestList = new SimpleStringProperty();
     traineeList = new SimpleStringProperty();
     selectedTraineeName = new SimpleStringProperty();
+    selectedMeeting = new SimpleStringProperty();
     meetingsListProperty = new SimpleStringProperty();
 
     gson = new Gson();
@@ -98,26 +97,21 @@ public class EditRosterViewModel extends ViewModel
     //get list of folders from the database
 
     MeetingList meetingList = model.getCoachMeetingList(usernameProperty.get());
-//    meetingsListProperty.set("");
+    //    meetingsListProperty.set("");
     meetingsListProperty.set(gson.toJson(meetingList));
 
   }
 
-  public boolean removeMeeting(String date, String traineeUsername)
+  public boolean removeMeeting()
   {
-    viewState.setUsername(usernameProperty.get());
-    try
-    {
-      model.removeMeeting(usernameProperty.get(), LocalDate.parse(date), traineeUsername);
-      clear();
+    if (model.removeMeeting(selectedMeeting.get()))
       return true;
-    }
-    catch (Exception e)
+    else
     {
-      errorProperty.set("Error deleting from DB");
+      errorProperty.set(
+          "An error occurred while trying to remove the meeting.");
       return false;
     }
-
   }
 
   public boolean acceptRequest(String username)
@@ -163,6 +157,17 @@ public class EditRosterViewModel extends ViewModel
   {
     System.out.println("Clicked");
     this.selectedTraineeName = new SimpleStringProperty(selectedTraineeName);
+  }
+
+  public StringProperty getSelectedMeeting()
+  {
+    return selectedMeeting;
+  }
+
+  public void setSelectedMeeting(String selectedMeeting, String trainee)
+  {
+    System.out.println("Clicked");
+    this.selectedMeeting = new SimpleStringProperty(selectedMeeting, trainee);
   }
 
   public void logout()
