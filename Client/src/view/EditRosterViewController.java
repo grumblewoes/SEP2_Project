@@ -32,7 +32,7 @@ public class EditRosterViewController extends ViewController {
   private VBox requestBox, traineeBox;
 
   @FXML
-  private HBox meetingBox, meetingRequestBox;
+  private HBox meetingBox;
 
   @FXML
   private Label usernameLabel;
@@ -60,6 +60,9 @@ public class EditRosterViewController extends ViewController {
     editRosterViewModel.getMeetingRequestList().addListener((obs, oldVal, newVal) -> {
       populateMeetingRequests(newVal);
     });
+    editRosterViewModel.getMeetingList().addListener((obs, oldVal, newVal) -> {
+      populateMeetings(newVal);
+    });
   }
 
   @FXML
@@ -81,14 +84,14 @@ public class EditRosterViewController extends ViewController {
     //gets the list from a gson string
     ArrayList<String> list = gson.fromJson(meetingString, ArrayList.class);
 
-    meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
-
     //loops through the list, adding each element. formatted as date,trainee for each entry. delimited by comma
-    for (int i = 0; i < list.size(); ++i) {
-      String[] mtg = list.get(i).split(",");
-      String date = mtg[0];
-      String trainee = mtg[1];
-      meetingBox.getChildren().add(createMeetingComponent(date, trainee));
+    if (list != null) {
+      for (int i = 0; i < list.size(); ++i) {
+        String[] mtg = list.get(i).split(",");
+        String date = mtg[0];
+        String trainee = mtg[1];
+        meetingBox.getChildren().add(createMeetingComponent(date, trainee));
+      }
     }
   }
 
@@ -97,11 +100,13 @@ public class EditRosterViewController extends ViewController {
     ArrayList<String> list = gson.fromJson(meetingString, ArrayList.class);
 
     //loops through the list, adding each element. formatted as date,trainee for each entry. delimited by comma
-    for (int i = 0; i < list.size(); ++i) {
-      String[] mtg = list.get(i).split(",");
-      String date = mtg[0];
-      String trainee = mtg[1];
-      meetingRequestBox.getChildren().add(createMeetingRequestComponent(date, trainee));
+    if (list != null) {
+      for (int i = 0; i < list.size(); ++i) {
+        String[] mtg = list.get(i).split(",");
+        String date = mtg[0];
+        String trainee = mtg[1];
+        meetingBox.getChildren().add(createMeetingRequestComponent(date, trainee));
+      }
     }
   }
 
@@ -263,6 +268,7 @@ public class EditRosterViewController extends ViewController {
 
   @Override
   public void reset() {
+    meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
     editRosterViewModel.clear();
   }
 

@@ -90,12 +90,14 @@ public class EditRosterViewModel extends ViewModel
   private void loadMtgRequests()
   {
     ArrayList<String> mtgList = model.getMeetingRequests(viewState.getUsername());
+    meetingRequestList.set("");
     meetingRequestList.set(gson.toJson(mtgList));
   }
 
   private void loadMtgs()
   {
     ArrayList<String> mtgList = model.getCoachMeetings(viewState.getUsername());
+    meetingList.set("");
     meetingList.set(gson.toJson(mtgList));
   }
 
@@ -139,6 +141,8 @@ public class EditRosterViewModel extends ViewModel
 
   @Override public void clear()
   {
+    //listeners in controller see this as a change when refreshing the screen, so it updates every time
+    //instead of only when there's updates
     loadTrainee();
     loadMtgRequests();
     loadMtgs();
