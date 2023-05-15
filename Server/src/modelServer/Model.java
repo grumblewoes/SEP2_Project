@@ -58,7 +58,7 @@ public interface Model
 
   ArrayList<String> getTraineeList(String username);
   ArrayList<String> getTraineeRequest(String username);
-  boolean removeMeeting(String coachName, LocalDate date);
+  boolean removeMeeting(String coachName, String traineeUsername, LocalDate date);
   MeetingList getCoachMeetingList(String coachName);
 
 

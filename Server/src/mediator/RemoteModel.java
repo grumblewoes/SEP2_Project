@@ -53,7 +53,7 @@ public interface RemoteModel extends RemoteSubject<String,String>
 	ArrayList<String> getTraineeList(String username) throws RemoteException;
 	ArrayList<String> getTraineeRequest(String username) throws RemoteException;
 
-	boolean removeMeeting(String coachName, LocalDate date) throws RemoteException;
+	boolean removeMeeting(String coachName, String traineeUsername, LocalDate date) throws RemoteException;
 	MeetingList getCoachMeetingList(String coachName) throws RemoteException;
 
 }

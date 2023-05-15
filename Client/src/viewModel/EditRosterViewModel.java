@@ -1,17 +1,12 @@
 package viewModel;
 
 import com.google.gson.Gson;
-import javafx.beans.Observable;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import mediator.*;
 import modelClient.Model;
 import util.Logger;
-import view.ViewController;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
@@ -103,17 +98,17 @@ public class EditRosterViewModel extends ViewModel
     //get list of folders from the database
 
     MeetingList meetingList = model.getCoachMeetingList(usernameProperty.get());
-    meetingsListProperty.set("");
+//    meetingsListProperty.set("");
     meetingsListProperty.set(gson.toJson(meetingList));
 
   }
 
-  public boolean removeMeeting(LocalDate date)
+  public boolean removeMeeting(String date, String traineeUsername)
   {
     viewState.setUsername(usernameProperty.get());
     try
     {
-      model.removeMeeting(usernameProperty.get(), date);
+      model.removeMeeting(usernameProperty.get(), LocalDate.parse(date), traineeUsername);
       clear();
       return true;
     }

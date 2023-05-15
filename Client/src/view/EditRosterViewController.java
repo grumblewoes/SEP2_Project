@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -15,14 +14,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import mediator.Meeting;
 import mediator.MeetingList;
 import mediator.TraineeList;
 import util.Logger;
 import viewModel.EditRosterViewModel;
 import viewModel.ViewModel;
-
-import java.time.LocalDate;
 
 public class EditRosterViewController extends ViewController {
 
@@ -62,21 +58,27 @@ public class EditRosterViewController extends ViewController {
   private void populateMeetings(String meetingsListString)
   {
 
-    MeetingList meetingList = gson.fromJson(meetingsListString, MeetingList.class);
+    try {
 
-    meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
+      MeetingList meetingList = gson.fromJson(meetingsListString, MeetingList.class);
+      meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
 
 
-    for (int i = 0; i < meetingList.size(); ++i)
-    {
-      String title = String.valueOf(meetingList.get(i).getDateOfMeeting());
-      meetingBox.getChildren().add(createMeetingComponent(
-          String.valueOf(meetingList.get(i))));
-      Logger.log(title + " ");
+      for (int i = 0; i < meetingList.size(); ++i)
+      {
+        String date = String.valueOf(meetingList.get(i).getDateOfMeeting());
+        String trainee = meetingList.get(i).getTraineeUsername();
+        meetingBox.getChildren().add(createMeetingComponent(date, trainee));
+        Logger.log(date + " " + trainee);
+      }
     }
+    catch (NullPointerException e) {
+      System.out.println("Fuck " + e );
+    }
+
   }
 
-  private HBox createMeetingComponent(String date) {
+  private HBox createMeetingComponent(String date, String trainee) {
     HBox hBox = new HBox();
 
     hBox.getStyleClass().addAll("bg-primary","fs-2");
@@ -89,8 +91,7 @@ public class EditRosterViewController extends ViewController {
 
     Button removeBtn = new Button("Remove");
     removeBtn.getStyleClass().addAll("btn-danger");
-    removeBtn.onActionProperty().setValue((evt)->removeMeeting(
-        LocalDate.parse(date)));
+    removeBtn.onActionProperty().setValue((evt)->removeMeeting(date, trainee));
 
 
     int r = 5,l=5;
@@ -113,9 +114,9 @@ public class EditRosterViewController extends ViewController {
     //editRosterViewModel.denyRequest();
   }
 
-  @FXML void removeMeeting(LocalDate date)
+  @FXML void removeMeeting(String date, String traineeUsername)
   {
-    editRosterViewModel.removeMeeting(date);
+    editRosterViewModel.removeMeeting(date, traineeUsername);
     reset();
   }
 

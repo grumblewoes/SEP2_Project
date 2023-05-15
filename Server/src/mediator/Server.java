@@ -186,10 +186,10 @@ public class Server implements RemoteModel
     return model.getTraineeRequest(username);
   }
 
-  @Override public boolean removeMeeting(String coachName, LocalDate date)
+  @Override public boolean removeMeeting(String coachName, String traineeUsername, LocalDate date)
       throws RemoteException
   {
-    return model.removeMeeting(coachName, date);
+    return model.removeMeeting(coachName, traineeUsername, date);
   }
 
   @Override public MeetingList getCoachMeetingList(String coachName)

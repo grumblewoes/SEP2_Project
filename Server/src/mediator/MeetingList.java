@@ -1,8 +1,9 @@
 package mediator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MeetingList
+public class MeetingList implements Serializable
 {
   private ArrayList<Meeting> list;
   public MeetingList(){

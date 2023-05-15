@@ -12,6 +12,6 @@ public interface IMeetingDAO
 {
   MeetingList getCoachMeetingList(String coachUsername) throws SQLException;
 
-  boolean removeMeeting(String coachUsername, LocalDate date) throws SQLException;
+  boolean removeMeeting(String coachUsername, String traineeUsername, LocalDate date) throws SQLException;
 
 }

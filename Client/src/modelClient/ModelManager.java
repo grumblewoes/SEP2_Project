@@ -193,9 +193,9 @@ public class ModelManager implements Model, LocalListener<String,String>
 		return client.getCoachMeetingList(coachUsername);
 	}
 
-	@Override public boolean removeMeeting(String coachName, LocalDate date)
+	@Override public boolean removeMeeting(String coachName, LocalDate date, String traineeUsername)
 	{
-		return client.removeMeeting(coachName, date);
+		return client.removeMeeting(coachName, date, traineeUsername);
 	}
 
 	@Override public boolean denyRequest(String traineeUsername)

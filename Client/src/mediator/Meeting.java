@@ -1,8 +1,9 @@
 package mediator;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Meeting
+public class Meeting implements Serializable
 {
   private String traineeUsername, coachUsername;
   private LocalDate dateOfMeeting;

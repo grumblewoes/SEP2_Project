@@ -1,11 +1,15 @@
 package mediator;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Meeting
+public class Meeting implements Serializable
 {
   private String traineeUsername, coachUsername;
   private LocalDate dateOfMeeting;
+
 
   public Meeting(String coachUsername, LocalDate dateOfMeeting) {
     setTraineeUsername(null);
