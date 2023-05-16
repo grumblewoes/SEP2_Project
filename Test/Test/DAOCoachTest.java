@@ -1,4 +1,3 @@
-import mediator.User;
 import modelServer.DAO.implementation.CoachDAO;
 import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.ICoachDAO;
@@ -11,7 +10,8 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CoachDAOTest {
+class DAOCoachTest
+{
     private ICoachDAO cdao;
     private IUserDAO udao;
 

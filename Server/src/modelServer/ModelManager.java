@@ -10,6 +10,7 @@ import modelServer.DAO.implementation.UserDAO;
 import util.Logger;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ModelManager implements Model
@@ -338,6 +339,16 @@ public class ModelManager implements Model
         }
     }
 
+    @Override
+    public ArrayList<String> getMeetingRequests(String coach) {
+      try {
+        return new MeetingDAO().getTraineeMeetingRequests(coach);
+      }
+      catch (SQLException e) {
+        return new ArrayList<>();
+      }
+    }
+
     @Override public boolean removeFriend(String requesterUsername,
         String accepterUsername)
     {
@@ -471,4 +482,36 @@ public class ModelManager implements Model
             return null;
         }
     }
+
+    @Override
+    public boolean approveMeeting(String trainee, String coach, LocalDate date) {
+        try {
+            return new MeetingDAO().approveMeeting(trainee, coach, date);
+        }
+        catch (SQLException e)
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean denyMeeting(String trainee, String coach, LocalDate date) {
+        try {
+            return new MeetingDAO().denyMeeting(trainee, coach, date);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+  @Override public ArrayList<String> getCoachMeetings(String coach)
+  {
+    try
+    {
+      return new MeetingDAO().getCoachMeetings(coach);
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 }

@@ -6,6 +6,7 @@ import modelServer.ModelManager;
 import util.Logger;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 
 public class ServerMain
 {
@@ -23,7 +24,6 @@ public class ServerMain
 //    server.removeFolder("d","nope2");
 //    Logger.log(server.getFriendRequests("e"));
 //    server.acceptFriendRequest("e","d");
-
 
   }
 }

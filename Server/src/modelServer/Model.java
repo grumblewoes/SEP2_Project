@@ -3,6 +3,8 @@ package modelServer;
 import mediator.*;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface Model
@@ -58,4 +60,9 @@ public interface Model
 
   ArrayList<String> getTraineeList(String username);
   ArrayList<String> getTraineeRequest(String username);
+  ArrayList<String> getMeetingRequests(String coach);
+  boolean approveMeeting(String trainee, String coach, LocalDate date);
+  boolean denyMeeting(String trainee, String coach, LocalDate date);
+
+  ArrayList<String> getCoachMeetings(String coach);
 }

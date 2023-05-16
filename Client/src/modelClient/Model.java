@@ -4,6 +4,7 @@ import mediator.*;
 import utility.observer.subject.LocalSubject;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface Model extends LocalSubject<String,String>
@@ -52,9 +53,13 @@ public interface Model extends LocalSubject<String,String>
 	boolean denyRequest(String traineeUsername);
 	boolean removeTraineeFromRoster(String traineeUsername);
 
-	ArrayList<String> getTraineeList(String username) throws RemoteException;
-	ArrayList<String> getTraineeRequest(String username) throws RemoteException;
+	ArrayList<String> getTraineeList(String username);
+	ArrayList<String> getTraineeRequest(String username);
+	ArrayList<String> getMeetingRequests(String coach);
+	boolean approveMeeting(String trainee, String coach, LocalDate date);
+	boolean denyMeeting(String trainee, String coach, LocalDate date);
 
-  void disconnectListener(String username);
+	ArrayList<String> getCoachMeetings(String coach);
+	void disconnectListener(String username);
 
 }
