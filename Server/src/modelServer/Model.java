@@ -65,4 +65,6 @@ public interface Model
   boolean denyMeeting(String trainee, String coach, LocalDate date);
 
   ArrayList<String> getCoachMeetings(String coach);
+  boolean removeMeeting(String traineeUsername, String coachName, LocalDate date);
+
 }

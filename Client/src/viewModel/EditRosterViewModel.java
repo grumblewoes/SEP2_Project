@@ -1,6 +1,7 @@
 package viewModel;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonToken;
 import javafx.beans.Observable;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,8 +19,10 @@ import view.ViewController;
 
 import java.lang.reflect.Array;
 import java.rmi.RemoteException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class EditRosterViewModel extends ViewModel
@@ -35,8 +38,9 @@ public class EditRosterViewModel extends ViewModel
   private Gson gson;
   private DateTimeFormatter formatter;
 
-  public EditRosterViewModel(Model model, ViewState viewState){
-    this.model =model;
+  public EditRosterViewModel(Model model, ViewState viewState)
+  {
+    this.model = model;
     this.viewState = viewState;
     usernameProperty = new SimpleStringProperty();
     errorProperty = new SimpleStringProperty();
@@ -50,46 +54,57 @@ public class EditRosterViewModel extends ViewModel
     formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   }
 
-  public StringProperty getErrorProperty(){
+  public StringProperty getErrorProperty()
+  {
     return errorProperty;
   }
 
-  public StringProperty getTraineeRequestList (){
+  public StringProperty getTraineeRequestList()
+  {
     return traineeRequestList;
   }
 
   public StringProperty getMeetingRequestList()
-  { return meetingRequestList; }
-  public StringProperty getMeetingList()
-  { return meetingList; }
+  {
+    return meetingRequestList;
+  }
 
-  public StringProperty getTraineeList(){
+  public StringProperty getMeetingList()
+  {
+    return meetingList;
+  }
+
+  public StringProperty getTraineeList()
+  {
     return traineeList;
   }
 
-
   private void loadTrainee()
   {
-      ArrayList<String> traineesArrayList = model.getTraineeList(viewState.getUsername());
-      TraineeList trainees = new TraineeList();
-      for (String s : traineesArrayList) {
-        trainees.addTrainee(new Trainee(s));
-      }
-      String coachUsername = viewState.getUsername();
-      ArrayList<String> requestArrayList = model.getTraineeRequest( coachUsername);
-      TraineeList requests = new TraineeList();
-      for (String s : requestArrayList) {
-        requests.addTrainee(new Trainee(s));
-      }
-      Logger.log(coachUsername+" "+requests);
+    ArrayList<String> traineesArrayList = model.getTraineeList(
+        viewState.getUsername());
+    TraineeList trainees = new TraineeList();
+    for (String s : traineesArrayList)
+    {
+      trainees.addTrainee(new Trainee(s));
+    }
+    String coachUsername = viewState.getUsername();
+    ArrayList<String> requestArrayList = model.getTraineeRequest(coachUsername);
+    TraineeList requests = new TraineeList();
+    for (String s : requestArrayList)
+    {
+      requests.addTrainee(new Trainee(s));
+    }
+    Logger.log(coachUsername + " " + requests);
 
-      traineeRequestList.set(gson.toJson(requests));
-      traineeList.set(gson.toJson(trainees));
+    traineeRequestList.set(gson.toJson(requests));
+    traineeList.set(gson.toJson(trainees));
   }
 
   private void loadMtgRequests()
   {
-    ArrayList<String> mtgList = model.getMeetingRequests(viewState.getUsername());
+    ArrayList<String> mtgList = model.getMeetingRequests(
+        viewState.getUsername());
     meetingRequestList.set("");
     meetingRequestList.set(gson.toJson(mtgList));
   }
@@ -101,14 +116,18 @@ public class EditRosterViewModel extends ViewModel
     meetingList.set(gson.toJson(mtgList));
   }
 
-  public boolean acceptRequest(String username) {
+  public boolean acceptRequest(String username)
+  {
     return model.acceptRequest(username, viewState.getUsername());
   }
-  public boolean denyRequest(String username) {
+
+  public boolean denyRequest(String username)
+  {
     return model.denyRequest(username);
   }
 
-  public boolean removeTrainee(){
+  public boolean removeTrainee()
+  {
     if (model.removeTraineeFromRoster(selectedTraineeName.get()))
       return true;
     else
@@ -116,26 +135,49 @@ public class EditRosterViewModel extends ViewModel
     return false;
   }
 
-  public boolean approveMeeting() {
-    String[] s = selectedMtg.get().split(",");
+  public boolean removeMeeting()
+  {
+    try
+    {
+      String[] s = selectedMtg.get().split(",");
+      LocalDate date = LocalDate.parse(s[0], formatter);
+
+      if (model.removeMeeting(s[1], usernameProperty.get(), date))
+        return true;
+    }
+    catch (Exception e)
+    {
+      System.out.println("No meeting was selected");
+      errorProperty.set("PLease select a meeting to remove");
+    }
+    return false;
+  }
+
+
+  public boolean approveMeeting()
+  {
+      String[] s = selectedMtg.get().split(",");
     System.out.println(selectedMtg.get());
     LocalDate date = LocalDate.parse(s[0], formatter);
 
     if (model.approveMeeting(s[1], usernameProperty.get(), date))
       return true;
     else
-      errorProperty.set("An error occurred while trying to approve the meeting request.");
+      errorProperty.set(
+          "An error occurred while trying to approve the meeting request.");
     return false;
   }
 
-  public boolean denyMeeting() {
+  public boolean denyMeeting()
+  {
     String[] s = selectedMtg.get().split(",");
     LocalDate date = LocalDate.parse(s[0], formatter);
 
     if (model.denyMeeting(s[1], usernameProperty.get(), date))
       return true;
     else
-      errorProperty.set("An error occurred while trying to deny the meeting request.");
+      errorProperty.set(
+          "An error occurred while trying to deny the meeting request.");
     return false;
   }
 
@@ -146,28 +188,41 @@ public class EditRosterViewModel extends ViewModel
     loadTrainee();
     loadMtgRequests();
     loadMtgs();
+    selectedMtg.set("");
     errorProperty.set("");
     usernameProperty.set(viewState.getUsername());
     Logger.log("is a coach: "+viewState.isCoach());
   }
 
-
-
-  public StringProperty getUsernameProperty() {
+  public StringProperty getUsernameProperty()
+  {
     return usernameProperty;
   }
 
-  public void setSelectedTraineeName(String selectedTraineeName) {
+  public StringProperty getSelectedTraineeName()
+  {
+    return selectedTraineeName;
+  }
+
+  public void setSelectedTraineeName(String selectedTraineeName)
+  {
+    System.out.println("Clicked");
     this.selectedTraineeName = new SimpleStringProperty(selectedTraineeName);
   }
-  public void setSelectedMeeting(String mtgString) {
+
+  public void setSelectedMeeting(String mtgString)
+  {
+    System.out.println("Clicked" + " " + mtgString);
     this.selectedMtg = new SimpleStringProperty(mtgString);
   }
-  public StringProperty getSelectedMeeting() {
+
+  public StringProperty getSelectedMeeting()
+  {
     return selectedMtg;
   }
 
-  public void logout() {
+  public void logout()
+  {
     model.disconnectListener(viewState.getUsername());
     viewState.setIsCoach(false);
     viewState.setUsername(null);
@@ -179,7 +234,6 @@ public class EditRosterViewModel extends ViewModel
     viewState.setNewFolder(false);
     viewState.setManageFolderEditable(false);
   }
-
   public void manageTraineeOpen(String username) {
     viewState.setProfileUsername(username);
     viewState.setGoBack("manageRoster");

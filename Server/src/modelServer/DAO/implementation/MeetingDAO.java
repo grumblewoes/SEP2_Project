@@ -18,45 +18,48 @@ public class MeetingDAO implements IMeetingDAO
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
 
-    try {
+    try
+    {
       PreparedStatement statement = connection.prepareStatement(
           "delete from meeting_request where trainee_username = ? and coach_username = ? "
-              + "and date_of_meeting = ?;"
-      );
+              + "and date_of_meeting = ?;");
       statement.setString(1, trainee);
       statement.setString(2, coach);
       statement.setDate(3, Date.valueOf(date));
       statement.executeUpdate();
 
       PreparedStatement statement1 = connection.prepareStatement(
-          "insert into meeting_list values(?, ?, ?);"
-      );
+          "insert into meeting_list values(?, ?, ?);");
       statement1.setString(1, trainee);
       statement1.setString(2, coach);
       statement1.setDate(3, Date.valueOf(date));
       statement1.executeUpdate();
       return true;
 
-    } catch (SQLException e) {
+    }
+    catch (SQLException e)
+    {
       Logger.log(e);
       return false;
 
-    } finally {
+    }
+    finally
+    {
       connection.close();
     }
   }
 
-  @Override public boolean denyMeeting(String trainee, String coach, LocalDate date)
-      throws SQLException
+  @Override public boolean denyMeeting(String trainee, String coach,
+      LocalDate date) throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
 
-    try {
+    try
+    {
       PreparedStatement statement = connection.prepareStatement(
           "delete from meeting_request where trainee_username = ? and coach_username = ? "
-              + "and date_of_meeting = ?;"
-      );
+              + "and date_of_meeting = ?;");
       statement.setString(1, trainee);
       statement.setString(2, coach);
       statement.setDate(3, Date.valueOf(date));
@@ -64,11 +67,15 @@ public class MeetingDAO implements IMeetingDAO
 
       return true;
 
-    } catch (SQLException e) {
+    }
+    catch (SQLException e)
+    {
       Logger.log(e);
       return false;
 
-    } finally {
+    }
+    finally
+    {
       connection.close();
     }
   }
@@ -81,20 +88,27 @@ public class MeetingDAO implements IMeetingDAO
     Connection connection = db.getConnection();
     ArrayList<String> list = new ArrayList<>();
 
-    try {
-      PreparedStatement statement = connection.prepareStatement("select * from meeting_request where coach_username = ?");
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "select * from meeting_request where coach_username = ?");
       statement.setString(1, coach);
       ResultSet rs = statement.executeQuery();
-      while (rs.next()){
+      while (rs.next())
+      {
         String traineeUser = rs.getString(1);
         LocalDate dateOfMeeting = rs.getDate(3).toLocalDate();
         list.add(dateOfMeeting + "," + traineeUser);
       }
       return list;
 
-    } catch (SQLException e) {
+    }
+    catch (SQLException e)
+    {
       return list;
-    } finally {
+    }
+    finally
+    {
       connection.close();
     }
   }
@@ -106,21 +120,61 @@ public class MeetingDAO implements IMeetingDAO
     Connection connection = db.getConnection();
     ArrayList<String> list = new ArrayList<>();
 
-    try {
-      PreparedStatement statement = connection.prepareStatement("select * from meeting_list where coach_username = ?");
+    try
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "select * from meeting_list where coach_username = ?");
       statement.setString(1, coach);
       ResultSet rs = statement.executeQuery();
-      while (rs.next()){
+      while (rs.next())
+      {
         String traineeUser = rs.getString(1);
         LocalDate dateOfMeeting = rs.getDate(3).toLocalDate();
         list.add(dateOfMeeting + "," + traineeUser);
       }
       return list;
 
-    } catch (SQLException e) {
+    }
+    catch (SQLException e)
+    {
       return list;
-    } finally {
+    }
+    finally
+    {
       connection.close();
     }
   }
-}
+
+
+  @Override public boolean removeMeeting(String traineeUsername,
+      String coachUsername, LocalDate date) throws SQLException
+  {
+
+      DBConnection db = DBConnection.getInstance();
+      Connection connection = db.getConnection();
+
+      try
+      {
+        PreparedStatement statement = connection.prepareStatement(
+            "delete from meeting_list where trainee_username=? and coach_username = ?"
+                + " and date_of_meeting=?;");
+        statement.setString(1, traineeUsername);
+        statement.setString(2, coachUsername);
+        statement.setDate(3, Date.valueOf(date));
+
+        statement.executeUpdate();
+        return true;
+
+      }
+      catch (SQLException e)
+      {
+        Logger.log(e);
+        return false;
+      }
+      finally
+      {
+        connection.close();
+      }
+    }
+  }
+
