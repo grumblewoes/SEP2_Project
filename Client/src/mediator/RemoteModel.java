@@ -48,7 +48,9 @@ public interface RemoteModel extends RemoteSubject<String,String>
 
 	boolean isCoach(String username) throws RemoteException;
   boolean removeCoachAssignment(String traineeUsername) throws RemoteException;
-
+	ArrayList<String> getTraineeMeetingList(String traineeUsername) throws RemoteException;
+	ArrayList<String> getTraineeMeetingRequests(String traineeUsername) throws RemoteException;
+	boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) throws RemoteException;
 	boolean acceptRequest(String traineeUsername, String coachUsername) throws RemoteException;
 	boolean denyRequest(String traineeUsername) throws RemoteException;
 	boolean removeTraineeFromRoster(String traineeUsername) throws RemoteException;

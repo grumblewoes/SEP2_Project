@@ -37,6 +37,7 @@ public class ViewHandler {
 	//private ViewController manageCoachViewController;
 
 	private ViewController editRosterViewController;
+	private ViewController addMeetingViewController;
 
 	private ViewModelFactory viewModelFactory;
 
@@ -85,6 +86,10 @@ public class ViewHandler {
 				editRosterViewController = loadViewController("manageRosterView.fxml", editRosterViewController, viewModelFactory.getEditRosterViewModel());
 				break;
 
+			case "addMeeting":
+				addMeetingViewController =loadViewController("addMeeting.fxml", addMeetingViewController,
+						viewModelFactory.getAddMeetingViewModel());
+				break;
 			case "addFriend":
 				addFriendViewController =loadViewController("sendFriendRequest.fxml", addFriendViewController,
 						viewModelFactory.getAddFriendViewModel());

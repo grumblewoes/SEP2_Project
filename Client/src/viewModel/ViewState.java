@@ -73,4 +73,5 @@ public class ViewState {
     public User getTrainee(User trainee){
         return trainee;
     }
+
 }

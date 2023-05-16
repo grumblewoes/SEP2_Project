@@ -14,6 +14,7 @@ public class AddFriendViewController extends ViewController
   @FXML private TextField nameField;
   @FXML private Label headerLabel;
   @FXML private Label errorLabel;
+  private ViewHandler viewHandler;
   private AddFriendViewModel friendViewModel;
 
 

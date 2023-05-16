@@ -1,14 +1,24 @@
 package mediator;
 
+<<<<<<< HEAD
 import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Meeting implements Serializable
+=======
+import java.time.LocalDate;
+
+public class Meeting
+>>>>>>> item15
 {
   private String traineeUsername, coachUsername;
   private LocalDate dateOfMeeting;
 
+<<<<<<< HEAD
   public Meeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) {
+=======
+  public Meeting(String traineeUsername, LocalDate dateOfMeeting) {
+>>>>>>> item15
     setTraineeUsername(traineeUsername);
     setDateOfMeeting(dateOfMeeting);
     setCoachUsername(null);
@@ -50,3 +60,6 @@ public class Meeting implements Serializable
     this.dateOfMeeting = dateOfMeeting;
   }
 }
+=======
+}
+>>>>>>> item15

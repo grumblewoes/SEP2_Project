@@ -229,51 +229,23 @@ public class ModelManager implements Model, LocalListener<String,String>
 	}
 
 	//	@Override
-	//	@Override
-//	public boolean editHeight(int height) {
-//		return client.editHeight(height);
-//	}
-//
-//	@Override
-//	public boolean editWeight(int weight) {
-//		return client.editWeight(weight);
-//	}
-//
-//	@Override
-//	public boolean editDob(int dob) {
-//		return client.editDob(dob);
-//	}
-//
-//	@Override
-//	public boolean editDeadlift(int weight) {
-//		return client.editDeadlift(weight);
-//	}
-//
-//	@Override
-//	public boolean editBenchPress(int weight) {
-//		return client.editBenchPress(weight);
-//	}
-//
-//	@Override
-//	public boolean editSquat(int weight) {
-//		return client.editSquat(weight);
-//	}
+	@Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
+	{
+		return client.getTraineeMeetingList(traineeUsername);
+	}
 
-	//	@Override public void addListener(PropertyChangeListener listener)
-//	{
-//		property.addPropertyChangeListener(listener);
-//	}
-//
-//	@Override public void removeListener(PropertyChangeListener listener)
-//	{
-//		property.removePropertyChangeListener(listener);
-//	}
-//
-//	@Override public void propertyChange(PropertyChangeEvent evt)
-//	{
-//		//passes events coming from the server to viewmodel
-//		property.firePropertyChange(evt);
-//	}
+	@Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
+	{
+		return client.getTraineeMeetingRequests(traineeUsername);
+	}
+
+	@Override public boolean sendMeetingRequest(String traineeUsername,
+			String coachUsername, LocalDate dateOfMeeting)
+	{
+		return client.sendMeetingRequest(traineeUsername,coachUsername,dateOfMeeting);
+	}
+
+
 }
 
 

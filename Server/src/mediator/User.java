@@ -17,6 +17,8 @@ public class User implements Serializable {
         this.shareProfile = shareProfile;
     }
 
+
+
     public int getHeight() {
         return height;
     }

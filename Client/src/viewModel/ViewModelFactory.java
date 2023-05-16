@@ -16,7 +16,7 @@ public class ViewModelFactory {
 
 	private AddFriendViewModel addFriendViewModel;
 	private EditRosterViewModel editRosterViewModel;
-
+	private AddMeetingViewModel addMeetingViewModel;
 	public ViewModelFactory(Model model) {
 		ViewState viewState = new ViewState();
 		this.createUserViewModel=new CreateUserViewModel(model);
@@ -27,6 +27,7 @@ public class ViewModelFactory {
 		manageFolderViewModel = new ManageFolderViewModel(model, viewState);
 		manageSpecificExercisesViewModel = new ManageSpecificExercisesViewModel(model, viewState);
 		profileViewModel = new ProfileViewModel(model, viewState);
+		addMeetingViewModel = new AddMeetingViewModel(model,viewState);
 
 		this.addFriendViewModel = new AddFriendViewModel(model,viewState);
 
@@ -51,6 +52,10 @@ public class ViewModelFactory {
 		return addFriendViewModel;
 	}
 
+	public AddMeetingViewModel getAddMeetingViewModel()
+	{
+		return addMeetingViewModel;
+	}
 	public EditRosterViewModel getEditRosterViewModel(){
 		return editRosterViewModel;
 	}

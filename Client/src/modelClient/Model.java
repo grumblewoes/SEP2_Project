@@ -64,4 +64,9 @@ public interface Model extends LocalSubject<String,String>
 
 	boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
 
+
+	ArrayList<String> getTraineeMeetingList(String traineeUsername);
+	ArrayList<String> getTraineeMeetingRequests(String traineeUsername);
+	boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
+
 }

@@ -3,12 +3,10 @@ package mediator;
 import modelClient.Model;
 import util.Logger;
 import utility.observer.event.ObserverEvent;
-import utility.observer.javaobserver.NamedPropertyChangeSubject;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.RemoteListener;
 import utility.observer.subject.LocalSubject;
 import utility.observer.subject.PropertyChangeHandler;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.Naming;
@@ -433,9 +431,56 @@ public class Client implements Model, RemoteListener<String, String>,
 
   @Override public boolean removeCoachAssignment(String traineeUsername)
   {
+    try{
+      return server.removeCoachAssignment(traineeUsername);
+    }catch(RemoteException e){
+      return false;
+    }
+  }
+
+  @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
+  {
     try
     {
-      return server.removeCoachAssignment(traineeUsername);
+      return server.getTraineeMeetingList(traineeUsername);
+    }
+    catch (RemoteException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
+  {
+    try
+    {
+      return server.getTraineeMeetingRequests(traineeUsername);
+    }
+    catch (RemoteException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public boolean sendMeetingRequest(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting)
+  {
+    try
+    {
+      return server.sendMeetingRequest(traineeUsername,coachUsername,dateOfMeeting);
+    }
+    catch (RemoteException e)
+    {
+      return false;
+    }
+  }
+
+  @Override public boolean removeMeeting(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting)
+  {
+    try
+    {
+      return server.removeMeeting(traineeUsername,coachUsername,dateOfMeeting);
     }
     catch (RemoteException e)
     {

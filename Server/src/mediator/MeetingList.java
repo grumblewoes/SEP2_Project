@@ -1,9 +1,15 @@
 package mediator;
 
+<<<<<<< HEAD
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MeetingList implements Serializable
+=======
+import java.util.ArrayList;
+
+public class MeetingList
+>>>>>>> item15
 {
   private ArrayList<Meeting> list;
   public MeetingList(){
@@ -23,3 +29,6 @@ public class MeetingList implements Serializable
         '}';
   }
 }
+=======
+}
+>>>>>>> item15

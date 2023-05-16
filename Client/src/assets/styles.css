@@ -1,7 +1,12 @@
+*{
+    -fx-font-family: "Lexend";
+}
+
 .text-primary{ -fx-text-fill: #BAFF99; }
 .text-danger{ -fx-text-fill: #fa3030; }
 .bg-primary{ -fx-background-color: #BAFF99; }
 .bg-secondary{-fx-background-color: #adec8e;}
+.bg-light{-fx-background-color: #f0f0f0}
 
 .fs-1{ -fx-font-size: 10px;}
 .fs-2{ -fx-font-size: 15px;}
@@ -54,6 +59,14 @@
 
 .cursor-default{
     -fx-cursor: default !important;
+}
+
+.scrollBox{
+    -fx-background-color: transparent;
+}
+
+.profile-logo{
+    -fx-cursor: hand;
 }
 
 

@@ -44,23 +44,6 @@ public class ModelManager implements Model
     return true;
   }
 
-  //    @Override public boolean createUser(String firstName, String lastName,
-  //        String username, String password, int height, int weight)
-  //    {
-  //        Trainee trainee = null;
-  //        try{
-  //            trainee = new Trainee(firstName, lastName, username, password, height, weight);
-  //        }catch (Exception e){
-  //            return false;
-  //        }
-  //
-  //        if (!trainee.getUserName().equals(traineeList.getUserByUsername(username))) {
-  //            traineeList.addUser(trainee);
-  //            System.out.println(traineeList);
-  //            return true;
-  //        }
-  //        return false;
-  //    }
 
   @Override public boolean login(String username, String password)
   {
@@ -269,164 +252,124 @@ public class ModelManager implements Model
 
   @Override public boolean addExercise(String title)
   {
-    try
-    {
+    try{
       return new ExerciseAdminDAO().addExercise(title);
-    }
-    catch (SQLException e)
-    {
+    }catch(SQLException e){
       return false;
     }
   }
 
   @Override public boolean removeExercise(String title)
   {
-    try
-    {
+    try{
       return new ExerciseAdminDAO().removeExercise(title);
-    }
-    catch (SQLException e)
-    {
+    }catch(SQLException e){
       return false;
     }
   }
 
-  @Override public boolean updateTrainee(String u, int h, int w, boolean s,
-      String st)
-  {
-    try
-    {
-      return new UserDAO().updateTrainee(u, h, w, s, st);
+  @Override public boolean updateTrainee(String u, int h, int w,boolean s,String st){
+        try{
+            return new UserDAO().updateTrainee(u,h,w,s,st);
+        }catch(SQLException e){
+            return false;
+        }
     }
-    catch (SQLException e)
-    {
-      return false;
-    }
-  }
 
-  @Override public boolean acceptFriendRequest(String requester_username,
-      String accepter_username)
-  {
-    Logger.log("accepting " + requester_username + " , " + accepter_username);
-    try
-    {
-      return new FriendDAO().acceptFriendRequest(requester_username,
-          accepter_username);
-    }
-    catch (SQLException e)
-    {
-      return false;
-    }
-  }
 
-  @Override public boolean rejectFriendRequest(String requester_username,
-      String accepter_username)
-  {
-    try
-    {
-      Logger.log("rejecting " + requester_username + " , " + accepter_username);
-      return new FriendDAO().rejectFriendRequest(requester_username,
-          accepter_username);
+    @Override
+    public boolean acceptFriendRequest(String requester_username,String accepter_username) {
+        Logger.log("accepting "+ requester_username + " , "+ accepter_username);
+        try{
+            return new FriendDAO().acceptFriendRequest(requester_username,accepter_username);
+        }catch(SQLException e){
+            return false;
+        }
     }
-    catch (SQLException e)
-    {
-      return false;
+    @Override
+    public boolean rejectFriendRequest(String requester_username,String accepter_username) {
+        try{
+            Logger.log("rejecting "+ requester_username + " , "+ accepter_username);
+            return new FriendDAO().rejectFriendRequest(requester_username,accepter_username);
+        }catch(SQLException e){
+            return false;
+        }
     }
-  }
 
-  @Override public boolean sendFriendRequest(String requesterUsername,
-      String accepterUsername)
-  {
-    try
-    {
-      return new FriendDAO().sendFriendRequest(requesterUsername,
-          accepterUsername);
+    @Override public boolean sendFriendRequest(String requesterUsername,
+        String accepterUsername) {
+        try {
+            return new FriendDAO().sendFriendRequest(requesterUsername, accepterUsername);
+        } catch (SQLException e) {
+            return false;
+        }
     }
-    catch (SQLException e)
-    {
-      return false;
-    }
-  }
 
-  @Override public FriendList getFriends(String username)
-  {
-    try
-    {
-      return new FriendDAO().getFriends(username);
-    }
-    catch (SQLException e)
-    {
-      return new FriendList();
-    }
-  }
 
-  @Override public ArrayList<String> getFriendRequests(String username)
-  {
-    try
-    {
-      return new FriendDAO().getFriendRequests(username);
+    @Override
+    public FriendList getFriends(String username) {
+        try{
+            return new FriendDAO().getFriends(username);
+        }catch(SQLException e){
+            return new FriendList();
+        }
     }
-    catch (SQLException e)
-    {
-      return new ArrayList<>();
-    }
-  }
 
-  @Override public ArrayList<String> getMeetingRequests(String coach)
-  {
-    try
-    {
-      return new MeetingDAO().getTraineeMeetingRequests(coach);
+    @Override
+    public ArrayList<String> getFriendRequests(String username) {
+        try{
+            return new FriendDAO().getFriendRequests(username);
+        }catch(SQLException e){
+            return new ArrayList<>();
+        }
     }
-    catch (SQLException e)
-    {
-      return new ArrayList<>();
-    }
-  }
 
-  @Override public boolean removeFriend(String requesterUsername,
-      String accepterUsername)
-  {
-    try
+    @Override public boolean removeFriend(String requesterUsername,
+        String accepterUsername)
     {
-      return new FriendDAO().removeFriend(requesterUsername, accepterUsername);
+        try{
+            return new FriendDAO().removeFriend(requesterUsername,accepterUsername);
+        }catch(SQLException e){
+            return false;
+        }
     }
-    catch (SQLException e)
-    {
-      return false;
-    }
-  }
 
-  @Override public boolean requestCoach(String requesterUsername,
-      String accepterUsername)
-  {
-    try
-    {
-      return new CoachDAO().requestCoach(requesterUsername, accepterUsername);
+    @Override
+    public boolean requestCoach(String requesterUsername, String accepterUsername) {
+        try{
+            return new CoachDAO().requestCoach(requesterUsername,accepterUsername);
+        }catch(SQLException e){
+            return false;
+        }
     }
-    catch (SQLException e)
-    {
-      return false;
-    }
-  }
 
-  @Override public boolean isCoach(String username)
-  {
-    try
-    {
-      return new CoachDAO().isCoach(username);
+    @Override
+    public boolean isCoach(String username) {
+        try{
+            return new CoachDAO().isCoach(username);
+        }catch(SQLException e){
+            return false;
+        }
     }
-    catch (SQLException e)
-    {
-      return false;
-    }
-  }
 
-  @Override public boolean removeCoachAssignment(String traineeUsername)
-  {
-    try
+    @Override public boolean removeCoachAssignment(String traineeUsername)
     {
-      return new CoachDAO().removeCoachAssignment(traineeUsername);
+        try{
+            return new CoachDAO().removeCoachAssignment(traineeUsername);
+        }catch(SQLException e){
+            return false;
+        }
+    }
+
+
+
+  @Override public boolean addCoach(String coachUsername,
+      String coachPassword, String coachName, String coachLName,
+      int coachHeight, int coachWeight, int pbBench, int pbSquat,
+      int pbLift, String status, boolean share)
+  {
+    try {
+      return new CoachDAO().addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, status, share);
     }
     catch (SQLException e)
     {
@@ -495,58 +438,76 @@ public class ModelManager implements Model
     }
   }
 
-  @Override public boolean removeMeeting(
-      String traineeUsername, String coachName, LocalDate date)
-  {
-    try
-    {
-      return new MeetingDAO().removeMeeting(traineeUsername, coachName, date);
-    }
-    catch (SQLException e)
-    {
-      return false;
-    }
-  }
 
-  @Override public boolean addCoach(String coachUsername, String coachPassword,
-      String coachName, String coachLName, int coachHeight, int coachWeight,
-      int pbBench, int pbSquat, int pbLift, String status, boolean share)
-  {
-    try
-    {
-      return new CoachDAO().addCoach(coachUsername, coachPassword, coachName,
-          coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift,
-          status, share);
-    }
-    catch (SQLException e)
-    {
-      return false;
-    }
-  }
 
-  @Override public boolean removeCoach(String name)
-  {
-    try
+    @Override public boolean removeCoach(String name)
     {
-      return new CoachDAO().removeCoach(name);
+        try {
+            return new CoachDAO().removeCoach(name);
+        }
+        catch (SQLException e)
+        {
+            return false;
+        }
     }
-    catch (SQLException e)
-    {
-      return false;
-    }
-  }
 
-  @Override public User getCoach(String traineeUsername)
+    @Override
+    public User getCoach(String traineeUsername) {
+        try {
+            return new CoachDAO().getCoach(traineeUsername);
+        }
+        catch (SQLException e)
+        {
+            return null;
+        }
+    }
+
+  @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
   {
-    try
-    {
-      return new CoachDAO().getCoach(traineeUsername);
+    try {
+      return new MeetingDAO().getTraineeMeetingList(traineeUsername);
     }
     catch (SQLException e)
     {
       return null;
     }
   }
+
+  @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
+  {
+    try {
+      return new MeetingDAO().getTraineeMeetingRequests(traineeUsername);
+    }
+    catch (SQLException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public boolean sendMeetingRequest(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting)
+  {
+    try {
+      return new MeetingDAO().sendMeetingRequest(traineeUsername,coachUsername,dateOfMeeting);
+    }
+    catch (SQLException e)
+    {
+      return false;
+    }
+  }
+
+  @Override public boolean removeMeeting(String traineeUsername,
+      String coachUsername, LocalDate dateOfMeeting)
+  {
+    try {
+      return new MeetingDAO().removeMeeting(traineeUsername,coachUsername,dateOfMeeting);
+    }
+    catch (SQLException e)
+    {
+      return false;
+    }
+  }
+
 
   @Override public boolean approveMeeting(String trainee, String coach,
       LocalDate date)
