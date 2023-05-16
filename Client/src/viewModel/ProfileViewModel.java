@@ -115,7 +115,12 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     public void clear() {
         String u = viewState.getProfileUsername();
         //is the user a coach or trainee? -> changes depending on which one
-        User profileUser = viewState.isCoach() ? model.getCoach(u): model.getTrainee(u);
+        User profileUser = null;
+        if( viewState.isCoach() && viewState.getUsername().equals(viewState.getProfileUsername()) )
+            profileUser = model.getCoach(u);
+        else
+            profileUser = model.getTrainee(u);
+
         String pUsername = profileUser.getUsername();
         boolean wantsToShare = profileUser.isShareProfile();
         boolean owns = viewState.getProfileUsername().equals(viewState.getUsername()) ;
