@@ -87,22 +87,21 @@ public class UserDAO implements IUserDAO
     {
 
       PreparedStatement statement = connection.prepareStatement(
-              "select height,weight,first_name,last_name,username,share_profile,status, coach " +
-                      "from trainee2 " +
-                      "where username = '"+username+"';"
+          "select height,weight,first_name,last_name,username,share_profile,status " +
+              "from trainee2 " +
+              "where username = '"+username+"';"
       );
 
       ResultSet rs = statement.executeQuery();
       if(rs.next()){
-//        int height, int weight, String firstName, String lastName, String username, String gender
+        //        int height, int weight, String firstName, String lastName, String username, String gender
         int height = rs.getInt(1);
         int weight = rs.getInt(2);
         String firstName = rs.getString(3);
         String lastName = rs.getString(4);
         boolean shareProfile = rs.getBoolean(6);
         String status = rs.getString(7);
-        String coachUsername = rs.getString(8);
-        user= new User(height,weight,firstName,lastName,username,status,shareProfile,coachUsername);
+        user= new User(height,weight,firstName,lastName,username,status,shareProfile);
       }
 
 

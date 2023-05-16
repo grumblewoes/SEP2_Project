@@ -156,13 +156,13 @@ public class Server implements RemoteModel
     return model.removeCoachAssignment(traineeUsername);
   }
 
-  @Override public MeetingList getTraineeMeetingList(String traineeUsername)
+  @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
       throws RemoteException
   {
     return model.getTraineeMeetingList(traineeUsername);
   }
 
-  @Override public MeetingList getTraineeMeetingRequests(String traineeUsername)
+  @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
       throws RemoteException
   {
     return model.getTraineeMeetingRequests(traineeUsername);

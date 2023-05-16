@@ -2,14 +2,10 @@ package modelClient;
 
 import mediator.*;
 import utility.observer.event.ObserverEvent;
-import utility.observer.javaobserver.NamedPropertyChangeSubject;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;
-import utility.observer.subject.LocalSubject;
 import utility.observer.subject.PropertyChangeHandler;
 
-import java.beans.PropertyChangeListener;
-import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -183,12 +179,12 @@ public class ModelManager implements Model, LocalListener<String,String>
 	@Override
 	public void disconnectListener(String username){client.disconnectListener(username);}
 
-	@Override public MeetingList getTraineeMeetingList(String traineeUsername)
+	@Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
 	{
 		return client.getTraineeMeetingList(traineeUsername);
 	}
 
-	@Override public MeetingList getTraineeMeetingRequests(String traineeUsername)
+	@Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
 	{
 		return client.getTraineeMeetingRequests(traineeUsername);
 	}

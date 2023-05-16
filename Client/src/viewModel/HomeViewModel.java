@@ -134,9 +134,9 @@ public class HomeViewModel extends ViewModel{
     }
 
     private void loadMeetings(){
-        MeetingList meetingList = model.getTraineeMeetingList(viewState.getUsername());
+        ArrayList<String> meetingList = model.getTraineeMeetingList(viewState.getUsername());
 
-        MeetingList meetingRequests = model.getTraineeMeetingRequests(viewState.getUsername());
+        ArrayList<String> meetingRequests = model.getTraineeMeetingRequests(viewState.getUsername());
 
         meetingListProperty.set("");
         meetingRequestListProperty.set("");
@@ -153,8 +153,32 @@ public class HomeViewModel extends ViewModel{
     }
 
     public boolean removeMeeting(LocalDate dateOfMeeting){
-        return model.removeMeeting(viewState.getUsername(),
-            model.getCoach(viewState.getUsername()).getUsername(), dateOfMeeting);
+
+        String traineeUsername = viewState.getUsername();
+        String coachUsername = null;
+        User coach = model.getCoach(viewState.getUsername());
+        if (coach != null) {
+            coachUsername = coach.getUsername();
+        }
+        Logger.log(traineeUsername);
+        Logger.log(coachUsername);
+        try
+        {
+            if (coachUsername!=null){
+                model.removeMeeting(traineeUsername, coachUsername, dateOfMeeting);
+                clear();
+                return true;
+            }
+            else {
+                errorProperty.set("You cannot remove a meeting since you do not have a coach.");
+                return false;
+            }
+
+        }
+        catch (Exception e){
+            errorProperty.set(e.getMessage());
+            return false;
+        }
     }
 
     public void logout() {
@@ -164,7 +188,18 @@ public class HomeViewModel extends ViewModel{
         viewState.setIsCoach(false);
     }
 
+    public boolean setupMeeting()
+    {
+        String coachUsername = null;
+        User coach = model.getCoach(viewState.getUsername());
+        if (coach != null) {
+            coachUsername = coach.getUsername();
+        }
 
-
-
+        if (coachUsername == null) {
+            errorProperty.set("You do not have a coach.");
+            return false;
+        }
+        return true;
+    }
 }

@@ -3,18 +3,15 @@ package mediator;
 import modelClient.Model;
 import util.Logger;
 import utility.observer.event.ObserverEvent;
-import utility.observer.javaobserver.NamedPropertyChangeSubject;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.RemoteListener;
 import utility.observer.subject.LocalSubject;
 import utility.observer.subject.PropertyChangeHandler;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
+
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -359,7 +356,7 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
     }
   }
 
-  @Override public MeetingList getTraineeMeetingList(String traineeUsername)
+  @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
   {
     try
     {
@@ -371,7 +368,7 @@ public class Client implements Model, RemoteListener<String, String>, LocalSubje
     }
   }
 
-  @Override public MeetingList getTraineeMeetingRequests(String traineeUsername)
+  @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
   {
     try
     {

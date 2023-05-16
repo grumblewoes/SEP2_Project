@@ -2,7 +2,6 @@ package modelServer;
 
 import mediator.*;
 import modelServer.DAO.implementation.*;
-import mediator.*;
 import modelServer.DAO.implementation.ExerciseAdminDAO;
 import modelServer.DAO.implementation.ExerciseDAO;
 import modelServer.DAO.implementation.FolderDAO;
@@ -414,7 +413,7 @@ public class ModelManager implements Model
         }
     }
 
-  @Override public MeetingList getTraineeMeetingList(String traineeUsername)
+  @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
   {
     try {
       return new MeetingDAO().getTraineeMeetingList(traineeUsername);
@@ -425,7 +424,7 @@ public class ModelManager implements Model
     }
   }
 
-  @Override public MeetingList getTraineeMeetingRequests(String traineeUsername)
+  @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
   {
     try {
       return new MeetingDAO().getTraineeMeetingRequests(traineeUsername);

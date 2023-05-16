@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 import javafx.util.StringConverter;
 import javafx.util.converter.LocalDateStringConverter;
 import modelClient.Model;
+import util.Logger;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -21,14 +22,17 @@ public class AddMeetingViewModel extends ViewModel
   public AddMeetingViewModel(Model model, ViewState viewState){
     this.model=model;
     this.viewState = viewState;
-    coachProperty = new SimpleStringProperty();
+    coachProperty=new SimpleStringProperty();
     errorProperty = new SimpleStringProperty();
     dateOfMeeting = new SimpleObjectProperty<>();
   }
   public boolean sendMeetingRequest(){
     String traineeUsername = viewState.getUsername();
-    String coachUsername = model.getCoach(viewState.getProfileUsername()).getCoach();
+    String coachUsername = model.getCoach(viewState.getProfileUsername()).getUsername();
     LocalDate date= dateOfMeeting.get();
+    Logger.log(traineeUsername);
+    Logger.log(coachUsername);
+    Logger.log(date);
 
     boolean successAddition = model.sendMeetingRequest(traineeUsername,coachUsername, date);
     if(!successAddition)
@@ -40,6 +44,8 @@ public class AddMeetingViewModel extends ViewModel
   {
     dateOfMeeting.set(null);
     errorProperty.set("");
+    Logger.log(viewState.getProfileUsername());
+    coachProperty.set(model.getCoach(viewState.getProfileUsername()).getUsername());
   }
   public StringProperty getErrorProperty() {return errorProperty;}
   public ObjectProperty<LocalDate> getDateOfMeeting(){return dateOfMeeting;}

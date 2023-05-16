@@ -70,6 +70,7 @@
 }
 
 
+
 .btn-danger{ -fx-cursor: hand; -fx-padding: 8px; -fx-border-color: white;-fx-border-width: 1px; -fx-border-style: solid; -fx-background-color: #ff7171; }
 .btn-success{ -fx-cursor: hand; -fx-padding: 8px; -fx-border-color: white;-fx-border-width: 1px; -fx-border-style: solid; -fx-background-color: #9dd780; -fx-text-fill: #324228;}
 .btn-info{ -fx-cursor: hand; -fx-padding: 8px; -fx-border-color: white;-fx-border-width: 1px; -fx-border-style: solid; -fx-background-color: #3effdc; }

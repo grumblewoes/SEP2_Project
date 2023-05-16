@@ -131,6 +131,7 @@ public class HomeViewController extends ViewController
   }
   @Override public void reset()
   {
+
     homeViewModel.clear();
   }
 
@@ -221,37 +222,40 @@ public class HomeViewController extends ViewController
 
   @FXML private void addMeeting(){
     // if there is no coach write an error message
-    viewHandler.openView("addMeeting");
+    boolean hasCoach=homeViewModel.setupMeeting();
+    if (hasCoach){
+      homeViewModel.setupProfile();
+      viewHandler.openView("addMeeting");
+    }
   }
 
   private void populateMeetings(String meetingListString){
-    MeetingList meetingList = gson.fromJson(meetingListString, MeetingList.class);
-    MeetingList meetingRequests = gson.fromJson(meetingRequestsList.get(),MeetingList.class);
+    ArrayList<String> meetingList = gson.fromJson(meetingListString, ArrayList.class);
+    ArrayList<String> meetingRequests = gson.fromJson(meetingRequestsList.get(),ArrayList.class);
 
     meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
 
     if (meetingRequests!=null){
       for(int i=0;i<meetingRequests.size();++i){
-        LocalDate localDate = meetingList.get(i).getDateOfMeeting();
-        DateTimeFormatter formatter =DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDate=localDate.format(formatter);
+        String date = meetingRequests.get(i);
+        LocalDate localDate=LocalDate.parse(date);
         String status = "Pending...";
-        folderBox.getChildren().add( createMeetingRequestElement(localDate,formattedDate,status));
+        meetingBox.getChildren().add( createMeetingRequestElement(localDate,date,status));
       }
     }
-    else if (meetingList!=null)
+    if (meetingList!=null)
     {
       for(int i=0;i<meetingList.size();++i){
-        LocalDate localDate = meetingList.get(i).getDateOfMeeting();
-        DateTimeFormatter formatter =DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDate=localDate.format(formatter);
-        folderBox.getChildren().add( createMeetingElement(localDate, formattedDate) );
+        String date = meetingList.get(i);
+        LocalDate localDate=LocalDate.parse(date);
+        meetingBox.getChildren().add( createMeetingElement(localDate, date) );
       }
     }
   }
 
   private void removeMeeting(LocalDate date){
     homeViewModel.removeMeeting(date);
+    reset();
   }
   private HBox createMeetingElement(LocalDate localDate, String date){
     HBox hBox = new HBox();
@@ -281,7 +285,7 @@ public class HomeViewController extends ViewController
   }
   private HBox createMeetingRequestElement(LocalDate localDate, String date,String status){
     HBox hBox = new HBox();
-
+    hBox.setAlignment(Pos.CENTER);
     hBox.getStyleClass().addAll("bg-light","fs-2");
     hBox.setPadding( new Insets(10,10,10,10));
     VBox v1 = new VBox();
@@ -290,13 +294,14 @@ public class HomeViewController extends ViewController
 
     Label dateLabel = new Label(date);
     Label statusLabel = new Label(status);
+    statusLabel.setAlignment(Pos.CENTER);
 
 
     Button removeBtn = new Button("Remove");
     removeBtn.getStyleClass().addAll("btn-danger");
     removeBtn.onActionProperty().setValue((evt)->removeMeeting(localDate));
 
-    int r = 5,l=5;
+    int r = 5,l=10;
     HBox.setMargin(removeBtn,new Insets(0,r,0,l));
     HBox.setMargin(statusLabel,new Insets(0,r,0,l));
 

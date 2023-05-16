@@ -2,8 +2,6 @@ package modelServer;
 
 import mediator.*;
 
-import java.rmi.RemoteException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -54,8 +52,8 @@ public interface Model
     boolean isCoach(String username);
   boolean removeCoachAssignment(String traineeUsername);
 
-  MeetingList getTraineeMeetingList(String traineeUsername);
-  MeetingList getTraineeMeetingRequests(String traineeUsername);
+  ArrayList<String> getTraineeMeetingList(String traineeUsername);
+  ArrayList<String> getTraineeMeetingRequests(String traineeUsername);
   boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
   boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
 }
