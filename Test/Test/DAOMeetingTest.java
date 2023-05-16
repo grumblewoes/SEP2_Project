@@ -22,8 +22,6 @@ class DAOMeetingTest
 
     @BeforeEach void setUp() throws SQLException
     {
-        cdao = new CoachDAO();
-        udao = new UserDAO();
         mdao = new MeetingDAO();
         trainee = "d";
         coach = "coach";
