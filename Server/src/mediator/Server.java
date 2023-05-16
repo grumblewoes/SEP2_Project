@@ -192,6 +192,10 @@ public class Server implements RemoteModel
     return model.removeMeeting( traineeUsername, coachName, date);
   }
 
+  @Override public ArrayList<LocalDate> getTakenDates(String coachUsername) throws RemoteException
+  {
+    return model.getTakenDates(coachUsername);
+  }
 
   @Override public ArrayList<String> getMeetingRequests(String coach)
       throws RemoteException

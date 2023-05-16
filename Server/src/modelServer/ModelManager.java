@@ -505,6 +505,17 @@ public class ModelManager implements Model
     }
   }
 
+  @Override public ArrayList<LocalDate> getTakenDates(String coachUsername)
+  {
+    try {
+      return new MeetingDAO().getTakenDates(coachUsername);
+    }
+    catch (SQLException e)
+    {
+      return null;
+    }
+  }
+
   @Override public boolean removeMeeting(String traineeUsername,
       String coachUsername, LocalDate dateOfMeeting)
   {

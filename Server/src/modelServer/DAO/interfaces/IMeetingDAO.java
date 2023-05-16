@@ -1,5 +1,7 @@
 package modelServer.DAO.interfaces;
 
+import org.postgresql.jdbc2.ArrayAssistant;
+
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -18,4 +20,6 @@ public interface IMeetingDAO
 
   ArrayList<String> getCoachMeetingRequests(String coach) throws SQLException;
   ArrayList<String> getCoachMeetings(String coach) throws SQLException;
+
+  ArrayList<LocalDate> getTakenDates(String coachUsername) throws SQLException;
 }

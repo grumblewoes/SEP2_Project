@@ -253,5 +253,52 @@ public class MeetingDAO implements IMeetingDAO
     }
   }
 
+  @Override public ArrayList<LocalDate> getTakenDates(String coachUsername)
+      throws SQLException
+  {
+    DBConnection db = DBConnection.getInstance();
+    Connection connection = db.getConnection();
+    ArrayList<LocalDate> list = new ArrayList<>();
+
+    try
+    {
+      LocalDate currentDate = LocalDate.now();
+      LocalDate endDate = currentDate.plusDays(30);
+
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT date_of_meeting FROM meeting_list WHERE coach_username = ? " +
+              "AND date_of_meeting >= ? AND date_of_meeting <= ?");
+      statement.setString(1, coachUsername);
+      statement.setDate(2, java.sql.Date.valueOf(currentDate));
+      statement.setDate(3, java.sql.Date.valueOf(endDate));
+
+      ResultSet rs = statement.executeQuery();
+      ArrayList<LocalDate> tempList = new ArrayList<>();
+      while (rs.next()) {
+        LocalDate dateOfMeeting = rs.getDate(1).toLocalDate();
+        tempList.add(dateOfMeeting);
+
+        // Process a batch of rows
+        if (tempList.size() >= 6) {
+          list.addAll(tempList);
+          tempList.clear();
+        }
+      }
+
+      // Add any remaining rows in the tempList
+      list.addAll(tempList);
+      return list;
+
+    }
+    catch (SQLException e)
+    {
+      return list;
+    }
+    finally
+    {
+      connection.close();
+    }
   }
+
+}
 

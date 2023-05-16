@@ -71,4 +71,6 @@ public interface Model
   ArrayList<String> getTraineeMeetingList(String traineeUsername);
   ArrayList<String> getTraineeMeetingRequests(String traineeUsername);
   boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
+  ArrayList<LocalDate> getTakenDates(String coachUsername);
+
 }

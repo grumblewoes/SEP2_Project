@@ -35,6 +35,10 @@ public class AddMeetingViewController extends ViewController
           setDisable(true);
           setStyle("-fx-background-color: #f0f0f0;"); // change disabled date color
         }
+//        else if(addMeetingViewModel.getTakenDates().contains(date)){
+//          setDisable(true);
+//          setStyle("-fx-background-color: #fee0f0;");
+//        }
       }
     });
   }

@@ -185,12 +185,25 @@ public class CoachDAO implements ICoachDAO
 
     try
     {
-      PreparedStatement statement = connection.prepareStatement(
-          "update trainee2 set coach_username = null where username = ? and coach_username is not null"
+      PreparedStatement updateStatement = connection.prepareStatement(
+          "UPDATE trainee2 SET coach_username = NULL WHERE username = ? AND coach_username IS NOT NULL"
       );
-      statement.setString(1, traineeUsername);
-      int result = statement.executeUpdate();
-      return result > 0;
+      updateStatement.setString(1, traineeUsername);
+      updateStatement.executeUpdate();
+
+      // Second PreparedStatement for the DELETE statement
+      PreparedStatement deleteStatement = connection.prepareStatement(
+          "DELETE FROM meeting_request WHERE trainee_username = ?"
+      );
+      deleteStatement.setString(1, traineeUsername);
+      deleteStatement.executeUpdate();
+      PreparedStatement deleteStatement2 = connection.prepareStatement(
+          "DELETE FROM meeting_list WHERE trainee_username = ?"
+      );
+      deleteStatement2.setString(1, traineeUsername);
+      deleteStatement2.executeUpdate();
+
+      return true;
     }
     catch (SQLException e){
       Logger.log(e);
@@ -279,7 +292,19 @@ public class CoachDAO implements ICoachDAO
       statement.setString(1, traineeUsername);
       int result = statement.executeUpdate();
 
+      PreparedStatement deleteStatement = connection.prepareStatement(
+          "DELETE FROM meeting_request WHERE trainee_username = ?"
+      );
+      deleteStatement.setString(1, traineeUsername);
+      deleteStatement.executeUpdate();
+      PreparedStatement deleteStatement2 = connection.prepareStatement(
+          "DELETE FROM meeting_list WHERE trainee_username = ?"
+      );
+      deleteStatement2.setString(1, traineeUsername);
+      deleteStatement2.executeUpdate();
       return result > 0;
+
+
 
     }
     catch (SQLException e){

@@ -6,10 +6,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.util.StringConverter;
 import javafx.util.converter.LocalDateStringConverter;
+import mediator.User;
 import modelClient.Model;
 import util.Logger;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AddMeetingViewModel extends ViewModel
@@ -53,5 +55,19 @@ public class AddMeetingViewModel extends ViewModel
   public StringProperty getCoachProperty()
   {
     return coachProperty;
+  }
+
+  public ArrayList<LocalDate> getTakenDates(){
+    String coachUsername = null;
+    User coach = model.getCoach(viewState.getUsername());
+    if (coach != null) {
+      coachUsername = coach.getUsername();
+    }
+
+    if (coachUsername == null) {
+      errorProperty.set("You do not have a coach.");
+      return null;
+    }
+    return model.getTakenDates(coachUsername);
   }
 }

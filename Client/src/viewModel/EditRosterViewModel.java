@@ -205,7 +205,7 @@ public class EditRosterViewModel extends ViewModel
 
   public void setSelectedTraineeName(String selectedTraineeName)
   {
-    System.out.println("Clicked");
+    System.out.println("Clicked" + selectedTraineeName);
     this.selectedTraineeName = new SimpleStringProperty(selectedTraineeName);
   }
 

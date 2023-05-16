@@ -596,6 +596,17 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  @Override public ArrayList<LocalDate> getTakenDates(String coachUsername){
+    try
+    {
+      return server.getTakenDates(coachUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
 
 }
 

@@ -63,5 +63,7 @@ public interface RemoteModel extends RemoteSubject<String,String>
 	boolean approveMeeting(String trainee, String coach, LocalDate date) throws RemoteException;
 	boolean denyMeeting(String trainee, String coach, LocalDate date) throws RemoteException;
 	ArrayList<String> getCoachMeetings(String coach) throws RemoteException;
+	ArrayList<LocalDate> getTakenDates(String coachUsername) throws RemoteException;
+
 
 }

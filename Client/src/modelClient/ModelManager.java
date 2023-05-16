@@ -245,6 +245,10 @@ public class ModelManager implements Model, LocalListener<String,String>
 		return client.sendMeetingRequest(traineeUsername,coachUsername,dateOfMeeting);
 	}
 
+	@Override public ArrayList<LocalDate> getTakenDates(String coachUsername)
+	{
+		return client.getTakenDates(coachUsername);
+	}
 
 }
 

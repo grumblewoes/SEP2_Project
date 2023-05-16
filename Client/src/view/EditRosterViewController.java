@@ -69,12 +69,7 @@ public class EditRosterViewController extends ViewController
     });
   }
 
-  @FXML void removeTrainee(ActionEvent event)
-  {
-    editRosterViewModel.getMeetingList().addListener((obs, oldVal, newVal) -> {
-      populateMeetings(newVal);
-    });
-  }
+
 
   @FXML private void removeMeeting(ActionEvent event) throws RemoteException
   {
@@ -90,9 +85,9 @@ public class EditRosterViewController extends ViewController
 
   @FXML void removeTrainee()
   {
+    Logger.log(editRosterViewModel.getSelectedTraineeName());
     if (editRosterViewModel.removeTrainee())
-      ;
-    editRosterViewModel.clear();
+        reset();
   }
 
   @FXML
