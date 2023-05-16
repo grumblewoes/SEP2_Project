@@ -73,7 +73,7 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     }
     public BooleanProperty editableProperty() {  return editableProperty;  }
 
-public BooleanProperty isCoachProperty() { return isCoachProperty; }
+    public BooleanProperty isCoachProperty() { return isCoachProperty; }
 
     public StringProperty errorProperty() {
         return errorProperty;
@@ -118,9 +118,10 @@ public BooleanProperty isCoachProperty() { return isCoachProperty; }
         User profileUser = viewState.isCoach() ? model.getCoach(u): model.getTrainee(u);
         String pUsername = profileUser.getUsername();
         boolean wantsToShare = profileUser.isShareProfile();
-        boolean owns = viewState.getProfileUsername().equals(viewState.getUsername());
-        editableProperty.set(owns);
-
+        boolean owns = viewState.getProfileUsername().equals(viewState.getUsername()) ;
+        boolean isCoach = viewState.isCoach();
+        editableProperty.set(owns && !isCoach);
+        isCoachProperty.set(isCoach);
 
         if( owns || wantsToShare){
 
@@ -144,7 +145,6 @@ public BooleanProperty isCoachProperty() { return isCoachProperty; }
             weightProperty.set(w);
             shareProfileProperty.set(profileUser.isShareProfile() );
             bmiProperty.set( String.valueOf( 1.0*w/(1.0*h*h/100/100) ) );
-            isCoachProperty.set(viewState.isCoach());
 
             if (model.getCoach(viewState.getProfileUsername()) != null)
             {
@@ -185,6 +185,7 @@ public BooleanProperty isCoachProperty() { return isCoachProperty; }
                 coachProperty.set("");
             }
         }
+
     }
 
     public boolean update() {

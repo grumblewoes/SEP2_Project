@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -577,4 +578,105 @@ class DAOCoachTest
     void removeTraineeException(String traineeUsername) {
         //trainee is not associated with coach
     }
+
+
+
+//    ArrayList<String> getTraineeList(String username) throws SQLException;
+//    ArrayList<String> getTraineeRequest(String username) throws SQLException;
+
+    @Test void getTraineeListZero(){
+        assertDoesNotThrow(()->cdao.getTraineeList(null));
+    }
+
+    @Test void getTraineeListOne() throws SQLException {
+        String username = "name"+Math.random();
+        String coach = "coach"+Math.random();
+        udao.createTrainee(username,"pds","sda","dasd",12,12);
+        cdao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd",true);
+        cdao.requestCoach(username,coach);
+        cdao.acceptRequest(username,coach);
+
+        ArrayList<String> list = cdao.getTraineeList(coach);
+        ArrayList<String> requests = cdao.getTraineeRequest(coach);
+
+        assertEquals(requests.size(),0);
+        assertEquals(list.get(0),username);
+    }
+    @Test void getTraineeListMany() throws SQLException {
+        String coach = "coach"+Math.random();
+        String username = "name"+Math.random();
+        String username2 = "name"+Math.random();
+        String username3 = "name"+Math.random();
+
+        udao.createTrainee(username,"pds","sda","dasd",12,12);
+        cdao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd",true);
+        udao.createTrainee(username2,"pds","sda","dasd",12,12);
+        udao.createTrainee(username3,"pds","sda","dasd",12,12);
+
+        cdao.requestCoach(username,coach);
+        cdao.acceptRequest(username,coach);
+        cdao.requestCoach(username2,coach);
+        cdao.acceptRequest(username2,coach);
+        cdao.requestCoach(username3,coach);
+        cdao.acceptRequest(username3,coach);
+
+        ArrayList<String> list = cdao.getTraineeList(coach);
+        ArrayList<String> requests = cdao.getTraineeRequest(coach);
+
+        assertEquals(requests.size(),0);
+        assertEquals(list.get(2),username3);
+    }
+    @Test void getTraineeListBoundary()  {
+        //pass boundary
+    }
+    @Test void getTraineeListException()   {
+        //pass
+    }
+
+
+
+
+    @Test void getTraineeRequestZero(){
+        assertDoesNotThrow(()->cdao.getTraineeRequest(null));
+    }
+
+    @Test void getTraineeRequestOne() throws SQLException {
+        String username = "name"+Math.random();
+        String coach = "coach"+Math.random();
+        udao.createTrainee(username,"pds","sda","dasd",12,12);
+        cdao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd",true);
+        cdao.requestCoach(username,coach);
+
+        ArrayList<String> list = cdao.getTraineeRequest(coach);
+        assertEquals(list.get(0),username);
+    }
+    @Test void getTraineeRequestMany() throws SQLException {
+        String coach = "coach"+Math.random();
+        String username = "name"+Math.random();
+        String username2 = "name"+Math.random();
+        String username3 = "name"+Math.random();
+
+        udao.createTrainee(username,"pds","sda","dasd",12,12);
+        cdao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd",true);
+        udao.createTrainee(username2,"pds","sda","dasd",12,12);
+        udao.createTrainee(username3,"pds","sda","dasd",12,12);
+
+        cdao.requestCoach(username,coach);
+        cdao.requestCoach(username2,coach);
+        cdao.requestCoach(username3,coach);
+
+        ArrayList<String> list = cdao.getTraineeRequest(coach);
+        assertEquals(list.get(2),username3);
+    }
+    @Test void getTraineeRequestBoundary()   {
+        //pass boundary
+    }
+    @Test void getTraineeRequestException()   {
+        //pass
+    }
+
+
+
+
+
 }
