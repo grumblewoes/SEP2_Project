@@ -248,6 +248,7 @@ class DAOMeetingTest
     finally {
       connection.close();
     }
+  }
     @Test void denyMeetingBoundary()
     {
         //no boundary
@@ -271,7 +272,6 @@ class DAOMeetingTest
             throw new RuntimeException(e);
         }
     }
-  }
   @Test void getTraineeMeetingRequestsMany() {
     try {
       Assertions.assertNotNull(mdao.getTraineeMeetingRequests(coach));

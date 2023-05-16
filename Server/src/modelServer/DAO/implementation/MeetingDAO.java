@@ -1,7 +1,5 @@
 package modelServer.DAO.implementation;
 
-import mediator.Meeting;
-import mediator.MeetingList;
 import modelServer.DAO.interfaces.IMeetingDAO;
 import modelServer.DbContext.DBConnection;
 import util.Logger;
@@ -119,6 +117,7 @@ public class MeetingDAO implements IMeetingDAO
     }
   }
 
+
   @Override public boolean approveMeeting(String trainee, String coach,
       LocalDate date) throws SQLException
   {
@@ -187,8 +186,10 @@ public class MeetingDAO implements IMeetingDAO
     }
   }
 
+
+
   //is arraylist instead of meetinglist because STUPID gson won't convert LocalDate to json format
-  @Override public ArrayList<String> getTraineeMeetingRequests(String coach)
+  @Override public ArrayList<String> getCoachMeetingRequests(String coach)
       throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
@@ -252,36 +253,5 @@ public class MeetingDAO implements IMeetingDAO
     }
   }
 
-
-  @Override public boolean removeMeeting(String traineeUsername,
-      String coachUsername, LocalDate date) throws SQLException
-  {
-
-      DBConnection db = DBConnection.getInstance();
-      Connection connection = db.getConnection();
-
-      try
-      {
-        PreparedStatement statement = connection.prepareStatement(
-            "delete from meeting_list where trainee_username=? and coach_username = ?"
-                + " and date_of_meeting=?;");
-        statement.setString(1, traineeUsername);
-        statement.setString(2, coachUsername);
-        statement.setDate(3, Date.valueOf(date));
-
-        statement.executeUpdate();
-        return true;
-
-      }
-      catch (SQLException e)
-      {
-        Logger.log(e);
-        return false;
-      }
-      finally
-      {
-        connection.close();
-      }
-    }
   }
 

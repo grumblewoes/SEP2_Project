@@ -127,7 +127,7 @@ public class HomeViewController extends ViewController
     return hBox;
   }
 
-  @FXML private void sendRequest()
+  @FXML private void sendFriendRequest()
   {
     viewHandler.openView("addFriend");
   }

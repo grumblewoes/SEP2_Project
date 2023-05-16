@@ -2,7 +2,6 @@ package modelServer;
 
 import mediator.*;
 import modelServer.DAO.implementation.*;
-import mediator.*;
 import modelServer.DAO.implementation.ExerciseAdminDAO;
 import modelServer.DAO.implementation.ExerciseDAO;
 import modelServer.DAO.implementation.FolderDAO;
@@ -438,9 +437,19 @@ public class ModelManager implements Model
     }
   }
 
+  @Override public ArrayList<String> getMeetingRequests(String coach)
+  {
+    try
+    {
+      return new MeetingDAO().getCoachMeetingRequests(coach);
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
-
-    @Override public boolean removeCoach(String name)
+  @Override public boolean removeCoach(String name)
     {
         try {
             return new CoachDAO().removeCoach(name);

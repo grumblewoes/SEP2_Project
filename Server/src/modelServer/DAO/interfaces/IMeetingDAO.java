@@ -12,7 +12,7 @@ public interface IMeetingDAO
   boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) throws
       SQLException;
   boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) throws SQLException;
-  boolean approveMeeting(String trainee, String coach, Date date) throws
+  boolean approveMeeting(String trainee, String coach, LocalDate date) throws
       SQLException;
   boolean denyMeeting(String trainee, String coach, LocalDate date) throws SQLException;
 

@@ -7,13 +7,10 @@ import utility.observer.listener.GeneralListener;
 import utility.observer.listener.RemoteListener;
 import utility.observer.subject.LocalSubject;
 import utility.observer.subject.PropertyChangeHandler;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -599,19 +596,6 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
-  @Override public boolean removeMeeting(String traineeUsername,
-      String coachUsername, LocalDate dateOfMeeting)
-  {
-    try
-    {
-      return server.removeMeeting(traineeUsername, coachUsername,
-          dateOfMeeting);
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-  }
 
 }
 

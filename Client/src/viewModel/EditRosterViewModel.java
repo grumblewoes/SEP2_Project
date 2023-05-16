@@ -10,7 +10,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import mediator.FriendList;
-import mediator.MeetingList;
 import mediator.Trainee;
 import mediator.TraineeList;
 import modelClient.Model;
