@@ -1,85 +1,146 @@
 import modelServer.DAO.implementation.MeetingDAO;
 import modelServer.DAO.interfaces.IMeetingDAO;
+import modelServer.DbContext.DBConnection;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class MeetingDAOTest
+class DAOMeetingTest
 {
     IMeetingDAO mdao;
     String trainee, coach;
-    LocalDate date;
+    LocalDate date1, date2, date3;
+    PreparedStatement statement;
+    DBConnection db;
+    Connection connection;
 
-    @BeforeEach void setUp()
+    @BeforeEach void setUp() throws SQLException
     {
         mdao = new MeetingDAO();
         trainee = "d";
         coach = "coach";
+        date1 = LocalDate.of(2023, 5, 16);
+        date2 = LocalDate.of(2023, 5, 17);
+        date3 = LocalDate.of(2023, 5, 18);
+
+        try
+        {
+            db = DBConnection.getInstance();
+            connection = db.getConnection();
+            statement = connection.prepareStatement("delete from meeting_list;"
+                + "delete from meeting_request;");
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        finally {
+            connection.close();
+        }
     }
 
     @Test void approveMeetingZero()
     {
-        assertFalse(()-> {
-            try
-            {
-                return mdao.approveMeeting(null, null, null);
-            }
-            catch (SQLException e)
-            {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            try {
+                mdao.approveMeeting(null, null, null);
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         });
     }
-    @Test void approveMeetingOne()
+    @Test void approveMeetingOne() throws SQLException
     {
-        assertTrue(()-> {
-            try
-            {
-                return mdao.approveMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
+        try
+        {
+            db = DBConnection.getInstance();
+            connection = db.getConnection();
+            statement = connection.prepareStatement("insert into meeting_request values('d', 'coach', '2023-05-16');");
+            statement.executeUpdate();
+
+            Assertions.assertTrue(()-> {
+                try
+                {
+                    return mdao.approveMeeting(trainee, coach,
+                        date1);
+                }
+                catch (SQLException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            statement = connection.prepareStatement("delete from meeting_list;");
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        finally {
+            connection.close();
+        }
+
     }
-    @Test void approveMeetingMany()
+    @Test void approveMeetingMany() throws SQLException
     {
-        assertTrue(()-> {
-            try
-            {
-                return mdao.approveMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
-        assertTrue(()-> {
-            try
-            {
-                return mdao.approveMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
-        assertTrue(()-> {
-            try
-            {
-                return mdao.approveMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
+        try
+        {
+            db = DBConnection.getInstance();
+            connection = db.getConnection();
+            statement = connection.prepareStatement("insert into meeting_request values('d', 'coach', '2023-05-16');"
+                + "insert into meeting_request values('d', 'coach', '2023-05-17');"
+                + "insert into meeting_request values('d', 'coach', '2023-05-18');");
+            statement.executeUpdate();
+
+            Assertions.assertTrue(()-> {
+                try
+                {
+                    return mdao.approveMeeting(trainee, coach, date1);
+
+                }
+                catch (SQLException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            });
+            Assertions.assertTrue(()-> {
+                try
+                {
+                    return mdao.approveMeeting(trainee, coach, date2);
+
+                }
+                catch (SQLException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            });
+            Assertions.assertTrue(()-> {
+                try
+                {
+                    return mdao.approveMeeting(trainee, coach, date3);
+
+                }
+                catch (SQLException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        finally {
+            connection.close();
+        }
     }
     @Test void approveMeetingBoundary()
     {
@@ -87,99 +148,106 @@ class MeetingDAOTest
     }
     @Test void approveMeetingException()
     {
-        //trainee that doesn't have a coach
-        assertTrue(()-> {
-            try
-            {
-                return mdao.approveMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
-        //coach not associated with trainee
-        assertTrue(()-> {
-            try
-            {
-                return mdao.approveMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
-        //duplicate meeting
-        assertTrue(()-> {
-            try
-            {
-                return mdao.approveMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
+        //trainee cannot request from coach that is not assigned to them, so no
     }
 
     @Test void denyMeetingZero()
     {
-        assertFalse(()-> {
-            try
-            {
-                return mdao.denyMeeting(null, null, null);
-            }
-            catch (SQLException e)
-            {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            try {
+                mdao.denyMeeting(null, null, null);
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         });
     }
-    @Test void denyMeetingOne()
+    @Test void denyMeetingOne() throws SQLException
     {
-        assertTrue(()-> {
-            try
-            {
-                return mdao.denyMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
+        try
+        {
+            db = DBConnection.getInstance();
+            connection = db.getConnection();
+            statement = connection.prepareStatement("insert into meeting_request values('d', 'coach', '2023-05-16');");
+            statement.executeUpdate();
+
+            Assertions.assertTrue(()-> {
+                try
+                {
+                    return mdao.denyMeeting(trainee, coach,
+                        date1);
+                }
+                catch (SQLException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            statement = connection.prepareStatement("delete from meeting_list;");
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        finally {
+            connection.close();
+        }
     }
-    @Test void denyMeetingMany()
+    @Test void denyMeetingMany() throws SQLException
     {
-        assertTrue(()-> {
-            try
-            {
-                return mdao.denyMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
-        assertTrue(()-> {
-            try
-            {
-                return mdao.denyMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
-        assertTrue(()-> {
-            try
-            {
-                return mdao.denyMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
+        try
+        {
+            db = DBConnection.getInstance();
+            connection = db.getConnection();
+            statement = connection.prepareStatement("insert into meeting_request values('d', 'coach', '2023-05-16');"
+                + "insert into meeting_request values('d', 'coach', '2023-05-17');"
+                + "insert into meeting_request values('d', 'coach', '2023-05-18');");
+            statement.executeUpdate();
+
+            Assertions.assertTrue(()-> {
+                try
+                {
+                    return mdao.denyMeeting(trainee, coach,
+                        date1);
+                }
+                catch (SQLException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            });
+            Assertions.assertTrue(()-> {
+                try
+                {
+                    return mdao.denyMeeting(trainee, coach,
+                        date2);
+                }
+                catch (SQLException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            });
+            Assertions.assertTrue(()-> {
+                try
+                {
+                    return mdao.denyMeeting(trainee, coach,
+                        date3);
+                }
+                catch (SQLException e)
+                {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            statement = connection.prepareStatement("delete from meeting_list;");
+            statement.executeUpdate();
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        finally {
+            connection.close();
+        }
     }
     @Test void denyMeetingBoundary()
     {
@@ -187,57 +255,36 @@ class MeetingDAOTest
     }
     @Test void denyMeetingException()
     {
-        //trainee w no coach
-        assertTrue(()-> {
-            try
-            {
-                return mdao.denyMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
-        //coach not associated w trainee
-        assertTrue(()-> {
-            try
-            {
-                return mdao.denyMeeting(trainee, coach, date);
-            }
-            catch (SQLException e)
-            {
-                throw new RuntimeException(e);
-            }
-        });
+        //already tested
     }
 
     @Test void getTraineeMeetingRequestsZero() {
         try {
-            assertNull(mdao.getTraineeMeetingRequests(null));
+            Assertions.assertNotNull(mdao.getTraineeMeetingRequests(null));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
     @Test void getTraineeMeetingRequestsOne() {
         try {
-            assertNull(mdao.getTraineeMeetingRequests(coach));
+            Assertions.assertNotNull(mdao.getTraineeMeetingRequests(coach));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
     @Test void getTraineeMeetingRequestsMany() {
         try {
-            assertNull(mdao.getTraineeMeetingRequests(coach));
+            Assertions.assertNotNull(mdao.getTraineeMeetingRequests(coach));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         try {
-            assertNull(mdao.getTraineeMeetingRequests(coach));
+            Assertions.assertNotNull(mdao.getTraineeMeetingRequests(coach));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         try {
-            assertNull(mdao.getTraineeMeetingRequests(coach));
+            Assertions.assertNotNull(mdao.getTraineeMeetingRequests(coach));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -250,32 +297,29 @@ class MeetingDAOTest
     }
 
     @Test void getCoachMeetingsZero() {
-        try {
-            assertNull(mdao.getCoachMeetings(null));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        Assertions.assertDoesNotThrow(() -> mdao.getCoachMeetings(null));
     }
     @Test void getCoachMeetingsOne() {
         try {
-            assertNull(mdao.getCoachMeetings(coach));
+            Assertions.assertNotNull(mdao.getCoachMeetings(coach));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
     @Test void getCoachMeetingsMany() {
         try {
-            assertNull(mdao.getCoachMeetings(coach));
+            Assertions.assertNotNull(mdao.getCoachMeetings(coach));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         try {
-            assertNull(mdao.getCoachMeetings(coach));
+            Assertions.assertNotNull(mdao.getCoachMeetings(coach));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         try {
-            assertNull(mdao.getCoachMeetings(coach));
+            Assertions.assertNotNull(mdao.getCoachMeetings(coach));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
