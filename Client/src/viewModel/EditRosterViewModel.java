@@ -1,6 +1,7 @@
 package viewModel;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonToken;
 import javafx.beans.Observable;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
@@ -143,16 +144,15 @@ public class EditRosterViewModel extends ViewModel
 
       if (model.removeMeeting(s[1], usernameProperty.get(), date))
         return true;
-      System.out.println("LALALALALALA");
     }
     catch (Exception e)
     {
-      errorProperty.set(
-          "An error occurred while trying to remove the meeting.");
-      System.out.println(e.getMessage());
+      System.out.println("No meeting was selected");
+      errorProperty.set("PLease select a meeting to remove");
     }
     return false;
   }
+
 
   public boolean approveMeeting()
   {
@@ -188,6 +188,7 @@ public class EditRosterViewModel extends ViewModel
     loadTrainee();
     loadMtgRequests();
     loadMtgs();
+    selectedMtg.set("");
     errorProperty.set("");
     usernameProperty.set(viewState.getUsername());
   }

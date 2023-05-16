@@ -18,6 +18,7 @@ class DAOMeetingTest
     void setUp() {
         cdao = new CoachDAO();
         udao = new UserDAO();
+
     }
 
     @Test

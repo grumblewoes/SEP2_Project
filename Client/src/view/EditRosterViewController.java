@@ -81,8 +81,14 @@ public class EditRosterViewController extends ViewController
 
   @FXML private void removeMeeting(ActionEvent event) throws RemoteException
   {
-    editRosterViewModel.removeMeeting();
-    reset();
+    if (editRosterViewModel.removeMeeting())
+    {
+      reset();
+    }
+    else
+    {
+
+    }
   }
 
   @FXML void removeTrainee()
@@ -192,6 +198,7 @@ public class EditRosterViewController extends ViewController
     hBox.getChildren().addAll(meetingLabel);
 
     String meeting = date +","+ trainee;
+
     meetingLabel.setOnMouseClicked(event -> {
       editRosterViewModel.setSelectedMeeting(meeting);
     });
