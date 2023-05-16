@@ -2,9 +2,9 @@ package mediator;
 
 import utility.observer.subject.RemoteSubject;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -59,5 +59,7 @@ public interface RemoteModel extends RemoteSubject<String,String>
 	boolean denyMeeting(String trainee, String coach, LocalDate date) throws RemoteException;
 
 	ArrayList<String> getCoachMeetings(String coach) throws RemoteException;
+
+	boolean removeMeeting( String traineeUsername, String coachName, LocalDate date) throws RemoteException;
 
 }

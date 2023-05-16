@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="ValhallaDB">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.45">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.48">
     <root id="1">
       <DateStyle>mdy</DateStyle>
       <Grants>13091||10|c|G
@@ -66579,12 +66579,16 @@ true posixrules
     <sequence id="10531" parent="10527" name="folder2_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>12912777</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
       <StateNumber>196026399</StateNumber>
       <OwnerName>dmzntfyy</OwnerName>
     </sequence>
     <sequence id="10532" parent="10527" name="user_exercise2_id_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>12912794</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
       <StateNumber>196026409</StateNumber>
       <OwnerName>dmzntfyy</OwnerName>
     </sequence>

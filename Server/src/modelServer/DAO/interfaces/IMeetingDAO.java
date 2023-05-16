@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public interface IMeetingDAO
 {
+  boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate date) throws SQLException;
+
   boolean approveMeeting(String trainee, String coach, LocalDate date) throws
       SQLException;
   boolean denyMeeting(String trainee, String coach, LocalDate date) throws SQLException;
@@ -13,3 +15,4 @@ public interface IMeetingDAO
   ArrayList<String> getTraineeMeetingRequests(String coach) throws SQLException;
   ArrayList<String> getCoachMeetings(String coach) throws SQLException;
 }
+
