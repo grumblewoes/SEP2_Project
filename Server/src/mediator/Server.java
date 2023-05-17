@@ -194,6 +194,7 @@ public class Server implements RemoteModel
 
   @Override public ArrayList<LocalDate> getTakenDates(String coachUsername) throws RemoteException
   {
+    Logger.log("quering taken dates...");
     return model.getTakenDates(coachUsername);
   }
 
