@@ -122,7 +122,7 @@
                   </HBox>
                   <HBox prefHeight="211.0" prefWidth="710.0">
                      <children>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="scrollBox" HBox.hgrow="ALWAYS">
+                        <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" styleClass="scrollBox" HBox.hgrow="ALWAYS">
                            <content>
                               <VBox fx:id="meetingBox" prefHeight="200.0" prefWidth="705.0" styleClass="menu-display" />
                            </content>
@@ -166,7 +166,7 @@
                   </HBox>
                   <HBox prefHeight="211.0" prefWidth="710.0">
                      <children>
-                        <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="scrollBox" HBox.hgrow="ALWAYS">
+                        <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" styleClass="scrollBox" HBox.hgrow="ALWAYS">
                            <content>
                               <VBox fx:id="traineeBox" prefHeight="200.0" prefWidth="705.0" styleClass="menu-display" />
                            </content>
