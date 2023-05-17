@@ -58,7 +58,7 @@ public interface Model
   boolean denyRequest(String traineeUsername);
   boolean removeTraineeFromRoster(String traineeUsername);
 
-  ArrayList<String> getTraineeList(String username);
+  TraineeList getTraineeList(String username);
   ArrayList<String> getTraineeRequest(String username);
   ArrayList<String> getMeetingRequests(String coach);
   boolean approveMeeting(String trainee, String coach, LocalDate date);

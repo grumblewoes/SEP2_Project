@@ -228,7 +228,7 @@ public class EditRosterViewController extends ViewController
     //loops through the list, adding each element
     for (int i = 0; i < traineeList.getSize(); ++i)
     {
-      String u = traineeList.getTrainee(i);
+      String u = traineeList.getTraineeUsername(i);
       requestBox.getChildren().add(createTraineeRequestComponent(u));
     }
   }
@@ -246,12 +246,13 @@ public class EditRosterViewController extends ViewController
     //loops through the list, adding each element
     for (int i = 0; i < traineeList.getSize(); ++i)
     {
-      String u = traineeList.getTrainee(i);
-      traineeBox.getChildren().add(createTraineeComponent(u));
+      String u = traineeList.getTraineeUsername(i);
+      String st = traineeList.getTraineeStatus(i);
+      traineeBox.getChildren().add(createTraineeComponent(u,st));
     }
   }
 
-  private HBox createTraineeComponent(String username)
+  private HBox createTraineeComponent(String username,String status)
   {
     HBox hBox = new HBox();
     hBox.getStyleClass().addAll("bg-primary", "fs-2");
@@ -263,7 +264,7 @@ public class EditRosterViewController extends ViewController
     seeBtn.onActionProperty().setValue((evt) -> manageTraineeOpen(username));
 
     //figure out how to load status
-    Label statusLabel = new Label("Status: On dat grind");
+    Label statusLabel = new Label("Status: "+status);
     HBox.setHgrow(statusLabel, Priority.ALWAYS);
     statusLabel.setMaxWidth(Double.MAX_VALUE);
     statusLabel.setAlignment(Pos.CENTER_RIGHT);

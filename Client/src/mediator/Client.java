@@ -522,7 +522,7 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
-  public ArrayList<String> getTraineeList(String username)
+  public TraineeList getTraineeList(String username)
   {
     try
     {

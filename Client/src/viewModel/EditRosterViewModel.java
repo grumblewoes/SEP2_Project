@@ -80,13 +80,7 @@ public class EditRosterViewModel extends ViewModel
 
   private void loadTrainee()
   {
-    ArrayList<String> traineesArrayList = model.getTraineeList(
-        viewState.getUsername());
-    TraineeList trainees = new TraineeList();
-    for (String s : traineesArrayList)
-    {
-      trainees.addTrainee(new Trainee(s));
-    }
+    TraineeList trainees = model.getTraineeList(viewState.getUsername());
     String coachUsername = viewState.getUsername();
     ArrayList<String> requestArrayList = model.getTraineeRequest(coachUsername);
     TraineeList requests = new TraineeList();

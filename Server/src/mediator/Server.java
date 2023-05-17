@@ -174,7 +174,7 @@ public class Server implements RemoteModel
     return model.removeTraineeFromRoster(traineeUsername);
   }
 
-  @Override public ArrayList<String> getTraineeList(String username)
+  @Override public TraineeList getTraineeList(String username)
       throws RemoteException
   {
     return model.getTraineeList(username);

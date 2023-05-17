@@ -203,7 +203,7 @@ public class ModelManager implements Model, LocalListener<String,String>
     return client.removeTraineeFromRoster(traineeUsername);
   }
 
-	@Override public ArrayList<String> getTraineeList(String username)
+	@Override public TraineeList getTraineeList(String username)
 	{
 		return client.getTraineeList(username);
 	}

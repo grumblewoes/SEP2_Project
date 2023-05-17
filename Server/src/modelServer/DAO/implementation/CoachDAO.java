@@ -317,21 +317,21 @@ public class CoachDAO implements ICoachDAO
     }
   }
 
-  @Override public ArrayList<String> getTraineeList(String username)
+  @Override public TraineeList getTraineeList(String username)
       throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
-    ArrayList<String> list = new ArrayList<>();
+    TraineeList list = new TraineeList();
 
     try {
 
       PreparedStatement statement1 = connection.prepareStatement(
-          "select username from trainee2 where coach_username = ?"
+          "select username,status from trainee2 where coach_username = ?"
       );
       statement1.setString(1, username);
       ResultSet rs1 = statement1.executeQuery();
-      while (rs1.next()) list.add(rs1.getString(1));
+      while (rs1.next()) list.addTrainee( new Trainee(rs1.getString(1), rs1.getString(2)));
 
       return list;
     } catch (SQLException e) {

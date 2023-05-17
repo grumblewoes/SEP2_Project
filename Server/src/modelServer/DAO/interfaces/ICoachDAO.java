@@ -1,6 +1,7 @@
 package modelServer.DAO.interfaces;
 
 import mediator.FriendList;
+import mediator.TraineeList;
 import mediator.User;
 
 import java.sql.SQLException;
@@ -21,6 +22,6 @@ public interface ICoachDAO
   boolean acceptRequest(String traineeUsername, String coachUsername) throws  SQLException;
   boolean denyRequest(String traineeUsername) throws  SQLException;
   boolean removeTraineeFromRoster(String traineeUsername) throws  SQLException;
-  ArrayList<String> getTraineeList(String username) throws SQLException;
+  TraineeList getTraineeList(String username) throws SQLException;
   ArrayList<String> getTraineeRequest(String username) throws SQLException;
 }

@@ -1,16 +1,30 @@
 package mediator;
 
-public class Trainee
+import java.io.Serializable;
+
+public class Trainee implements Serializable
 {
 
-  private String username;
+  private String username,status;
 
   public Trainee(String username){
     this.username = username;
   }
+  public Trainee(String username, String status){
+    this(username);
+    this.status=status;
+  }
 
   public String getUsername(){
     return username;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 
   public String toString(){

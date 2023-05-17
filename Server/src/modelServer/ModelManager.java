@@ -413,7 +413,7 @@ public class ModelManager implements Model
     }
   }
 
-  @Override public ArrayList<String> getTraineeList(String username)
+  @Override public TraineeList getTraineeList(String username)
   {
     try
     {
