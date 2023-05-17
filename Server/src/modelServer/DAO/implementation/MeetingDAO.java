@@ -60,20 +60,32 @@ public class MeetingDAO implements IMeetingDAO
     }
   }
 
-  @Override public boolean sendMeetingRequest(String traineeUsername,
-      String coachUsername, LocalDate dateOfMeeting) throws SQLException
-  {
+  @Override
+  public boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
-    try {
-      PreparedStatement statement = connection.prepareStatement(
-          "INSERT INTO meeting_request (trainee_username, coach_username, date_of_meeting) "
-              + "SELECT ?, ?, ? ");
-      statement.setString(1, traineeUsername);
-      statement.setString(2, coachUsername);
-      statement.setDate(3, java.sql.Date.valueOf(dateOfMeeting));
 
-      statement.executeUpdate();
+    try {
+      // Check if the same values already exist in the meeting_list table
+      PreparedStatement checkStatement = connection.prepareStatement(
+          "SELECT * FROM meeting_list WHERE trainee_username = ? AND coach_username = ? AND date_of_meeting = ?");
+      checkStatement.setString(1, traineeUsername);
+      checkStatement.setString(2, coachUsername);
+      checkStatement.setDate(3, java.sql.Date.valueOf(dateOfMeeting));
+
+      ResultSet resultSet = checkStatement.executeQuery();
+      if (resultSet.next()) {
+        throw new SQLException("Duplicate values found in meeting_list table");
+      }
+
+      // Insert the meeting request into the meeting_request table
+      PreparedStatement insertStatement = connection.prepareStatement(
+          "INSERT INTO meeting_request (trainee_username, coach_username, date_of_meeting) VALUES (?, ?, ?)");
+      insertStatement.setString(1, traineeUsername);
+      insertStatement.setString(2, coachUsername);
+      insertStatement.setDate(3, java.sql.Date.valueOf(dateOfMeeting));
+
+      insertStatement.executeUpdate();
       return true;
     } catch (SQLException e) {
       Logger.log(e);
@@ -82,6 +94,7 @@ public class MeetingDAO implements IMeetingDAO
       connection.close();
     }
   }
+
 
   @Override public boolean removeMeeting(String traineeUsername,
       String coachUsername, LocalDate dateOfMeeting) throws SQLException
