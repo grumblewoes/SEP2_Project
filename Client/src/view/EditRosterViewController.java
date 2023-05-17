@@ -30,9 +30,7 @@ public class EditRosterViewController extends ViewController
 {
 
   @FXML private Label errorLabel;
-  @FXML private VBox requestBox, traineeBox;
-
-  @FXML private HBox meetingBox;
+  @FXML private VBox requestBox, traineeBox, meetingBox;
 
   @FXML private Label usernameLabel;
 
@@ -137,15 +135,19 @@ public class EditRosterViewController extends ViewController
   private HBox createMeetingRequestComponent(String date, String trainee)
   {
     HBox hBox = new HBox();
-
-    hBox.getStyleClass().addAll("bg-primary", "fs-2");
-    hBox.setAlignment(Pos.CENTER_LEFT);
-    hBox.setPadding(new Insets(30, 30, 30, 30));
+    hBox.getStyleClass().addAll("bg-primary","fs-2");
+    hBox.setPadding( new Insets(10,10,10,10));
+    HBox.setMargin(hBox,new Insets(0,0,5,0));
+    VBox v1 = new VBox();
+    HBox.setHgrow(v1, Priority.ALWAYS);
+    v1.setAlignment(Pos.CENTER_LEFT);
 
     Button acceptBtn = new Button("✓");
     Button rejectBtn = new Button("X");
     acceptBtn.getStyleClass().addAll("btn-success");
     rejectBtn.getStyleClass().addAll("btn-danger");
+    HBox.setMargin(acceptBtn,new Insets(0,5,0,5));
+    HBox.setMargin(rejectBtn,new Insets(0,5,0,5));
 
     acceptBtn.onActionProperty().setValue((evt) -> {
       editRosterViewModel.setSelectedMeeting(date + "," + trainee);
@@ -164,8 +166,8 @@ public class EditRosterViewController extends ViewController
     String dateDispOut = dateDispIn.format(outputFormatter);
 
     Label meetingLabel = new Label(dateDispOut + " " + trainee);
-    meetingLabel.getStyleClass()
-        .addAll("fs-2", "btn-success", "cursor-default");
+    hBox.getChildren().add(v1);
+    v1.getChildren().add(meetingLabel);
     hBox.getChildren().addAll(acceptBtn, meetingLabel, rejectBtn);
 
     return hBox;
@@ -174,10 +176,12 @@ public class EditRosterViewController extends ViewController
   private HBox createMeetingComponent(String date, String trainee)
   {
     HBox hBox = new HBox();
-
-    hBox.getStyleClass().addAll("bg-primary", "fs-2");
-    hBox.setAlignment(Pos.CENTER_LEFT);
-    hBox.setPadding(new Insets(30, 30, 30, 30));
+    hBox.getStyleClass().addAll("bg-primary","fs-2");
+    hBox.setPadding( new Insets(10,10,10,10));
+    HBox.setMargin(hBox,new Insets(0,0,5,0));
+    VBox v1 = new VBox();
+    HBox.setHgrow(v1, Priority.ALWAYS);
+    v1.setAlignment(Pos.CENTER_LEFT);
 
     DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern(
         "yyyy-MM-dd");
@@ -187,16 +191,14 @@ public class EditRosterViewController extends ViewController
     String dateDispOut = dateDispIn.format(outputFormatter);
 
     Label meetingLabel = new Label(dateDispOut + " " + trainee);
-    meetingLabel.getStyleClass()
-        .addAll("fs-2", "btn-success", "cursor-default");
-    hBox.getChildren().addAll(meetingLabel);
+    hBox.getChildren().add(v1);
+    v1.getChildren().add(meetingLabel);
 
     String meeting = date +","+ trainee;
 
     meetingLabel.setOnMouseClicked(event -> {
       editRosterViewModel.setSelectedMeeting(meeting);
     });
-
 
     return hBox;
   }
@@ -252,7 +254,6 @@ public class EditRosterViewController extends ViewController
   private HBox createTraineeComponent(String username)
   {
     HBox hBox = new HBox();
-
     hBox.getStyleClass().addAll("bg-primary", "fs-2");
     hBox.setAlignment(Pos.CENTER_LEFT);
     hBox.setPadding(new Insets(10, 10, 10, 10));
@@ -262,8 +263,10 @@ public class EditRosterViewController extends ViewController
     seeBtn.onActionProperty().setValue((evt) -> manageTraineeOpen(username));
 
     //figure out how to load status
-    Label statusLabel = new Label("On dat grind");
-    statusLabel.getStyleClass().addAll("fs-2", "btn-success", "cursor-default");
+    Label statusLabel = new Label("Status: On dat grind");
+    HBox.setHgrow(statusLabel, Priority.ALWAYS);
+    statusLabel.setMaxWidth(Double.MAX_VALUE);
+    statusLabel.setAlignment(Pos.CENTER_RIGHT);
     statusLabel.setOnMouseClicked(event -> {
       editRosterViewModel.setSelectedTraineeName(username);
     });
