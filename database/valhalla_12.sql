@@ -11,8 +11,7 @@ create table coach (
                           bench_best smallint,
                           squat_best smallint,
                           deadlift_best smallint,
-                          status varchar(50),
-                          share boolean
+                          status varchar(50)
 );
 
 
