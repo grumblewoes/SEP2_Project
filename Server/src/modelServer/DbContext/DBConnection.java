@@ -43,6 +43,8 @@ public class DBConnection {
       connection = DriverManager.getConnection(url, user, pw);
     } catch (SQLException e) {
       throw new RuntimeException("Failed to establish a database connection", e);
+    }catch (Exception e){
+      throw new RuntimeException("Some other DB exception while connectiong");
     }
     return connection;
   }
