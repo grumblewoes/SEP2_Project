@@ -1,13 +1,15 @@
 package viewModel;
 
 import com.google.gson.Gson;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
+import mediator.Exercise;
 import mediator.ExerciseList;
 import modelClient.Model;
 import util.Logger;
+
+import java.net.DatagramSocket;
 
 public class ManageSpecificExercisesViewModel extends ViewModel{
     private Model model;
@@ -15,6 +17,8 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
     private Gson gson;
     private StringProperty usernameProperty,exercisesListProperty,errorProperty,exerciseNameProperty,folderNameProperty;
     private BooleanProperty isSpecificProperty;
+    private ObjectProperty<LineChart<?, ?>> lineChartProperty;
+
     public ManageSpecificExercisesViewModel(Model model, ViewState viewState) {
         this.model=model;
         this.viewState=viewState;
@@ -25,10 +29,12 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
         exerciseNameProperty = new SimpleStringProperty();
         folderNameProperty = new SimpleStringProperty();
         isSpecificProperty = new SimpleBooleanProperty(false);
+        lineChartProperty = new SimpleObjectProperty<>();
     }
 
     private void populateExercises(){
         ExerciseList exercisesList = null;
+
         if(isSpecificProperty.get())
             exercisesList = model.getExerciseListByNameAndFolderId(viewState.getExerciseName(), viewState.getFolderId());
         else
@@ -36,12 +42,14 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
 
         exercisesListProperty.set(null);
         exercisesListProperty.set( gson.toJson(exercisesList) );
+
     }
     @Override
     public void clear() {
         exerciseNameProperty.set(viewState.getExerciseName());
         usernameProperty.set(viewState.getUsername());
         folderNameProperty.set(viewState.getFolderName());
+        updateLineChart(viewState.getExerciseName());
         populateExercises();
     }
 
@@ -64,6 +72,9 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
         return usernameProperty;
     }
 
+    public ObjectProperty getLineChartProperty() {
+        return lineChartProperty;
+    }
 
     public StringProperty getExercisesListProperty() {
         return exercisesListProperty;
@@ -85,6 +96,7 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
     }
     public void removeExercisesByName(String name) {
         model.removeExercisesByName(name,viewState.getFolderId());
+        updateLineChart(name);
     }
     public void setupAddExercise() {
         if(isSpecificProperty.get())
@@ -100,4 +112,29 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
         viewState.setGoBack("manageExercises");
         viewState.setProfileUsername(viewState.getUsername());
     }
+
+
+    public void setLineChart(LineChart<Number, Number> lineChart) {
+        lineChartProperty.set(lineChart);
+    }
+
+    public void updateLineChart(String exerciseName)
+    {
+        LineChart<Number, Number> chart = (LineChart<Number, Number>) lineChartProperty.get();
+        if (chart != null)
+        {
+            chart.getData().clear();
+
+            ExerciseList exerciseList = model.getExerciseListByNameAndFolderId(exerciseName, viewState.getFolderId());
+            XYChart.Series<Number, Number> series = new XYChart.Series<>();
+            for (int i = 0; i < exerciseList.size(); i++)
+            {
+                Exercise exercise = exerciseList.get(i);
+                series.getData().add(new XYChart.Data<>(exercise.getRepetitions(), exercise.getWeight()));
+            }
+
+            chart.getData().addAll(series);
+        }
+    }
+
 }

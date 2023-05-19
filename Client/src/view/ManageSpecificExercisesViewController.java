@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -24,6 +27,11 @@ public class ManageSpecificExercisesViewController extends ViewController
   @FXML private VBox exerciseBox;
   @FXML private Button addBtn,backBtn;
 
+  @FXML private NumberAxis x;
+  @FXML private NumberAxis y;
+  @FXML private LineChart<?, ?> lineChart;
+
+
   private ManageSpecificExercisesViewModel exViewModel;
   private Gson gson;
   private boolean isSpecific;
@@ -36,6 +44,16 @@ public class ManageSpecificExercisesViewController extends ViewController
     this.gson = new Gson();
     this.isSpecific=false;
 
+
+    lineChart.setVisible(false);
+    lineChart.setTitle("Exercise Progress");
+    lineChart.setCreateSymbols(false);
+    lineChart.setLegendVisible(false);
+    exViewModel.setLineChart((LineChart<Number, Number>) lineChart);
+    x.setLabel("Repetitions");
+    y.setLabel("Weight");
+
+
     usernameLabel.textProperty().bind(exViewModel.getUsernameProperty() );
     exerciseNameLabel.textProperty().bind(exViewModel.getExerciseNameProperty());
     errorLabel.textProperty().bind(exViewModel.getErrorProperty());
@@ -43,6 +61,14 @@ public class ManageSpecificExercisesViewController extends ViewController
       populateExercises(newVal);
     });
     folderNameLabel.textProperty().bind(exViewModel.getFolderNameProperty());
+
+    exViewModel.getLineChartProperty().addListener((obs, oldChart, newChart) -> {
+      if (newChart != null) {
+        exViewModel.updateLineChart(
+            String.valueOf(exViewModel.getExerciseNameProperty()));
+      }
+    });
+
 
   }
 
@@ -85,6 +111,10 @@ public class ManageSpecificExercisesViewController extends ViewController
   private void openExercisesByName(String name){
     exViewModel.setupOpenExercisesByName(name);
     viewHandler.openView("specificExercises");
+
+    lineChart.setVisible(true);
+    lineChart.setCreateSymbols(true);
+    exViewModel.updateLineChart(name);
   }
 
   @FXML private void addExercise(){
@@ -95,6 +125,7 @@ public class ManageSpecificExercisesViewController extends ViewController
   @FXML private void goBack(){
 
       viewHandler.openView(exViewModel.setupGoBack());
+      lineChart.setVisible(false);
   }
 
   @Override public void reset()
@@ -109,6 +140,7 @@ public class ManageSpecificExercisesViewController extends ViewController
   }
   private void removeExercisesByName(String name){
     exViewModel.removeExercisesByName(name);
+    exViewModel.updateLineChart(name);
     reset();
   }
 
