@@ -25,6 +25,7 @@ public class ViewHandler {
 
 	private Region root;
 
+//	abstract factory
 	private ViewController createUserViewController;
 	private ViewController logInViewController;
 	private ViewController homeViewController;
