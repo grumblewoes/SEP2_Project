@@ -91,21 +91,21 @@ public class Server implements RemoteModel
   public ArrayList<String> getPossibleExercises() {
     return model.getPossibleExercises();
   }
-
-  @Override
-  public int getBestBenchPress(String username) throws RemoteException {
-    return model.getBestBenchPress(username);
-  }
-
-  @Override
-  public int getBestSquat(String username) throws RemoteException {
-    return model.getBestSquat(username);
-  }
-
-  @Override
-  public int getBestDeadlift(String username) throws RemoteException {
-    return model.getBestDeadlift(username);
-  }
+//
+//  @Override
+//  public int getBestBenchPress(String username) throws RemoteException {
+//    return model.getBestBenchPress(username);
+//  }
+//
+//  @Override
+//  public int getBestSquat(String username) throws RemoteException {
+//    return model.getBestSquat(username);
+//  }
+//
+//  @Override
+//  public int getBestDeadlift(String username) throws RemoteException {
+//    return model.getBestDeadlift(username);
+//  }
 
   @Override
   public User getTrainee(String username) throws RemoteException {
@@ -195,6 +195,21 @@ public class Server implements RemoteModel
   @Override public ArrayList<LocalDate> getTakenDates(String coachUsername) throws RemoteException
   {
     return model.getTakenDates(coachUsername);
+  }
+
+  @Override public TraineeList getSquatLeaders() throws RemoteException
+  {
+    return model.getSquatLeaders();
+  }
+
+  @Override public TraineeList getDeadliftLeaders() throws RemoteException
+  {
+    return model.getDeadliftLeaders();
+  }
+
+  @Override public TraineeList getBenchLeaders() throws RemoteException
+  {
+    return model.getBenchLeaders();
   }
 
   @Override public ArrayList<String> getMeetingRequests(String coach)

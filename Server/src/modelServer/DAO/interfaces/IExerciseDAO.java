@@ -17,9 +17,9 @@ public interface IExerciseDAO
 
   boolean addExercise(String username, String exerciseName, int folderId, int weight, int repetition) throws SQLException;
 
-  int getBestWeightFromExerciseByName(String username, String name) throws SQLException;
-  int getBestSquat(String username) throws SQLException;
-  int getBestDeadlift(String username) throws SQLException;
-  int getBestBenchPress(String username) throws SQLException;
+//  int getBestWeightFromExerciseByName(String username, String name) throws SQLException;
+//  int getBestSquat(String username) throws SQLException;
+//  int getBestDeadlift(String username) throws SQLException;
+//  int getBestBenchPress(String username) throws SQLException;
 
 }

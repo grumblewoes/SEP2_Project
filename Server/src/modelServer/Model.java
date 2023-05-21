@@ -25,9 +25,9 @@ public interface Model
     ExerciseList getExerciseListByNameAndFolderId(String name, int folderId);
 
     ArrayList<String> getPossibleExercises();
-    int getBestSquat(String username);
-    int getBestDeadlift(String username) ;
-    int getBestBenchPress(String username);
+//    int getBestSquat(String username);
+//    int getBestDeadlift(String username) ;
+//    int getBestBenchPress(String username);
     User getTrainee(String username);
 
 
@@ -72,5 +72,9 @@ public interface Model
   ArrayList<String> getTraineeMeetingRequests(String traineeUsername);
   boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
   ArrayList<LocalDate> getTakenDates(String coachUsername);
+
+  TraineeList getSquatLeaders();
+  TraineeList getDeadliftLeaders();
+  TraineeList getBenchLeaders();
 
 }

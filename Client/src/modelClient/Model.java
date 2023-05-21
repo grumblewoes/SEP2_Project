@@ -27,9 +27,9 @@ public interface Model extends LocalSubject<String,String>
 
 	ArrayList<String> getPossibleExercises();
 
-	int getBestBenchPress(String username) ;
-	int getBestSquat(String username) ;
-	int getBestDeadlift(String username) ;
+//	int getBestBenchPress(String username) ;
+//	int getBestSquat(String username) ;
+//	int getBestDeadlift(String username) ;
 
 	User getTrainee(String username);
 
@@ -69,5 +69,7 @@ public interface Model extends LocalSubject<String,String>
 	ArrayList<String> getTraineeMeetingRequests(String traineeUsername);
 	boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
 	ArrayList<LocalDate> getTakenDates(String coachUsername);
-
+	TraineeList getSquatLeaders();
+	TraineeList getDeadliftLeaders();
+	TraineeList getBenchLeaders();
 }

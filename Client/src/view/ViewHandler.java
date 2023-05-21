@@ -1,7 +1,9 @@
 package view;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -10,11 +12,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import viewModel.ViewModel;
 import viewModel.ViewModelFactory;
 
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ViewHandler {
@@ -35,9 +39,9 @@ public class ViewHandler {
 	private ViewController profileViewController;
 	private ViewController addFriendViewController;
 	//private ViewController manageCoachViewController;
-
 	private ViewController editRosterViewController;
 	private ViewController addMeetingViewController;
+	private ViewController leaderboardViewController;
 
 	private ViewModelFactory viewModelFactory;
 
@@ -143,4 +147,26 @@ public class ViewHandler {
 
 
 	}
+
+	public void openLeaderboardView() {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("leaderboard.fxml"));
+		LeaderboardViewController popupController = null;
+		try {
+			Parent layout = loader.load();
+			Scene scene = new Scene(layout);
+			popupController = loader.getController(); // Get the controller instance from the FXMLLoader
+			popupController.init(this, viewModelFactory.getLeaderboardViewModel(), root);
+			Stage popupStage = new Stage();
+			popupController.setStage(popupStage);
+			popupStage.initModality(Modality.WINDOW_MODAL);
+			popupStage.setScene(scene);
+			popupStage.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+			new Alert(Alert.AlertType.ERROR, "There was an error trying to load the popup fxml file.").show();
+		}
+	}
+
+
 }
