@@ -200,42 +200,42 @@ public class ModelManager implements Model
       return null;
     }
   }
-
-  @Override public int getBestSquat(String username)
-  {
-    try
-    {
-      return new ExerciseDAO().getBestSquat(username);
-    }
-    catch (SQLException e)
-    {
-      return 0;
-    }
-  }
-
-  @Override public int getBestDeadlift(String username)
-  {
-    try
-    {
-      return new ExerciseDAO().getBestDeadlift(username);
-    }
-    catch (SQLException e)
-    {
-      return 0;
-    }
-  }
-
-  @Override public int getBestBenchPress(String username)
-  {
-    try
-    {
-      return new ExerciseDAO().getBestBenchPress(username);
-    }
-    catch (SQLException e)
-    {
-      return 0;
-    }
-  }
+//
+//  @Override public int getBestSquat(String username)
+//  {
+//    try
+//    {
+//      return new ExerciseDAO().getBestSquat(username);
+//    }
+//    catch (SQLException e)
+//    {
+//      return 0;
+//    }
+//  }
+//
+//  @Override public int getBestDeadlift(String username)
+//  {
+//    try
+//    {
+//      return new ExerciseDAO().getBestDeadlift(username);
+//    }
+//    catch (SQLException e)
+//    {
+//      return 0;
+//    }
+//  }
+//
+//  @Override public int getBestBenchPress(String username)
+//  {
+//    try
+//    {
+//      return new ExerciseDAO().getBestBenchPress(username);
+//    }
+//    catch (SQLException e)
+//    {
+//      return 0;
+//    }
+//  }
 
   @Override public User getTrainee(String username)
   {
@@ -509,6 +509,39 @@ public class ModelManager implements Model
   {
     try {
       return new MeetingDAO().getTakenDates(coachUsername);
+    }
+    catch (SQLException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public TraineeList getSquatLeaders()
+  {
+    try {
+      return new LeaderboardDAO().getSquatLeaders();
+    }
+    catch (SQLException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public TraineeList getDeadliftLeaders()
+  {
+    try {
+      return new LeaderboardDAO().getDeadliftLeaders();
+    }
+    catch (SQLException e)
+    {
+      return null;
+    }
+  }
+
+  @Override public TraineeList getBenchLeaders()
+  {
+    try {
+      return new LeaderboardDAO().getBenchLeaders();
     }
     catch (SQLException e)
     {

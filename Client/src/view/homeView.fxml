@@ -16,19 +16,38 @@
    <children>
       <VBox prefHeight="600.0" prefWidth="156.0">
          <children>
-            <HBox prefHeight="32.0" prefWidth="250.0">
+            <HBox alignment="CENTER" prefHeight="32.0" prefWidth="250.0">
                <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/box-arrow-left.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="32.0" prefWidth="121.0">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/box-arrow-left.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <VBox.margin>
+                              <Insets left="5.0" />
+                           </VBox.margin>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_RIGHT" prefHeight="32.0" prefWidth="121.0">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" onMouseClicked="#getLeaderboard" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/leaderboard.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <VBox.margin>
+                              <Insets right="5.0" />
+                           </VBox.margin>
+                        </ImageView>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="51.0" prefWidth="250.0">
@@ -86,9 +105,9 @@
             </HBox>
             <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <ScrollPane prefHeight="379.0" prefWidth="193.0" styleClass="nav">
+                  <ScrollPane prefHeight="379.0" prefWidth="228.0" styleClass="nav">
                      <content>
-                        <VBox fx:id="friendshipBox" prefHeight="105.0" prefWidth="236.0" styleClass="nav-friend-box" />
+                        <VBox fx:id="friendshipBox" prefHeight="28.0" prefWidth="236.5" />
                      </content>
                   </ScrollPane>
                </children>
@@ -115,7 +134,7 @@
                                     <Label styleClass="fs-6" text="Folders" />
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
+                                    <Insets right="10.0" />
                                  </HBox.margin>
                               </VBox>
                               <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="95.0">
@@ -143,7 +162,7 @@
                            <children>
                               <ScrollPane prefHeight="200.0" prefWidth="200.0" styleClass="scrollBox" HBox.hgrow="ALWAYS">
                                  <content>
-                                    <VBox fx:id="folderBox" prefHeight="200.0" prefWidth="705.0" styleClass="menu-display" />
+                                    <VBox fx:id="folderBox" prefHeight="10.0" prefWidth="705.0" styleClass="menu-display" />
                                  </content>
                               </ScrollPane>
                            </children>
@@ -166,7 +185,7 @@
                                     <Label styleClass="fs-6" text="Meetings" />
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
+                                    <Insets right="10.0" />
                                  </HBox.margin>
                               </VBox>
                               <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0">
@@ -194,7 +213,7 @@
                            <children>
                               <ScrollPane prefHeight="200.0" prefWidth="710.0" styleClass="scrollBox" HBox.hgrow="ALWAYS">
                                  <content>
-                                    <VBox fx:id="meetingBox" prefHeight="206.0" prefWidth="684.0" styleClass="menu-display" />
+                                    <VBox fx:id="meetingBox" prefHeight="10.0" prefWidth="684.0" styleClass="menu-display" />
                                  </content>
                               </ScrollPane>
                            </children>

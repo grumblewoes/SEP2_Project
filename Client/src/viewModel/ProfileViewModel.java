@@ -130,9 +130,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
         if( owns || wantsToShare){
 
-            int benchPressBest = model.getBestBenchPress(u);
-            int squatBest = model.getBestSquat(u);
-            int deadliftBest = model.getBestDeadlift(u);
+            int benchPressBest = profileUser.getBench();
+            int squatBest = profileUser.getSquat();
+            int deadliftBest = profileUser.getDeadlift();
 
             usernameProperty.set(pUsername);
             errorProperty.set("");

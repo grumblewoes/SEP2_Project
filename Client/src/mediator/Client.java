@@ -228,41 +228,41 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
-  @Override public int getBestBenchPress(String username)
-  {
-    try
-    {
-      return server.getBestBenchPress(username);
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-  }
-
-  @Override public int getBestSquat(String username)
-  {
-    try
-    {
-      return server.getBestSquat(username);
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-  }
-
-  @Override public int getBestDeadlift(String username)
-  {
-    try
-    {
-      return server.getBestDeadlift(username);
-    }
-    catch (RemoteException e)
-    {
-      throw new RuntimeException(e);
-    }
-  }
+//  @Override public int getBestBenchPress(String username)
+//  {
+//    try
+//    {
+//      return server.getBestBenchPress(username);
+//    }
+//    catch (RemoteException e)
+//    {
+//      throw new RuntimeException(e);
+//    }
+//  }
+//
+//  @Override public int getBestSquat(String username)
+//  {
+//    try
+//    {
+//      return server.getBestSquat(username);
+//    }
+//    catch (RemoteException e)
+//    {
+//      throw new RuntimeException(e);
+//    }
+//  }
+//
+//  @Override public int getBestDeadlift(String username)
+//  {
+//    try
+//    {
+//      return server.getBestDeadlift(username);
+//    }
+//    catch (RemoteException e)
+//    {
+//      throw new RuntimeException(e);
+//    }
+//  }
 
   @Override public User getTrainee(String username)
   {
@@ -607,6 +607,41 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  @Override public TraineeList getSquatLeaders()
+  {
+    try
+    {
+      return server.getSquatLeaders();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public TraineeList getDeadliftLeaders()
+  {
+    try
+    {
+      return server.getDeadliftLeaders();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Override public TraineeList getBenchLeaders()
+  {
+    try
+    {
+      return server.getBenchLeaders();
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException(e);
+    }
+  }
 
 }
 

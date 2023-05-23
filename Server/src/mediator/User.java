@@ -3,7 +3,7 @@ package mediator;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private int height,weight;
+    private int height,weight, bench, deadlift, squat;
     private String firstName,lastName,username,status;
     private boolean shareProfile;
 
@@ -17,7 +17,18 @@ public class User implements Serializable {
         this.shareProfile = shareProfile;
     }
 
-
+    public User(int height, int weight, String firstName, String lastName, String username, String status,boolean shareProfile, int deadlift, int squat, int bench) {
+        this.height = height;
+        this.weight = weight;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.status = status;
+        this.shareProfile = shareProfile;
+        this.deadlift=deadlift;
+        this.squat=squat;
+        this.bench=bench;
+    }
 
     public int getHeight() {
         return height;
@@ -68,4 +79,19 @@ public class User implements Serializable {
     public boolean isShareProfile() { return shareProfile; }
 
     public void setShareProfile(boolean shareProfile) {  this.shareProfile = shareProfile;  }
+
+    public int getBench()
+    {
+        return bench;
+    }
+
+    public int getDeadlift()
+    {
+        return deadlift;
+    }
+
+    public int getSquat()
+    {
+        return squat;
+    }
 }

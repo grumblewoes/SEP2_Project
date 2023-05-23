@@ -24,9 +24,9 @@ public interface RemoteModel extends RemoteSubject<String,String>
 	ExerciseList getExerciseListByNameAndFolderId(String name, int folderId) throws  RemoteException;
 	ArrayList<String> getPossibleExercises() throws RemoteException;
 
-	int getBestBenchPress(String username) throws RemoteException;
-	int getBestSquat(String username) throws RemoteException;
-	int getBestDeadlift(String username) throws RemoteException;
+//	int getBestBenchPress(String username) throws RemoteException;
+//	int getBestSquat(String username) throws RemoteException;
+//	int getBestDeadlift(String username) throws RemoteException;
 
 	User getTrainee(String username) throws RemoteException;
 
@@ -65,5 +65,7 @@ public interface RemoteModel extends RemoteSubject<String,String>
 	boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) throws RemoteException;
 	boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) throws RemoteException;
 	ArrayList<LocalDate> getTakenDates(String coachUsername) throws RemoteException;
-
+	TraineeList getSquatLeaders() throws RemoteException;
+	TraineeList getDeadliftLeaders() throws RemoteException;
+	TraineeList getBenchLeaders() throws RemoteException;
 }

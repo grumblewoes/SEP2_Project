@@ -18,6 +18,9 @@ public class TraineeList implements Serializable
   public int getSize(){
     return traineeList.size();
   }
+  public ArrayList<Trainee> getList(){
+    return traineeList;
+  }
 
   public Trainee getTrainee(int i)
   {

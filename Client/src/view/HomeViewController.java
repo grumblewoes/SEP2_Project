@@ -4,20 +4,27 @@ package view;
 import com.google.gson.Gson;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import mediator.*;
 import util.Logger;
 import viewModel.HomeViewModel;
+import viewModel.LeaderboardViewModel;
 import viewModel.ViewModel;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class HomeViewController extends ViewController
@@ -314,5 +321,10 @@ public class HomeViewController extends ViewController
 
 
     return hBox;
+  }
+
+  @FXML private void getLeaderboard()
+  {
+    viewHandler.openLeaderboardView();
   }
 }
