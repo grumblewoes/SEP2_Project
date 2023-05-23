@@ -83,20 +83,20 @@ public class ModelManager implements Model, LocalListener<String,String>
 		return client.getPossibleExercises();
 	}
 
-	@Override
-	public int getBestBenchPress(String username) {
-		return client.getBestBenchPress(username);
-	}
-
-	@Override
-	public int getBestSquat(String username) {
-		return client.getBestSquat(username);
-	}
-
-	@Override
-	public int getBestDeadlift(String username) {
-		return client.getBestDeadlift(username);
-	}
+//	@Override
+//	public int getBestBenchPress(String username) {
+//		return client.getBestBenchPress(username);
+//	}
+//
+//	@Override
+//	public int getBestSquat(String username) {
+//		return client.getBestSquat(username);
+//	}
+//
+//	@Override
+//	public int getBestDeadlift(String username) {
+//		return client.getBestDeadlift(username);
+//	}
 
 	@Override
 	public User getTrainee(String username){return client.getTrainee(username);}
@@ -248,6 +248,21 @@ public class ModelManager implements Model, LocalListener<String,String>
 	@Override public ArrayList<LocalDate> getTakenDates(String coachUsername)
 	{
 		return client.getTakenDates(coachUsername);
+	}
+
+	@Override public TraineeList getSquatLeaders()
+	{
+		return client.getSquatLeaders();
+	}
+
+	@Override public TraineeList getDeadliftLeaders()
+	{
+		return client.getDeadliftLeaders();
+	}
+
+	@Override public TraineeList getBenchLeaders()
+	{
+		return client.getBenchLeaders();
 	}
 
 }
