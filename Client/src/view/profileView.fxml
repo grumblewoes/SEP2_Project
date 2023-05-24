@@ -260,7 +260,7 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="71.0" prefWidth="841.0">
          <children>
-            <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#remove" prefHeight="40.0" prefWidth="150.0" text="REMOVE FRIEND">
+            <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#remove" prefHeight="40.0" prefWidth="150.0" text="Remove Friend">
                <styleClass>
                   <String fx:value="btn-danger" />
                   <String fx:value="fs-2" />
