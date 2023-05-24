@@ -221,6 +221,9 @@
                      </children>
                   </VBox>
                </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="710.0">
                <children>
