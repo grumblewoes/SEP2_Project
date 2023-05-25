@@ -52,8 +52,8 @@ class DAOExerciseTest {
         eao.addExercise(username,"squat",folderId,11,10);
         eao.addExercise(username,"bench_press",folderId,12,10);
 
-        assert eao.getBestDeadlift(username)==10;
-        assert eao.getBestSquat(username)==11;
-        assert eao.getBestBenchPress(username)==12;
+        assert uao.getTrainee(username).getDeadlift()==10;
+        assert uao.getTrainee(username).getSquat()==11;
+        assert uao.getTrainee(username).getBench()==12;
     }
 }

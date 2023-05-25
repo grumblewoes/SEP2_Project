@@ -38,7 +38,7 @@ public class LeaderboardViewController extends ViewController
     this.viewHandler=viewHandler;
     this.root=root;
     leaderboardViewModel = (LeaderboardViewModel) viewModel;
-    reset();
+
 
     deadliftColumn.setCellValueFactory(data -> {
       String deadliftValue = data.getValue().weightPropertyProperty().get() + "kg | " + data.getValue().usernamePropertyProperty().get();
@@ -55,7 +55,7 @@ public class LeaderboardViewController extends ViewController
     squatTable.setItems(((LeaderboardViewModel) viewModel).getSquats());
     deadliftTable.setItems(((LeaderboardViewModel) viewModel).getDeadlifts());
     benchTable.setItems(((LeaderboardViewModel) viewModel).getBenches());
-
+    reset();
   }
 
   @Override public void reset()

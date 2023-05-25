@@ -2,6 +2,7 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import util.Logger;
@@ -12,7 +13,9 @@ public class CreateUserViewController extends ViewController
 {
 
 	@FXML
-	private TextField firstName, lastName, username, password, height, weight;
+	private TextField firstName, lastName, username, height, weight;
+	@FXML private PasswordField password;
+
 
 	@FXML
 	private Label errorLabel;
