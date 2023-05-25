@@ -1,3 +1,5 @@
+import mediator.Trainee;
+import mediator.TraineeList;
 import modelServer.DAO.implementation.CoachDAO;
 import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.ICoachDAO;
@@ -596,11 +598,11 @@ class DAOCoachTest
         cdao.requestCoach(username,coach);
         cdao.acceptRequest(username,coach);
 
-        ArrayList<String> list = cdao.getTraineeList(coach);
+        TraineeList list = cdao.getTraineeList(coach);
         ArrayList<String> requests = cdao.getTraineeRequest(coach);
 
         assertEquals(requests.size(),0);
-        assertEquals(list.get(0),username);
+        assertEquals(list.getTrainee(0),username);
     }
     @Test void getTraineeListMany() throws SQLException {
         String coach = "coach"+Math.random();
@@ -620,11 +622,11 @@ class DAOCoachTest
         cdao.requestCoach(username3,coach);
         cdao.acceptRequest(username3,coach);
 
-        ArrayList<String> list = cdao.getTraineeList(coach);
+        TraineeList list = cdao.getTraineeList(coach);
         ArrayList<String> requests = cdao.getTraineeRequest(coach);
 
         assertEquals(requests.size(),0);
-        assertEquals(list.get(2),username3);
+        assertEquals(list.getTrainee(2),username3);
     }
     @Test void getTraineeListBoundary()  {
         //pass boundary
