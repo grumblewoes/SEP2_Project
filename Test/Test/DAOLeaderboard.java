@@ -49,6 +49,10 @@ class DAOLeaderboard
     service.switchToTestDatabase();
   }
 
+  /**
+   * 
+   * 
+   */
   @Test public void getSquatBestZero() {
     try
     {
@@ -64,6 +68,10 @@ class DAOLeaderboard
       service.switchToProductionDatabase();
     }
   }
+    /**
+     * 
+     * 
+     */
     @Test public void getSquatBestOne(){
     try
     {
@@ -82,6 +90,10 @@ class DAOLeaderboard
       service.switchToProductionDatabase();
     }
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getSquatBestMany(){
     try
     {
@@ -106,11 +118,23 @@ class DAOLeaderboard
       service.switchToProductionDatabase();
     }
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getSquatBestBoundary(){
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getSquatBestException(){
   }
 
+  /**
+   * 
+   * 
+   */
   @Test public void getBenchBestZero() {
     try
     {
@@ -127,6 +151,10 @@ class DAOLeaderboard
       service.switchToProductionDatabase();
     }
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getBenchBestOne(){
     try
     {
@@ -146,6 +174,10 @@ class DAOLeaderboard
       service.switchToProductionDatabase();
     }
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getBenchBestMany(){
     try
     {
@@ -171,11 +203,23 @@ class DAOLeaderboard
       service.switchToProductionDatabase();
     }
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getBenchBestBoundary(){
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getBenchBestException(){
   }
 
+  /**
+   * 
+   * 
+   */
   @Test public void getDeadliftBestZero() {
     try
     {
@@ -192,6 +236,10 @@ class DAOLeaderboard
       service.switchToProductionDatabase();
     }
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getDeadliftBestOne(){
     try
     {
@@ -211,6 +259,10 @@ class DAOLeaderboard
       service.switchToProductionDatabase();
     }
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getDeadliftBestMany(){
     try
     {
@@ -236,8 +288,16 @@ class DAOLeaderboard
       service.switchToProductionDatabase();
     }
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getDeadliftBestBoundary(){
   }
+  /**
+   * 
+   * 
+   */
   @Test public void getDeadliftBestException(){
   }
 

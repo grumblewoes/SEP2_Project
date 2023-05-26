@@ -15,14 +15,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ExerciseDAO implements IExerciseDAO
 {
   private static ExerciseDAO instance;
 
+  /**
+   * 0-argument constructor 
+   * 
+   * 
+   */
   public ExerciseDAO(){}
 
 
 
+  /**
+   * 
+   * 
+   * @param folderId 
+   *        
+   *
+   * @return 
+   *        
+   */
   public ExerciseList getExerciseList(int folderId) throws SQLException {
     ExerciseList exerciseList = new ExerciseList();
 
@@ -55,6 +76,15 @@ public class ExerciseDAO implements IExerciseDAO
   }
 
   @Override
+  /**
+   * 
+   * 
+   * @param exerciseId 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean removeExercise(int exerciseId) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -84,6 +114,17 @@ public class ExerciseDAO implements IExerciseDAO
   }
 
   @Override
+  /**
+   * 
+   * 
+   * @param name 
+   *        
+   * @param folderId 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean removeExerciseByName(String name, int folderId) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -113,6 +154,13 @@ public class ExerciseDAO implements IExerciseDAO
   }
 
   @Override
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public ArrayList<String> getPossibleExercises() throws SQLException {
     ArrayList<String> list = new ArrayList<>();
     DBConnection db = DBConnection.getInstance();
@@ -144,6 +192,23 @@ public class ExerciseDAO implements IExerciseDAO
   }
 
   @Override
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param exerciseName 
+   *        
+   * @param folderId 
+   *        
+   * @param weight 
+   *        
+   * @param repetition 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean addExercise(String username, String exerciseName, int folderId, int weight, int repetition) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -201,6 +266,17 @@ public class ExerciseDAO implements IExerciseDAO
 
 
 //  @Override
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ * @param name 
+ *        
+ *
+ * @return 
+ *        
+ */
 //  public int getBestWeightFromExerciseByName(String username,String name) throws SQLException {
 //    DBConnection db = DBConnection.getInstance();
 //    Connection connection = db.getConnection();
@@ -235,16 +311,43 @@ public class ExerciseDAO implements IExerciseDAO
 //  }
 //
 //  @Override
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ *
+ * @return 
+ *        
+ */
 //  public int getBestSquat(String username) throws SQLException {
 //    return getBestWeightFromExerciseByName(username,"squat");
 //  }
 //
 //  @Override
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ *
+ * @return 
+ *        
+ */
 //  public int getBestDeadlift(String username) throws SQLException {
 //    return getBestWeightFromExerciseByName(username,"deadlift");
 //  }
 //
 //  @Override
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ *
+ * @return 
+ *        
+ */
 //  public int getBestBenchPress(String username) throws SQLException {
 //    return getBestWeightFromExerciseByName(username,"bench_press");
 //  }

@@ -13,6 +13,13 @@ import viewModel.ViewModel;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class AddMeetingViewController extends ViewController
 {
   @FXML DatePicker dateOfMeeting;
@@ -40,6 +47,14 @@ public class AddMeetingViewController extends ViewController
     dateOfMeeting.setDayCellFactory(picker -> new DateCell() {
 
       @Override
+      /**
+       * 
+       * 
+       * @param date 
+       *        
+       * @param empty 
+       *        
+       */
       public void updateItem(LocalDate date, boolean empty) {
         super.updateItem(date, empty);
 
@@ -64,6 +79,10 @@ public class AddMeetingViewController extends ViewController
   @FXML private void cancel(){
     viewHandler.openView("home");
   }
+  /**
+   * 
+   * 
+   */
   @Override public void reset()
   {
     dates.clear();

@@ -21,6 +21,13 @@ import viewModel.ViewModel;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ManageSpecificExercisesViewController extends ViewController
 {
   @FXML private Label usernameLabel,folderNameLabel,exerciseNameLabel,errorLabel;
@@ -36,6 +43,16 @@ public class ManageSpecificExercisesViewController extends ViewController
   private Gson gson;
   private boolean isSpecific;
 
+  /**
+   * 
+   * 
+   * @param viewHandler 
+   *        
+   * @param viewModel 
+   *        
+   * @param root 
+   *        
+   */
   @Override public void init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
     this.viewHandler = viewHandler;
@@ -128,6 +145,10 @@ public class ManageSpecificExercisesViewController extends ViewController
       lineChart.setVisible(false);
   }
 
+  /**
+   * 
+   * 
+   */
   @Override public void reset()
   {
     exViewModel.clear();

@@ -24,6 +24,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class EditRosterViewModel extends ViewModel
 {
 
@@ -37,6 +44,15 @@ public class EditRosterViewModel extends ViewModel
   private Gson gson;
   private DateTimeFormatter formatter;
 
+  /**
+   * 2-argument constructor 
+   * 
+   * 
+   * @param model 
+   *        
+   * @param viewState 
+   *        
+   */
   public EditRosterViewModel(Model model, ViewState viewState)
   {
     this.model = model;
@@ -53,26 +69,61 @@ public class EditRosterViewModel extends ViewModel
     formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public StringProperty getErrorProperty()
   {
     return errorProperty;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public StringProperty getTraineeRequestList()
   {
     return traineeRequestList;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public StringProperty getMeetingRequestList()
   {
     return meetingRequestList;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public StringProperty getMeetingList()
   {
     return meetingList;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public StringProperty getTraineeList()
   {
     return traineeList;
@@ -109,16 +160,41 @@ public class EditRosterViewModel extends ViewModel
     meetingList.set(gson.toJson(mtgList));
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean acceptRequest(String username)
   {
     return model.acceptRequest(username, viewState.getUsername());
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean denyRequest(String username)
   {
     return model.denyRequest(username);
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public boolean removeTrainee()
   {
     if (model.removeTraineeFromRoster(selectedTraineeName.get()))
@@ -128,6 +204,13 @@ public class EditRosterViewModel extends ViewModel
     return false;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public boolean removeMeeting()
   {
     try
@@ -147,6 +230,13 @@ public class EditRosterViewModel extends ViewModel
   }
 
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public boolean approveMeeting()
   {
       String[] s = selectedMtg.get().split(",");
@@ -161,6 +251,13 @@ public class EditRosterViewModel extends ViewModel
     return false;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public boolean denyMeeting()
   {
     String[] s = selectedMtg.get().split(",");
@@ -174,6 +271,10 @@ public class EditRosterViewModel extends ViewModel
     return false;
   }
 
+  /**
+   * 
+   * 
+   */
   @Override public void clear()
   {
     //listeners in controller see this as a change when refreshing the screen, so it updates every time
@@ -187,33 +288,70 @@ public class EditRosterViewModel extends ViewModel
     Logger.log("is a coach: "+viewState.isCoach());
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public StringProperty getUsernameProperty()
   {
     return usernameProperty;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public StringProperty getSelectedTraineeName()
   {
     return selectedTraineeName;
   }
 
+  /**
+   * 
+   * 
+   * @param selectedTraineeName 
+   *        
+   */
   public void setSelectedTraineeName(String selectedTraineeName)
   {
     System.out.println("Clicked" + selectedTraineeName);
     this.selectedTraineeName = new SimpleStringProperty(selectedTraineeName);
   }
 
+  /**
+   * 
+   * 
+   * @param mtgString 
+   *        
+   */
   public void setSelectedMeeting(String mtgString)
   {
     System.out.println("Clicked" + " " + mtgString);
     this.selectedMtg = new SimpleStringProperty(mtgString);
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public StringProperty getSelectedMeeting()
   {
     return selectedMtg;
   }
 
+  /**
+   * 
+   * 
+   */
   public void logout()
   {
     model.disconnectListener(viewState.getUsername());
@@ -227,11 +365,21 @@ public class EditRosterViewModel extends ViewModel
     viewState.setNewFolder(false);
     viewState.setManageFolderEditable(false);
   }
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   */
   public void manageTraineeOpen(String username) {
     viewState.setProfileUsername(username);
     viewState.setGoBack("manageRoster");
   }
 
+  /**
+   * 
+   * 
+   */
   public void setupOpenProfile() {
     viewState.setProfileUsername(viewState.getUsername() );
     viewState.setGoBack("manageRoster");

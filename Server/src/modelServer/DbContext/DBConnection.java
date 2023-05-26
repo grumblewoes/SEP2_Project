@@ -6,6 +6,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class DBConnection {
 
   private static final String user = "dmzntfyy";
@@ -22,6 +29,13 @@ public class DBConnection {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public static DBConnection getInstance() throws SQLException {
 
     if (instance == null) {
@@ -35,14 +49,29 @@ public class DBConnection {
     return instance;
   }
 
+  /**
+   * 
+   * 
+   */
   public static void setToProduction() {
     isTest = false;
   }
 
+  /**
+   * 
+   * 
+   */
   public static void setToTest() {
     isTest = true;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public Connection getConnection() throws SQLException {
     String url = "";
     if(isTest){
@@ -68,6 +97,10 @@ public class DBConnection {
     return connection;
   }
 
+  /**
+   * 
+   * 
+   */
   public static void restartTestDatabase(){
     String url="jdbc:postgresql://balarama.db.elephantsql.com:5432/rphlerrs?currentSchema=valhalla_test";
     try{

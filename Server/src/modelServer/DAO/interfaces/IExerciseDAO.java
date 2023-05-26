@@ -5,6 +5,13 @@ import mediator.ExerciseList;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public interface IExerciseDAO
 {
   ExerciseList getExerciseList(int folderId) throws  SQLException;

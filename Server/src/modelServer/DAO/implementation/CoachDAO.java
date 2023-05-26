@@ -10,6 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class CoachDAO implements ICoachDAO
 {
   private static CoachDAO instance;
@@ -50,6 +57,15 @@ public class CoachDAO implements ICoachDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param name 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean removeCoach(String name) throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
@@ -75,6 +91,15 @@ public class CoachDAO implements ICoachDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUser 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public User getCoach(String traineeUser) throws SQLException
   {
     //has two ways of working. checks trainee table first, and if that doesn't work, it knows to check coach table
@@ -126,6 +151,17 @@ public class CoachDAO implements ICoachDAO
   }
 
   @Override
+  /**
+   * 
+   * 
+   * @param traineeUser 
+   *        
+   * @param coachUser 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean requestCoach(String traineeUser, String coachUser) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -152,6 +188,15 @@ public class CoachDAO implements ICoachDAO
   }
 
   @Override
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean isCoach(String username) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -177,6 +222,15 @@ public class CoachDAO implements ICoachDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeCoachAssignment(String traineeUsername)
       throws SQLException
   {
@@ -215,6 +269,17 @@ public class CoachDAO implements ICoachDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   * @param coachUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean acceptRequest(String traineeUsername, String coachUsername)
       throws SQLException
   {
@@ -249,6 +314,15 @@ public class CoachDAO implements ICoachDAO
 
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean denyRequest(String traineeUsername)
       throws SQLException
   {
@@ -278,6 +352,15 @@ public class CoachDAO implements ICoachDAO
 
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeTraineeFromRoster(String traineeUsername)
       throws SQLException
   {
@@ -317,6 +400,15 @@ public class CoachDAO implements ICoachDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getTraineeList(String username)
       throws SQLException
   {
@@ -341,6 +433,15 @@ public class CoachDAO implements ICoachDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getTraineeRequest(String username)
       throws SQLException
   {

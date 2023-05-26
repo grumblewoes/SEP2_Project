@@ -6,11 +6,22 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ExerciseListTest {
 
     private ExerciseList exerciseList;
 
     @Before
+    /**
+     * 
+     * 
+     */
     public void setUp() {
         exerciseList = new ExerciseList();
         exerciseList.add(new Exercise(1, 50.0, 10, "Bicep Curls"));
@@ -20,6 +31,10 @@ public class ExerciseListTest {
     }
 
     @Test
+    /**
+     * 
+     * 
+     */
     public void testExerciseListAddAndGet() {
         assertEquals(4, exerciseList.size());
 
@@ -30,6 +45,10 @@ public class ExerciseListTest {
     }
 
     @Test
+    /**
+     * 
+     * 
+     */
     public void testExerciseListFilterByName()
     {
         ExerciseList filteredList = exerciseList.filterByName("Bicep Curls");
@@ -56,9 +75,91 @@ public class ExerciseListTest {
     }
 
     @Test
+    /**
+     * 
+     * 
+     */
     public void testExerciseListToString() {
         assertDoesNotThrow(()->exerciseList.toString());
     }
+
+
+    @Test
+    /**
+     * 
+     * 
+     */
+    public void testFilterByNameZero(){
+        ExerciseList list = exerciseList.filterByName(null);
+
+        assert list instanceof ExerciseList && list.size()==0;
+    }
+
+    @Test
+    /**
+     * 
+     * 
+     */
+    public void testFilterByNameEmptyList(){
+        ExerciseList list = exerciseList.filterByName("random_name");
+
+        assert list instanceof ExerciseList && list.size()==0;
+    }
+
+    @Test
+    /**
+     * 
+     * 
+     */
+    public void testFilterByNameNoMatchingNameOneExercise(){
+        exerciseList.add(new Exercise(1,100,12,"squat"));
+        ExerciseList list = exerciseList.filterByName("random_name");
+
+        assert list instanceof ExerciseList && list.size()==0;
+    }
+    @Test
+    /**
+     * 
+     * 
+     */
+    public void testFilterByNameNoMatchingNameManyExercises(){
+        exerciseList.add(new Exercise(1,100,12,"squat"));
+        exerciseList.add(new Exercise(3,120,12,"deadlift"));
+        exerciseList.add(new Exercise(4,70,8,"bench press"));
+        ExerciseList list = exerciseList.filterByName("random_name");
+
+        assert list instanceof ExerciseList && list.size()==0;
+    }
+    @Test
+    /**
+     * 
+     * 
+     */
+    public void testFilterByNameExercisesWithNoName(){
+        exerciseList.add(new Exercise(1,100,12,""));
+        exerciseList.add(new Exercise(3,120,12,null));
+        exerciseList.add(new Exercise(4,70,8,"bench press"));
+        ExerciseList list = exerciseList.filterByName("random_name");
+
+        assert list instanceof ExerciseList && list.size()==0;
+    }
+    @Test
+    /**
+     * 
+     * 
+     */
+    public void testFilterByNameExercisesWithNameExist(){
+        exerciseList.add(new Exercise(1,100,12,"squat"));
+        exerciseList.add(new Exercise(4,70,8,"bench press"));
+        exerciseList.add(new Exercise(3,120,10,"squat"));
+        String filterName = "squat";
+        ExerciseList list = exerciseList.filterByName(filterName);
+
+        assert list instanceof ExerciseList && list.size()==2;
+        assert  list.get(0).getRepetitions()==12 && list.get(0).getWeight()==100 && list.get(0).getId()==1 && filterName.equals(list.get(0).getName());
+        assert  list.get(1).getRepetitions()==10 && list.get(1).getWeight()==120 && list.get(1).getId()==3 && filterName.equals(list.get(1).getName());
+    }
+
 }
 
 //

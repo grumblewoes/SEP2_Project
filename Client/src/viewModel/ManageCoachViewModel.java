@@ -4,11 +4,27 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import modelClient.Model;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ManageCoachViewModel extends ViewModel {
     private Model model;
     private ViewState viewState;
     private StringProperty coachProperty, errorProperty;
 
+    /**
+     * 2-argument constructor 
+     * 
+     * 
+     * @param model 
+     *        
+     * @param viewState 
+     *        
+     */
     public ManageCoachViewModel(Model model, ViewState viewState) {
         this.model = model;
         this.viewState = viewState;
@@ -16,6 +32,10 @@ public class ManageCoachViewModel extends ViewModel {
         errorProperty = new SimpleStringProperty();
     }
     @Override
+    /**
+     * 
+     * 
+     */
     public void clear() {
         //check to see if user is coach, or if they have a coach already
         errorProperty.set("");
@@ -28,6 +48,10 @@ public class ManageCoachViewModel extends ViewModel {
         }
     }
 
+    /**
+     * 
+     * 
+     */
     public void requestCoach() {
         //if the request goes through
         if (model.requestCoach(viewState.getUsername(), coachProperty.get()))
@@ -41,6 +65,13 @@ public class ManageCoachViewModel extends ViewModel {
         }
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getCoachProperty() {
         return coachProperty;
     }

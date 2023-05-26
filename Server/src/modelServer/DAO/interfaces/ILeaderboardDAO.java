@@ -4,6 +4,13 @@ import mediator.TraineeList;
 
 import java.sql.SQLException;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public interface ILeaderboardDAO
 {
   TraineeList getSquatLeaders() throws SQLException;

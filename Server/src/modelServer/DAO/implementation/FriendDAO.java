@@ -13,9 +13,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class FriendDAO implements IFriendDAO {
 
     @Override
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public boolean acceptFriendRequest(String requester_username, String accepter_username) throws SQLException {
         DBConnection db = DBConnection.getInstance();
         Connection connection = db.getConnection();
@@ -42,6 +56,13 @@ public class FriendDAO implements IFriendDAO {
     }
 
     @Override
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public boolean rejectFriendRequest(String requester_username, String accepter_username) throws SQLException {
         DBConnection db = DBConnection.getInstance();
         Connection connection = db.getConnection();
@@ -67,6 +88,15 @@ public class FriendDAO implements IFriendDAO {
     }
 
     @Override
+    /**
+     * 
+     * 
+     * @param username 
+     *        
+     *
+     * @return 
+     *        
+     */
     public FriendList getFriends(String username) throws SQLException {
         DBConnection db = DBConnection.getInstance();
         Connection connection = db.getConnection();
@@ -105,6 +135,15 @@ public class FriendDAO implements IFriendDAO {
     }
 
     @Override
+    /**
+     * 
+     * 
+     * @param username 
+     *        
+     *
+     * @return 
+     *        
+     */
     public ArrayList<String> getFriendRequests(String username) throws SQLException {
         DBConnection db = DBConnection.getInstance();
         Connection connection = db.getConnection();

@@ -7,13 +7,44 @@ import util.Logger;
 
 import java.sql.*;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class UserDAO implements IUserDAO
 {
   private static UserDAO instance;
 
+  /**
+   * 0-argument constructor 
+   * 
+   * 
+   */
   public UserDAO(){}
 
   @Override
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param password 
+   *        
+   * @param firstName 
+   *        
+   * @param lastName 
+   *        
+   * @param height 
+   *        
+   * @param weight 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean createTrainee(String username, String password, String firstName, String lastName, int height, int weight) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -42,6 +73,17 @@ public class UserDAO implements IUserDAO
   }
 
   @Override
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param password 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean login(String username, String password) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -78,6 +120,15 @@ public class UserDAO implements IUserDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public User getTrainee(String username) throws SQLException{
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -120,6 +171,23 @@ public class UserDAO implements IUserDAO
   }
 
   @Override
+  /**
+   * 
+   * 
+   * @param u 
+   *        
+   * @param h 
+   *        
+   * @param w 
+   *        
+   * @param s 
+   *        
+   * @param st 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean updateTrainee(String u, int h, int w,boolean s,String st) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -152,6 +220,15 @@ public class UserDAO implements IUserDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean deleteTrainee(String username)throws SQLException{
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();

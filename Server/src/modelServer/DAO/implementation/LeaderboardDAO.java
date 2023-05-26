@@ -11,8 +11,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class LeaderboardDAO implements ILeaderboardDAO
 {
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getSquatLeaders() throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
@@ -37,6 +51,13 @@ public class LeaderboardDAO implements ILeaderboardDAO
     }
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getDeadliftLeaders() throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
@@ -61,6 +82,13 @@ public class LeaderboardDAO implements ILeaderboardDAO
     }
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getBenchLeaders() throws SQLException
   {
     DBConnection db = DBConnection.getInstance();

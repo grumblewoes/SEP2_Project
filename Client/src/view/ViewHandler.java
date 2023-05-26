@@ -21,6 +21,13 @@ import viewModel.ViewModelFactory;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ViewHandler {
 
 	private Stage primaryStage;
@@ -49,17 +56,36 @@ public class ViewHandler {
 
 
 
+/**
+ * 1-argument constructor 
+ * 
+ * 
+ * @param viewModelFactory 
+ *        
+ */
 	public ViewHandler(ViewModelFactory viewModelFactory) {
 		this.viewModelFactory = viewModelFactory;
 		this.currentScene = new Scene(new Region());
 	}
 
+/**
+ * 
+ * 
+ * @param primaryStage 
+ *        
+ */
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		createCustomTitleBar();
 		openView("logIn");
 	}
 
+/**
+ * 
+ * 
+ * @param id 
+ *        
+ */
 	public void openView(String id) {
 		switch (id)
 		{
@@ -149,6 +175,10 @@ public class ViewHandler {
 
 	}
 
+/**
+ * 
+ * 
+ */
 	public void openLeaderboardView() {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("leaderboard.fxml"));

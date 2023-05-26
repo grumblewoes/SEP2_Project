@@ -4,6 +4,13 @@ import mediator.Exercise;
 
 import java.sql.SQLException;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public interface IExerciseAdminDAO
 {
 

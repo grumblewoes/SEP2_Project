@@ -25,6 +25,10 @@ class DAOFolderTest {
         title3 = "sdasdasddsadasdasdasdasdasdas";
 
     }
+    /**
+     * 
+     * 
+     */
     @Test public void AAAA(){
         try{
 
@@ -36,35 +40,71 @@ class DAOFolderTest {
         }
     }
 
+    /**
+     * 
+     * 
+     */
     @Test public void createZero(){
         assertDoesNotThrow(()->fdao.createFolder(null,null));
     }
+    /**
+     * 
+     * 
+     */
     @Test public void createOne(){
         assertDoesNotThrow(()->fdao.createFolder(username,title1));
     }
+    /**
+     * 
+     * 
+     */
     @Test public void createMany(){
         assertDoesNotThrow(()->fdao.createFolder(username,title2));
         assertDoesNotThrow(()->fdao.createFolder(username,title3));
     }
+    /**
+     * 
+     * 
+     */
     @Test public void renameZero() throws SQLException {
         assertDoesNotThrow(()->fdao.renameFolder(null,id,"aaa"));
     }
+    /**
+     * 
+     * 
+     */
     @Test public void renameOne() throws SQLException {
         assertDoesNotThrow(()->fdao.renameFolder(username,id,"aaa"));
     }
+    /**
+     * 
+     * 
+     */
     @Test public void renameMany() throws SQLException {
         assertDoesNotThrow(()->fdao.renameFolder(username,id,"aaa"));
         assertDoesNotThrow(()->fdao.renameFolder(username,id,"bbb"));
         assertDoesNotThrow(()->fdao.renameFolder(username,id,"ccc"));
     }
 
+    /**
+     * 
+     * 
+     */
     @Test public void listZero() throws SQLException {
         assertDoesNotThrow(()->fdao.getFolderList(null));
     }
+    /**
+     * 
+     * 
+     */
     @Test public void listOne() throws SQLException {
         assertDoesNotThrow(()->fdao.getFolderList(username));
         assert(fdao.getFolderList(username).size()>0);
     }
+    /**
+     * 
+     * 
+     */
     @Test public void listMany() throws SQLException {
         assertDoesNotThrow(()->fdao.getFolderList(username));
 //        assert(fdao.getFolderList(username).size()>0);

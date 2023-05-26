@@ -8,8 +8,24 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class MeetingDAO implements IMeetingDAO
 {
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
       throws SQLException
   {
@@ -35,6 +51,15 @@ public class MeetingDAO implements IMeetingDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
       throws SQLException
   {
@@ -61,6 +86,19 @@ public class MeetingDAO implements IMeetingDAO
   }
 
   @Override
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   * @param coachUsername 
+   *        
+   * @param dateOfMeeting 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -202,6 +240,15 @@ public class MeetingDAO implements IMeetingDAO
 
 
   //is arraylist instead of meetinglist because STUPID gson won't convert LocalDate to json format
+  /**
+   * 
+   * 
+   * @param coach 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getCoachMeetingRequests(String coach)
       throws SQLException
   {
@@ -234,6 +281,15 @@ public class MeetingDAO implements IMeetingDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param coach 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getCoachMeetings(String coach)
       throws SQLException
   {
@@ -266,6 +322,15 @@ public class MeetingDAO implements IMeetingDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param coachUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<LocalDate> getTakenDates(String coachUsername)
       throws SQLException
   {

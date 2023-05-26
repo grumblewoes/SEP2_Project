@@ -9,6 +9,13 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class DAOExerciseAdminTest
 {
   private IExerciseAdminDAO dao;

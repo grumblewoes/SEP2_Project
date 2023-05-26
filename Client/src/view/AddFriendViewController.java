@@ -9,6 +9,13 @@ import viewModel.HomeViewModel;
 import viewModel.ManageFolderViewModel;
 import viewModel.ViewModel;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class AddFriendViewController extends ViewController
 {
   @FXML private TextField nameField;
@@ -18,6 +25,16 @@ public class AddFriendViewController extends ViewController
   private AddFriendViewModel friendViewModel;
 
 
+  /**
+   * 
+   * 
+   * @param viewHandler 
+   *        
+   * @param viewModel 
+   *        
+   * @param root 
+   *        
+   */
   @Override public void  init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
     this.viewHandler = viewHandler;
@@ -39,6 +56,10 @@ public class AddFriendViewController extends ViewController
     viewHandler.openView("home");
   }
 
+  /**
+   * 
+   * 
+   */
   @Override public void reset()
   {
     friendViewModel.clear();

@@ -8,12 +8,26 @@ import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class Admin implements Runnable
 
 {
   private Model model;
   private String username, password;
 
+  /**
+   * 1-argument constructor 
+   * 
+   * 
+   * @param model 
+   *        
+   */
   public Admin(Model model)
   {
     this.model = model;
@@ -21,6 +35,17 @@ public class Admin implements Runnable
     this.password = "1234";
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param password 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean validateLogin(String username, String password)
   {
     if (username.equals(this.username) && password.equals(this.password))
@@ -30,6 +55,10 @@ public class Admin implements Runnable
     return false;
   }
 
+  /**
+   * 
+   * 
+   */
   @Override public void run()
   {
     Scanner scanner = new Scanner(System.in);

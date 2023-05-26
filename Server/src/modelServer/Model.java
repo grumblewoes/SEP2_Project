@@ -7,6 +7,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public interface Model
 {
     boolean createUser(String firstName, String lastName, String username, String password, int height, int weight);

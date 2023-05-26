@@ -5,6 +5,13 @@ import mediator.User;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public interface IUserDAO
 {
   boolean createTrainee(String username, String password, String firstName, String lastName, int height, int weight) throws SQLException;

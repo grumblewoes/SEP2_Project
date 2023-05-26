@@ -9,11 +9,19 @@ class ExerciseTest {
     private Exercise exercise;
 
     @BeforeEach
+    /**
+     * 
+     * 
+     */
     public void setUp() {
         exercise = new Exercise(1, 50.0, 10, "Bicep Curls");
     }
 
     @Test
+    /**
+     * 
+     * 
+     */
     public void testExerciseToString() {
         String expected = "Exercise{" +
                 "weight=50.0" +
@@ -25,6 +33,10 @@ class ExerciseTest {
     }
 
     @Test
+    /**
+     * 
+     * 
+     */
     public void testExerciseSettersAndGetters() {
         assertEquals(1, exercise.getId());
         exercise.setId(2);
@@ -44,6 +56,10 @@ class ExerciseTest {
     }
 
     @Test
+    /**
+     * 
+     * 
+     */
     public void testExerciseConstructor() {
         assertEquals(1, exercise.getId());
         assertEquals(50.0, exercise.getWeight(), 0.0);

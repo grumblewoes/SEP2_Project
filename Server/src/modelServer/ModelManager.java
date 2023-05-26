@@ -12,12 +12,24 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ModelManager implements Model
 {
   private UserDAO userDAO;
   private ExerciseAdminDAO exerciseAdminDAO;
   private MeetingDAO meetingDAO;
 
+  /**
+   * 0-argument constructor 
+   * 
+   * 
+   */
   public ModelManager()
   {
     this.userDAO = new UserDAO();
@@ -44,6 +56,17 @@ public class ModelManager implements Model
   }
 
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param password 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean login(String username, String password)
   {
     boolean ans = false;
@@ -60,6 +83,17 @@ public class ModelManager implements Model
     return ans;
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param name 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean createFolder(String username, String name)
   {
     boolean ans = false;
@@ -76,6 +110,17 @@ public class ModelManager implements Model
     return ans;
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param folderId 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeFolder(String username, int folderId)
   {
     boolean ans = false;
@@ -112,6 +157,15 @@ public class ModelManager implements Model
     return ans;
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public FolderList getFolderList(String username)
   {
     try
@@ -138,6 +192,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param exerciseId 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeExercise(int exerciseId)
   {
     try
@@ -150,6 +213,17 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param name 
+   *        
+   * @param folderId 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeExercisesByName(String name, int folderId)
   {
 
@@ -164,6 +238,15 @@ public class ModelManager implements Model
 
   }
 
+  /**
+   * 
+   * 
+   * @param folderId 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ExerciseList getExerciseList(int folderId)
   {
     try
@@ -189,6 +272,13 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getPossibleExercises()
   {
     try
@@ -201,6 +291,15 @@ public class ModelManager implements Model
     }
   }
 //
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ *
+ * @return 
+ *        
+ */
 //  @Override public int getBestSquat(String username)
 //  {
 //    try
@@ -213,6 +312,15 @@ public class ModelManager implements Model
 //    }
 //  }
 //
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ *
+ * @return 
+ *        
+ */
 //  @Override public int getBestDeadlift(String username)
 //  {
 //    try
@@ -225,6 +333,15 @@ public class ModelManager implements Model
 //    }
 //  }
 //
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ *
+ * @return 
+ *        
+ */
 //  @Override public int getBestBenchPress(String username)
 //  {
 //    try
@@ -237,6 +354,15 @@ public class ModelManager implements Model
 //    }
 //  }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public User getTrainee(String username)
   {
     try
@@ -249,6 +375,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param title 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean addExercise(String title)
   {
     try{
@@ -258,6 +393,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param title 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeExercise(String title)
   {
     try{
@@ -267,6 +411,23 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param u 
+   *        
+   * @param h 
+   *        
+   * @param w 
+   *        
+   * @param s 
+   *        
+   * @param st 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean updateTrainee(String u, int h, int w,boolean s,String st){
         try{
             return new UserDAO().updateTrainee(u,h,w,s,st);
@@ -277,6 +438,13 @@ public class ModelManager implements Model
 
 
     @Override
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public boolean acceptFriendRequest(String requester_username,String accepter_username) {
         Logger.log("accepting "+ requester_username + " , "+ accepter_username);
         try{
@@ -286,6 +454,13 @@ public class ModelManager implements Model
         }
     }
     @Override
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public boolean rejectFriendRequest(String requester_username,String accepter_username) {
         try{
             Logger.log("rejecting "+ requester_username + " , "+ accepter_username);
@@ -306,6 +481,15 @@ public class ModelManager implements Model
 
 
     @Override
+    /**
+     * 
+     * 
+     * @param username 
+     *        
+     *
+     * @return 
+     *        
+     */
     public FriendList getFriends(String username) {
         try{
             return new FriendDAO().getFriends(username);
@@ -315,6 +499,15 @@ public class ModelManager implements Model
     }
 
     @Override
+    /**
+     * 
+     * 
+     * @param username 
+     *        
+     *
+     * @return 
+     *        
+     */
     public ArrayList<String> getFriendRequests(String username) {
         try{
             return new FriendDAO().getFriendRequests(username);
@@ -334,6 +527,17 @@ public class ModelManager implements Model
     }
 
     @Override
+    /**
+     * 
+     * 
+     * @param requesterUsername 
+     *        
+     * @param accepterUsername 
+     *        
+     *
+     * @return 
+     *        
+     */
     public boolean requestCoach(String requesterUsername, String accepterUsername) {
         try{
             return new CoachDAO().requestCoach(requesterUsername,accepterUsername);
@@ -343,6 +547,15 @@ public class ModelManager implements Model
     }
 
     @Override
+    /**
+     * 
+     * 
+     * @param username 
+     *        
+     *
+     * @return 
+     *        
+     */
     public boolean isCoach(String username) {
         try{
             return new CoachDAO().isCoach(username);
@@ -351,6 +564,15 @@ public class ModelManager implements Model
         }
     }
 
+    /**
+     * 
+     * 
+     * @param traineeUsername 
+     *        
+     *
+     * @return 
+     *        
+     */
     @Override public boolean removeCoachAssignment(String traineeUsername)
     {
         try{
@@ -389,6 +611,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean denyRequest(String traineeUsername)
   {
     try
@@ -401,6 +632,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeTraineeFromRoster(String traineeUsername)
   {
     try
@@ -413,6 +653,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getTraineeList(String username)
   {
     try
@@ -425,6 +674,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getTraineeRequest(String username)
   {
     try
@@ -437,6 +695,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param coach 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getMeetingRequests(String coach)
   {
     try
@@ -449,6 +716,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param name 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeCoach(String name)
     {
         try {
@@ -461,6 +737,15 @@ public class ModelManager implements Model
     }
 
     @Override
+    /**
+     * 
+     * 
+     * @param traineeUsername 
+     *        
+     *
+     * @return 
+     *        
+     */
     public User getCoach(String traineeUsername) {
         try {
             return new CoachDAO().getCoach(traineeUsername);
@@ -471,6 +756,15 @@ public class ModelManager implements Model
         }
     }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
   {
     try {
@@ -482,6 +776,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
   {
     try {
@@ -505,6 +808,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param coachUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<LocalDate> getTakenDates(String coachUsername)
   {
     try {
@@ -516,6 +828,13 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getSquatLeaders()
   {
     try {
@@ -527,6 +846,13 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getDeadliftLeaders()
   {
     try {
@@ -538,6 +864,13 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getBenchLeaders()
   {
     try {
@@ -588,6 +921,15 @@ public class ModelManager implements Model
     }
   }
 
+  /**
+   * 
+   * 
+   * @param coach 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getCoachMeetings(String coach)
   {
     try
