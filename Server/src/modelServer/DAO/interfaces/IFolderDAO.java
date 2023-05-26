@@ -6,6 +6,13 @@ import mediator.FolderList;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public interface IFolderDAO
 {
   boolean createFolder(String username, String title) throws SQLException;

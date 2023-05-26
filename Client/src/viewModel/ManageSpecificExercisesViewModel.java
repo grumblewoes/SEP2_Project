@@ -11,6 +11,13 @@ import util.Logger;
 
 import java.net.DatagramSocket;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ManageSpecificExercisesViewModel extends ViewModel{
     private Model model;
     private ViewState viewState;
@@ -19,6 +26,15 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
     private BooleanProperty isSpecificProperty;
     private ObjectProperty<LineChart<?, ?>> lineChartProperty;
 
+    /**
+     * 2-argument constructor 
+     * 
+     * 
+     * @param model 
+     *        
+     * @param viewState 
+     *        
+     */
     public ManageSpecificExercisesViewModel(Model model, ViewState viewState) {
         this.model=model;
         this.viewState=viewState;
@@ -45,6 +61,10 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
 
     }
     @Override
+    /**
+     * 
+     * 
+     */
     public void clear() {
         exerciseNameProperty.set(viewState.getExerciseName());
         usernameProperty.set(viewState.getUsername());
@@ -53,10 +73,23 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
         populateExercises();
     }
 
+    /**
+     * 
+     * 
+     * @param name 
+     *        
+     */
     public void setupOpenExercisesByName(String name){
         isSpecificProperty.set(true);
         viewState.setExerciseName(name);
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public String setupGoBack(){
         isSpecificProperty.set(false);
         if(viewState.getExerciseName()==null)
@@ -68,36 +101,101 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
         return viewState.getGoBack();
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getUsernameProperty() {
         return usernameProperty;
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public ObjectProperty getLineChartProperty() {
         return lineChartProperty;
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getExercisesListProperty() {
         return exercisesListProperty;
     }
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getErrorProperty() {
         return errorProperty;
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getExerciseNameProperty() {
         return exerciseNameProperty;
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getFolderNameProperty() { return folderNameProperty; }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public BooleanProperty getIsSpecificProperty() { return isSpecificProperty; }
 
 
+    /**
+     * 
+     * 
+     * @param exerciseId 
+     *        
+     */
     public void removeExercise(int exerciseId) {
         model.removeExercise(exerciseId);
     }
+    /**
+     * 
+     * 
+     * @param name 
+     *        
+     */
     public void removeExercisesByName(String name) {
         model.removeExercisesByName(name,viewState.getFolderId());
         updateLineChart(name);
     }
+    /**
+     * 
+     * 
+     */
     public void setupAddExercise() {
         if(isSpecificProperty.get())
             viewState.setGoBack("specificExercises");
@@ -108,16 +206,30 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
 
     }
 
+    /**
+     * 
+     * 
+     */
     public void setupProfile() {
         viewState.setGoBack("manageExercises");
         viewState.setProfileUsername(viewState.getUsername());
     }
 
 
+    /**
+     * 
+     * 
+     */
     public void setLineChart(LineChart<Number, Number> lineChart) {
         lineChartProperty.set(lineChart);
     }
 
+    /**
+     * 
+     * 
+     * @param exerciseName 
+     *        
+     */
     public void updateLineChart(String exerciseName)
     {
         LineChart<Number, Number> chart = (LineChart<Number, Number>) lineChartProperty.get();

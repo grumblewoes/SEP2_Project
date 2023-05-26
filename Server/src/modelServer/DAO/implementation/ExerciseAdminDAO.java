@@ -10,15 +10,36 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ExerciseAdminDAO implements IExerciseAdminDAO
 {
 
   private static ExerciseAdminDAO instance;
 
+  /**
+   * 0-argument constructor 
+   * 
+   * 
+   */
   public ExerciseAdminDAO()
   {
   }
 
+  /**
+   * 
+   * 
+   * @param exerciseName 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean addExercise(String exerciseName) throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
@@ -62,6 +83,15 @@ public class ExerciseAdminDAO implements IExerciseAdminDAO
   }
 
 
+  /**
+   * 
+   * 
+   * @param exerciseName 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeExercise(String exerciseName) throws SQLException
   {
     DBConnection db = DBConnection.getInstance();

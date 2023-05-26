@@ -8,8 +8,19 @@ import util.Logger;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ServerMain
 {
+  /**
+   * 
+   * 
+   */
   public static void main(String[] args) {
     Model model = new ModelManager();
     Server server = new Server(model);

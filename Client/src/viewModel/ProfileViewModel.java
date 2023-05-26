@@ -10,6 +10,13 @@ import util.Logger;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ProfileViewModel extends ViewModel implements LocalListener<String,String> {
     private Model model;
     private ViewState viewState;
@@ -20,6 +27,15 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     private BooleanProperty shareProfileProperty,editableProperty, coachStateProperty, isCoachProperty;
 
+    /**
+     * 2-argument constructor 
+     * 
+     * 
+     * @param model 
+     *        
+     * @param viewState 
+     *        
+     */
     public ProfileViewModel(Model model, ViewState viewState){
         this.model = model;
         this.model.addListener(this);
@@ -46,72 +62,188 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     }
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty firstNameProperty() {
         return firstNameProperty;
     }
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty lastNameProperty() {
         return lastNameProperty;
     }
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty usernameProperty() {
         return usernameProperty;
     }
 
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty statusProperty() {
         return statusProperty;
     }
 
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty bmiProperty() {
         return bmiProperty;
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public BooleanProperty editableProperty() {  return editableProperty;  }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public BooleanProperty isCoachProperty() { return isCoachProperty; }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty errorProperty() {
         return errorProperty;
     }
 
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public IntegerProperty weightProperty() {
         return weightProperty;
     }
 
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public IntegerProperty heightProperty() {
         return heightProperty;
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public IntegerProperty benchPressProperty() {
         return benchPressProperty;
     }
 
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public IntegerProperty deadliftProperty() {
         return deadliftProperty;
     }
 
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public IntegerProperty squatProperty() {
         return squatProperty;
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public BooleanProperty shareProfileProperty() {  return shareProfileProperty;  }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public BooleanProperty coachStateProperty() { return coachStateProperty; }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty coachProperty() {
         return coachProperty;
     }
 
     @Override
+    /**
+     * 
+     * 
+     */
     public void clear() {
         String u = viewState.getProfileUsername();
         //is the user a coach or trainee? -> changes depending on which one
@@ -193,6 +325,13 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public boolean update() {
         int h = heightProperty.get();
         int w = weightProperty().get();
@@ -205,6 +344,13 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         return success;
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public boolean removeFriend(){
         String username = viewState.getUsername();
         String friendUsername = viewState.getProfileUsername();
@@ -217,6 +363,13 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         return success;
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public String getGoBack(){
         String b = viewState.getGoBack();
 
@@ -224,6 +377,10 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     }
 
     @Override
+    /**
+     * 
+     * 
+     */
     public void propertyChange(ObserverEvent<String, String> event) {
         String name = event.getPropertyName();
         String value = event.getValue2();
@@ -232,6 +389,10 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         });
     }
 
+    /**
+     * 
+     * 
+     */
     public void removeCoach()
     {
         //if the request goes through
@@ -248,6 +409,10 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
         }
     }
 
+    /**
+     * 
+     * 
+     */
     public void requestCoach()
     {
         //if the request goes through

@@ -6,6 +6,13 @@ import mediator.FriendList;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public interface IFriendDAO
 {
     boolean acceptFriendRequest(String requester_username,String accepter_username) throws SQLException;

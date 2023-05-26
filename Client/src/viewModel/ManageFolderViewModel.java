@@ -4,11 +4,27 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import modelClient.Model;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ManageFolderViewModel extends ViewModel{
     private StringProperty errorProperty, nameProperty, headerLabel;
     private ViewState viewState;
     private Model model;
 
+    /**
+     * 2-argument constructor 
+     * 
+     * 
+     * @param model 
+     *        
+     * @param viewState 
+     *        
+     */
     public ManageFolderViewModel(Model model, ViewState viewState) {
         this.model = model;
         this.viewState = viewState;
@@ -17,6 +33,13 @@ public class ManageFolderViewModel extends ViewModel{
         headerLabel = new SimpleStringProperty();
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public boolean submit() {
         if (viewState.getNewFolder())
             return createFolder();
@@ -34,12 +57,37 @@ public class ManageFolderViewModel extends ViewModel{
         return model.editFolder(viewState.getUsername(), viewState.getFolderId(), newName);
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getErrorProperty() {return errorProperty;}
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getHeaderProperty() {return headerLabel;}
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getNameProperty() {return nameProperty;}
 
 
     @Override
+    /**
+     * 
+     * 
+     */
     public void clear() {
         errorProperty.set("");
         //change header and name depending on viewstate, clear error label

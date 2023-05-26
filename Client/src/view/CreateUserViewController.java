@@ -9,6 +9,13 @@ import util.Logger;
 import viewModel.CreateUserViewModel;
 import viewModel.ViewModel;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class CreateUserViewController extends ViewController
 {
 
@@ -26,11 +33,26 @@ public class CreateUserViewController extends ViewController
 
 	private IntStringConverter converter;
 
+/**
+ * 0-argument constructor 
+ * 
+ * 
+ */
 	public CreateUserViewController() {
 		converter = new IntStringConverter();
 	}
 
 	@Override
+/**
+ * 
+ * 
+ * @param viewHandler 
+ *        
+ * @param viewModel 
+ *        
+ * @param root 
+ *        
+ */
 	public void init(ViewHandler viewHandler, ViewModel viewModel, Region root) {
 		this.viewHandler = viewHandler;
 		createUserViewModel = (CreateUserViewModel) viewModel;
@@ -48,6 +70,10 @@ public class CreateUserViewController extends ViewController
 
 	}
 
+/**
+ * 
+ * 
+ */
 	@Override public void reset() {
 		createUserViewModel.clear();
 	}

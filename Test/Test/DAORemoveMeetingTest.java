@@ -14,6 +14,13 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class DAORemoveMeetingTest
 {
   private IMeetingDAO mdao;
@@ -57,6 +64,10 @@ public class DAORemoveMeetingTest
     service.switchToTestDatabase();
   }
 
+  /**
+   * 
+   * 
+   */
   @Test public void removeMeetingZero()
   {
     Assertions.assertThrows(NullPointerException.class, () -> {
@@ -71,6 +82,10 @@ public class DAORemoveMeetingTest
     });
   }
 
+  /**
+   * 
+   * 
+   */
   @Test public void removeMeetingOne() throws SQLException
   {
     try
@@ -106,6 +121,10 @@ public class DAORemoveMeetingTest
     }
   }
 
+  /**
+   * 
+   * 
+   */
   @Test public void removeMeetingMany() throws SQLException {
     try
     {

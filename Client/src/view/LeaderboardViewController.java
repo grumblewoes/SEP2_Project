@@ -11,6 +11,13 @@ import viewModel.SimpleLeaderboardViewModel;
 import viewModel.ViewModel;
 
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class LeaderboardViewController extends ViewController
 {
   @FXML
@@ -58,11 +65,21 @@ public class LeaderboardViewController extends ViewController
     reset();
   }
 
+  /**
+   * 
+   * 
+   */
   @Override public void reset()
   {
     leaderboardViewModel.clear();
   }
 
+  /**
+   * 
+   * 
+   * @param stage 
+   *        
+   */
   public void setStage(Stage stage) {
     this.stage = stage;
   }

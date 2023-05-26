@@ -13,6 +13,13 @@ import viewModel.AddExerciseViewModel;
 import viewModel.ViewModel;
 import javafx.beans.binding.Bindings;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class AddExerciseViewController extends ViewController{
 
     @FXML private Text exercisePrompt;
@@ -22,6 +29,16 @@ public class AddExerciseViewController extends ViewController{
     private AddExerciseViewModel addViewModel;
 
     @Override
+    /**
+     * 
+     * 
+     * @param viewHandler 
+     *        
+     * @param viewModel 
+     *        
+     * @param root 
+     *        
+     */
     public void init(ViewHandler viewHandler, ViewModel viewModel, Region root) {
         addViewModel = (AddExerciseViewModel) viewModel;
         this.root = root;
@@ -54,10 +71,20 @@ public class AddExerciseViewController extends ViewController{
     }
 
     @Override
+    /**
+     * 
+     * 
+     */
     public void reset() {
         addViewModel.clear();
     }
 
+    /**
+     * 
+     * 
+     * @param actionEvent 
+     *        
+     */
     public void submit(ActionEvent actionEvent) {
 //        submit exercise
         if( addViewModel.addExercise() )
@@ -65,6 +92,12 @@ public class AddExerciseViewController extends ViewController{
 
     }
 
+    /**
+     * 
+     * 
+     * @param actionEvent 
+     *        
+     */
     public void goBack(ActionEvent actionEvent) {
         viewHandler.openView(goBackString.get());
     }

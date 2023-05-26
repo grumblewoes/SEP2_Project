@@ -7,6 +7,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public interface IMeetingDAO
 {
   ArrayList<String> getTraineeMeetingList(String traineeUsername) throws SQLException;

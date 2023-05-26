@@ -7,6 +7,13 @@ import modelClient.Model;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class AddExerciseViewModel extends ViewModel {
     private IntegerProperty repetitionsProperty;
     private IntegerProperty weightProperty;
@@ -17,6 +24,15 @@ public class AddExerciseViewModel extends ViewModel {
     private Model model;
     private ViewState viewState;
 
+    /**
+     * 2-argument constructor 
+     * 
+     * 
+     * @param model 
+     *        
+     * @param viewState 
+     *        
+     */
     public AddExerciseViewModel(Model model, ViewState viewState){
         this.model=model;
         this.viewState = viewState;
@@ -30,20 +46,76 @@ public class AddExerciseViewModel extends ViewModel {
         gson = new Gson();
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getErrorProperty(){
         return errorProperty;
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public IntegerProperty getRepetitionsProperty(){
         return repetitionsProperty;
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getExerciseListProperty(){ return exerciseListProperty;    }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getExerciseProperty(){ return exerciseProperty;    }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public IntegerProperty getWeightProperty(){
         return weightProperty;
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public BooleanProperty getEditableProperty(){ return editableProperty; }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getGoBackProperty(){ return goBackProperty; }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public boolean addExercise(){
         String username = viewState.getUsername();
         int folderId = viewState.getFolderId();
@@ -61,6 +133,10 @@ public class AddExerciseViewModel extends ViewModel {
     }
 
     @Override
+    /**
+     * 
+     * 
+     */
     public void clear() {
 
         loadExercisesList();

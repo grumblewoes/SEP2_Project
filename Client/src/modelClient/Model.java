@@ -7,10 +7,47 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public interface Model extends LocalSubject<String,String>
 {
 
+/**
+ * 
+ * 
+ * @param firstName 
+ *        
+ * @param lastName 
+ *        
+ * @param userName 
+ *        
+ * @param password 
+ *        
+ * @param height 
+ *        
+ * @param weight 
+ *        
+ *
+ * @return 
+ *        
+ */
 	public abstract boolean createUser(String firstName, String lastName, String userName, String password, int height, int weight);
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ * @param password 
+ *        
+ *
+ * @return 
+ *        
+ */
 	public boolean login(String username, String password);
 	boolean createFolder(String username, String name);
 	boolean removeFolder(String username, int folderId);

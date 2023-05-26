@@ -11,6 +11,13 @@ import modelClient.Model;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class CreateUserViewModel extends ViewModel implements
 		PropertyChangeListener
 {
@@ -31,6 +38,13 @@ public class CreateUserViewModel extends ViewModel implements
 
 	private Model model;
 
+/**
+ * 1-argument constructor 
+ * 
+ * 
+ * @param model 
+ *        
+ */
 	public CreateUserViewModel(Model model) {
 		this.model=model;
 		this.firstNameProperty=new SimpleStringProperty("");
@@ -43,6 +57,13 @@ public class CreateUserViewModel extends ViewModel implements
 		//model.addListener(null, this);
 	}
 
+/**
+ * 
+ * 
+ *
+ * @return 
+ *        
+ */
 	public boolean createUser() {
 		boolean userCreated = model.createUser(getFirstNameProperty().get(), getLastNameProperty().get(), getUserNameProperty().get(),
 				getPasswordProperty().get(), getHeightProperty().get(), getWeightProperty().get());
@@ -58,6 +79,10 @@ public class CreateUserViewModel extends ViewModel implements
 	}
 
 	@Override
+/**
+ * 
+ * 
+ */
 	public void clear(){
 		Platform.runLater(() -> {
 			errorLabel.set("");
@@ -71,6 +96,12 @@ public class CreateUserViewModel extends ViewModel implements
 	}
 
   @Override
+/**
+ * 
+ * 
+ * @param evt 
+ *        
+ */
 	public void propertyChange(PropertyChangeEvent evt) {
 //		Platform.runLater(() -> {
 //			switch (evt.getPropertyName())
@@ -85,30 +116,79 @@ public class CreateUserViewModel extends ViewModel implements
 //		});
 	}
 
+/**
+ * 
+ * 
+ *
+ * @return 
+ *        
+ */
 	public StringProperty getFirstNameProperty() {
 		return firstNameProperty;
 	}
 
+/**
+ * 
+ * 
+ *
+ * @return 
+ *        
+ */
 	public StringProperty getLastNameProperty() {
 		return lastNameProperty;
 	}
 
+/**
+ * 
+ * 
+ *
+ * @return 
+ *        
+ */
 	public StringProperty getUserNameProperty() {
 		return userNameProperty;
 	}
 
+/**
+ * 
+ * 
+ *
+ * @return 
+ *        
+ */
 	public StringProperty getPasswordProperty() {
 		return passwordProperty;
 	}
 
+/**
+ * 
+ * 
+ *
+ * @return 
+ *        
+ */
 	public IntegerProperty getHeightProperty() {
 		return heightProperty;
 	}
 
+/**
+ * 
+ * 
+ *
+ * @return 
+ *        
+ */
 	public IntegerProperty getWeightProperty() {
 		return weightProperty;
 	}
 
+/**
+ * 
+ * 
+ *
+ * @return 
+ *        
+ */
 	public StringProperty getErrorLabel() {
 		return errorLabel;
 	}

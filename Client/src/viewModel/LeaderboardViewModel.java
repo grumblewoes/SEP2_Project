@@ -14,6 +14,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class LeaderboardViewModel extends ViewModel  implements LocalListener<String,String>
 {
   private ObservableList<SimpleLeaderboardViewModel> squats;
@@ -21,6 +28,13 @@ public class LeaderboardViewModel extends ViewModel  implements LocalListener<St
   private ObservableList<SimpleLeaderboardViewModel> benches;
   private Model model;
 
+  /**
+   * 1-argument constructor 
+   * 
+   * 
+   * @param model 
+   *        
+   */
   public LeaderboardViewModel(Model model) {
     this.model=model;
     squats = FXCollections.observableArrayList();
@@ -30,14 +44,35 @@ public class LeaderboardViewModel extends ViewModel  implements LocalListener<St
     model.addListener(this);
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public ObservableList<SimpleLeaderboardViewModel> getSquats() {
     return squats;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public ObservableList<SimpleLeaderboardViewModel> getBenches() {
     return benches;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public ObservableList<SimpleLeaderboardViewModel> getDeadlifts() {
     return deadlifts;
   }
@@ -68,6 +103,10 @@ public class LeaderboardViewModel extends ViewModel  implements LocalListener<St
       benches.add( new SimpleLeaderboardViewModel(trainee) );
     }
   }
+  /**
+   * 
+   * 
+   */
   @Override public void clear()
   {
     loadSquatLeaders();
@@ -76,6 +115,10 @@ public class LeaderboardViewModel extends ViewModel  implements LocalListener<St
   }
 
 
+  /**
+   * 
+   * 
+   */
   @Override public void propertyChange(ObserverEvent<String, String> event)
   {
     loadSquatLeaders();

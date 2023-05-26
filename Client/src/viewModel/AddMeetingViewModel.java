@@ -14,6 +14,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class AddMeetingViewModel extends ViewModel
 {
   private StringProperty errorProperty, coachProperty;
@@ -21,6 +28,15 @@ public class AddMeetingViewModel extends ViewModel
   private Model model;
   private ViewState viewState;
 
+  /**
+   * 2-argument constructor 
+   * 
+   * 
+   * @param model 
+   *        
+   * @param viewState 
+   *        
+   */
   public AddMeetingViewModel(Model model, ViewState viewState){
     this.model=model;
     this.viewState = viewState;
@@ -28,6 +44,13 @@ public class AddMeetingViewModel extends ViewModel
     errorProperty = new SimpleStringProperty();
     dateOfMeeting = new SimpleObjectProperty<>();
   }
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public boolean sendMeetingRequest(){
     String traineeUsername = viewState.getUsername();
     String coachUsername = model.getCoach(viewState.getProfileUsername()).getUsername();
@@ -42,6 +65,10 @@ public class AddMeetingViewModel extends ViewModel
 
     return successAddition;
   }
+  /**
+   * 
+   * 
+   */
   @Override public void clear()
   {
     dateOfMeeting.set(null);
@@ -49,14 +76,42 @@ public class AddMeetingViewModel extends ViewModel
     Logger.log(viewState.getProfileUsername());
     coachProperty.set(model.getCoach(viewState.getProfileUsername()).getUsername());
   }
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public StringProperty getErrorProperty() {return errorProperty;}
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public ObjectProperty<LocalDate> getDateOfMeeting(){return dateOfMeeting;}
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public StringProperty getCoachProperty()
   {
     return coachProperty;
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   public ArrayList<LocalDate> getTakenDates(){
     String coachUsername = null;
     User coach = model.getCoach(viewState.getUsername());

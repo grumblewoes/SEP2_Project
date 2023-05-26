@@ -8,6 +8,13 @@ import viewModel.HomeViewModel;
 import viewModel.ManageFolderViewModel;
 import viewModel.ViewModel;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class ManageFolderViewController extends ViewController
 {
 
@@ -17,6 +24,16 @@ public class ManageFolderViewController extends ViewController
   private ManageFolderViewModel folderViewModel;
 
 
+  /**
+   * 
+   * 
+   * @param viewHandler 
+   *        
+   * @param viewModel 
+   *        
+   * @param root 
+   *        
+   */
   @Override public void  init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
     this.viewHandler = viewHandler;
@@ -38,6 +55,10 @@ public class ManageFolderViewController extends ViewController
     viewHandler.openView("home");
   }
 
+  /**
+   * 
+   * 
+   */
   @Override public void reset()
   {
     folderViewModel.clear();

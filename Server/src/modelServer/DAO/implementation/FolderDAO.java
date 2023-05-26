@@ -12,14 +12,37 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class FolderDAO implements IFolderDAO
 {
   private static FolderDAO instance;
 
+  /**
+   * 0-argument constructor 
+   * 
+   * 
+   */
   public FolderDAO()
   {
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param title 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean createFolder(String username, String title)
       throws SQLException
   {
@@ -75,6 +98,17 @@ public class FolderDAO implements IFolderDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param folderId 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeFolder(String username, int folderId)
       throws SQLException
   {
@@ -107,6 +141,15 @@ public class FolderDAO implements IFolderDAO
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   public FolderList getFolderList(String username) throws SQLException
   {
     FolderList folderList = new FolderList();

@@ -8,6 +8,13 @@ import modelClient.Model;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class FolderViewModel extends ViewModel {
     private StringProperty folderTitleProperty;
     private StringProperty errorProperty;
@@ -15,6 +22,15 @@ public class FolderViewModel extends ViewModel {
     private Model model;
     private ViewState viewState;
 
+    /**
+     * 2-argument constructor 
+     * 
+     * 
+     * @param model 
+     *        
+     * @param viewState 
+     *        
+     */
     public FolderViewModel(Model model, ViewState viewState){
         this.model=model;
         this.viewState = viewState;
@@ -23,10 +39,24 @@ public class FolderViewModel extends ViewModel {
         gson = new Gson();
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getFolderTitleProperty(){
         return folderTitleProperty;
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty ErrorProperty(){
         return errorProperty;
     }
@@ -38,11 +68,24 @@ public class FolderViewModel extends ViewModel {
         folderTitleProperty.set(gson.toJson(exercises));
     }
 
+    /**
+     * 
+     * 
+     * @param exerciseId 
+     *        
+     *
+     * @return 
+     *        
+     */
     public boolean removeExercise(int exerciseId){
         return model.removeExercise(exerciseId);
     }
 
     @Override
+    /**
+     * 
+     * 
+     */
     public void clear() {
         loadExercises();
     }

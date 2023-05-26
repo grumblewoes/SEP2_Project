@@ -12,6 +12,13 @@ import util.Logger;
 import viewModel.ProfileViewModel;
 import viewModel.ViewModel;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class profileViewController extends  ViewController{
     @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField, coachField;
     @FXML private RadioButton shareProfileRadio;
@@ -20,6 +27,16 @@ public class profileViewController extends  ViewController{
 
     private ProfileViewModel profileViewModel;
     @Override
+    /**
+     * 
+     * 
+     * @param viewHandler 
+     *        
+     * @param viewModel 
+     *        
+     * @param root 
+     *        
+     */
     public void init(ViewHandler viewHandler, ViewModel viewModel, Region root) {
         this.viewHandler=viewHandler;
         this.profileViewModel = (ProfileViewModel) viewModel;
@@ -92,14 +109,30 @@ public class profileViewController extends  ViewController{
     }
 
     @Override
+    /**
+     * 
+     * 
+     */
     public void reset() {
         profileViewModel.clear();
     }
 
+    /**
+     * 
+     * 
+     * @param actionEvent 
+     *        
+     */
     public void update(ActionEvent actionEvent) {
         profileViewModel.update();
     }
 
+    /**
+     * 
+     * 
+     * @param actionEvent 
+     *        
+     */
     public void goBack(ActionEvent actionEvent) {
         viewHandler.openView(profileViewModel.getGoBack());
     }

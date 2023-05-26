@@ -20,6 +20,10 @@ class DAOExerciseTest {
         eao=new ExerciseDAO();
     }
 
+    /**
+     * 
+     * 
+     */
     @Test public void iAmTiredLetsTestThisShit() throws SQLException {
         String username = "your_mom"+Math.random();
         String folderName = "your_dad"+Math.random();

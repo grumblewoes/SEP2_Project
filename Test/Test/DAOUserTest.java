@@ -34,22 +34,38 @@ class DAOUserTest {
         service.switchToTestDatabase();
     }
 
+/**
+ * 
+ * 
+ */
 //    @Test public void tttt() throws SQLException {
 //        assertDoesNotThrow(()->dao.createTrainee(username1,password,firstName,lastName,height,weight));
 //        User user = dao.getTrainee(username1);
 //        System.out.println(user.getUsername());
 //    }
 //
+    /**
+     * 
+     * 
+     */
     @Test public void createZero(){
         SetupTestDatabase();
         assertDoesNotThrow(()->dao.createTrainee(null,null,null,null,0,0));
         service.switchToProductionDatabase();
     }
+    /**
+     * 
+     * 
+     */
     @Test public void createOne(){
         SetupTestDatabase();
         assertDoesNotThrow(()->dao.createTrainee(username1,password,firstName,lastName,height,weight));
         service.switchToProductionDatabase();
     }
+    /**
+     * 
+     * 
+     */
     @Test public void createMany(){
         SetupTestDatabase();
         assertDoesNotThrow(()->dao.createTrainee(username2,password,firstName,lastName,height,weight));
@@ -58,23 +74,43 @@ class DAOUserTest {
     }
 
 
+    /**
+     * 
+     * 
+     */
     @Test public void createBoundary(){
         //pass
     }
+    /**
+     * 
+     * 
+     */
     @Test public void createExceptions(){
         //tested in Z
     }
 
+    /**
+     * 
+     * 
+     */
     @Test public void loginZero(){
         SetupTestDatabase();
         assertDoesNotThrow(()->dao.login(null,null));
         service.switchToProductionDatabase();
     }
+    /**
+     * 
+     * 
+     */
     @Test public void loginOne(){
         SetupTestDatabase();
         assertDoesNotThrow(()->dao.login(username1,password));
         service.switchToProductionDatabase();
     }
+    /**
+     * 
+     * 
+     */
     @Test public void loginMany(){
         SetupTestDatabase();
         assertDoesNotThrow(()->dao.login(username1,password));
@@ -82,15 +118,27 @@ class DAOUserTest {
         assertDoesNotThrow(()->dao.login(username1,password));
         service.switchToProductionDatabase();
     }
+    /**
+     * 
+     * 
+     */
     @Test public void loginBoundaryException(){
         //pass
     }
 
+    /**
+     * 
+     * 
+     */
     @Test public void getTraineeZero(){
         SetupTestDatabase();
         assertDoesNotThrow(()-> dao.getTrainee(null));
         service.switchToProductionDatabase();
     }
+    /**
+     * 
+     * 
+     */
     @Test public void getTraineeOne() throws SQLException {
         SetupTestDatabase();
         dao.createTrainee("a", "a", "a", "a", 100, 100);
@@ -99,6 +147,10 @@ class DAOUserTest {
         assertEquals("a",user.getUsername());
         service.switchToProductionDatabase();
     }
+    /**
+     * 
+     * 
+     */
     @Test public void getTraineeMany(){
         SetupTestDatabase();
         assertDoesNotThrow(()-> dao.getTrainee(username1));
@@ -111,10 +163,18 @@ class DAOUserTest {
         }
         service.switchToProductionDatabase();
     }
+    /**
+     * 
+     * 
+     */
     @Test public void getTraineeBoundaryException(){
         //pass
     }
 
+    /**
+     * 
+     * 
+     */
     @Test public void updateZero(){
         SetupTestDatabase();
         assertDoesNotThrow(()->{
@@ -122,6 +182,10 @@ class DAOUserTest {
         });
         service.switchToProductionDatabase();
     }
+    /**
+     * 
+     * 
+     */
     @Test public void updateOne(){
         SetupTestDatabase();
         assertDoesNotThrow(()->{
@@ -129,6 +193,10 @@ class DAOUserTest {
         });
         service.switchToProductionDatabase();
     }
+    /**
+     * 
+     * 
+     */
     @Test public void updateMany(){
         SetupTestDatabase();
         assertDoesNotThrow(()->{
@@ -150,6 +218,10 @@ class DAOUserTest {
 
 
     @Test
+    /**
+     * 
+     * 
+     */
     public void Zdelete(){
         assertDoesNotThrow(()->dao.deleteTrainee("a"));
         assertDoesNotThrow(()->dao.deleteTrainee(username1));

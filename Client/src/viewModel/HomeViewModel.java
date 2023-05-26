@@ -11,12 +11,28 @@ import util.Logger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class HomeViewModel extends ViewModel{
     private StringProperty usernameProperty, folderListProperty, errorProperty,friendshipListProperty,friendshipRequestListProperty,meetingListProperty,meetingRequestListProperty;
     private Model model;
     private ViewState viewState;
     private Gson gson;
 
+    /**
+     * 2-argument constructor 
+     * 
+     * 
+     * @param model 
+     *        
+     * @param viewState 
+     *        
+     */
     public HomeViewModel(Model model, ViewState viewState) {
         this.model = model;
         this.viewState = viewState;
@@ -30,19 +46,68 @@ public class HomeViewModel extends ViewModel{
         gson = new Gson();
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getUsernameProperty() { return usernameProperty; }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getErrorLabel() { return errorProperty; }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getFolderListProperty() {
         return folderListProperty;
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getFriendshipRequestListProperty() {     return friendshipRequestListProperty;  }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getFriendshipListProperty() {     return friendshipListProperty;  }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getMeetingListProperty()
     {
         return meetingListProperty;
     }
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public StringProperty getMeetingRequestListProperty()
     {
         return meetingRequestListProperty;
@@ -50,6 +115,13 @@ public class HomeViewModel extends ViewModel{
 
 
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public boolean createFolder() {
         //pass to ViewState, view will switch to manage folder screen. DB call will be made there
         viewState.setNewFolder(true);
@@ -58,6 +130,15 @@ public class HomeViewModel extends ViewModel{
     }
 
 
+    /**
+     * 
+     * 
+     * @param folderId 
+     *        
+     *
+     * @return 
+     *        
+     */
     public boolean removeFolder(int folderId) {
         //call DB, then call clear
         viewState.setUsername(usernameProperty.get());
@@ -76,6 +157,14 @@ public class HomeViewModel extends ViewModel{
         }
     }
 
+    /**
+     * 
+     * 
+     * @param title 
+     *        
+     * @param id 
+     *        
+     */
     public void editFolder(String title,int id) {
         //pass to ViewState, view will switch to manage folder screen. DB called from there
         viewState.setNewFolder(false);
@@ -85,6 +174,10 @@ public class HomeViewModel extends ViewModel{
     }
 
     @Override
+    /**
+     * 
+     * 
+     */
     public void clear() {
         //receiving folder names from the database
         Logger.log("reseting the home");
@@ -98,15 +191,33 @@ public class HomeViewModel extends ViewModel{
         loadMeetings();
     }
 
+    /**
+     * 
+     * 
+     * @param folderName 
+     *        
+     * @param folderId 
+     *        
+     */
     public void setupOpenFolder(String folderName,int folderId) {
         viewState.setFolderName(folderName);
         viewState.setFolderId(folderId);
 
     }
 
+    /**
+     * 
+     * 
+     */
     public void setupProfile() {
         viewState.setProfileUsername(viewState.getUsername() );
     }
+    /**
+     * 
+     * 
+     * @param username 
+     *        
+     */
     public void setupProfile(String username) {
         viewState.setProfileUsername(username );
     }
@@ -145,13 +256,34 @@ public class HomeViewModel extends ViewModel{
 
     }
 
+    /**
+     * 
+     * 
+     * @param username 
+     *        
+     */
     public void acceptRequest(String username) {
         model.acceptFriendRequest(username, viewState.getUsername());
     }
+    /**
+     * 
+     * 
+     * @param username 
+     *        
+     */
     public void rejectRequest(String username) {
         model.rejectFriendRequest(username, viewState.getUsername());
     }
 
+    /**
+     * 
+     * 
+     * @param dateOfMeeting 
+     *        
+     *
+     * @return 
+     *        
+     */
     public boolean removeMeeting(LocalDate dateOfMeeting){
 
         String traineeUsername = viewState.getUsername();
@@ -181,6 +313,10 @@ public class HomeViewModel extends ViewModel{
         }
     }
 
+    /**
+     * 
+     * 
+     */
     public void logout() {
         model.disconnectListener(viewState.getUsername());
         viewState.setIsCoach(false);
@@ -194,6 +330,13 @@ public class HomeViewModel extends ViewModel{
         viewState.setManageFolderEditable(false);
     }
 
+    /**
+     * 
+     * 
+     *
+     * @return 
+     *        
+     */
     public boolean setupMeeting()
     {
         String coachUsername = null;

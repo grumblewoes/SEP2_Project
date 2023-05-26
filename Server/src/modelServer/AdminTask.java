@@ -2,12 +2,26 @@ package modelServer;
 
 import java.util.Scanner;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class AdminTask implements Runnable
 {
   private Model model;
   private String username, password;
   private Scanner scan;
 
+  /**
+   * 1-argument constructor 
+   * 
+   * 
+   * @param model 
+   *        
+   */
   public AdminTask(Model model) {
     this.model = model;
     username = "admin";
@@ -15,6 +29,17 @@ public class AdminTask implements Runnable
     scan = new Scanner(System.in);
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param password 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean validateLogin(String username, String password) {
     if (username.equals(this.username) && password.equals(this.password))
       return true;
@@ -23,6 +48,10 @@ public class AdminTask implements Runnable
     return false;
   }
 
+  /**
+   * 
+   * 
+   */
   public void promptLogin() {
     do {
       System.out.print("Enter username >> ");
@@ -33,6 +62,10 @@ public class AdminTask implements Runnable
     while (!validateLogin(username, password));
   }
 
+  /**
+   * 
+   * 
+   */
   public void coachManagement() {
     String choice;
 
@@ -99,6 +132,10 @@ public class AdminTask implements Runnable
     while (!choice.equals("exit"));
   }
 
+  /**
+   * 
+   * 
+   */
   @Override public void run()
   {
     while (true)

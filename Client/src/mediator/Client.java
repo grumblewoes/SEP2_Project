@@ -14,6 +14,13 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class Client implements Model, RemoteListener<String, String>,
     LocalSubject<String, String>
 {
@@ -21,6 +28,11 @@ public class Client implements Model, RemoteListener<String, String>,
   private RemoteModel server;
   private PropertyChangeHandler<String, String> property;
 
+  /**
+   * 0-argument constructor 
+   * 
+   * 
+   */
   public Client()
   {
     this.property = new PropertyChangeHandler<>(this);
@@ -37,6 +49,12 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   */
   public void connectListener(String username)
   {
     try
@@ -49,6 +67,12 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   */
   public void disconnectListener(String username)
   {
     try
@@ -61,6 +85,10 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   */
   public void start()
   {
     try
@@ -87,6 +115,17 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param password 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean login(String username, String password)
   {
     try
@@ -102,6 +141,17 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param name 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean createFolder(String username, String name)
   {
     try
@@ -114,6 +164,17 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param folderId 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean removeFolder(String username, int folderId)
   {
     try
@@ -126,6 +187,19 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   * @param folderId 
+   *        
+   * @param newName 
+   *        
+   *
+   * @return 
+   *        
+   */
   public boolean editFolder(String username, int folderId, String newName)
   {
     try
@@ -139,6 +213,15 @@ public class Client implements Model, RemoteListener<String, String>,
 
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   public FolderList getFolderList(String username)
   {
     try
@@ -152,6 +235,15 @@ public class Client implements Model, RemoteListener<String, String>,
 
   }
 
+  /**
+   * 
+   * 
+   * @param folderId 
+   *        
+   *
+   * @return 
+   *        
+   */
   public ExerciseList getExerciseList(int folderId)
   {
     try
@@ -177,6 +269,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param exerciseId 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeExercise(int exerciseId)
   {
     try
@@ -189,6 +290,17 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param name 
+   *        
+   * @param folderId 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeExercisesByName(String name, int folderId)
   {
     try
@@ -216,6 +328,13 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getPossibleExercises()
   {
     try
@@ -228,6 +347,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ *
+ * @return 
+ *        
+ */
 //  @Override public int getBestBenchPress(String username)
 //  {
 //    try
@@ -240,6 +368,15 @@ public class Client implements Model, RemoteListener<String, String>,
 //    }
 //  }
 //
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ *
+ * @return 
+ *        
+ */
 //  @Override public int getBestSquat(String username)
 //  {
 //    try
@@ -252,6 +389,15 @@ public class Client implements Model, RemoteListener<String, String>,
 //    }
 //  }
 //
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ *
+ * @return 
+ *        
+ */
 //  @Override public int getBestDeadlift(String username)
 //  {
 //    try
@@ -264,6 +410,15 @@ public class Client implements Model, RemoteListener<String, String>,
 //    }
 //  }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public User getTrainee(String username)
   {
     try
@@ -315,6 +470,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public FriendList getFriends(String username)
   {
     try
@@ -327,6 +491,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getFriendRequests(String username)
   {
     try
@@ -339,6 +512,10 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   */
   @Override public void propertyChange(ObserverEvent<String, String> event)
   {
     String name = event.getPropertyName();
@@ -401,6 +578,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public User getCoach(String traineeUsername)
   {
     try
@@ -414,6 +600,15 @@ public class Client implements Model, RemoteListener<String, String>,
 
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean isCoach(String username)
   {
     try
@@ -426,6 +621,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeCoachAssignment(String traineeUsername)
   {
     try{
@@ -435,6 +639,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
   {
     try
@@ -447,6 +660,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
   {
     try
@@ -498,6 +720,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean denyRequest(String traineeUsername)
   {
     try
@@ -510,6 +741,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param traineeUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public boolean removeTraineeFromRoster(String traineeUsername)
   {
     try
@@ -522,6 +762,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   public TraineeList getTraineeList(String username)
   {
     try
@@ -534,6 +783,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param username 
+   *        
+   *
+   * @return 
+   *        
+   */
   public ArrayList<String> getTraineeRequest(String username)
   {
     try
@@ -546,6 +804,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param coach 
+   *        
+   *
+   * @return 
+   *        
+   */
   public ArrayList<String> getMeetingRequests(String coach)
   {
     try
@@ -558,6 +825,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param coach 
+   *        
+   *
+   * @return 
+   *        
+   */
   public ArrayList<String> getCoachMeetings(String coach)
   {
     try
@@ -596,6 +872,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   * @param coachUsername 
+   *        
+   *
+   * @return 
+   *        
+   */
   @Override public ArrayList<LocalDate> getTakenDates(String coachUsername){
     try
     {
@@ -607,6 +892,13 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getSquatLeaders()
   {
     try
@@ -619,6 +911,13 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getDeadliftLeaders()
   {
     try
@@ -631,6 +930,13 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * 
+   * 
+   *
+   * @return 
+   *        
+   */
   @Override public TraineeList getBenchLeaders()
   {
     try

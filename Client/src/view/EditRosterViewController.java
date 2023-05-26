@@ -26,6 +26,13 @@ import java.util.ArrayList;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class EditRosterViewController extends ViewController
 {
 
@@ -39,6 +46,16 @@ public class EditRosterViewController extends ViewController
 
   private Gson gson;
 
+  /**
+   * 
+   * 
+   * @param viewHandler 
+   *        
+   * @param viewModel 
+   *        
+   * @param root 
+   *        
+   */
   public void init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
     this.viewHandler = viewHandler;
@@ -323,12 +340,22 @@ public class EditRosterViewController extends ViewController
     viewHandler.openView("profile");
   }
 
+  /**
+   * 
+   * 
+   */
   @Override public void reset()
   {
     meetingBox.getChildren().remove(0, meetingBox.getChildren().size());
     editRosterViewModel.clear();
   }
 
+  /**
+   * 
+   * 
+   * @param mouseEvent 
+   *        
+   */
   public void logout(MouseEvent mouseEvent)
   {
     editRosterViewModel.logout();

@@ -8,6 +8,13 @@ import javafx.scene.layout.Region;
 import viewModel.LoginViewModel;
 import viewModel.ViewModel;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class LoginViewController extends ViewController
 {
   @FXML private TextField username;
@@ -29,6 +36,10 @@ public class LoginViewController extends ViewController
 
   }
 
+  /**
+   * 
+   * 
+   */
   @Override public void reset()
   {
     loginViewModel.clear();

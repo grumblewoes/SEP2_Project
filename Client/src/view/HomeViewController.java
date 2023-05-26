@@ -27,6 +27,13 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class HomeViewController extends ViewController
 {
   @FXML private Label usernameLabel, errorLabel;
@@ -37,6 +44,16 @@ public class HomeViewController extends ViewController
   private StringProperty friendRequestList, meetingRequestsList;
   private Gson gson;
 
+  /**
+   * 
+   * 
+   * @param viewHandler 
+   *        
+   * @param viewModel 
+   *        
+   * @param root 
+   *        
+   */
   @Override public void init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
     this.viewHandler = viewHandler;
@@ -138,6 +155,10 @@ public class HomeViewController extends ViewController
   {
     viewHandler.openView("addFriend");
   }
+  /**
+   * 
+   * 
+   */
   @Override public void reset()
   {
 

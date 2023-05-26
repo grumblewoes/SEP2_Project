@@ -4,6 +4,13 @@ import viewModel.CreateUserViewModel;
 import viewModel.HomeViewModel;
 import viewModel.ViewModel;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public abstract class ViewController {
 
 	protected Region root;
@@ -13,8 +20,19 @@ public abstract class ViewController {
 	public abstract void init(
 			ViewHandler viewHandler, ViewModel viewModel, Region root);
 
+/**
+ * 
+ * 
+ */
 	public abstract void reset();
 
+/**
+ * 
+ * 
+ *
+ * @return 
+ *        
+ */
 	public Region getRoot() {
 		return root;
 	}

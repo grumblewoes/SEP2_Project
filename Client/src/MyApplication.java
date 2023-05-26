@@ -6,10 +6,23 @@ import modelClient.ModelManager;
 import view.ViewHandler;
 import viewModel.ViewModelFactory;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class MyApplication extends Application
 {
   Client client;
 
+  /**
+   * 
+   * 
+   * @param primaryStage 
+   *        
+   */
   public void start(Stage primaryStage)
   {
     client = new Client();
