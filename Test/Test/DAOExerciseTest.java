@@ -5,6 +5,7 @@ import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.IExerciseDAO;
 import modelServer.DAO.interfaces.IFolderDAO;
 import modelServer.DAO.interfaces.IUserDAO;
+import modelServer.DbContext.DBService;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -13,11 +14,24 @@ class DAOExerciseTest {
     private IFolderDAO fao;
     private IUserDAO uao;
     private IExerciseDAO eao;
+    private DBService service;
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         fao=new FolderDAO();
         uao=new UserDAO();
         eao=new ExerciseDAO();
+        service = new DBService();
+        SetupTestDatabase();
+    }
+
+    @org.junit.jupiter.api.AfterEach
+    void tearDown() {
+        service.switchToProductionDatabase();
+    }
+
+    private void SetupTestDatabase(){
+        service.restartDatabase();
+        service.switchToTestDatabase();
     }
 
     @Test public void iAmTiredLetsTestThisShit() throws SQLException {
