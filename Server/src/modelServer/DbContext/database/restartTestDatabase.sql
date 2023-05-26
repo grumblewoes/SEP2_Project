@@ -15,6 +15,9 @@ create table if not exists trainee2 (
                           share_profile boolean,
                           status varchar(50)
 );
+
+insert into trainee2 values ('d', 'd', 'd', 'd', 120, 120, 120, 'coach', 160, 70, true, 'On dat grind');
+
 create table if not exists folder2 (
                          id bigint generated always as identity primary key ,
                          title varchar(50) ,
@@ -58,6 +61,9 @@ create table if not exists coach (
                        deadlift_best smallint,
                        status varchar(50)
 );
+
+insert into coach values ('coach', 'coach', 'coach', 'coach', 160, 70, 120, 120, 120, 'On dat grind');
+
 create table if not exists coach_request (
                                trainee_username varchar(50) references trainee2(username) unique,
                                coach_username varchar(50) references coach(username)
