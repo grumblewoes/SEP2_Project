@@ -59,10 +59,12 @@ create table if not exists coach (
                        bench_best smallint,
                        squat_best smallint,
                        deadlift_best smallint,
-                       status varchar(50)
+                       status varchar(50),
+                       share boolean
 );
 
-insert into coach values ('coach', 'coach', 'coach', 'coach', 160, 70, 120, 120, 120, 'On dat grind');
+insert into coach values ('coach', 'coach', 'coach', 'coach', 160, 70, 120, 120, 120, 'On dat grind', true);
+
 
 create table if not exists coach_request (
                                trainee_username varchar(50) references trainee2(username) unique,
