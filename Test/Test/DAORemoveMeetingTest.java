@@ -1,6 +1,7 @@
 import modelServer.DAO.implementation.MeetingDAO;
 import modelServer.DAO.interfaces.IMeetingDAO;
 import modelServer.DbContext.DBConnection;
+import modelServer.DbContext.DBService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +23,11 @@ public class DAORemoveMeetingTest
   DBConnection db;
   Connection connection;
 
+  DBService service;
+
   @BeforeEach void setUp() throws SQLException
   {
+    service=new DBService();
     mdao = new MeetingDAO();
     trainee = "d";
     coach = "coach";
@@ -46,6 +50,11 @@ public class DAORemoveMeetingTest
     {
   //
     }
+  }
+
+  private void SetupTestDatabase(){
+    service.restartDatabase();
+    service.switchToTestDatabase();
   }
 
   @Test public void removeMeetingZero()

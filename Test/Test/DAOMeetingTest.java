@@ -1,6 +1,8 @@
+import junit.extensions.TestSetup;
 import modelServer.DAO.implementation.MeetingDAO;
 import modelServer.DAO.interfaces.IMeetingDAO;
 import modelServer.DbContext.DBConnection;
+import modelServer.DbContext.DBService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,8 +22,11 @@ class DAOMeetingTest
   DBConnection db;
   Connection connection;
 
+  DBService service;
+
   @BeforeEach void setUp() throws SQLException
   {
+    service = new DBService();
     mdao = new MeetingDAO();
     traineeD = "d";
     traineeB = "b";
@@ -31,26 +36,32 @@ class DAOMeetingTest
     date2 = LocalDate.of(2023, 5, 17);
     date3 = LocalDate.of(2023, 5, 18);
 
-    try
-    {
-      db = DBConnection.getInstance();
-      connection = db.getConnection();
-      statement = connection.prepareStatement(
-          "delete from meeting_list;" + "delete from meeting_request;");
-      statement.executeUpdate();
-    }
-    catch (SQLException e)
-    {
-      throw new RuntimeException(e);
-    }
-    finally
-    {
-      connection.close();
-    }
+//    try
+//    {
+//      db = DBConnection.getInstance();
+//      connection = db.getConnection();
+//      statement = connection.prepareStatement(
+//          "delete from meeting_list;" + "delete from meeting_request;");
+//      statement.executeUpdate();
+//    }
+//    catch (SQLException e)
+//    {
+//      throw new RuntimeException(e);
+//    }
+//    finally
+//    {
+//      connection.close();
+//    }
+  }
+
+  private void SetupTestDatabase(){
+    service.restartDatabase();
+    service.switchToTestDatabase();
   }
 
   @Test void approveMeetingZero()
   {
+    SetupTestDatabase();
     Assertions.assertThrows(NullPointerException.class, () -> {
       try
       {
@@ -61,10 +72,12 @@ class DAOMeetingTest
         throw new RuntimeException(e);
       }
     });
+    service.switchToProductionDatabase();
   }
 
   @Test void approveMeetingOne() throws SQLException
   {
+    SetupTestDatabase();
     try
     {
       db = DBConnection.getInstance();
@@ -95,11 +108,12 @@ class DAOMeetingTest
     {
       connection.close();
     }
-
+    service.switchToProductionDatabase();
   }
 
   @Test void approveMeetingMany() throws SQLException
   {
+    SetupTestDatabase();
     try
     {
       db = DBConnection.getInstance();
@@ -152,6 +166,7 @@ class DAOMeetingTest
     {
       connection.close();
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void approveMeetingBoundary()
@@ -166,6 +181,7 @@ class DAOMeetingTest
 
   @Test void denyMeetingZero()
   {
+    SetupTestDatabase();
     Assertions.assertThrows(NullPointerException.class, () -> {
       try
       {
@@ -176,10 +192,12 @@ class DAOMeetingTest
         throw new RuntimeException(e);
       }
     });
+    service.switchToProductionDatabase();
   }
 
   @Test void denyMeetingOne() throws SQLException
   {
+    SetupTestDatabase();
     try
     {
       db = DBConnection.getInstance();
@@ -210,10 +228,12 @@ class DAOMeetingTest
     {
       connection.close();
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void denyMeetingMany() throws SQLException
   {
+    SetupTestDatabase();
     try
     {
       db = DBConnection.getInstance();
@@ -266,6 +286,7 @@ class DAOMeetingTest
     {
       connection.close();
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void denyMeetingBoundary()
@@ -280,6 +301,7 @@ class DAOMeetingTest
 
   @Test void getCoachMeetingRequestsZero()
   {
+    SetupTestDatabase();
     try
     {
       Assertions.assertNotNull(mdao.getCoachMeetingRequests(null));
@@ -288,10 +310,12 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getCoachMeetingRequestsOne()
   {
+    SetupTestDatabase();
     try
     {
       Assertions.assertNotNull(mdao.getCoachMeetingRequests(coach));
@@ -300,10 +324,12 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getCoachMeetingRequestsMany()
   {
+    SetupTestDatabase();
     try
     {
       Assertions.assertNotNull(mdao.getCoachMeetingRequests(coach));
@@ -328,6 +354,7 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getCoachMeetingRequestsBoundary()
@@ -342,12 +369,14 @@ class DAOMeetingTest
 
   @Test void getCoachMeetingsZero()
   {
-
+    SetupTestDatabase();
     Assertions.assertDoesNotThrow(() -> mdao.getCoachMeetings(null));
+    service.switchToProductionDatabase();
   }
 
   @Test void getCoachMeetingsOne()
   {
+    SetupTestDatabase();
     try
     {
       Assertions.assertNotNull(mdao.getCoachMeetings(coach));
@@ -356,10 +385,12 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getCoachMeetingsMany()
   {
+    SetupTestDatabase();
     try
     {
       Assertions.assertNotNull(mdao.getCoachMeetings(coach));
@@ -384,6 +415,7 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getCoachMeetingsBoundary()
@@ -398,6 +430,7 @@ class DAOMeetingTest
 
   @Test void sendMeetingRequestZero()
   {
+    SetupTestDatabase();
     Assertions.assertThrows(Exception.class, () -> {
       try
       {
@@ -408,33 +441,38 @@ class DAOMeetingTest
         throw new RuntimeException(e);
       }
     });
+    service.switchToProductionDatabase();
   }
 
   @Test void sendMeetingRequestOne()
   {
+    SetupTestDatabase();
     try
     {
-      Assertions.assertTrue(mdao.sendMeetingRequest(traineeA, coach, date1));
-    }
-    catch (SQLException e)
-    {
-      throw new RuntimeException(e);
-    }
-  }
-
-  @Test void sendMeetingRequestMany()
-  {
-    try
-    {
-      Assertions.assertTrue(mdao.sendMeetingRequest(traineeA, coach, date1));
-      Assertions.assertFalse(mdao.sendMeetingRequest(traineeA, coach, date1));
-      Assertions.assertTrue(mdao.sendMeetingRequest(traineeB, coach, date2));
       Assertions.assertTrue(mdao.sendMeetingRequest(traineeD, coach, date1));
     }
     catch (SQLException e)
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
+  }
+
+  @Test void sendMeetingRequestMany()
+  {
+    SetupTestDatabase();
+    try
+    {
+      Assertions.assertTrue(mdao.sendMeetingRequest(traineeD, coach, date1));
+      Assertions.assertFalse(mdao.sendMeetingRequest(traineeD, coach, date1));
+      Assertions.assertTrue(mdao.sendMeetingRequest(traineeD, coach, date2));
+      Assertions.assertFalse(mdao.sendMeetingRequest(traineeD, coach, date2));
+    }
+    catch (SQLException e)
+    {
+      throw new RuntimeException(e);
+    }
+    service.switchToProductionDatabase();
   }
 
   @Test void sendMeetingRequestBoundary()
@@ -448,6 +486,7 @@ class DAOMeetingTest
   //returns boolean
   @Test void removeMeetingZero()
   {
+    SetupTestDatabase();
     try
     {
       Assertions.assertTrue(mdao.removeMeeting(null, null, date1));
@@ -466,10 +505,12 @@ class DAOMeetingTest
         throw new RuntimeException(e);
       }
     });
+    service.switchToProductionDatabase();
   }
 
   @Test void removeMeetingOne()
   {
+    SetupTestDatabase();
     try
     {
       mdao.sendMeetingRequest(traineeD, coach, date2);
@@ -480,10 +521,12 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void removeMeetingMany()
   {
+    SetupTestDatabase();
     try
     {
       mdao.sendMeetingRequest(traineeA, coach, date1);
@@ -500,6 +543,7 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void removeMeetingBoundary()
@@ -512,6 +556,7 @@ class DAOMeetingTest
 
   @Test void getTraineeMeetingRequestZero()
   {
+    SetupTestDatabase();
     try
     {
       Assertions.assertNotNull(mdao.getTraineeMeetingRequests(null));
@@ -520,10 +565,12 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getTraineeMeetingRequestOne()
   {
+    SetupTestDatabase();
     try
     {
       mdao.sendMeetingRequest(traineeD, coach, date1);
@@ -533,10 +580,12 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getTraineeMeetingRequestMany()
   {
+    SetupTestDatabase();
     try
     {
       mdao.sendMeetingRequest(traineeA, coach, date1);
@@ -550,6 +599,7 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getTraineeMeetingRequestBoundary()
@@ -564,6 +614,7 @@ class DAOMeetingTest
 
   @Test void getTraineeMeetingListZero()
   {
+    SetupTestDatabase();
     try
     {
       Assertions.assertNotNull(mdao.getTraineeMeetingList(null));
@@ -572,10 +623,12 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getTraineeMeetingListOne()
   {
+    SetupTestDatabase();
     try
     {
       mdao.sendMeetingRequest(traineeD, coach, date1);
@@ -586,10 +639,12 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getTraineeMeetingListMany()
   {
+    SetupTestDatabase();
     try
     {
       mdao.sendMeetingRequest(traineeA, coach, date1);
@@ -606,6 +661,7 @@ class DAOMeetingTest
     {
       throw new RuntimeException(e);
     }
+    service.switchToProductionDatabase();
   }
 
   @Test void getTraineeMeetingListBoundary()
