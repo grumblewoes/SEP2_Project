@@ -75,7 +75,7 @@ public class FriendTest {
      */
     @Test public void setUsernameOne(){
         f.setUsername("null");
-        assertEquals("null",f.getStatus());
+        assertEquals("null",f.getUsername());
     }
     /**
      * 
