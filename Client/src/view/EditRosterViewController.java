@@ -361,5 +361,10 @@ public class EditRosterViewController extends ViewController
     editRosterViewModel.logout();
     viewHandler.openView("logIn");
   }
+
+  @FXML private void getLeaderboard()
+  {
+    viewHandler.openLeaderboardView();
+  }
 }
 

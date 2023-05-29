@@ -63,4 +63,5 @@ public class ManageFolderViewController extends ViewController
   {
     folderViewModel.clear();
   }
+
 }

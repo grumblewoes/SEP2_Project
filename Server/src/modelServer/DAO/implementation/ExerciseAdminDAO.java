@@ -116,7 +116,7 @@ public class ExerciseAdminDAO implements IExerciseAdminDAO
       }
       else // exercise is not in the table
       {
-        System.out.println("There is no such exercise in the table");
+        System.out.println("There is no such exercise in the system");
       }
     }
     catch (SQLException e)

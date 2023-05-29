@@ -47,7 +47,6 @@ public class CoachDAO implements ICoachDAO
       return result > 0; //to hit this statement, technically would always be true? cuz otherwise it is caught?
     }
     catch (SQLException e){
-      Logger.log(e);
       return false;
     }
     finally

@@ -85,7 +85,7 @@ public class AddMeetingViewController extends ViewController
    */
   @Override public void reset()
   {
-    dates.clear();
+//    dates.clear();
     addMeetingViewModel.clear();
   }
 }

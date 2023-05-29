@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddExerciseViewController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddExerciseViewController">
    <children>
       <HBox alignment="CENTER" prefHeight="55.0" prefWidth="600.0">
          <children>
@@ -23,7 +23,7 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Label styleClass="fs-6" text="AddExercise" />
+            <Label styleClass="fs-6" text="Add Exercise" />
          </children>
          <VBox.margin>
             <Insets />
