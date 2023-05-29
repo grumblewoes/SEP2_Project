@@ -5,11 +5,11 @@ import viewModel.HomeViewModel;
 import viewModel.ViewModel;
 
 /**
+ * Higher class that sets some rules for view controllers to follow.
  * 
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafiałek
+ * @version 2.0
  */
 public abstract class ViewController {
 
@@ -21,16 +21,16 @@ public abstract class ViewController {
 			ViewHandler viewHandler, ViewModel viewModel, Region root);
 
 /**
- * 
+ * Reset method that is to be implemented.
  * 
  */
 	public abstract void reset();
 
 /**
- * 
+ * Method that returns the region - root.
  * 
  *
- * @return 
+ * @return root
  *        
  */
 	public Region getRoot() {

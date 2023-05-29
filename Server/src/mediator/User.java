@@ -15,22 +15,22 @@ public class User implements Serializable {
     private boolean shareProfile;
 
     /**
-     * 7-argument constructor 
+     * 7-argument constructor initialising instance variables without the bench,deadlift and squat.
      * 
      * 
-     * @param height 
+     * @param height - integer value
      *        
-     * @param weight 
+     * @param weight - integer value
      *        
-     * @param firstName 
+     * @param firstName - string value
      *        
-     * @param lastName 
+     * @param lastName - string value
      *        
-     * @param username 
+     * @param username - string value
      *        
-     * @param status 
+     * @param status - string value
      *        
-     * @param shareProfile 
+     * @param shareProfile - boolean value
      *        
      */
     public User(int height, int weight, String firstName, String lastName, String username, String status,boolean shareProfile) {
@@ -44,28 +44,28 @@ public class User implements Serializable {
     }
 
     /**
-     * 10-argument constructor 
+     * 10-argument constructor initialising all instance variables.
      * 
-     * 
-     * @param height 
+     *
+     * @param height - integer value
+     *
+     * @param weight - integer value
+     *
+     * @param firstName - string value
+     *
+     * @param lastName - string value
+     *
+     * @param username - string value
+     *
+     * @param status - string value
+     *
+     * @param shareProfile - boolean value
      *        
-     * @param weight 
+     * @param deadlift - integer value
      *        
-     * @param firstName 
+     * @param squat - integer value
      *        
-     * @param lastName 
-     *        
-     * @param username 
-     *        
-     * @param status 
-     *        
-     * @param shareProfile 
-     *        
-     * @param deadlift 
-     *        
-     * @param squat 
-     *        
-     * @param bench 
+     * @param bench - integer value
      *        
      */
     public User(int height, int weight, String firstName, String lastName, String username, String status,boolean shareProfile, int deadlift, int squat, int bench) {
@@ -82,10 +82,10 @@ public class User implements Serializable {
     }
 
     /**
-     * 
+     * Returns the height.
      * 
      *
-     * @return 
+     * @return height integer
      *        
      */
     public int getHeight() {
@@ -93,9 +93,9 @@ public class User implements Serializable {
     }
 
     /**
+     * Sets the height.
      * 
-     * 
-     * @param height 
+     * @param height - integer value
      *        
      */
     public void setHeight(int height) {
@@ -103,10 +103,10 @@ public class User implements Serializable {
     }
 
     /**
-     * 
+     * Returns weight.
      * 
      *
-     * @return 
+     * @return weight integer
      *        
      */
     public int getWeight() {
@@ -114,9 +114,9 @@ public class User implements Serializable {
     }
 
     /**
+     * Sets the weight.
      * 
-     * 
-     * @param weight 
+     * @param weight - integer value
      *        
      */
     public void setWeight(int weight) {
@@ -124,10 +124,10 @@ public class User implements Serializable {
     }
 
     /**
-     * 
+     * Returns the first name.
      * 
      *
-     * @return 
+     * @return first name string
      *        
      */
     public String getFirstName() {
@@ -135,9 +135,9 @@ public class User implements Serializable {
     }
 
     /**
+     * Sets the first name.
      * 
-     * 
-     * @param firstName 
+     * @param firstName - string value
      *        
      */
     public void setFirstName(String firstName) {

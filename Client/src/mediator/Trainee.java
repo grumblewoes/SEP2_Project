@@ -3,11 +3,11 @@ package mediator;
 import java.io.Serializable;
 
 /**
+ * Class that stores data of trainee.
  * 
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafiałek
+ * @version 1.0
  */
 public class Trainee implements Serializable
 {
@@ -16,22 +16,22 @@ public class Trainee implements Serializable
   private int liftedWeight;
 
   /**
-   * 1-argument constructor 
+   * 1-argument constructor that initialises username leaving status and liftedWeight with default value.
    * 
    * 
-   * @param username 
+   * @param username - string value
    *        
    */
   public Trainee(String username){
     this.username = username;
   }
   /**
-   * 2-argument constructor 
+   * 2-argument constructor that initialises username and status leaving and liftedWeight with default value
    * 
    * 
-   * @param username 
+   * @param username -string value
    *        
-   * @param status 
+   * @param status -string value
    *        
    */
   public Trainee(String username, String status){
@@ -39,12 +39,12 @@ public class Trainee implements Serializable
     this.status=status;
   }
   /**
-   * 2-argument constructor 
+   * 2-argument constructor that initialises username and liftedWeight leaving status with default value
    * 
    * 
-   * @param username 
+   * @param username - string value
    *        
-   * @param liftedWeight 
+   * @param liftedWeight - integer value
    *        
    */
   public Trainee(String username, int liftedWeight){
@@ -53,10 +53,10 @@ public class Trainee implements Serializable
   }
 
   /**
-   * 
+   * Method that get the username.
    * 
    *
-   * @return 
+   * @return string username
    *        
    */
   public String getUsername(){
@@ -64,10 +64,10 @@ public class Trainee implements Serializable
   }
 
   /**
-   * 
+   * Method that getsw the status string.
    * 
    *
-   * @return 
+   * @return status string
    *        
    */
   public String getStatus() {
@@ -75,9 +75,9 @@ public class Trainee implements Serializable
   }
 
   /**
+   * Method that sets the string
    * 
-   * 
-   * @param status 
+   * @param status -string
    *        
    */
   public void setStatus(String status) {
@@ -85,10 +85,10 @@ public class Trainee implements Serializable
   }
 
   /**
-   * 
+   * Casts the object to string.
    * 
    *
-   * @return 
+   * @return string
    *        
    */
   public String toString(){
@@ -96,10 +96,10 @@ public class Trainee implements Serializable
   }
 
   /**
-   * 
+   * Returns the lifted weight of the user.
    * 
    *
-   * @return 
+   * @return lifted weight integer
    *        
    */
   public int getLiftedWeight()

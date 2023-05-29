@@ -7,15 +7,15 @@ import java.util.ArrayList;
  * 
  * 
  * 
- * @author 
- * @version 
+ * @author Damian Trafiałek
+ * @version 1.0
  */
 public class TraineeList implements Serializable
 {
   private ArrayList<Trainee> traineeList;
 
   /**
-   * 0-argument constructor 
+   * 0-argument constructor initialises a new array list.
    * 
    * 
    */
@@ -24,9 +24,9 @@ public class TraineeList implements Serializable
   }
 
   /**
+   * Add the trainee to the list.
    * 
-   * 
-   * @param t 
+   * @param t - Trainee
    *        
    */
   public void addTrainee(Trainee t) {
@@ -34,20 +34,20 @@ public class TraineeList implements Serializable
   }
 
   /**
-   * 
+   * Returns the size of the list.
    * 
    *
-   * @return 
+   * @return integer size
    *        
    */
   public int getSize(){
     return traineeList.size();
   }
   /**
-   * 
+   * Returns the arrayList of trainees.
    * 
    *
-   * @return 
+   * @return ArrayList of trainees
    *        
    */
   public ArrayList<Trainee> getList(){
@@ -55,12 +55,12 @@ public class TraineeList implements Serializable
   }
 
   /**
+   * Gets the trainee under given index in the list.
    * 
-   * 
-   * @param i 
+   * @param i - integer index
    *        
    *
-   * @return 
+   * @return Trainee
    *        
    */
   public Trainee getTrainee(int i)
@@ -68,34 +68,34 @@ public class TraineeList implements Serializable
     return traineeList.get(i);
   }
   /**
+   * Gets the username of the trainee under given index in the list.
    * 
-   * 
-   * @param i 
+   * @param i - integer index
    *        
    *
-   * @return 
+   * @return String username
    *        
    */
   public String getTraineeUsername(int i){return traineeList.get(i).getUsername();}
   /**
-   * 
-   * 
-   * @param i 
-   *        
+   * Gets the staus of the trainee under given index in the list.
    *
-   * @return 
-   *        
+   * @param i - integer index
+   *
+   *
+   * @return string status
+   *
    */
   public String getTraineeStatus(int i){return traineeList.get(i).getStatus();}
 
 
   /**
+   * Gets the staus of the trainee under given index in the list.
    * 
-   * 
-   * @param i 
+   * @param i - integer index
    *        
    *
-   * @return 
+   * @return string status
    *        
    */
   public String getUsername(int i){
@@ -103,10 +103,10 @@ public class TraineeList implements Serializable
   }
 
   /**
-   * 
+   * Casts object to string.
    * 
    *
-   * @return 
+   * @return string
    *        
    */
   public String toString(){

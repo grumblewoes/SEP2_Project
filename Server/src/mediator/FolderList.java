@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * Class that stores the list of folders data.
+ *
+ *
+ * @author Damian Trafiałek
+ * @version 1.0
  */
 public class FolderList implements Serializable {
     private ArrayList<Folder> list;
     /**
-     * 0-argument constructor 
+     * 0-argument constructor that initialises the list.
      * 
      * 
      */
@@ -22,29 +22,29 @@ public class FolderList implements Serializable {
     }
 
     /**
+     * Add the folder to the list.
      * 
-     * 
-     * @param folder 
+     * @param folder - Folder
      *        
      */
     public void add(Folder folder){
         list.add(folder);
     }
     /**
+     * Retunrs the folder under given index in the list.
      * 
-     * 
-     * @param i 
+     * @param i - integer
      *        
      *
-     * @return 
+     * @return Folder
      *        
      */
     public Folder get(int i){return list.get(i);}
     /**
-     * 
+     * Returns the size of the list.
      * 
      *
-     * @return 
+     * @return integer
      *        
      */
     public int size(){return list.size();}

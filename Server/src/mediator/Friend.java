@@ -3,22 +3,22 @@ package mediator;
 import java.io.Serializable;
 
 /**
+ * Class that stores friend data.
  * 
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafiałek
+ * @version 1.0
  */
 public class Friend implements Serializable {
     private String username,status;
 
     /**
-     * 2-argument constructor 
+     * 2-argument constructor that initialises the object.
      * 
      * 
-     * @param username 
+     * @param username -string value
      *        
-     * @param status 
+     * @param status -string value
      *        
      */
     public Friend(String username, String status) {
@@ -26,10 +26,10 @@ public class Friend implements Serializable {
         this.status = status;
     }
     /**
-     * 1-argument constructor 
+     * 1-argument constructor that initialises the object with null status.
      * 
      * 
-     * @param username 
+     * @param username - string value
      *        
      */
     public Friend(String username) {
@@ -38,10 +38,10 @@ public class Friend implements Serializable {
     }
 
     /**
-     * 
+     * Returns username of the friend.
      * 
      *
-     * @return 
+     * @return string
      *        
      */
     public String getUsername() {
@@ -49,9 +49,9 @@ public class Friend implements Serializable {
     }
 
     /**
+     * Sets the username of teh friend.
      * 
-     * 
-     * @param username 
+     * @param username - string value
      *        
      */
     public void setUsername(String username) {
@@ -59,10 +59,10 @@ public class Friend implements Serializable {
     }
 
     /**
-     * 
+     * Returns the status of the friend.
      * 
      *
-     * @return 
+     * @return string
      *        
      */
     public String getStatus() {
@@ -70,7 +70,7 @@ public class Friend implements Serializable {
     }
 
     /**
-     * 
+     * Sets the status of the friend.
      * 
      * @param status 
      *        
@@ -81,10 +81,10 @@ public class Friend implements Serializable {
 
     @Override
     /**
-     * 
+     * Casts object to the string
      * 
      *
-     * @return 
+     * @return string value
      *        
      */
     public String toString() {

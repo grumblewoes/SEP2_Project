@@ -2,6 +2,7 @@ import modelServer.DAO.implementation.FolderDAO;
 import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.IFolderDAO;
 import modelServer.DAO.interfaces.IUserDAO;
+import modelServer.DbContext.DBService;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ class DAOFolderTest {
     private IUserDAO udao;
     private String username,title1,title2,title3;
     private int id;
+    private DBService service;
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         fdao = new FolderDAO();
@@ -23,7 +25,13 @@ class DAOFolderTest {
         title1 = "sdasdasdasdasdas";
         title2 = "sdasddsadasdaasdasdasdas";
         title3 = "sdasdasddsadasdasdasdasdasdas";
+        service=new DBService();
 
+        SetupTestDatabase();
+    }
+    private void SetupTestDatabase(){
+        service.restartDatabase();
+        service.switchToTestDatabase();
     }
     /**
      * 

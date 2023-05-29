@@ -15,11 +15,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
+ * Class that manages the communication between cleint and server.
  * 
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafiałek, Jakub Cerovsky, Anna Pomerantz, Julia Gramovicha
+ * @version 1.0
  */
 public class Client implements Model, RemoteListener<String, String>,
     LocalSubject<String, String>
@@ -29,7 +29,7 @@ public class Client implements Model, RemoteListener<String, String>,
   private PropertyChangeHandler<String, String> property;
 
   /**
-   * 0-argument constructor 
+   * 0-argument constructor that initialises the object. Creates the connection with server.
    * 
    * 
    */
@@ -50,9 +50,9 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Sets up the remote listener
    * 
-   * 
-   * @param username 
+   * @param username - string value to which it is listening
    *        
    */
   public void connectListener(String username)
@@ -68,9 +68,9 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Removes the remote listener.
    * 
-   * 
-   * @param username 
+   * @param username - string value
    *        
    */
   public void disconnectListener(String username)
@@ -86,7 +86,7 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * 
+   * Starts the client.
    * 
    */
   public void start()
@@ -101,6 +101,24 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls server to create a new user.
+   *
+   * @param firstName - string value
+   *
+   * @param lastName - string value
+   *
+   * @param userName - string value
+   *
+   * @param password - string value
+   *
+   * @param height - integer value
+   *
+   * @param weight - integer value
+   *
+   *
+   * @return boolean if everything went ok
+   */
   public boolean createUser(String firstName, String lastName, String userName,
       String password, int height, int weight)
   {
@@ -116,14 +134,14 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls server to check if the user and password match.
    * 
-   * 
-   * @param username 
+   * @param username - string value
    *        
-   * @param password 
+   * @param password - string value
    *        
    *
-   * @return 
+   * @return boolean if everything went ok
    *        
    */
   public boolean login(String username, String password)
@@ -142,14 +160,14 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls sever to create a new folder.
    * 
-   * 
-   * @param username 
+   * @param username - string value
    *        
-   * @param name 
+   * @param name - string value
    *        
    *
-   * @return 
+   * @return boolean if everything went ok
    *        
    */
   public boolean createFolder(String username, String name)
@@ -165,14 +183,14 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls server to remove folder.
    * 
-   * 
-   * @param username 
+   * @param username - string value
    *        
-   * @param folderId 
+   * @param folderId - integer value
    *        
    *
-   * @return 
+   * @return boolean if everything went ok
    *        
    */
   public boolean removeFolder(String username, int folderId)
@@ -188,16 +206,16 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls server to change the folder name.
    * 
-   * 
-   * @param username 
+   * @param username - string value
    *        
-   * @param folderId 
+   * @param folderId - integer value
    *        
-   * @param newName 
+   * @param newName - string value
    *        
    *
-   * @return 
+   * @return boolean if everything went ok
    *        
    */
   public boolean editFolder(String username, int folderId, String newName)
@@ -214,12 +232,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Gets the list of user's folder.
    * 
-   * 
-   * @param username 
+   * @param username - string value
    *        
    *
-   * @return 
+   * @return list of folders
    *        
    */
   public FolderList getFolderList(String username)
@@ -236,12 +254,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Gets the list of exercises within the folder.
    * 
-   * 
-   * @param folderId 
+   * @param folderId - integer value
    *        
    *
-   * @return 
+   * @return list of exercises
    *        
    */
   public ExerciseList getExerciseList(int folderId)
@@ -256,7 +274,16 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
-  @Override public ExerciseList getExerciseListByNameAndFolderId(String name,
+  @Override
+  /**
+   * Gets the list of exercises by name and folder id.
+   *
+   * @param name - string value
+   *
+   * @param folderId - integer value
+   * @return ExerciseList - list of exercises
+   */
+  public ExerciseList getExerciseListByNameAndFolderId(String name,
       int folderId)
   {
     try
@@ -270,12 +297,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Removes exercises from database.
    * 
-   * 
-   * @param exerciseId 
+   * @param exerciseId - integer value
    *        
    *
-   * @return 
+   * @return boolean if everything went ok
    *        
    */
   @Override public boolean removeExercise(int exerciseId)
@@ -291,14 +318,14 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Removes exercises by name and folder id from database.
    * 
-   * 
-   * @param name 
+   * @param name - string value
    *        
-   * @param folderId 
+   * @param folderId - integer value
    *        
    *
-   * @return 
+   * @return boolean if everything went ok
    *        
    */
   @Override public boolean removeExercisesByName(String name, int folderId)
@@ -314,6 +341,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls server to add the exercise to the database.
+   * @param username - string value
+   * @param exerciseName - string value
+   * @param folderId - integer value
+   * @param weight - integer value
+   * @param repetitions - integer value
+   * @return boolean if everything went ok
+   */
   @Override public boolean addExercise(String username, String exerciseName,
       int folderId, int weight, int repetitions)
   {
@@ -329,10 +365,10 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * 
+   * Calls the server to get the list of possible exercises.
    * 
    *
-   * @return 
+   * @return array list of possible exercises names
    *        
    */
   @Override public ArrayList<String> getPossibleExercises()
@@ -347,76 +383,14 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
-/**
- * 
- * 
- * @param username 
- *        
- *
- * @return 
- *        
- */
-//  @Override public int getBestBenchPress(String username)
-//  {
-//    try
-//    {
-//      return server.getBestBenchPress(username);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-/**
- * 
- * 
- * @param username 
- *        
- *
- * @return 
- *        
- */
-//  @Override public int getBestSquat(String username)
-//  {
-//    try
-//    {
-//      return server.getBestSquat(username);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
-//
-/**
- * 
- * 
- * @param username 
- *        
- *
- * @return 
- *        
- */
-//  @Override public int getBestDeadlift(String username)
-//  {
-//    try
-//    {
-//      return server.getBestDeadlift(username);
-//    }
-//    catch (RemoteException e)
-//    {
-//      throw new RuntimeException(e);
-//    }
-//  }
 
   /**
+   * Gets the trainee from server.
    * 
-   * 
-   * @param username 
+   * @param username - stirng value
    *        
    *
-   * @return 
+   * @return User
    *        
    */
   @Override public User getTrainee(String username)
@@ -431,6 +405,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls server to update the trainee.
+   * @param u - trainee username
+   * @param h - trainee height
+   * @param w - trainee weight
+   * @param s - trainee wants to share their profile
+   * @param st - trainee status
+   * @return boolean if everything went ok
+   */
   @Override public boolean updateTrainee(String u, int h, int w, boolean s,
       String st)
   {
@@ -444,6 +427,12 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls the server to accept friend request.
+   * @param requester_username - string value
+   * @param accepter_username - string value
+   * @return boolean if everything went ok
+   */
   @Override public boolean acceptFriendRequest(String requester_username,
       String accepter_username)
   {
@@ -456,7 +445,12 @@ public class Client implements Model, RemoteListener<String, String>,
       throw new RuntimeException(e);
     }
   }
-
+  /**
+   * Calls the server to reject friend request.
+   * @param requester_username - string value
+   * @param accepter_username - string value
+   * @return boolean if everything went ok
+   */
   @Override public boolean rejectFriendRequest(String requester_username,
       String accepter_username)
   {
@@ -471,12 +465,11 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to get the list of trainee's friends.
    * 
-   * 
-   * @param username 
-   *        
+   * @param username - string value
    *
-   * @return 
+   * @return list of friends
    *        
    */
   @Override public FriendList getFriends(String username)
@@ -492,12 +485,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to get the list of the friend requests.
    * 
-   * 
-   * @param username 
+   * @param username - trainee username - string value
    *        
    *
-   * @return 
+   * @return ArrayList of friend requests usernames
    *        
    */
   @Override public ArrayList<String> getFriendRequests(String username)
@@ -513,7 +506,7 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * 
+   * Listens to remote notifications.
    * 
    */
   @Override public void propertyChange(ObserverEvent<String, String> event)
@@ -525,6 +518,13 @@ public class Client implements Model, RemoteListener<String, String>,
     property.firePropertyChange(name, val1, val2);
   }
 
+  /**
+   * Add the listener to the subject.
+   * @param listener the listener to be added
+   * @param propertyNames a var-args list of property names. If empty, then the
+   *                      listener should be added as a lister for all events.
+   * @return boolean if everything went ok
+   */
   @Override public boolean addListener(GeneralListener<String, String> listener,
       String... propertyNames)
   {
@@ -532,6 +532,13 @@ public class Client implements Model, RemoteListener<String, String>,
     return true;
   }
 
+  /**
+   * Removes the listener from the subject.
+   * @param listener the listener to be removed
+   * @param propertyNames a var-args list of property names. If empty, then the
+   *                      listener should be removed as a lister for all events.
+   * @return boolean if everything went ok
+   */
   @Override public boolean removeListener(
       GeneralListener<String, String> listener, String... propertyNames)
   {
@@ -539,6 +546,12 @@ public class Client implements Model, RemoteListener<String, String>,
     return true;
   }
 
+  /**
+   * Calls the server to send the friend request.
+   * @param requesterUsername
+   * @param accepterUsername
+   * @return boolean if everything went ok
+   */
   @Override public boolean sendFriendRequest(String requesterUsername,
       String accepterUsername)
   {
@@ -552,6 +565,12 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls the server to remove a friend.
+   * @param requesterUsername
+   * @param accepterUsername
+   * @return boolean if everything went ok
+   */
   @Override public boolean removeFriend(String requesterUsername,
       String accepterUsername)
   {
@@ -565,6 +584,12 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls the server to request the coach for a trainee.
+   * @param requesterUsername
+   * @param accepterUsername
+   * @return boolean if everything went ok
+   */
   @Override public boolean requestCoach(String requesterUsername,
       String accepterUsername)
   {
@@ -579,12 +604,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to get the coach of the trainee.
    * 
-   * 
-   * @param traineeUsername 
+   * @param traineeUsername - string value
    *        
    *
-   * @return 
+   * @return User
    *        
    */
   @Override public User getCoach(String traineeUsername)
@@ -601,12 +626,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to check if the user is a coach.
    * 
-   * 
-   * @param username 
+   * @param username - string value
    *        
    *
-   * @return 
+   * @return boolean if user is a coach
    *        
    */
   @Override public boolean isCoach(String username)
@@ -622,12 +647,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to remove the coach fromthe trainee
    * 
-   * 
-   * @param traineeUsername 
+   * @param traineeUsername - string value
    *        
    *
-   * @return 
+   * @return boolean if everything went ok
    *        
    */
   @Override public boolean removeCoachAssignment(String traineeUsername)
@@ -640,12 +665,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to get the list of trainee's meetings
    * 
-   * 
-   * @param traineeUsername 
+   * @param traineeUsername - string value
    *        
    *
-   * @return 
+   * @return arrayList of strings
    *        
    */
   @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
@@ -661,12 +686,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to get the list of trainee meeting requests.
    * 
-   * 
-   * @param traineeUsername 
+   * @param traineeUsername - string value
    *        
    *
-   * @return 
+   * @return list of meetings requests
    *        
    */
   @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
@@ -681,6 +706,13 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls the server to add the meeting request.
+   * @param traineeUsername - string value
+   * @param coachUsername - string value
+   * @param dateOfMeeting - localDate value
+   * @return boolean if everything went ok
+   */
   @Override public boolean sendMeetingRequest(String traineeUsername,
       String coachUsername, LocalDate dateOfMeeting)
   {
@@ -694,6 +726,13 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls the server to remove the meeting.
+   * @param traineeUsername - string value
+   * @param coachUsername - string value
+   * @param dateOfMeeting - localDate value
+   * @return boolean if everything went ok
+   */
   @Override public boolean removeMeeting(String traineeUsername,
       String coachUsername, LocalDate dateOfMeeting)
   {
@@ -707,6 +746,12 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls the server to accept trainee request.
+   * @param traineeUsername - string value
+   * @param coachUsername - string value
+   * @return boolean if everything went ok
+   */
   @Override public boolean acceptRequest(String traineeUsername,
       String coachUsername)
   {
@@ -721,13 +766,9 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * 
-   * 
-   * @param traineeUsername 
-   *        
-   *
-   * @return 
-   *        
+   * Calls the server to deny trainee request.
+   * @param traineeUsername - string value
+   * @return boolean if everything went ok
    */
   @Override public boolean denyRequest(String traineeUsername)
   {
@@ -742,13 +783,9 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * 
-   * 
-   * @param traineeUsername 
-   *        
-   *
-   * @return 
-   *        
+   * Calls the server to remove trainee from a roaster.
+   * @param traineeUsername - string value
+   * @return boolean if everything went ok
    */
   @Override public boolean removeTraineeFromRoster(String traineeUsername)
   {
@@ -763,12 +800,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to get the list of trainees.
    * 
-   * 
-   * @param username 
+   * @param username - string value
    *        
    *
-   * @return 
+   * @return TraineeList
    *        
    */
   public TraineeList getTraineeList(String username)
@@ -784,12 +821,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to get the list of trainees requests.
    * 
-   * 
-   * @param username 
+   * @param username - string value
    *        
    *
-   * @return 
+   * @return arraylist of strings (trainees request usernames)
    *        
    */
   public ArrayList<String> getTraineeRequest(String username)
@@ -805,12 +842,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to get the list of meeting requests.
    * 
-   * 
-   * @param coach 
+   * @param coach - string value
    *        
    *
-   * @return 
+   * @return arrayList of meeting requests
    *        
    */
   public ArrayList<String> getMeetingRequests(String coach)
@@ -826,12 +863,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Calls the server to get the list of coaches meetings.
    * 
-   * 
-   * @param coach 
+   * @param coach - string value
    *        
    *
-   * @return 
+   * @return arrayList of coaches meetings
    *        
    */
   public ArrayList<String> getCoachMeetings(String coach)
@@ -846,6 +883,13 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls the server to approve the meeting.
+   * @param trainee - string value
+   * @param coach - string value
+   * @param date - localDate value
+   * @return boolean if everything went ok
+   */
   @Override public boolean approveMeeting(String trainee, String coach,
       LocalDate date)
   {
@@ -859,6 +903,13 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  /**
+   * Calls the server to deny the meeting.
+   * @param trainee - string value
+   * @param coach - string value
+   * @param date - localDate value
+   * @return boolean if everything went ok
+   */
   @Override public boolean denyMeeting(String trainee, String coach,
       LocalDate date)
   {
@@ -873,12 +924,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
+   * Method that gets the dates that are already taken/reserved with the coach.
    * 
-   * 
-   * @param coachUsername 
+   * @param coachUsername - username
    *        
    *
-   * @return 
+   * @return ArrayList of local Dates
    *        
    */
   @Override public ArrayList<LocalDate> getTakenDates(String coachUsername){
@@ -893,10 +944,10 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * 
+   * Calls the server to get the list of squat leaders.
    * 
    *
-   * @return 
+   * @return TraineeList
    *        
    */
   @Override public TraineeList getSquatLeaders()
@@ -912,10 +963,10 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * 
+   * Calls the server to get the deadlift leaders
    * 
    *
-   * @return 
+   * @return TraineList
    *        
    */
   @Override public TraineeList getDeadliftLeaders()
@@ -931,10 +982,10 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * 
+   * Calls the server to get the bench press leaders.
    * 
    *
-   * @return 
+   * @return TraineeList
    *        
    */
   @Override public TraineeList getBenchLeaders()

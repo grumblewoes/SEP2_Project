@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * Class that stores list of friends data.
+ *
+ *
+ * @author Damian Trafiałek
+ * @version 1.0
  */
 public class FriendList implements Serializable {
     private ArrayList<Friend> list;
     /**
-     * 0-argument constructor 
+     * 0-argument constructor that initialises the list.
      * 
      * 
      */
@@ -22,39 +22,39 @@ public class FriendList implements Serializable {
     }
 
     /**
+     * Method that adds the friend to the list.
      * 
-     * 
-     * @param friend 
+     * @param friend Friend
      *        
      */
     public void add(Friend friend){
         list.add(friend);
     }
     /**
+     * Method that returns the friend under given index in the list.
      * 
-     * 
-     * @param i 
+     * @param i - integer
      *        
      *
-     * @return 
+     * @return Friend
      *        
      */
     public Friend get(int i){return list.get(i);}
     /**
-     * 
+     * Returns the size of the list.
      * 
      *
-     * @return 
+     * @return integer
      *        
      */
     public int size(){return list.size();}
 
     @Override
     /**
-     * 
+     * Casts the object to string
      * 
      *
-     * @return 
+     * @return string value.
      *        
      */
     public String toString() {

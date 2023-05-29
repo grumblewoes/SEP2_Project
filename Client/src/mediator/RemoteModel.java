@@ -8,11 +8,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
+ * Remote Model that serves the communication between the client and server.
  * 
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafiałek, Jakub Cerovsky, Anna Pomerantz
+ * @version 1.0
  */
 public interface RemoteModel extends RemoteSubject<String,String>
 {

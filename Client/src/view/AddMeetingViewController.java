@@ -14,11 +14,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
+ * View controller responsible for displaying the add meeting view.
  * 
  * 
- * 
- * @author 
- * @version 
+ * @author Jakub Cerovsky, Damian Trafiałek
+ * @version 1.0
  */
 public class AddMeetingViewController extends ViewController
 {
@@ -33,6 +33,17 @@ public class AddMeetingViewController extends ViewController
 
     return this.dates;
   }
+
+  /**
+   * Method that initialise the controller and sets up all instance variables and bindings.
+   *
+   * @param viewHandler - handles changing views
+   *
+   * @param viewModel - view model related to the controller
+   *
+   * @param root - region that is being displayed
+   *
+   */
   @Override public void init(ViewHandler viewHandler, ViewModel viewModel,
       Region root)
   {
@@ -48,11 +59,11 @@ public class AddMeetingViewController extends ViewController
 
       @Override
       /**
+       * Method that manages (disables and colors) the dates within the date picker.
        * 
-       * 
-       * @param date 
+       * @param date - current date
        *        
-       * @param empty 
+       * @param empty - whether or not this cell represents data from the list
        *        
        */
       public void updateItem(LocalDate date, boolean empty) {
@@ -80,12 +91,12 @@ public class AddMeetingViewController extends ViewController
     viewHandler.openView("home");
   }
   /**
-   * 
-   * 
+   * Reset method that calls view model to trigger the reset.
+   *
    */
   @Override public void reset()
   {
-//    dates.clear();
+    dates.clear();
     addMeetingViewModel.clear();
   }
 }

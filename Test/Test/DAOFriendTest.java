@@ -5,6 +5,7 @@ import modelServer.DAO.implementation.FriendDAO;
 import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.IFriendDAO;
 import modelServer.DAO.interfaces.IUserDAO;
+import modelServer.DbContext.DBService;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ class DAOFriendTest {
     private IFriendDAO fao;
     private String[] usernames;
     private String password,firstName,lastName;
+    private DBService service;
     private int height,weight;
     @org.junit.jupiter.api.BeforeEach
     void setUp() throws SQLException {
@@ -29,6 +31,9 @@ class DAOFriendTest {
         password = "password"+Math.random();
         firstName = "firstName"+Math.random();
         lastName = "lastName"+Math.random();
+        service=new DBService();
+
+        SetupTestDatabase();
         dao.createTrainee(usernames[0],"a",firstName,lastName,height,weight);
         dao.createTrainee(usernames[1],"a",firstName,lastName,height,weight);
         dao.createTrainee(usernames[2],"a",firstName,lastName,height,weight);
@@ -42,7 +47,10 @@ class DAOFriendTest {
 
 
     }
-
+    private void SetupTestDatabase(){
+        service.restartDatabase();
+        service.switchToTestDatabase();
+    }
     /**
      * 
      * 
