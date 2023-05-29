@@ -13,19 +13,18 @@ import java.sql.SQLException;
 
 /**
  * 
+ * DAO Class accessing the database through an instance of the DBConnection class
+ * LeaderboardDAO works with the operations connected to the displaying the Leaders of the system for specific exercises
  * 
- * 
- * @author 
- * @version 
+ * @author Jakub Cerovsky
+ * @version 1.0
  */
 public class LeaderboardDAO implements ILeaderboardDAO
 {
   /**
-   * 
-   * 
+   * Method gets the connection to the database and executes the sql statement
    *
-   * @return 
-   *        
+   * @return TraineeList of top 10 usernames and their squat_best from trainee table only if the trainee wants to share the profile
    */
   @Override public TraineeList getSquatLeaders() throws SQLException
   {
@@ -52,11 +51,9 @@ public class LeaderboardDAO implements ILeaderboardDAO
   }
 
   /**
-   * 
-   * 
+   * Method gets the connection to the database and executes the sql statement
    *
-   * @return 
-   *        
+   * @return TraineeList of top 10 usernames and their deadlift_best from trainee table only if the trainee wants to share the profile
    */
   @Override public TraineeList getDeadliftLeaders() throws SQLException
   {
@@ -83,11 +80,9 @@ public class LeaderboardDAO implements ILeaderboardDAO
   }
 
   /**
-   * 
-   * 
+   * Method gets the connection to the database and executes the sql statement
    *
-   * @return 
-   *        
+   * @return TraineeList of top 10 usernames and their bench_best from trainee table only if the trainee wants to share the profile
    */
   @Override public TraineeList getBenchLeaders() throws SQLException
   {

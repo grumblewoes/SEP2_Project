@@ -5,11 +5,9 @@ import mediator.TraineeList;
 import java.sql.SQLException;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * Interface class used with methods connected only to Leaderboard function
+ *
+ * @version Sprint 6 - 29.05.2023
  */
 public interface ILeaderboardDAO
 {

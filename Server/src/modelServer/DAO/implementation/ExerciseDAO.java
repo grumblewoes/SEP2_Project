@@ -16,32 +16,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * DAO Class accessing the database through an instance of the DBConnection class
+ * ExerciseDAO works with the operations connected to the Exercise object
  * 
- * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class ExerciseDAO implements IExerciseDAO
 {
-  private static ExerciseDAO instance;
-
   /**
-   * 0-argument constructor 
-   * 
-   * 
-   */
-  public ExerciseDAO(){}
-
-
-
-  /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
+   * This method selects values from user_exercise2 table where the folderId matches parameter
    * 
    * @param folderId 
    *        
    *
-   * @return 
+   * @return ExerciseList with all exercise info for given folder
    *        
    */
   public ExerciseList getExerciseList(int folderId) throws SQLException {
@@ -66,7 +56,7 @@ public class ExerciseDAO implements IExerciseDAO
       return exerciseList;
     }
     catch (SQLException e){
-      Logger.log(e);
+
       return exerciseList;
     }
     finally
@@ -77,12 +67,13 @@ public class ExerciseDAO implements IExerciseDAO
 
   @Override
   /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
+   * This method removes exercise from user_exercise2 table based on its id
    * 
    * @param exerciseId 
    *        
    *
-   * @return 
+   * @return  true or false, whether the removal was successful or not
    *        
    */
   public boolean removeExercise(int exerciseId) throws SQLException {
@@ -99,12 +90,9 @@ public class ExerciseDAO implements IExerciseDAO
       );
 
       statement.executeUpdate();
-
-
       return true;
     }
     catch (SQLException e){
-      Logger.log(e);
       return false;
     }
     finally
@@ -115,14 +103,15 @@ public class ExerciseDAO implements IExerciseDAO
 
   @Override
   /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
+   * This method deletes exercise from user_exercise2 table based on given parameters
    * 
    * @param name 
    *        
    * @param folderId 
    *        
    *
-   * @return 
+   * @return  true or false, whether the removal was successful or not
    *        
    */
   public boolean removeExerciseByName(String name, int folderId) throws SQLException {
@@ -144,7 +133,6 @@ public class ExerciseDAO implements IExerciseDAO
       return true;
     }
     catch (SQLException e){
-      Logger.log(e);
       return false;
     }
     finally
@@ -155,10 +143,10 @@ public class ExerciseDAO implements IExerciseDAO
 
   @Override
   /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
    * 
    *
-   * @return 
+   * @return ArrayList of string with titles of all exercises in exercise_type2 table
    *        
    */
   public ArrayList<String> getPossibleExercises() throws SQLException {
@@ -182,7 +170,6 @@ public class ExerciseDAO implements IExerciseDAO
       return list;
     }
     catch (SQLException e){
-      Logger.log(e);
       return list;
     }
     finally
@@ -193,7 +180,12 @@ public class ExerciseDAO implements IExerciseDAO
 
   @Override
   /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
+   * This method has a few stages in it.
+   * Firstly, it initializes the columnToUpdate in case that exerciseName parameter is equal to any given options
+   * Secondly, if the columnToUpdate is empty it simply insert the parameters into user_exercise2 table and returns true
+   * If the columnToUpdate is not empty it compares if the weight is higher than the max weight in matching column name.
+   * If so, the trainee object is updated with his new personal best, and then it continues into insertion
    * 
    * @param username 
    *        
@@ -206,7 +198,7 @@ public class ExerciseDAO implements IExerciseDAO
    * @param repetition 
    *        
    *
-   * @return 
+   * @return  true or false, whether the addition was successful or not
    *        
    */
   public boolean addExercise(String username, String exerciseName, int folderId, int weight, int repetition) throws SQLException {
@@ -229,7 +221,6 @@ public class ExerciseDAO implements IExerciseDAO
             "SELECT MAX(weight) FROM user_exercise2 WHERE trainee_username = ? and exercise_name=?");
         maxWeightStatement.setString(1, username);
         maxWeightStatement.setString(2, exerciseName);
-        Logger.log("weight");
 
         ResultSet resultSet = maxWeightStatement.executeQuery();
         if (resultSet.next())
@@ -256,99 +247,9 @@ public class ExerciseDAO implements IExerciseDAO
 
       return true;
     } catch (SQLException e) {
-      Logger.log(e);
       return false;
     } finally {
       connection.close();
     }
   }
-
-
-
-//  @Override
-/**
- * 
- * 
- * @param username 
- *        
- * @param name 
- *        
- *
- * @return 
- *        
- */
-//  public int getBestWeightFromExerciseByName(String username,String name) throws SQLException {
-//    DBConnection db = DBConnection.getInstance();
-//    Connection connection = db.getConnection();
-//
-//    try
-//    {
-//
-//      PreparedStatement statement = connection.prepareStatement(
-//              "select weight " +
-//                      "from user_exercise2 " +
-//                      "where trainee_username = '"+ username +"' and exercise_name = '" + name + "'"+
-//                      "order by weight desc " +
-//                      "limit 1"
-//      );
-//
-//      ResultSet rs = statement.executeQuery();
-//
-//      int ans = 0;
-//      if( rs.next() )
-//        ans = rs.getInt(1);
-//      return ans;
-//
-//    }
-//    catch (SQLException e){
-//      Logger.log(e);
-//      return 0;
-//    }
-//    finally
-//    {
-//      connection.close();
-//    }
-//  }
-//
-//  @Override
-/**
- * 
- * 
- * @param username 
- *        
- *
- * @return 
- *        
- */
-//  public int getBestSquat(String username) throws SQLException {
-//    return getBestWeightFromExerciseByName(username,"squat");
-//  }
-//
-//  @Override
-/**
- * 
- * 
- * @param username 
- *        
- *
- * @return 
- *        
- */
-//  public int getBestDeadlift(String username) throws SQLException {
-//    return getBestWeightFromExerciseByName(username,"deadlift");
-//  }
-//
-//  @Override
-/**
- * 
- * 
- * @param username 
- *        
- *
- * @return 
- *        
- */
-//  public int getBestBenchPress(String username) throws SQLException {
-//    return getBestWeightFromExerciseByName(username,"bench_press");
-//  }
 }

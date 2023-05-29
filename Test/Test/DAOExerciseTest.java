@@ -1,9 +1,11 @@
 import mediator.ExerciseList;
 import modelServer.DAO.implementation.ExerciseDAO;
 import modelServer.DAO.implementation.FolderDAO;
+import modelServer.DAO.implementation.TraineeDAO;
 import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.IExerciseDAO;
 import modelServer.DAO.interfaces.IFolderDAO;
+import modelServer.DAO.interfaces.ITraineeDAO;
 import modelServer.DAO.interfaces.IUserDAO;
 import modelServer.DbContext.DBService;
 import org.junit.jupiter.api.Test;
@@ -12,13 +14,13 @@ import java.sql.SQLException;
 
 class DAOExerciseTest {
     private IFolderDAO fao;
-    private IUserDAO uao;
+    private ITraineeDAO uao;
     private IExerciseDAO eao;
     private DBService service;
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         fao=new FolderDAO();
-        uao=new UserDAO();
+        uao=new TraineeDAO();
         eao=new ExerciseDAO();
         service = new DBService();
         SetupTestDatabase();
@@ -38,9 +40,9 @@ class DAOExerciseTest {
      * 
      * 
      */
-    @Test public void iAmTiredLetsTestThisShit() throws SQLException {
-        String username = "your_mom"+Math.random();
-        String folderName = "your_dad"+Math.random();
+    @Test public void ExerciseZombie() throws SQLException {
+        String username = "u"+Math.random();
+        String folderName = "f"+Math.random();
         int folderId = 0;
         String exerciseName = "deadlift";
 
