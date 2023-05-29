@@ -587,10 +587,10 @@ public class ModelManager implements Model
   @Override public boolean addCoach(String coachUsername,
       String coachPassword, String coachName, String coachLName,
       int coachHeight, int coachWeight, int pbBench, int pbSquat,
-      int pbLift, String status, boolean share)
+      int pbLift, String status )
   {
     try {
-      return new CoachDAO().addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, status, share);
+      return new CoachDAO().addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, status);
     }
     catch (SQLException e)
     {

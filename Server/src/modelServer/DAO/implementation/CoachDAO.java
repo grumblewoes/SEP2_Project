@@ -22,7 +22,7 @@ public class CoachDAO implements ICoachDAO
   private static CoachDAO instance;
 
   public boolean addCoach(String coachUsername, String coachPassword, String coachName, String coachLName, int coachHeight, int coachWeight,
-      int pbBench, int pbSquat, int pbLift, String status, boolean share) throws SQLException
+      int pbBench, int pbSquat, int pbLift, String status) throws SQLException
   {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -30,7 +30,7 @@ public class CoachDAO implements ICoachDAO
     try
     {
         PreparedStatement statement = connection.prepareStatement(
-                "insert into coach(username, password, first_name, last_name, height, weight, bench_best, squat_best, deadlift_best, status, share) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                "insert into coach(username, password, first_name, last_name, height, weight, bench_best, squat_best, deadlift_best, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
       );
         statement.setString(1, coachUsername);
         statement.setString(2, coachPassword);
@@ -42,7 +42,6 @@ public class CoachDAO implements ICoachDAO
         statement.setInt(8, pbSquat);
         statement.setInt(9, pbLift);
         statement.setString(10, status);
-        statement.setBoolean(11, share);
 
       int result = statement.executeUpdate(); //number of modified rows
       return result > 0; //to hit this statement, technically would always be true? cuz otherwise it is caught?
@@ -125,8 +124,7 @@ public class CoachDAO implements ICoachDAO
         String lastName = rs.getString("last_name");
         String username = rs.getString("username");
         String status = rs.getString("status");
-        boolean shareProfile = rs.getBoolean("share");
-        coach = new User(height, weight, firstName, lastName, username, status, shareProfile);
+        coach = new User(height, weight, firstName, lastName, username, status, true);
       }
       else if (rs1.next()) {
         int height = rs1.getInt("height");
@@ -135,8 +133,7 @@ public class CoachDAO implements ICoachDAO
         String lastName = rs1.getString("last_name");
         String username = rs1.getString("username");
         String status = rs1.getString("status");
-        boolean shareProfile = rs1.getBoolean("share");
-        coach = new User(height, weight, firstName, lastName, username, status, shareProfile);
+        coach = new User(height, weight, firstName, lastName, username, status, true);
       }
       return coach;
     }

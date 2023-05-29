@@ -18,7 +18,7 @@ public interface ICoachDAO
 {
 
   public boolean addCoach(String coachUsername, String coachPassword, String coachName, String coachLName, int coachHeight, int coachWeight,
-      int pbBench, int pbSquat, int pbLift, String status, boolean share) throws SQLException;
+      int pbBench, int pbSquat, int pbLift, String status) throws SQLException;
 
   /**
    * 

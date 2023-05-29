@@ -105,7 +105,7 @@ public class AdminTask implements Runnable
           int pbLift = scan.nextInt();
 
 
-          if (model.addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, "On that grind", true))
+          if (model.addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, "On that grind"))
           {
             System.out.println("Coach was added to the system.");
           }
