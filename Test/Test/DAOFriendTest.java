@@ -2,8 +2,10 @@ import mediator.Friend;
 import mediator.FriendList;
 import mediator.User;
 import modelServer.DAO.implementation.FriendDAO;
+import modelServer.DAO.implementation.TraineeDAO;
 import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.IFriendDAO;
+import modelServer.DAO.interfaces.ITraineeDAO;
 import modelServer.DAO.interfaces.IUserDAO;
 import modelServer.DbContext.DBService;
 import org.junit.jupiter.api.Test;
@@ -14,16 +16,17 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DAOFriendTest {
-    private IUserDAO dao;
+    private ITraineeDAO dao;
     private IFriendDAO fao;
+    private DBService service;
     private String[] usernames;
     private String password,firstName,lastName;
-    private DBService service;
     private int height,weight;
     @org.junit.jupiter.api.BeforeEach
     void setUp() throws SQLException {
-        dao = new UserDAO();
+        dao = new TraineeDAO();
         fao = new FriendDAO();
+        service=new DBService();
 
         usernames = new String[10];
         for(int i=0;i<10;++i)
@@ -31,8 +34,6 @@ class DAOFriendTest {
         password = "password"+Math.random();
         firstName = "firstName"+Math.random();
         lastName = "lastName"+Math.random();
-        service=new DBService();
-
         SetupTestDatabase();
         dao.createTrainee(usernames[0],"a",firstName,lastName,height,weight);
         dao.createTrainee(usernames[1],"a",firstName,lastName,height,weight);
@@ -51,6 +52,11 @@ class DAOFriendTest {
         service.restartDatabase();
         service.switchToTestDatabase();
     }
+    @org.junit.jupiter.api.AfterEach
+    void tearDown() {
+        service.switchToProductionDatabase();
+    }
+
     /**
      * 
      * 

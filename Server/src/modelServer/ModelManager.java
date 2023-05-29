@@ -43,7 +43,7 @@ public class ModelManager implements Model
     boolean ans = false;
     try
     {
-      ans = userDAO.createTrainee(username, password, firstName, lastName,
+      ans = new TraineeDAO().createTrainee(username, password, firstName, lastName,
           height, weight);
       Logger.log("created user: " + ans);
     }
@@ -367,7 +367,7 @@ public class ModelManager implements Model
   {
     try
     {
-      return new UserDAO().getTrainee(username);
+      return new TraineeDAO().getTrainee(username);
     }
     catch (SQLException e)
     {
@@ -430,7 +430,7 @@ public class ModelManager implements Model
    */
   @Override public boolean updateTrainee(String u, int h, int w,boolean s,String st){
         try{
-            return new UserDAO().updateTrainee(u,h,w,s,st);
+            return new TraineeDAO().updateTrainee(u,h,w,s,st);
         }catch(SQLException e){
             return false;
         }
@@ -590,7 +590,7 @@ public class ModelManager implements Model
       int pbLift, String status )
   {
     try {
-      return new CoachDAO().addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, status);
+      return new CoachAdminDAO().addCoach(coachUsername, coachPassword, coachName, coachLName, coachHeight, coachWeight, pbBench, pbSquat, pbLift, status);
     }
     catch (SQLException e)
     {
@@ -728,7 +728,7 @@ public class ModelManager implements Model
   @Override public boolean removeCoach(String name)
     {
         try {
-            return new CoachDAO().removeCoach(name);
+            return new CoachAdminDAO().removeCoach(name);
         }
         catch (SQLException e)
         {
@@ -748,7 +748,7 @@ public class ModelManager implements Model
      */
     public User getCoach(String traineeUsername) {
         try {
-            return new CoachDAO().getCoach(traineeUsername);
+            return new TraineeDAO().getCoach(traineeUsername);
         }
         catch (SQLException e)
         {

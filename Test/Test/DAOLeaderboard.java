@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DAOLeaderboard
 {
-  DBService service;
-  IExerciseDAO eDao;
-  ILeaderboardDAO lDao;
-  IUserDAO uDao;
-  IFolderDAO fDao;
-  String traineeA, traineeB, traineeC, squat, bench, deadlift, folderA, folderB, folderC;
-  int weightA, weightB, weightC, folder0, folder1, folder2, folder3, repetition;
+  private DBService service;
+  private IExerciseDAO eDao;
+  private ILeaderboardDAO lDao;
+  private ITraineeDAO uDao;
+  private IFolderDAO fDao;
+  private String traineeA, traineeB, traineeC, squat, bench, deadlift, folderA, folderB, folderC;
+  private int weightA, weightB, weightC, folder0, folder1, folder2, folder3, repetition;
 
   @org.junit.jupiter.api.BeforeEach
   void setUp() throws SQLException
@@ -24,7 +24,7 @@ class DAOLeaderboard
     service=new DBService();
     eDao = new ExerciseDAO();
     lDao = new LeaderboardDAO();
-    uDao = new UserDAO();
+    uDao = new TraineeDAO();
     fDao=new FolderDAO();
     traineeC = "c";
     traineeB = "b";
@@ -224,7 +224,6 @@ class DAOLeaderboard
     try
     {
       SetupTestDatabase();
-
       assertTrue(lDao.getDeadliftLeaders().getSize() == 0);
     }
     catch (SQLException e)

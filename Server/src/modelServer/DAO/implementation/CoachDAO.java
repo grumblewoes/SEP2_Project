@@ -11,151 +11,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * DAO Class accessing the database through an instance of the DBConnection class
+ * CoachDAO works with the operations connected to the Coach object.
  * 
- * 
- * 
- * @author 
- * @version 
+ * @author Anna Pomerantz
+ * @version 1.0
  */
 public class CoachDAO implements ICoachDAO
 {
-  private static CoachDAO instance;
-
-  public boolean addCoach(String coachUsername, String coachPassword, String coachName, String coachLName, int coachHeight, int coachWeight,
-      int pbBench, int pbSquat, int pbLift, String status) throws SQLException
-  {
-    DBConnection db = DBConnection.getInstance();
-    Connection connection = db.getConnection();
-
-    try
-    {
-        PreparedStatement statement = connection.prepareStatement(
-                "insert into coach(username, password, first_name, last_name, height, weight, bench_best, squat_best, deadlift_best, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
-      );
-        statement.setString(1, coachUsername);
-        statement.setString(2, coachPassword);
-        statement.setString(3, coachName);
-        statement.setString(4, coachLName);
-        statement.setInt(5, coachHeight);
-        statement.setInt(6, coachWeight);
-        statement.setInt(7, pbBench);
-        statement.setInt(8, pbSquat);
-        statement.setInt(9, pbLift);
-        statement.setString(10, status);
-
-      int result = statement.executeUpdate(); //number of modified rows
-      return result > 0; //to hit this statement, technically would always be true? cuz otherwise it is caught?
-    }
-    catch (SQLException e){
-      return false;
-    }
-    finally
-    {
-      connection.close();
-    }
-  }
-
-  /**
-   * 
-   * 
-   * @param name 
-   *        
-   *
-   * @return 
-   *        
-   */
-  public boolean removeCoach(String name) throws SQLException
-  {
-    DBConnection db = DBConnection.getInstance();
-    Connection connection = db.getConnection();
-
-    try
-    {
-            PreparedStatement statement = connection.prepareStatement(
-                "delete from coach "
-                    + "where username = ?;"
-            );
-      statement.setString(1, name);
-      int result = statement.executeUpdate();
-      return result > 0;
-    }
-    catch (SQLException e){
-      Logger.log(e);
-      return false;
-    }
-    finally
-    {
-      connection.close();
-    }
-  }
-
-  /**
-   * 
-   * 
-   * @param traineeUser 
-   *        
-   *
-   * @return 
-   *        
-   */
-  @Override public User getCoach(String traineeUser) throws SQLException
-  {
-    //has two ways of working. checks trainee table first, and if that doesn't work, it knows to check coach table
-    DBConnection db = DBConnection.getInstance();
-    Connection connection = db.getConnection();
-    User coach = null;
-    try
-    {
-      PreparedStatement statement = connection.prepareStatement(
-          "select * from coach c "
-              + "join trainee2 t on c.username = t.coach_username " +
-                  "where t.username = '" + traineeUser + "';"
-      );
-      PreparedStatement statementCoach = connection.prepareStatement("select * from coach "
-              + "where username = '" + traineeUser + "';");
-
-      ResultSet rs = statement.executeQuery();
-      ResultSet rs1 = statementCoach.executeQuery();
-      if(rs.next()) {
-        int height = rs.getInt("height");
-        int weight = rs.getInt("weight");
-        String firstName = rs.getString("first_name");
-        String lastName = rs.getString("last_name");
-        String username = rs.getString("username");
-        String status = rs.getString("status");
-        coach = new User(height, weight, firstName, lastName, username, status, true);
-      }
-      else if (rs1.next()) {
-        int height = rs1.getInt("height");
-        int weight = rs1.getInt("weight");
-        String firstName = rs1.getString("first_name");
-        String lastName = rs1.getString("last_name");
-        String username = rs1.getString("username");
-        String status = rs1.getString("status");
-        coach = new User(height, weight, firstName, lastName, username, status, true);
-      }
-      return coach;
-    }
-    catch (SQLException e){
-      Logger.log(e);
-      return null;
-    }
-    finally
-    {
-      connection.close();
-    }
-  }
-
   @Override
   /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
+   * This method inserts both parameter into coach_request as a requester and accepter
    * 
    * @param traineeUser 
    *        
    * @param coachUser 
    *        
    *
-   * @return 
+   * @return  true or false, whether sending of the request was successful or not
    *        
    */
   public boolean requestCoach(String traineeUser, String coachUser) throws SQLException {
@@ -185,12 +59,12 @@ public class CoachDAO implements ICoachDAO
 
   @Override
   /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
    * 
    * @param username 
    *        
    *
-   * @return 
+   * @return  true or false, whether the user that matches parameter is coach or not
    *        
    */
   public boolean isCoach(String username) throws SQLException {
@@ -205,7 +79,6 @@ public class CoachDAO implements ICoachDAO
       statement.setString(1, username);
       ResultSet rs = statement.executeQuery();
       boolean success = rs.next();
-      Logger.log("is a coach: "+ success);
       return success;
     }
     catch (SQLException e){
@@ -219,12 +92,13 @@ public class CoachDAO implements ICoachDAO
   }
 
   /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
+   * This method removes coach from trainees profile
    * 
    * @param traineeUsername 
    *        
    *
-   * @return 
+   * @return true or false, whether the removal was successful or not
    *        
    */
   @Override public boolean removeCoachAssignment(String traineeUsername)
@@ -266,14 +140,15 @@ public class CoachDAO implements ICoachDAO
   }
 
   /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
+   * This method accepts the request. This means that request is deleted from coach_request table and coach is updated into trainees profile
    * 
    * @param traineeUsername 
    *        
    * @param coachUsername 
    *        
    *
-   * @return 
+   * @return  true or false, whether the acceptance was successful or not
    *        
    */
   @Override public boolean acceptRequest(String traineeUsername, String coachUsername)
@@ -311,12 +186,13 @@ public class CoachDAO implements ICoachDAO
   }
 
   /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
+   * this method deletes request from coach_request table since it was not accepted
    * 
    * @param traineeUsername 
    *        
    *
-   * @return 
+   * @return true or false, whether the denial was successful or not
    *        
    */
   @Override public boolean denyRequest(String traineeUsername)
@@ -337,7 +213,6 @@ public class CoachDAO implements ICoachDAO
 
     }
     catch (SQLException e){
-      Logger.log(e);
       return false;
     }
     finally
@@ -349,12 +224,13 @@ public class CoachDAO implements ICoachDAO
   }
 
   /**
-   * 
+   *  Method gets the connection to the database and executes the sql statement
+   *  This method removes trainee whose username matches the parameter from all tables related to coach
    * 
    * @param traineeUsername 
    *        
    *
-   * @return 
+   * @return true or false, whether the removal was successful or not
    *        
    */
   @Override public boolean removeTraineeFromRoster(String traineeUsername)
@@ -387,7 +263,6 @@ public class CoachDAO implements ICoachDAO
 
     }
     catch (SQLException e){
-      Logger.log(e);
       return false;
     }
     finally
@@ -397,12 +272,13 @@ public class CoachDAO implements ICoachDAO
   }
 
   /**
-   * 
+   *  Method gets the connection to the database and executes the sql statement
+   *  TraineeList is in this case needed since we return username and status based on matching parameter
    * 
    * @param username 
    *        
    *
-   * @return 
+   * @return TraineeList where parameter matches the coach_username in trainee2 table
    *        
    */
   @Override public TraineeList getTraineeList(String username)
@@ -430,18 +306,17 @@ public class CoachDAO implements ICoachDAO
   }
 
   /**
-   * 
+   * Method gets the connection to the database and executes the sql statement
    * 
    * @param username 
    *        
    *
-   * @return 
+   * @return ArrayList of string where parameter matches the coach_username in coach_request table
    *        
    */
   @Override public ArrayList<String> getTraineeRequest(String username)
       throws SQLException
   {
-    Logger.log(username);
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
     ArrayList<String> list = new ArrayList<>();

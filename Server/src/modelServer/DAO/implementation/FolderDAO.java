@@ -13,35 +13,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * DAO Class accessing the database through an instance of the DBConnection class
+ * FolderDAO works with the operations connected to the Folder object
+ *
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class FolderDAO implements IFolderDAO
 {
-  private static FolderDAO instance;
-
   /**
-   * 0-argument constructor 
-   * 
-   * 
-   */
-  public FolderDAO()
-  {
-  }
-
-  /**
-   * 
-   * 
-   * @param username 
-   *        
-   * @param title 
-   *        
+   * Method gets the connection to the database and executes the sql statement
+   * Method insert the parameters into a folder table
    *
-   * @return 
-   *        
+   * @param username
+   * @param title
+   *
+   * @return true or false, whether the folder was or was not created
    */
   @Override public boolean createFolder(String username, String title)
       throws SQLException
@@ -60,7 +47,6 @@ public class FolderDAO implements IFolderDAO
     }
     catch (SQLException e)
     {
-      Logger.log(e);
       return false;
     }
     finally
@@ -69,6 +55,16 @@ public class FolderDAO implements IFolderDAO
     }
   }
 
+  /**
+   * Method gets the connection to the database and executes the sql statement
+   * This method update the folder name from folder table based on given parameters
+   *
+   * @param username
+   * @param folderId
+   * @param newTitle
+   *
+   * @return true or false, whether the renaming was successful or not
+   */
   @Override public boolean renameFolder(String username, int folderId,
       String newTitle) throws SQLException
   {
@@ -89,7 +85,6 @@ public class FolderDAO implements IFolderDAO
     }
     catch (SQLException e)
     {
-      Logger.log(e);
       return false;
     }
     finally
@@ -99,15 +94,13 @@ public class FolderDAO implements IFolderDAO
   }
 
   /**
-   * 
-   * 
-   * @param username 
-   *        
-   * @param folderId 
-   *        
+   * Method gets the connection to the database and executes the sql statement
+   * This method deletes the folder from user_exercise table and folder table based on given parameters
    *
-   * @return 
-   *        
+   * @param username
+   * @param folderId
+   *
+   * @return true or false, whether the removal was successful or not
    */
   @Override public boolean removeFolder(String username, int folderId)
       throws SQLException
@@ -122,8 +115,6 @@ public class FolderDAO implements IFolderDAO
       sql = sql.replaceFirst("\\?", "" + folderId);
       sql = sql.replaceFirst("\\?", "'" + username + "'");
       sql = sql.replaceFirst("\\?", "" + folderId);
-      Logger.log(sql);
-
       PreparedStatement statement = connection.prepareStatement(sql);
 
       statement.executeUpdate();
@@ -132,7 +123,6 @@ public class FolderDAO implements IFolderDAO
     }
     catch (SQLException e)
     {
-      Logger.log(e);
       return false;
     }
     finally
@@ -142,13 +132,11 @@ public class FolderDAO implements IFolderDAO
   }
 
   /**
-   * 
-   * 
-   * @param username 
-   *        
+   * Method gets the connection to the database and executes the sql statement
+   * This method selects attributes from folder table based on the username given as parameter
    *
-   * @return 
-   *        
+   * @param username
+   * @return FolderList of given username
    */
   public FolderList getFolderList(String username) throws SQLException
   {
@@ -174,7 +162,6 @@ public class FolderDAO implements IFolderDAO
     }
     catch (SQLException e)
     {
-      Logger.log(e);
       return folderList;
     }
     finally
