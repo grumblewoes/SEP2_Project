@@ -16,10 +16,10 @@ import java.util.ArrayList;
 
 /**
  * 
+ * ViewModel class for the LeaderBoardViewController class.
  * 
- * 
- * @author 
- * @version 
+ * @author Jakub Cerovsky
+ * @version 1.0
  */
 public class LeaderboardViewModel extends ViewModel  implements LocalListener<String,String>
 {
@@ -30,9 +30,10 @@ public class LeaderboardViewModel extends ViewModel  implements LocalListener<St
 
   /**
    * 1-argument constructor 
+   * accepts the model object, and initializes array lists for each of the three categories
+   * for which there is a leaderboard.
    * 
-   * 
-   * @param model 
+   * @param model for the model layer which communicates with the server
    *        
    */
   public LeaderboardViewModel(Model model) {
@@ -46,9 +47,9 @@ public class LeaderboardViewModel extends ViewModel  implements LocalListener<St
 
   /**
    * 
-   * 
+   * getter for the arraylist of squats
    *
-   * @return 
+   * @return ObservableList<SimpleLeaderboardViewModel> to represent the names+weights of the top ranked members for squats
    *        
    */
   public ObservableList<SimpleLeaderboardViewModel> getSquats() {
@@ -56,10 +57,10 @@ public class LeaderboardViewModel extends ViewModel  implements LocalListener<St
   }
 
   /**
-   * 
-   * 
    *
-   * @return 
+   getter for the arraylist of benches
+   *
+   * @return ObservableList<SimpleLeaderboardViewModel> to represent the names+weights of the top ranked members for bench press
    *        
    */
   public ObservableList<SimpleLeaderboardViewModel> getBenches() {
@@ -67,10 +68,10 @@ public class LeaderboardViewModel extends ViewModel  implements LocalListener<St
   }
 
   /**
-   * 
-   * 
    *
-   * @return 
+   getter for the arraylist of deadlifts
+   *
+   * @return ObservableList<SimpleLeaderboardViewModel> to represent the names+weights of the top ranked members for deadlifts
    *        
    */
   public ObservableList<SimpleLeaderboardViewModel> getDeadlifts() {
@@ -104,7 +105,7 @@ public class LeaderboardViewModel extends ViewModel  implements LocalListener<St
     }
   }
   /**
-   * 
+   * refreshes the screen upon controller initialisation and screen swap
    * 
    */
   @Override public void clear()
@@ -116,7 +117,7 @@ public class LeaderboardViewModel extends ViewModel  implements LocalListener<St
 
 
   /**
-   * 
+   * refreshes data fetched from the server upon property change via observers
    * 
    */
   @Override public void propertyChange(ObserverEvent<String, String> event)

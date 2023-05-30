@@ -4,10 +4,10 @@ import mediator.User;
 
 /**
  * 
+ * A class intended to store information while switching between screens and user accounts.
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class ViewState {
     private String username,folderName,exerciseName,goBack,profileUsername;
@@ -22,7 +22,7 @@ public class ViewState {
     /**
      * 0-argument constructor 
      * 
-     * 
+     * Initializes all properties to default states tow ork with later
      */
     public ViewState(){
         this.username=null;
@@ -38,9 +38,9 @@ public class ViewState {
 
     /**
      * 
-     * 
+     * getter for the current user's username
      *
-     * @return 
+     * @return String to represent username
      *        
      */
     public String getUsername() {
@@ -48,9 +48,9 @@ public class ViewState {
     }
 
     /**
+     * setter for the current user's username
      * 
-     * 
-     * @param username 
+     * @param username the username value which the username variable will be set to
      *        
      */
     public void setUsername(String username) {
@@ -59,9 +59,9 @@ public class ViewState {
 
     /**
      * 
-     * 
+     * getter for the boolean that determines whether folders are editable
      *
-     * @return 
+     * @return boolean to represent editable/read-only
      *        
      */
     public boolean getManageFolderEditable() {
@@ -69,9 +69,9 @@ public class ViewState {
     }
 
     /**
+     * setter for the boolean to determine whether folders are editable/read-only
      * 
-     * 
-     * @param editable 
+     * @param editable to determine the ability to edit. True = editable, False = read-only
      *        
      */
     public void setManageFolderEditable(boolean editable) {
@@ -80,50 +80,50 @@ public class ViewState {
 
     /**
      * 
-     * 
+     * fetches the boolean that indicates if the folder selected will be a new addition or not
      *
-     * @return 
+     * @return boolean, True = new, False = edit/remove
      *        
      */
     public boolean getNewFolder() { return newFolder; }
 
     /**
+     * setter for the newFolder boolean
      * 
-     * 
-     * @param newFolder 
+     * @param newFolder argument to set the newFolder boolean value
      *        
      */
     public void setNewFolder(boolean newFolder) { this.newFolder = newFolder; }
 
     /**
      * 
-     * 
+     * getter for the currently selected folder's name
      *
-     * @return 
+     * @return String that contains the folder's title
      *        
      */
     public String getFolderName() { return folderName; }
     /**
+     * setter for the name of the folder that is currently selected
      * 
-     * 
-     * @param folderName 
+     * @param folderName String to indicate the name of the folder
      *        
      */
     public void setFolderName(String folderName) { this.folderName=folderName; }
     /**
      * 
-     * 
+     * getter for the currently selected folder's id
      *
-     * @return 
+     * @return integer to represent the id
      *        
      */
     public int getFolderId() {
         return folderId;
     }
     /**
+     * setter for the currently selected folder's id
      * 
-     * 
-     * @param folderId 
+     * @param folderId integer value of the folder's id
      *        
      */
     public void setFolderId(int folderId) {
@@ -131,18 +131,18 @@ public class ViewState {
     }
     /**
      * 
-     * 
+     * getter for the name of the currently selected exercise
      *
-     * @return 
+     * @return String to represent the name of the exercise
      *        
      */
     public String getExerciseName() {
         return exerciseName;
     }
     /**
+     * setter for the name of the currently selected exercise
      * 
-     * 
-     * @param exerciseName 
+     * @param exerciseName String to represent the exercise name
      *        
      */
     public void setExerciseName(String exerciseName) {
@@ -150,9 +150,9 @@ public class ViewState {
     }
 
     /**
+     * setter to determine whether the current user is a coach
      * 
-     * 
-     * @param isCoach 
+     * @param isCoach boolean to determine if the user is a coach
      *        
      */
     public void setIsCoach(boolean isCoach) {
@@ -160,9 +160,9 @@ public class ViewState {
     }
     /**
      * 
-     * 
+     * getter to determine if the current user is a coach
      *
-     * @return 
+     * @return boolean value for the current user's state
      *        
      */
     public boolean isCoach() {
@@ -170,46 +170,46 @@ public class ViewState {
     }
     /**
      * 
-     * 
+     * getter for the goBack value
      *
-     * @return 
+     * @return String value for the goBack display
      *        
      */
     public String getGoBack() { return goBack; }
     /**
+     * setter for the string value on the goBack function
      * 
-     * 
-     * @param goBack 
+     * @param goBack String value for the text
      *        
      */
     public void setGoBack(String goBack) { this.goBack = goBack; }
     /**
      * 
-     * 
+     * getter for the profile username of the current user
      *
-     * @return 
+     * @return String representing the user's username
      *        
      */
     public String getProfileUsername() { return profileUsername; }
     /**
+     * setter for the current user's profile username
      * 
-     * 
-     * @param profileUsername 
+     * @param profileUsername String to represent the user's username
      *        
      */
     public void setProfileUsername(String profileUsername) { this.profileUsername = profileUsername; }
 
-    /**
-     * 
-     * 
-     * @param trainee 
-     *        
-     *
-     * @return 
-     *        
-     */
-    public User getTrainee(User trainee){
-        return trainee;
-    }
+//    /**
+//     * fetches the User object for the requested trainee
+//     *
+//     * @param trainee
+//     *
+//     *
+//     * @return
+//     *
+//     */
+//    public User getTrainee(User trainee){
+//        return trainee;
+//    }
 
 }

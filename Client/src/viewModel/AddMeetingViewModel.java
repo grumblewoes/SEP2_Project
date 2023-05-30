@@ -16,10 +16,10 @@ import java.util.Date;
 
 /**
  * 
+ * The viewmodel for the AddMeetingViewController class.
  * 
- * 
- * @author 
- * @version 
+ * @author Jakub Cerovsky
+ * @version 1.0
  */
 public class AddMeetingViewModel extends ViewModel
 {
@@ -30,11 +30,11 @@ public class AddMeetingViewModel extends ViewModel
 
   /**
    * 2-argument constructor 
+   * initializes each of the StringProperties for the different fields in the controller class
    * 
-   * 
-   * @param model 
+   * @param model for the model layer to pass information to the server
    *        
-   * @param viewState 
+   * @param viewState to store information when switching screens
    *        
    */
   public AddMeetingViewModel(Model model, ViewState viewState){
@@ -46,9 +46,9 @@ public class AddMeetingViewModel extends ViewModel
   }
   /**
    * 
-   * 
+   * sends a meeting request from the trainee to the specified coach
    *
-   * @return 
+   * @return boolean for success/failure to send the request
    *        
    */
   public boolean sendMeetingRequest(){
@@ -66,7 +66,7 @@ public class AddMeetingViewModel extends ViewModel
     return successAddition;
   }
   /**
-   * 
+   * refreshes the screen upon initial load and when the screen is accessed by the user
    * 
    */
   @Override public void clear()
@@ -78,26 +78,26 @@ public class AddMeetingViewModel extends ViewModel
   }
   /**
    * 
-   * 
+   * getter for the errorLabel text
    *
-   * @return 
+   * @return StringProperty for the error label text
    *        
    */
   public StringProperty getErrorProperty() {return errorProperty;}
   /**
    * 
-   * 
+   * getter for the meeting date chosen by the trainee
    *
-   * @return 
+   * @return ObjectProperty<LocalDate> for the meeting date
    *        
    */
   public ObjectProperty<LocalDate> getDateOfMeeting(){return dateOfMeeting;}
 
   /**
-   * 
+   * getter for the trainee's coach
    * 
    *
-   * @return 
+   * @return StringProperty for the name of the coach
    *        
    */
   public StringProperty getCoachProperty()
@@ -107,9 +107,9 @@ public class AddMeetingViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * getter for the dates where the coach is unavailable to schedule a meeting
    *
-   * @return 
+   * @return ArrayList of LocalDates for taken days
    *        
    */
   public ArrayList<LocalDate> getTakenDates(){

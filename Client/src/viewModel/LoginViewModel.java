@@ -7,10 +7,10 @@ import modelClient.Model;
 
 /**
  * 
+ * ViewModel class for the LoginViewController class
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class LoginViewModel extends ViewModel
 {
@@ -22,11 +22,12 @@ public class LoginViewModel extends ViewModel
 
   /**
    * 2-argument constructor 
+   * takes the model object and the viewstate object, and initializes the different bound fields
+   * in the view controller
    * 
-   * 
-   * @param model 
+   * @param model for the model layer which communicates with the server
    *        
-   * @param viewState 
+   * @param viewState to store information when switching screens
    *        
    */
   public LoginViewModel(Model model, ViewState viewState) {
@@ -39,9 +40,11 @@ public class LoginViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * method that sends a request to the server to login with the given credentials.
+   * if true, then the user is logged in and the screen switches. if false, then an error
+   * is displayed.
    *
-   * @return 
+   * @return boolean to indicate login success/failure
    *        
    */
   public boolean login() {
@@ -58,9 +61,9 @@ public class LoginViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * getter for the user's username typed in the username field
    *
-   * @return 
+   * @return StringProperty that represents the user's name
    *        
    */
   public StringProperty getUsernameProperty() {
@@ -68,9 +71,9 @@ public class LoginViewModel extends ViewModel
   }
   /**
    * 
-   * 
+   * getter for the password string of the current user
    *
-   * @return 
+   * @return StringProperty that contains the password text
    *        
    */
   public StringProperty getPasswordProperty() {
@@ -78,9 +81,9 @@ public class LoginViewModel extends ViewModel
   }
   /**
    * 
-   * 
+   * getter for the text in the error label
    *
-   * @return 
+   * @return StringProperty that contains the error text
    *        
    */
   public StringProperty getErrorLabel() {
@@ -88,16 +91,16 @@ public class LoginViewModel extends ViewModel
   }
   /**
    * 
-   * 
+   * getter for the boolean to check if the current user is a coach
    *
-   * @return 
+   * @return boolean to indicate if the user is a coach
    *        
    */
   public boolean isCoach() {
     return model.isCoach(usernameProperty.get());
   }
   /**
-   * 
+   * method that refreshes the screen upon controller initialisation and screen switch
    * 
    */
   public void clear(){

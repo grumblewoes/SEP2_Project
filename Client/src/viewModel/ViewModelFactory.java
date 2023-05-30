@@ -4,10 +4,10 @@ import modelClient.Model;
 
 /**
  * 
+ * A class that returns instances of viewmodel subclasses upon request when switching screens
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class ViewModelFactory {
 
@@ -27,9 +27,9 @@ public class ViewModelFactory {
 	private AddMeetingViewModel addMeetingViewModel;
 /**
  * 1-argument constructor 
+ * initializes all instances of viewmodel subclasses along with setting model and initialising viewstate
  * 
- * 
- * @param model 
+ * @param model for the model layer of MVVM; communicates with the server
  *        
  */
 	public ViewModelFactory(Model model) {
@@ -53,9 +53,9 @@ public class ViewModelFactory {
 
 /**
  * 
- * 
+ * getter for CreateUserViewModel class
  *
- * @return 
+ * @return instance of CreateUserViewModel
  *        
  */
 	public CreateUserViewModel getCreateUserViewModel() {
@@ -64,9 +64,9 @@ public class ViewModelFactory {
 
 /**
  * 
- * 
+ * getter for LoginViewModel class
  *
- * @return 
+ * @return instance of LoginViewModel
  *        
  */
 	public LoginViewModel getLoginViewModel(){ return loginViewModel;	}
@@ -74,49 +74,49 @@ public class ViewModelFactory {
 
     /**
      * 
-     * 
+     * getter for HomeViewModel class
      *
-     * @return 
+     * @return instance of HomeViewModel
      *        
      */
     public HomeViewModel getHomeViewModel() { return  homeViewModel; }
     /**
      * 
-     * 
+     * getter for ManageFolderViewModel class
      *
-     * @return 
+     * @return instance of ManageFolderViewModel
      *        
      */
     public ManageFolderViewModel getManageFolderViewModel() { return  manageFolderViewModel; }
 /**
  * 
- * 
+ * getter for AddExerciseViewModel class
  *
- * @return 
+ * @return instance of AddExerciseViewModel
  *        
  */
 	public AddExerciseViewModel getAddExerciseViewModel() { return  addExerciseViewModel; }
     /**
      * 
-     * 
+     * getter for ManageSpecificExercisesViewModel class
      *
-     * @return 
+     * @return instance of ManageSpecificExercisesViewModel
      *        
      */
     public ManageSpecificExercisesViewModel getManageSpecificExercisesViewModel() { return  manageSpecificExercisesViewModel; }
     /**
      * 
-     * 
+     * getter for ProfileViewModel class
      *
-     * @return 
+     * @return instance of ProfileViewModel
      *        
      */
     public ProfileViewModel getProfileViewModel() { return  profileViewModel; }
 /**
  * 
- * 
+ * getter for AddFriendViewModel class
  *
- * @return 
+ * @return instance of AddFriendViewModel
  *        
  */
 	public AddFriendViewModel getAddFriendViewModel()
@@ -126,9 +126,9 @@ public class ViewModelFactory {
 
 /**
  * 
- * 
+ * getter for AddMeetingViewModel class
  *
- * @return 
+ * @return instance of AddMeetingViewModel
  *        
  */
 	public AddMeetingViewModel getAddMeetingViewModel()
@@ -137,9 +137,9 @@ public class ViewModelFactory {
 	}
 /**
  * 
- * 
+ * getter for EditRosterViewModel class
  *
- * @return 
+ * @return instance of EditRosterViewModel
  *        
  */
 	public EditRosterViewModel getEditRosterViewModel(){
@@ -148,9 +148,9 @@ public class ViewModelFactory {
 
 /**
  * 
- * 
+ * getter for LeaderboardViewModel class
  *
- * @return 
+ * @return instance of LeaderboardViewModel
  *        
  */
 	public LeaderboardViewModel getLeaderboardViewModel()

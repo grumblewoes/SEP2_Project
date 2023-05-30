@@ -13,10 +13,10 @@ import java.beans.PropertyChangeListener;
 
 /**
  * 
+ * ViewModel class for the CreateUserViewController class.
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class CreateUserViewModel extends ViewModel implements
 		PropertyChangeListener
@@ -40,9 +40,9 @@ public class CreateUserViewModel extends ViewModel implements
 
 /**
  * 1-argument constructor 
+ * accepts the model object as an argument, and initializes all the bound fields in the view controller to default values.
  * 
- * 
- * @param model 
+ * @param model for the model layer of MVVM, which communicates with the server
  *        
  */
 	public CreateUserViewModel(Model model) {
@@ -59,9 +59,9 @@ public class CreateUserViewModel extends ViewModel implements
 
 /**
  * 
- * 
+ * method that requests the server to create a new user, passing in their personal information.
  *
- * @return 
+ * @return boolean value to signify success/failure of the request
  *        
  */
 	public boolean createUser() {
@@ -80,7 +80,8 @@ public class CreateUserViewModel extends ViewModel implements
 
 	@Override
 /**
- * 
+ * method to refresh the screen and the displayed values upon controller initialisation
+ * and screen swap
  * 
  */
 	public void clear(){
@@ -96,12 +97,6 @@ public class CreateUserViewModel extends ViewModel implements
 	}
 
   @Override
-/**
- * 
- * 
- * @param evt 
- *        
- */
 	public void propertyChange(PropertyChangeEvent evt) {
 //		Platform.runLater(() -> {
 //			switch (evt.getPropertyName())
@@ -118,9 +113,9 @@ public class CreateUserViewModel extends ViewModel implements
 
 /**
  * 
- * 
+ * getter for the first name property
  *
- * @return 
+ * @return StringProperty for the first name text
  *        
  */
 	public StringProperty getFirstNameProperty() {
@@ -129,9 +124,9 @@ public class CreateUserViewModel extends ViewModel implements
 
 /**
  * 
- * 
+ * getter for the last name property
  *
- * @return 
+ * @return StringProperty for the last name text
  *        
  */
 	public StringProperty getLastNameProperty() {
@@ -140,9 +135,9 @@ public class CreateUserViewModel extends ViewModel implements
 
 /**
  * 
- * 
+ * getter for the username property
  *
- * @return 
+ * @return StringProperty for the username text
  *        
  */
 	public StringProperty getUserNameProperty() {
@@ -151,9 +146,9 @@ public class CreateUserViewModel extends ViewModel implements
 
 /**
  * 
- * 
+ * getter for the password property
  *
- * @return 
+ * @return StringProperty for the password
  *        
  */
 	public StringProperty getPasswordProperty() {
@@ -162,9 +157,9 @@ public class CreateUserViewModel extends ViewModel implements
 
 /**
  * 
- * 
+ * getter for the height property
  *
- * @return 
+ * @return IntegerProperty for the height text
  *        
  */
 	public IntegerProperty getHeightProperty() {
@@ -173,9 +168,9 @@ public class CreateUserViewModel extends ViewModel implements
 
 /**
  * 
- * 
+ * getter for the weight property
  *
- * @return 
+ * @return IntegerProperty for the weight text
  *        
  */
 	public IntegerProperty getWeightProperty() {
@@ -184,9 +179,9 @@ public class CreateUserViewModel extends ViewModel implements
 
 /**
  * 
- * 
+ * getter for the error property
  *
- * @return 
+ * @return StringProperty for the error text
  *        
  */
 	public StringProperty getErrorLabel() {

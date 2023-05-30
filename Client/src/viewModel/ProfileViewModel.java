@@ -12,10 +12,10 @@ import utility.observer.listener.LocalListener;
 
 /**
  * 
+ * ViewModel for the ProfileViewController class
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class ProfileViewModel extends ViewModel implements LocalListener<String,String> {
     private Model model;
@@ -29,11 +29,11 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 2-argument constructor 
+     * accepts a model and viewstate object as arguments
      * 
-     * 
-     * @param model 
+     * @param model for the model layer of MVVM, which communicates with the server
      *        
-     * @param viewState 
+     * @param viewState to store information while switching screens
      *        
      */
     public ProfileViewModel(Model model, ViewState viewState){
@@ -64,9 +64,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 
-     * 
+     * getter for the first name property
      *
-     * @return 
+     * @return StringProperty that contains the first name of the user
      *        
      */
     public StringProperty firstNameProperty() {
@@ -76,9 +76,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 
-     * 
+     * getter for the last name property
      *
-     * @return 
+     * @return StringProperty for the last name of the user
      *        
      */
     public StringProperty lastNameProperty() {
@@ -88,9 +88,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 
-     * 
+     * getter for the username property
      *
-     * @return 
+     * @return StringProperty that contains the username of the user
      *        
      */
     public StringProperty usernameProperty() {
@@ -101,9 +101,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 
-     * 
+     * getter for the status of the current user
      *
-     * @return 
+     * @return StringProperty that contains the status of the user
      *        
      */
     public StringProperty statusProperty() {
@@ -114,9 +114,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 
-     * 
+     * getter for the BMI of the current user
      *
-     * @return 
+     * @return StringProperty that contains the BMI
      *        
      */
     public StringProperty bmiProperty() {
@@ -124,27 +124,27 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     }
     /**
      * 
-     * 
+     * getter for the boolean property for whether the profile is editable
      *
-     * @return 
+     * @return BooleanProperty to determine whether the profile is read-only/editable
      *        
      */
     public BooleanProperty editableProperty() {  return editableProperty;  }
 
     /**
      * 
-     * 
+     * getter for the coach property to determine if the user is a coach or not
      *
-     * @return 
+     * @return BooleanProperty that contains whether or not the user is a coach
      *        
      */
     public BooleanProperty isCoachProperty() { return isCoachProperty; }
 
     /**
      * 
-     * 
+     * getter for the error property
      *
-     * @return 
+     * @return StringProperty that contains the error label text
      *        
      */
     public StringProperty errorProperty() {
@@ -155,9 +155,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 
-     * 
+     * getter for the weight property
      *
-     * @return 
+     * @return IntegerProperty that contains the weight of the user
      *        
      */
     public IntegerProperty weightProperty() {
@@ -168,9 +168,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 
-     * 
+     * getter for the height property
      *
-     * @return 
+     * @return IntegerProperty that contains the height of the user
      *        
      */
     public IntegerProperty heightProperty() {
@@ -178,9 +178,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     }
     /**
      * 
-     * 
+     * getter for the bench press property
      *
-     * @return 
+     * @return IntegerProperty that contains the record for the bench press weight of the user
      *        
      */
     public IntegerProperty benchPressProperty() {
@@ -190,10 +190,10 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
 
     /**
-     * 
-     * 
      *
-     * @return 
+     * getter for the deadlift property
+     *
+     * @return IntegerProperty that contains the record for the deadlift weight of the user
      *        
      */
     public IntegerProperty deadliftProperty() {
@@ -203,10 +203,10 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
 
     /**
-     * 
-     * 
      *
-     * @return 
+     * getter for the squat property
+     *
+     * @return IntegerProperty that contains the record for the squat weight of the user
      *        
      */
     public IntegerProperty squatProperty() {
@@ -214,25 +214,26 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     }
     /**
      * 
-     * 
+     * getter for the share property of the current user
      *
-     * @return 
+     * @return BooleanProperty that contains whether the user would like to share their personal information with others
+     * on the leaderboard
      *        
      */
     public BooleanProperty shareProfileProperty() {  return shareProfileProperty;  }
     /**
      * 
-     * 
+     * getter for the coach state property, determining if the user has a coach or not
      *
-     * @return 
+     * @return BooleanProperty that contains whether the user has a coach or not
      *        
      */
     public BooleanProperty coachStateProperty() { return coachStateProperty; }
     /**
      * 
-     * 
+     * getter for the coach property of the current user
      *
-     * @return 
+     * @return StringProperty that contains the name of the user's coach
      *        
      */
     public StringProperty coachProperty() {
@@ -241,7 +242,11 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     @Override
     /**
-     * 
+     * refreshes the screen during controller initialisation and screen swap.
+     * If the user is a trainee and is viewing their own profile, the fields will be editable,
+     * and they can update their profile. If the user is a friend of said trainee, the fields will
+     * be read-only, and the update button will be hidden. If the user is a coach, the fields will
+     * be read-only, and they will not have the option to request a coach.
      * 
      */
     public void clear() {
@@ -327,9 +332,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 
-     * 
+     * method that requests to the server to update the information on the profile screen
      *
-     * @return 
+     * @return boolean that signifies success/failure of the request
      *        
      */
     public boolean update() {
@@ -346,9 +351,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 
-     * 
+     * method that requests to the server to remove the person whose profile the user is currently viewing
      *
-     * @return 
+     * @return boolean to signify success/failure of the request
      *        
      */
     public boolean removeFriend(){
@@ -365,9 +370,9 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     /**
      * 
-     * 
+     * method fetches the text for the back button
      *
-     * @return 
+     * @return String that contains the text
      *        
      */
     public String getGoBack(){
@@ -378,7 +383,7 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     @Override
     /**
-     * 
+     * method that updates the error label with information received from the server
      * 
      */
     public void propertyChange(ObserverEvent<String, String> event) {
@@ -390,7 +395,7 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     }
 
     /**
-     * 
+     * method that makes a request to the server to remove the coach of the current trainee
      * 
      */
     public void removeCoach()
@@ -410,7 +415,8 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     }
 
     /**
-     * 
+     * method that requests to the server to make the coach by the name of the current coachProperty value
+     * the current trainee's new coach
      * 
      */
     public void requestCoach()

@@ -26,10 +26,10 @@ import java.util.ArrayList;
 
 /**
  * 
+ * ViewModel for the EditRosterViewController class
  * 
- * 
- * @author 
- * @version 
+ * @author Catarina Jesus
+ * @version 1.0
  */
 public class EditRosterViewModel extends ViewModel
 {
@@ -46,11 +46,12 @@ public class EditRosterViewModel extends ViewModel
 
   /**
    * 2-argument constructor 
+   * accepts a model and viewstate object and initialises the rest of the bound properties,
+   * along with a Gson interpreter and a date formatter
    * 
-   * 
-   * @param model 
+   * @param model for the model layer of MVVM, which communicates with the server
    *        
-   * @param viewState 
+   * @param viewState for storing information when switching screens
    *        
    */
   public EditRosterViewModel(Model model, ViewState viewState)
@@ -71,9 +72,9 @@ public class EditRosterViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * getter for the error property
    *
-   * @return 
+   * @return StringProperty that contains the error text
    *        
    */
   public StringProperty getErrorProperty()
@@ -83,9 +84,9 @@ public class EditRosterViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * getter for the JSON string of trainee requests for the current coach
    *
-   * @return 
+   * @return StringProperty that contains the list of trainee requests
    *        
    */
   public StringProperty getTraineeRequestList()
@@ -95,9 +96,9 @@ public class EditRosterViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * getter for the JSON string of meeting requests from the current coach's trainees
    *
-   * @return 
+   * @return StringProperty that contains the list of meeting requests
    *        
    */
   public StringProperty getMeetingRequestList()
@@ -107,9 +108,9 @@ public class EditRosterViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * getter for the JSON string of meeting's on the current coach's roster
    *
-   * @return 
+   * @return StringProperty that contains the list of meetings
    *        
    */
   public StringProperty getMeetingList()
@@ -119,9 +120,9 @@ public class EditRosterViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * getter for the JSON string of trainees on the current coach's roster
    *
-   * @return 
+   * @return StringProperty that contains the list of trainees
    *        
    */
   public StringProperty getTraineeList()
@@ -161,12 +162,12 @@ public class EditRosterViewModel extends ViewModel
   }
 
   /**
+   * method that requests to the server to accept the trainee request from the specified trainee
    * 
-   * 
-   * @param username 
+   * @param username String that contains the trainee's username
    *        
    *
-   * @return 
+   * @return boolean that contains the success/failure of the request
    *        
    */
   public boolean acceptRequest(String username)
@@ -175,12 +176,12 @@ public class EditRosterViewModel extends ViewModel
   }
 
   /**
-   * 
-   * 
-   * @param username 
-   *        
+   method that requests to the server to reject the trainee request from the specified trainee
    *
-   * @return 
+   * @param username String that contains the trainee's username
+   *
+   *
+   * @return boolean that contains the success/failure of the request
    *        
    */
   public boolean denyRequest(String username)
@@ -189,10 +190,9 @@ public class EditRosterViewModel extends ViewModel
   }
 
   /**
-   * 
-   * 
+   * method that requests to the server to remove the selected trainee from the coach's roster
    *
-   * @return 
+   * @return boolean that contains the success/failure of the request
    *        
    */
   public boolean removeTrainee()
@@ -206,9 +206,9 @@ public class EditRosterViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * method that requests to the server to cancel a meeting that was previously accepted by the coach
    *
-   * @return 
+   * @return boolean that signifies the success/failure of the request
    *        
    */
   public boolean removeMeeting()
@@ -231,10 +231,10 @@ public class EditRosterViewModel extends ViewModel
 
 
   /**
-   * 
-   * 
    *
-   * @return 
+   * method that requests to the server to approve a meeting request
+   *
+   * @return boolean that signifies the success/failure of the request
    *        
    */
   public boolean approveMeeting()
@@ -252,11 +252,11 @@ public class EditRosterViewModel extends ViewModel
   }
 
   /**
-   * 
-   * 
    *
-   * @return 
-   *        
+   * method that requests to the server to reject a meeting request
+   *
+   * @return boolean that signifies the success/failure of the request
+   *
    */
   public boolean denyMeeting()
   {
@@ -272,7 +272,9 @@ public class EditRosterViewModel extends ViewModel
   }
 
   /**
-   * 
+   * refreshes the screen upon controller initialisation and screen switch, and requests
+   * updated information from the server for the trainee roster, meeting requests, and trainee
+   * requests
    * 
    */
   @Override public void clear()
@@ -290,9 +292,9 @@ public class EditRosterViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * getter for the username property
    *
-   * @return 
+   * @return StringProperty that contains the username of the coach
    *        
    */
   public StringProperty getUsernameProperty()
@@ -302,9 +304,9 @@ public class EditRosterViewModel extends ViewModel
 
   /**
    * 
-   * 
+   * getter for the selected trainee property
    *
-   * @return 
+   * @return StringProperty that contains the name of the selected trainee
    *        
    */
   public StringProperty getSelectedTraineeName()
@@ -313,9 +315,9 @@ public class EditRosterViewModel extends ViewModel
   }
 
   /**
+   * setter for the selected trainee's name property
    * 
-   * 
-   * @param selectedTraineeName 
+   * @param selectedTraineeName String that contains the selected trainee's name
    *        
    */
   public void setSelectedTraineeName(String selectedTraineeName)
@@ -325,32 +327,32 @@ public class EditRosterViewModel extends ViewModel
   }
 
   /**
+   * setter for the selected meeting property
    * 
-   * 
-   * @param mtgString 
+   * @param mtgString String that contains the selected meeting text
    *        
    */
   public void setSelectedMeeting(String mtgString)
   {
-    System.out.println("Clicked" + " " + mtgString);
+    //System.out.println("Clicked" + " " + mtgString);
     this.selectedMtg = new SimpleStringProperty(mtgString);
   }
 
-  /**
-   * 
-   * 
-   *
-   * @return 
-   *        
-   */
-  public StringProperty getSelectedMeeting()
-  {
-    return selectedMtg;
-  }
+//  /**
+//   *
+//   *
+//   *
+//   * @return
+//   *
+//   */
+//  public StringProperty getSelectedMeeting()
+//  {
+//    return selectedMtg;
+//  }
 
   /**
-   * 
-   * 
+   * resets all viewstate variables to their defaults, and disconnects the listener for the current trainee
+   *
    */
   public void logout()
   {
@@ -366,9 +368,9 @@ public class EditRosterViewModel extends ViewModel
     viewState.setManageFolderEditable(false);
   }
   /**
+   * method that prepares the viewstate to view the selected trainee's profile
    * 
-   * 
-   * @param username 
+   * @param username String that contains the name of the selected trainee
    *        
    */
   public void manageTraineeOpen(String username) {
@@ -377,8 +379,8 @@ public class EditRosterViewModel extends ViewModel
   }
 
   /**
-   * 
-   * 
+   * method that prepares the viewstate to view the coach's profile
+   *
    */
   public void setupOpenProfile() {
     viewState.setProfileUsername(viewState.getUsername() );

@@ -13,10 +13,10 @@ import java.util.ArrayList;
 
 /**
  * 
+ * ViewModel for HomeViewController class.
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class HomeViewModel extends ViewModel{
     private StringProperty usernameProperty, folderListProperty, errorProperty,friendshipListProperty,friendshipRequestListProperty,meetingListProperty,meetingRequestListProperty;
@@ -26,11 +26,12 @@ public class HomeViewModel extends ViewModel{
 
     /**
      * 2-argument constructor 
+     * accepts a model and viewstate object, and initialises the rest of the bound properties,
+     * along with a Gson interpreter
      * 
-     * 
-     * @param model 
+     * @param model for the model layer of MVVM, which communicates with the server
      *        
-     * @param viewState 
+     * @param viewState to store information when switching screens
      *        
      */
     public HomeViewModel(Model model, ViewState viewState) {
@@ -48,27 +49,27 @@ public class HomeViewModel extends ViewModel{
 
     /**
      * 
-     * 
+     * getter for the username property
      *
-     * @return 
+     * @return StringProperty for the name of the user
      *        
      */
     public StringProperty getUsernameProperty() { return usernameProperty; }
 
     /**
      * 
-     * 
+     * getter for the error label text
      *
-     * @return 
+     * @return StringProperty that contains the error text
      *        
      */
     public StringProperty getErrorLabel() { return errorProperty; }
 
     /**
      * 
-     * 
+     * getter for the JSON string that represents the list of folders
      *
-     * @return 
+     * @return StringProperty that contains the String of folders
      *        
      */
     public StringProperty getFolderListProperty() {
@@ -76,25 +77,25 @@ public class HomeViewModel extends ViewModel{
     }
     /**
      * 
-     * 
+     * getter for the JSON string that represents the list of friend requests
      *
-     * @return 
+     * @return StringProperty that contains the String of requests
      *        
      */
     public StringProperty getFriendshipRequestListProperty() {     return friendshipRequestListProperty;  }
     /**
      * 
-     * 
+     * getter for the JSON string that represents the list of friends the current user has
      *
-     * @return 
+     * @return StringProperty that contains the String of friends
      *        
      */
     public StringProperty getFriendshipListProperty() {     return friendshipListProperty;  }
     /**
      * 
-     * 
+     * getter for the JSON string that represents the list of meetings with the user's coach
      *
-     * @return 
+     * @return StringProperty that contains the String of meetings
      *        
      */
     public StringProperty getMeetingListProperty()
@@ -103,9 +104,9 @@ public class HomeViewModel extends ViewModel{
     }
     /**
      * 
-     * 
+     * getter for the JSON string that represents the list of meeting requests made by the current user
      *
-     * @return 
+     * @return StringProperty that contains the String of meeting requests
      *        
      */
     public StringProperty getMeetingRequestListProperty()
@@ -117,9 +118,10 @@ public class HomeViewModel extends ViewModel{
 
     /**
      * 
-     * 
+     * method to create a new folder. sets ViewState variables to the appropriate values to store information
+     * when swapping screens
      *
-     * @return 
+     * @return boolean that is true in all cases
      *        
      */
     public boolean createFolder() {
@@ -131,12 +133,14 @@ public class HomeViewModel extends ViewModel{
 
 
     /**
+     * method that requests to remove a folder from the user's profile. the appropriate values
+     * in viewstate are set, and an attempt is made to remove the folder, returning a boolean
+     * upon success/failure
      * 
-     * 
-     * @param folderId 
+     * @param folderId integer to represent the folder ID
      *        
      *
-     * @return 
+     * @return boolean to represent success/failure of the request
      *        
      */
     public boolean removeFolder(int folderId) {
@@ -158,11 +162,11 @@ public class HomeViewModel extends ViewModel{
     }
 
     /**
+     * method that prepares the viewstate in order to edit a user's folder
      * 
-     * 
-     * @param title 
+     * @param title String for the title of the folder
      *        
-     * @param id 
+     * @param id integer for the folder's ID
      *        
      */
     public void editFolder(String title,int id) {
@@ -175,7 +179,8 @@ public class HomeViewModel extends ViewModel{
 
     @Override
     /**
-     * 
+     * method that refreshes the screen upon controller initialisation and screen swap, and requests updated information
+     * from the server
      * 
      */
     public void clear() {
@@ -192,11 +197,11 @@ public class HomeViewModel extends ViewModel{
     }
 
     /**
+     * prepares the viewstate to open the user's selected folder from the home screen
      * 
-     * 
-     * @param folderName 
+     * @param folderName String for the name of the folder
      *        
-     * @param folderId 
+     * @param folderId integer for the folder's ID
      *        
      */
     public void setupOpenFolder(String folderName,int folderId) {
@@ -206,16 +211,16 @@ public class HomeViewModel extends ViewModel{
     }
 
     /**
-     * 
+     * prepares the viewstate in order to open the profile of the current user
      * 
      */
     public void setupProfile() {
         viewState.setProfileUsername(viewState.getUsername() );
     }
     /**
+     * prepares the viewstate by setting the name of the current user
      * 
-     * 
-     * @param username 
+     * @param username String to represent the username of the current user
      *        
      */
     public void setupProfile(String username) {
@@ -257,16 +262,16 @@ public class HomeViewModel extends ViewModel{
     }
 
     /**
+     * method that requests to the server to accept a friend request from another user
      * 
-     * 
-     * @param username 
+     * @param username String that contains the username of the person requesting
      *        
      */
     public void acceptRequest(String username) {
         model.acceptFriendRequest(username, viewState.getUsername());
     }
     /**
-     * 
+     * method that requests to the server to reject a friend request sent by another user
      * 
      * @param username 
      *        
@@ -276,12 +281,12 @@ public class HomeViewModel extends ViewModel{
     }
 
     /**
+     * method that cancels a meeting scheduled to take place with the trainee's coach
      * 
-     * 
-     * @param dateOfMeeting 
+     * @param dateOfMeeting LocalDate that contains the date of the meeting
      *        
      *
-     * @return 
+     * @return boolean that represents success or failure
      *        
      */
     public boolean removeMeeting(LocalDate dateOfMeeting){
@@ -314,7 +319,7 @@ public class HomeViewModel extends ViewModel{
     }
 
     /**
-     * 
+     * resets all viewstate variables to their defaults, and disconnects the listener for the current trainee
      * 
      */
     public void logout() {
@@ -332,9 +337,9 @@ public class HomeViewModel extends ViewModel{
 
     /**
      * 
-     * 
+     * method that determines whether it's possible to schedule an appointment with a coach or not
      *
-     * @return 
+     * @return boolean that represents whether creating a meeting would be valid or not
      *        
      */
     public boolean setupMeeting()

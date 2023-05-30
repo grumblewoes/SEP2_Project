@@ -6,11 +6,10 @@ import javafx.beans.property.StringProperty;
 import modelClient.Model;
 
 /**
+ * The viewmodel class for the addFriendViewController.
  * 
- * 
- * 
- * @author 
- * @version 
+ * @author Jakub Cerovsky
+ * @version 1.0
  */
 public class AddFriendViewModel extends ViewModel
 {
@@ -20,11 +19,11 @@ public class AddFriendViewModel extends ViewModel
 
   /**
    * 2-argument constructor 
+   * initializes the StringProperties for each of the fields in the view controller
    * 
-   * 
-   * @param model 
+   * @param model for the model layer
    *        
-   * @param viewState 
+   * @param viewState to store information when switching screens
    *        
    */
   public AddFriendViewModel(Model model, ViewState viewState){
@@ -36,9 +35,9 @@ public class AddFriendViewModel extends ViewModel
   }
   /**
    * 
-   * 
+   * sends a friend request to the specified person, delegates to model
    *
-   * @return 
+   * @return boolean for success/failure
    *        
    */
   public boolean sendRequest(){
@@ -52,7 +51,7 @@ public class AddFriendViewModel extends ViewModel
     return successAddition;
   }
   /**
-   * 
+   * refreshes the screen upon initial load and when the screen is accessed by the user
    * 
    */
   @Override public void clear()
@@ -62,25 +61,25 @@ public class AddFriendViewModel extends ViewModel
   }
   /**
    * 
-   * 
+   * getter for the errorLabel property
    *
-   * @return 
+   * @return StringProperty for the label text
    *        
    */
   public StringProperty getErrorProperty() {return errorProperty;}
   /**
    * 
-   * 
+   * getter for the header property
    *
-   * @return 
+   * @return StringProperty for the header text
    *        
    */
   public StringProperty getHeaderProperty() {return headerLabel;}
   /**
    * 
-   * 
+   * getter for the name property
    *
-   * @return 
+   * @return StringProperty for the name field
    *        
    */
   public StringProperty getNameProperty() {return nameProperty;}
