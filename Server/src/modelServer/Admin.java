@@ -10,10 +10,12 @@ import java.util.Scanner;
 
 /**
  * 
+ * The Admin class represents an administrator in the model server system. It provides functionality for logging in, managing exercises, and managing coaches.
+ * Implements the Runnable interface to allow execution as a separate thread.
+ *
  * 
- * 
- * @author 
- * @version 
+ * @author Julija Gramovica, Anna Pomerantz
+ * @version 1.0
  */
 public class Admin implements Runnable
 
@@ -22,10 +24,10 @@ public class Admin implements Runnable
   private String username, password;
 
   /**
-   * 1-argument constructor 
+   * 1-argument constructor, creating the Admin object with a specified Model instance and default login credentials.
    * 
    * 
-   * @param model 
+   * @param model an instance of the Model class
    *        
    */
   public Admin(Model model)
@@ -36,14 +38,15 @@ public class Admin implements Runnable
   }
 
   /**
-   * 
-   * 
-   * @param username 
-   *        
-   * @param password 
-   *        
    *
-   * @return 
+   * Validates the login credentials provided by the Administrator.
+   *
+   * @param username the username to validate
+   *
+   * @param password the password to validate
+   *
+   *
+   * @return true if the credentials are valid, false otherwise
    *        
    */
   public boolean validateLogin(String username, String password)
@@ -56,8 +59,11 @@ public class Admin implements Runnable
   }
 
   /**
-   * 
-   * 
+   *
+   * The run method executed when the Admin thread starts.
+   * It prompts for username and password, validates the login, and presents a menu for exercise and coach management.
+   *
+   * @throws InputMismatchException - in case that input is invalid
    */
   @Override public void run()
   {
@@ -142,31 +148,31 @@ public class Admin implements Runnable
             break;
           case 3:
             scanner.nextLine();
-            System.out.print("Enter username for Coach >> ");
+            System.out.print("Enter username for Coach: ");
             String coachUsername = scanner.nextLine();
 
-            System.out.print("Enter password for Coach >> ");
+            System.out.print("Enter password for Coach: ");
             String coachPassword = scanner.nextLine();
 
-            System.out.print("Enter first name >> ");
+            System.out.print("Enter first name: ");
             String coachName = scanner.nextLine();
 
-            System.out.print("Enter last name >> ");
+            System.out.print("Enter last name: ");
             String coachLName = scanner.nextLine();
 
-            System.out.print("Enter height >> ");
+            System.out.print("Enter height: ");
             int coachHeight = scanner.nextInt();
 
-            System.out.print("Enter weight >> ");
+            System.out.print("Enter weight: ");
             int coachWeight = scanner.nextInt();
 
-            System.out.print("Enter PB for bench press >> ");
+            System.out.print("Enter PB for bench press: ");
             int pbBench = scanner.nextInt();
 
-            System.out.print("Enter PB for squat >> ");
+            System.out.print("Enter PB for squat: ");
             int pbSquat = scanner.nextInt();
 
-            System.out.print("Enter PB for deadlift >> ");
+            System.out.print("Enter PB for deadlift: ");
             int pbLift = scanner.nextInt();
 
 

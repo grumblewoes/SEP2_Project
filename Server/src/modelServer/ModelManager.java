@@ -13,11 +13,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
+ *
+ * The ModelManager class implements the Model interface and manages the application's data and logic.
+ * It provides methods for creating users, logging in, managing folders and exercises, and handling user interactions with the system.
+ *
  * 
- * 
- * 
- * @author 
- * @version 
+ * @author Jakub Cerovsky, Damian Trafiałek, Julija Gramovica, Anna Pomerantz
+ * @version 1.0
  */
 public class ModelManager implements Model
 {
@@ -26,7 +28,7 @@ public class ModelManager implements Model
   private MeetingDAO meetingDAO;
 
   /**
-   * 0-argument constructor 
+   * 0-argument constructor, creating a ModelManager object
    * 
    * 
    */
@@ -36,6 +38,17 @@ public class ModelManager implements Model
     this.meetingDAO = new MeetingDAO();
 
   }
+  /**
+   * Creates a new user with the specified details.
+   *
+   * @param firstName the first name of the user
+   * @param lastName the last name of the user
+   * @param username the username of the user
+   * @param password the password of the user
+   * @param height the height of the user
+   * @param weight the weight of the user
+   * @return true if the user was created successfully, false otherwise
+   */
 
   @Override public boolean createUser(String firstName, String lastName,
       String username, String password, int height, int weight)
@@ -57,14 +70,11 @@ public class ModelManager implements Model
 
 
   /**
-   * 
-   * 
-   * @param username 
-   *        
-   * @param password 
-   *        
+   * Logs in a user with the specified username and password.
    *
-   * @return 
+   * @param username the username of the user
+   * @param password the password of the user
+   * @return true if the login was successful, false otherwise
    *        
    */
   @Override public boolean login(String username, String password)
@@ -84,14 +94,11 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param username 
-   *        
-   * @param name 
-   *        
+   * Creates a new folder for the given user.
    *
-   * @return 
+   * @param username the username of the user
+   * @param name     the name of the folder to be created
+   * @return true if the folder is created successfully, false otherwise
    *        
    */
   @Override public boolean createFolder(String username, String name)
@@ -111,15 +118,11 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param username 
-   *        
-   * @param folderId 
-   *        
+   * Removes the folder with the specified folder Id for the given user.
    *
-   * @return 
-   *        
+   * @param username  the username of the user
+   * @param folderId  the ID of the folder to be removed
+   * @return true if the folder is removed successfully, false otherwise
    */
   @Override public boolean removeFolder(String username, int folderId)
   {
@@ -137,6 +140,14 @@ public class ModelManager implements Model
     }
     return ans;
   }
+  /**
+   * Renames the folder with the specified folder Id for the given user.
+   *
+   * @param username  the username of the user
+   * @param folderId  the ID of the folder to be renamed
+   * @param newName   the new name for the folder
+   * @return true if the folder is renamed successfully, false otherwise
+   */
 
   @Override public boolean editFolder(String username, int folderId,
       String newName)
@@ -158,13 +169,10 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param username 
-   *        
+   * Retrieves the list of folders for the given user.
    *
-   * @return 
-   *        
+   * @param username the username of the user
+   * @return the list of folders for the user, or null if SQLException is caught
    */
   @Override public FolderList getFolderList(String username)
   {
@@ -177,6 +185,16 @@ public class ModelManager implements Model
       return null;
     }
   }
+  /**
+   * Adds an exercise to the specified folder for the given user.
+   *
+   * @param username     the username of the user
+   * @param exerciseName the name of the exercise to be added
+   * @param folderId     the ID of the folder to which the exercise should be added
+   * @param weight       the weight of the exercise
+   * @param repetition   the number of repetitions for the exercise
+   * @return true if the exercise is added successfully, false otherwise
+   */
 
   @Override public boolean addExercise(String username, String exerciseName,
       int folderId, int weight, int repetition)
@@ -193,13 +211,10 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param exerciseId 
-   *        
+   * Removes the exercise with the specified exercise Id.
    *
-   * @return 
-   *        
+   * @param exerciseId the ID of the exercise to be removed
+   * @return true if the exercise is removed successfully, false otherwise
    */
   @Override public boolean removeExercise(int exerciseId)
   {
@@ -214,15 +229,11 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param name 
-   *        
-   * @param folderId 
-   *        
+   * Removes exercises with the specified name from the given folder.
    *
-   * @return 
-   *        
+   * @param name     the name of the exercises to be removed
+   * @param folderId the ID of the folder from which the exercises should be removed
+   * @return true if the exercises are removed successfully, false otherwise
    */
   @Override public boolean removeExercisesByName(String name, int folderId)
   {
@@ -239,13 +250,10 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param folderId 
-   *        
+   * Retrieves the list of exercises for the specified folder.
    *
-   * @return 
-   *        
+   * @param folderId the ID of the folder
+   * @return the list of exercises for the folder, or null if an error occurs
    */
   @Override public ExerciseList getExerciseList(int folderId)
   {
@@ -258,6 +266,14 @@ public class ModelManager implements Model
       return null;
     }
   }
+  /**
+   * Retrieves an ExerciseList by name and folder ID.
+   *
+   * @param name       the name of the exercise list
+   * @param folderId   the ID of the folder
+   * @return           the ExerciseList matching the specified name and folder ID,
+   *                   or null if an SQLException occurs
+   */
 
   @Override public ExerciseList getExerciseListByNameAndFolderId(String name,
       int folderId)
@@ -273,11 +289,10 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
+   * Retrieves a list of possible exercises.
    *
-   * @return 
-   *        
+   * @return           an ArrayList of possible exercises,
+   *                   or null if an SQLException occurs
    */
   @Override public ArrayList<String> getPossibleExercises()
   {
@@ -290,78 +305,13 @@ public class ModelManager implements Model
       return null;
     }
   }
-//
-/**
- * 
- * 
- * @param username 
- *        
- *
- * @return 
- *        
- */
-//  @Override public int getBestSquat(String username)
-//  {
-//    try
-//    {
-//      return new ExerciseDAO().getBestSquat(username);
-//    }
-//    catch (SQLException e)
-//    {
-//      return 0;
-//    }
-//  }
-//
-/**
- * 
- * 
- * @param username 
- *        
- *
- * @return 
- *        
- */
-//  @Override public int getBestDeadlift(String username)
-//  {
-//    try
-//    {
-//      return new ExerciseDAO().getBestDeadlift(username);
-//    }
-//    catch (SQLException e)
-//    {
-//      return 0;
-//    }
-//  }
-//
-/**
- * 
- * 
- * @param username 
- *        
- *
- * @return 
- *        
- */
-//  @Override public int getBestBenchPress(String username)
-//  {
-//    try
-//    {
-//      return new ExerciseDAO().getBestBenchPress(username);
-//    }
-//    catch (SQLException e)
-//    {
-//      return 0;
-//    }
-//  }
 
   /**
-   * 
-   * 
-   * @param username 
-   *        
+   * Retrieves a trainee by username.
    *
-   * @return 
-   *        
+   * @param username   the username of the trainee
+   * @return           the User object representing the trainee,
+   *                   or null if an SQLException occurs
    */
   @Override public User getTrainee(String username)
   {
@@ -376,13 +326,11 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param title 
-   *        
+   * Adds an exercise with the specified title.
    *
-   * @return 
-   *        
+   * @param title      the title of the exercise to be added
+   * @return           true if the exercise is added successfully,
+   *                   false if an SQLException occurs
    */
   @Override public boolean addExercise(String title)
   {
@@ -394,13 +342,11 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param title 
-   *        
+   * Removes an exercise with the specified title.
    *
-   * @return 
-   *        
+   * @param title      the title of the exercise to be removed
+   * @return           true if the exercise is removed successfully,
+   *                   false if an SQLException occurs
    */
   @Override public boolean removeExercise(String title)
   {
@@ -412,21 +358,15 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param u 
-   *        
-   * @param h 
-   *        
-   * @param w 
-   *        
-   * @param s 
-   *        
-   * @param st 
-   *        
+   * Updates the trainee with the specified details.
    *
-   * @return 
-   *        
+   * @param u          the username of the trainee
+   * @param h          the height of the trainee
+   * @param w          the weight of the trainee
+   * @param s          sharing of trainee's profile
+   * @param st         the status text of the trainee
+   * @return           true if the trainee is updated successfully,
+   *                   false if an SQLException occurs
    */
   @Override public boolean updateTrainee(String u, int h, int w,boolean s,String st){
         try{
@@ -439,11 +379,12 @@ public class ModelManager implements Model
 
     @Override
     /**
-     * 
-     * 
+     * Accepts a friend request between two users.
      *
-     * @return 
-     *        
+     * @param requester_username   the username of the requester
+     * @param accepter_username    the username of the accepter
+     * @return                     true if the friend request is accepted successfully,
+     *                             false if an SQLException occurs
      */
     public boolean acceptFriendRequest(String requester_username,String accepter_username) {
         Logger.log("accepting "+ requester_username + " , "+ accepter_username);
@@ -455,11 +396,12 @@ public class ModelManager implements Model
     }
     @Override
     /**
-     * 
-     * 
+     * Rejects a friend request between two users.
      *
-     * @return 
-     *        
+     * @param requester_username   the username of the requester
+     * @param accepter_username    the username of the accepter
+     * @return                     true if the friend request is rejected successfully,
+     *                             false if an SQLException occurs
      */
     public boolean rejectFriendRequest(String requester_username,String accepter_username) {
         try{
@@ -469,6 +411,14 @@ public class ModelManager implements Model
             return false;
         }
     }
+  /**
+   * Sends a friend request from the requester to the accepter.
+   *
+   * @param requesterUsername   the username of the requester
+   * @param accepterUsername    the username of the accepter
+   * @return                    true if the friend request is sent successfully,
+   *                            false if an SQLException occurs
+   */
 
     @Override public boolean sendFriendRequest(String requesterUsername,
         String accepterUsername) {
@@ -482,13 +432,11 @@ public class ModelManager implements Model
 
     @Override
     /**
-     * 
-     * 
-     * @param username 
-     *        
+     * Retrieves the list of friends for a given username.
      *
-     * @return 
-     *        
+     * @param username   the username of the user
+     * @return           the FriendList object containing the user's friends,
+     *                   or an empty FriendList if an SQLException occurs
      */
     public FriendList getFriends(String username) {
         try{
@@ -500,13 +448,11 @@ public class ModelManager implements Model
 
     @Override
     /**
-     * 
-     * 
-     * @param username 
-     *        
+     * Retrieves the list of friend requests for a given username.
      *
-     * @return 
-     *        
+     * @param username   the username of the user
+     * @return           an ArrayList of friend requests received by the user,
+     *                   or an empty ArrayList if an SQLException occurs
      */
     public ArrayList<String> getFriendRequests(String username) {
         try{
@@ -515,6 +461,14 @@ public class ModelManager implements Model
             return new ArrayList<>();
         }
     }
+  /**
+   * Removes a friend relationship between two users.
+   *
+   * @param requesterUsername   the username of the requester
+   * @param accepterUsername    the username of the accepter
+   * @return                    true if the friend relationship is removed successfully,
+   *                            false if an SQLException occurs
+   */
 
     @Override public boolean removeFriend(String requesterUsername,
         String accepterUsername)
@@ -527,17 +481,7 @@ public class ModelManager implements Model
     }
 
     @Override
-    /**
-     * 
-     * 
-     * @param requesterUsername 
-     *        
-     * @param accepterUsername 
-     *        
-     *
-     * @return 
-     *        
-     */
+
     public boolean requestCoach(String requesterUsername, String accepterUsername) {
         try{
             return new CoachDAO().requestCoach(requesterUsername,accepterUsername);
@@ -548,13 +492,10 @@ public class ModelManager implements Model
 
     @Override
     /**
-     * 
-     * 
-     * @param username 
-     *        
+     * Checks if a user is a coach.
      *
-     * @return 
-     *        
+     * @param username   the username of the user
+     * @return           true if the user is a coach, false otherwise or if an SQLException occurs
      */
     public boolean isCoach(String username) {
         try{
@@ -564,15 +505,12 @@ public class ModelManager implements Model
         }
     }
 
-    /**
-     * 
-     * 
-     * @param traineeUsername 
-     *        
-     *
-     * @return 
-     *        
-     */
+  /**
+   * Removes the coach for a trainee.
+   *
+   * @param traineeUsername the username of the trainee
+   * @return true if the coach assignment is successfully removed, false otherwise
+   */
     @Override public boolean removeCoachAssignment(String traineeUsername)
     {
         try{
@@ -582,6 +520,21 @@ public class ModelManager implements Model
         }
     }
 
+  /**
+   * Adds a coach with the specified details.
+   *
+   * @param coachUsername the username of the coach
+   * @param coachPassword the password of the coach
+   * @param coachName the name of the coach
+   * @param coachLName the last name of the coach
+   * @param coachHeight the height of the coach
+   * @param coachWeight the weight of the coach
+   * @param pbBench the personal best bench press of the coach
+   * @param pbSquat the personal best squat of the coach
+   * @param pbLift the personal best lift of the coach
+   * @param status the status of the coach
+   * @return true if the coach is successfully added, false otherwise
+   */
 
 
   @Override public boolean addCoach(String coachUsername,
@@ -597,6 +550,13 @@ public class ModelManager implements Model
       return false;
     }
   }
+  /**
+   * Accepts a coach request from a trainee.
+   *
+   * @param traineeUsername the username of the trainee
+   * @param coachUsername the username of the coach
+   * @return true if the coach request is successfully accepted, false otherwise
+   */
 
   @Override public boolean acceptRequest(String traineeUsername,
       String coachUsername)
@@ -612,13 +572,10 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param traineeUsername 
-   *        
+   * Denies a coach request from a trainee.
    *
-   * @return 
-   *        
+   * @param traineeUsername the username of the trainee
+   * @return true if the coach request is successfully denied, false otherwise
    */
   @Override public boolean denyRequest(String traineeUsername)
   {
@@ -633,13 +590,10 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param traineeUsername 
-   *        
+   * Removes a trainee from the coach's roster.
    *
-   * @return 
-   *        
+   * @param traineeUsername the username of the trainee
+   * @return true if the trainee is successfully removed, false otherwise
    */
   @Override public boolean removeTraineeFromRoster(String traineeUsername)
   {
@@ -654,13 +608,10 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param username 
-   *        
+   * Retrieves the list of trainees associated with a coach.
    *
-   * @return 
-   *        
+   * @param username the username of the coach
+   * @return the list of trainees associated with the coach
    */
   @Override public TraineeList getTraineeList(String username)
   {
@@ -673,15 +624,11 @@ public class ModelManager implements Model
       throw new RuntimeException(e);
     }
   }
-
   /**
-   * 
-   * 
-   * @param username 
-   *        
+   * Retrieves the list of all trainee requests received by a coach.
    *
-   * @return 
-   *        
+   * @param username the username of the coach
+   * @return the list of trainee requests received by the coach
    */
   @Override public ArrayList<String> getTraineeRequest(String username)
   {
@@ -696,13 +643,10 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param coach 
-   *        
+   * Retrieves the list of meeting requests for a coach.
    *
-   * @return 
-   *        
+   * @param coach the username of the coach
+   * @return the list of meeting requests for the coach
    */
   @Override public ArrayList<String> getMeetingRequests(String coach)
   {
@@ -715,15 +659,11 @@ public class ModelManager implements Model
       throw new RuntimeException(e);
     }
   }
-
   /**
-   * 
-   * 
-   * @param name 
-   *        
+   * Removes a coach with the specified name.
    *
-   * @return 
-   *        
+   * @param name the name of the coach
+   * @return true if the coach is successfully removed, false otherwise
    */
   @Override public boolean removeCoach(String name)
     {
@@ -737,15 +677,7 @@ public class ModelManager implements Model
     }
 
     @Override
-    /**
-     * 
-     * 
-     * @param traineeUsername 
-     *        
-     *
-     * @return 
-     *        
-     */
+
     public User getCoach(String traineeUsername) {
         try {
             return new CoachDAO().getCoach(traineeUsername);
@@ -757,13 +689,10 @@ public class ModelManager implements Model
     }
 
   /**
-   * 
-   * 
-   * @param traineeUsername 
-   *        
+   * Retrieves the list of meetings for a trainee.
    *
-   * @return 
-   *        
+   * @param traineeUsername the username of the trainee
+   * @return the list of meetings for the trainee
    */
   @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
   {
@@ -776,14 +705,12 @@ public class ModelManager implements Model
     }
   }
 
+
   /**
-   * 
-   * 
-   * @param traineeUsername 
-   *        
+   * Retrieves the list of meeting requests for a trainee.
    *
-   * @return 
-   *        
+   * @param traineeUsername the username of the trainee
+   * @return the list of meeting requests for the trainee
    */
   @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
   {
@@ -795,6 +722,14 @@ public class ModelManager implements Model
       return null;
     }
   }
+  /**
+   * Sends a meeting request from a trainee to a coach for a specified date.
+   *
+   * @param traineeUsername the username of the trainee sending the meeting request
+   * @param coachUsername the username of the coach receiving the meeting request
+   * @param dateOfMeeting the date of the meeting
+   * @return true if the meeting request was sent successfully, false otherwise
+   */
 
   @Override public boolean sendMeetingRequest(String traineeUsername,
       String coachUsername, LocalDate dateOfMeeting)
@@ -809,13 +744,10 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param coachUsername 
-   *        
+   * Retrieves a list of taken dates for a coach.
    *
-   * @return 
-   *        
+   * @param coachUsername the username of the coach
+   * @return the list of taken dates for the coach, or null if an error occurs
    */
   @Override public ArrayList<LocalDate> getTakenDates(String coachUsername)
   {
@@ -827,13 +759,10 @@ public class ModelManager implements Model
       return null;
     }
   }
-
   /**
-   * 
-   * 
+   * Retrieves the leaderboard of trainees based on their squat performance.
    *
-   * @return 
-   *        
+   * @return the leaderboard of trainees based on squat performance, or null if an error occurs
    */
   @Override public TraineeList getSquatLeaders()
   {
@@ -845,13 +774,10 @@ public class ModelManager implements Model
       return null;
     }
   }
-
   /**
-   * 
-   * 
+   * Retrieves the leaderboard of trainees based on their deadlift performance.
    *
-   * @return 
-   *        
+   * @return the leaderboard of trainees based on deadlift performance, or null if an error occurs
    */
   @Override public TraineeList getDeadliftLeaders()
   {
@@ -863,13 +789,10 @@ public class ModelManager implements Model
       return null;
     }
   }
-
   /**
-   * 
-   * 
+   * Retrieves the leaderboard of trainees based on their bench press performance.
    *
-   * @return 
-   *        
+   * @return the leaderboard of trainees based on bench press performance, or null if an error occurs
    */
   @Override public TraineeList getBenchLeaders()
   {
@@ -881,6 +804,14 @@ public class ModelManager implements Model
       return null;
     }
   }
+  /**
+   * Removes an existing meeting between a trainee and a coach for a specified date.
+   *
+   * @param traineeUsername the username of the trainee
+   * @param coachUsername the username of the coach
+   * @param dateOfMeeting the date of the meeting
+   * @return true if the meeting removal was approved successfully, false otherwise
+   */
 
   @Override public boolean removeMeeting(String traineeUsername,
       String coachUsername, LocalDate dateOfMeeting)
@@ -894,7 +825,14 @@ public class ModelManager implements Model
     }
   }
 
-
+  /**
+   * Approves a meeting request between a trainee and a coach for a specified date.
+   *
+   * @param trainee the username of the trainee
+   * @param coach the username of the coach
+   * @param date the date of the meeting
+   * @return true if the meeting request was approved successfully, false otherwise
+   */
   @Override public boolean approveMeeting(String trainee, String coach,
       LocalDate date)
   {
@@ -907,6 +845,15 @@ public class ModelManager implements Model
       return false;
     }
   }
+  /**
+   * Denies a meeting request between a trainee and a coach for a specified date.
+   *
+   * @param trainee the username of the trainee
+   * @param coach the username of the coach
+   * @param date the date of the meeting
+   * @return true if the meeting request was denied successfully, false otherwise
+   * @throws RuntimeException if an SQL exception occurs
+   */
 
   @Override public boolean denyMeeting(String trainee, String coach,
       LocalDate date)
@@ -922,13 +869,11 @@ public class ModelManager implements Model
   }
 
   /**
-   * 
-   * 
-   * @param coach 
-   *        
+   * Retrieves a list of meetings associated with a coach.
    *
-   * @return 
-   *        
+   * @param coach the username of the coach
+   * @return the list of meetings associated with the coach, or null if an error occurs
+   * @throws RuntimeException if an SQL exception occurs
    */
   @Override public ArrayList<String> getCoachMeetings(String coach)
   {
