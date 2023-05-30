@@ -185,7 +185,6 @@ public class HomeViewModel extends ViewModel{
      */
     public void clear() {
         //receiving folder names from the database
-        Logger.log("reseting the home");
         usernameProperty.set(viewState.getUsername());
 
         viewState.setNewFolder(true);

@@ -13,7 +13,6 @@ public class ViewModelFactory {
 
 	private CreateUserViewModel createUserViewModel;
 	private LoginViewModel loginViewModel;
-	private EditTraineeInfoViewModel editTraineeInfoViewModel;
 	private AddExerciseViewModel addExerciseViewModel;
 	private HomeViewModel homeViewModel;
 	private ManageFolderViewModel manageFolderViewModel;
@@ -36,7 +35,6 @@ public class ViewModelFactory {
 		ViewState viewState = new ViewState();
 		this.createUserViewModel=new CreateUserViewModel(model);
 		this.loginViewModel = new LoginViewModel(model,viewState);
-		editTraineeInfoViewModel = new EditTraineeInfoViewModel(model, viewState);
 		addExerciseViewModel = new AddExerciseViewModel(model, viewState);
 		homeViewModel = new HomeViewModel(model, viewState);
 		manageFolderViewModel = new ManageFolderViewModel(model, viewState);
@@ -44,11 +42,8 @@ public class ViewModelFactory {
 		profileViewModel = new ProfileViewModel(model, viewState);
 		addMeetingViewModel = new AddMeetingViewModel(model,viewState);
 		leaderboardViewModel= new LeaderboardViewModel(model);
-
 		this.addFriendViewModel = new AddFriendViewModel(model,viewState);
-
 		editRosterViewModel = new EditRosterViewModel(model, viewState);
-		//manageCoachViewModel = new ManageCoachViewModel(model, viewState);
 	}
 
 /**
@@ -158,14 +153,5 @@ public class ViewModelFactory {
 		return leaderboardViewModel;
 	}
 
-/**
- * 
- * 
- *
- * @return 
- *        
- */
-	//	public ViewModel getManageCoachViewModel() {
-//		return manageCoachViewModel;
-//	}
+
 }

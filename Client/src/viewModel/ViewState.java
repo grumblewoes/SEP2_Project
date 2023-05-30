@@ -15,8 +15,6 @@ public class ViewState {
     private boolean manageFolderEditable, newFolder;
     private boolean isCoach;
 
-    private User trainee;
-
 
 
     /**
