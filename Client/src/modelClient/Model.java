@@ -4,12 +4,50 @@ import mediator.*;
 import utility.observer.subject.LocalSubject;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public interface Model extends LocalSubject<String,String>
 {
 
+/**
+ * 
+ * 
+ * @param firstName 
+ *        
+ * @param lastName 
+ *        
+ * @param userName 
+ *        
+ * @param password 
+ *        
+ * @param height 
+ *        
+ * @param weight 
+ *        
+ *
+ * @return 
+ *        
+ */
 	public abstract boolean createUser(String firstName, String lastName, String userName, String password, int height, int weight);
+/**
+ * 
+ * 
+ * @param username 
+ *        
+ * @param password 
+ *        
+ *
+ * @return 
+ *        
+ */
 	public boolean login(String username, String password);
 	boolean createFolder(String username, String name);
 	boolean removeFolder(String username, int folderId);
@@ -26,9 +64,9 @@ public interface Model extends LocalSubject<String,String>
 
 	ArrayList<String> getPossibleExercises();
 
-	int getBestBenchPress(String username) ;
-	int getBestSquat(String username) ;
-	int getBestDeadlift(String username) ;
+//	int getBestBenchPress(String username) ;
+//	int getBestSquat(String username) ;
+//	int getBestDeadlift(String username) ;
 
 	User getTrainee(String username);
 
@@ -46,7 +84,29 @@ public interface Model extends LocalSubject<String,String>
 	boolean requestCoach(String requesterUsername, String accepterUsername);
 	User getCoach(String traineeUsername);
 	boolean isCoach(String username);
-  boolean removeCoachAssignment(String traineeUsername);
+  	boolean removeCoachAssignment(String traineeUsername);
 
-  void disconnectListener(String username);
+	boolean acceptRequest(String traineeUsername, String coachUsername);
+	boolean denyRequest(String traineeUsername);
+	boolean removeTraineeFromRoster(String traineeUsername);
+
+	TraineeList getTraineeList(String username);
+	ArrayList<String> getTraineeRequest(String username);
+	ArrayList<String> getMeetingRequests(String coach);
+	boolean approveMeeting(String trainee, String coach, LocalDate date);
+	boolean denyMeeting(String trainee, String coach, LocalDate date);
+
+	ArrayList<String> getCoachMeetings(String coach);
+	void disconnectListener(String username);
+
+	boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
+
+
+	ArrayList<String> getTraineeMeetingList(String traineeUsername);
+	ArrayList<String> getTraineeMeetingRequests(String traineeUsername);
+	boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting);
+	ArrayList<LocalDate> getTakenDates(String coachUsername);
+	TraineeList getSquatLeaders();
+	TraineeList getDeadliftLeaders();
+	TraineeList getBenchLeaders();
 }

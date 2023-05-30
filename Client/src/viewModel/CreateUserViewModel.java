@@ -11,6 +11,13 @@ import modelClient.Model;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * 
+ * ViewModel class for the CreateUserViewController class.
+ * 
+ * @author Damian Trafialek
+ * @version 1.0
+ */
 public class CreateUserViewModel extends ViewModel implements
 		PropertyChangeListener
 {
@@ -31,6 +38,13 @@ public class CreateUserViewModel extends ViewModel implements
 
 	private Model model;
 
+/**
+ * 1-argument constructor 
+ * accepts the model object as an argument, and initializes all the bound fields in the view controller to default values.
+ * 
+ * @param model for the model layer of MVVM, which communicates with the server
+ *        
+ */
 	public CreateUserViewModel(Model model) {
 		this.model=model;
 		this.firstNameProperty=new SimpleStringProperty("");
@@ -43,6 +57,13 @@ public class CreateUserViewModel extends ViewModel implements
 		//model.addListener(null, this);
 	}
 
+/**
+ * 
+ * method that requests the server to create a new user, passing in their personal information.
+ *
+ * @return boolean value to signify success/failure of the request
+ *        
+ */
 	public boolean createUser() {
 		boolean userCreated = model.createUser(getFirstNameProperty().get(), getLastNameProperty().get(), getUserNameProperty().get(),
 				getPasswordProperty().get(), getHeightProperty().get(), getWeightProperty().get());
@@ -58,6 +79,11 @@ public class CreateUserViewModel extends ViewModel implements
 	}
 
 	@Override
+/**
+ * method to refresh the screen and the displayed values upon controller initialisation
+ * and screen swap
+ * 
+ */
 	public void clear(){
 		Platform.runLater(() -> {
 			errorLabel.set("");
@@ -85,30 +111,79 @@ public class CreateUserViewModel extends ViewModel implements
 //		});
 	}
 
+/**
+ * 
+ * getter for the first name property
+ *
+ * @return StringProperty for the first name text
+ *        
+ */
 	public StringProperty getFirstNameProperty() {
 		return firstNameProperty;
 	}
 
+/**
+ * 
+ * getter for the last name property
+ *
+ * @return StringProperty for the last name text
+ *        
+ */
 	public StringProperty getLastNameProperty() {
 		return lastNameProperty;
 	}
 
+/**
+ * 
+ * getter for the username property
+ *
+ * @return StringProperty for the username text
+ *        
+ */
 	public StringProperty getUserNameProperty() {
 		return userNameProperty;
 	}
 
+/**
+ * 
+ * getter for the password property
+ *
+ * @return StringProperty for the password
+ *        
+ */
 	public StringProperty getPasswordProperty() {
 		return passwordProperty;
 	}
 
+/**
+ * 
+ * getter for the height property
+ *
+ * @return IntegerProperty for the height text
+ *        
+ */
 	public IntegerProperty getHeightProperty() {
 		return heightProperty;
 	}
 
+/**
+ * 
+ * getter for the weight property
+ *
+ * @return IntegerProperty for the weight text
+ *        
+ */
 	public IntegerProperty getWeightProperty() {
 		return weightProperty;
 	}
 
+/**
+ * 
+ * getter for the error property
+ *
+ * @return StringProperty for the error text
+ *        
+ */
 	public StringProperty getErrorLabel() {
 		return errorLabel;
 	}

@@ -15,14 +15,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * DAO Class accessing the database through an instance of the DBConnection class
+ * ExerciseDAO works with the operations connected to the Exercise object
+ * 
+ * @author Damian Trafialek
+ * @version 1.0
+ */
 public class ExerciseDAO implements IExerciseDAO
 {
-  private static ExerciseDAO instance;
-
-  public ExerciseDAO(){}
-
-
-
+  /**
+   * Method gets the connection to the database and executes the sql statement
+   * This method selects values from user_exercise2 table where the folderId matches parameter
+   * 
+   * @param folderId 
+   *        
+   *
+   * @return ExerciseList with all exercise info for given folder
+   *        
+   */
   public ExerciseList getExerciseList(int folderId) throws SQLException {
     ExerciseList exerciseList = new ExerciseList();
 
@@ -45,7 +56,7 @@ public class ExerciseDAO implements IExerciseDAO
       return exerciseList;
     }
     catch (SQLException e){
-      Logger.log(e);
+
       return exerciseList;
     }
     finally
@@ -55,6 +66,16 @@ public class ExerciseDAO implements IExerciseDAO
   }
 
   @Override
+  /**
+   * Method gets the connection to the database and executes the sql statement
+   * This method removes exercise from user_exercise2 table based on its id
+   * 
+   * @param exerciseId 
+   *        
+   *
+   * @return  true or false, whether the removal was successful or not
+   *        
+   */
   public boolean removeExercise(int exerciseId) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -69,12 +90,9 @@ public class ExerciseDAO implements IExerciseDAO
       );
 
       statement.executeUpdate();
-
-
       return true;
     }
     catch (SQLException e){
-      Logger.log(e);
       return false;
     }
     finally
@@ -84,6 +102,18 @@ public class ExerciseDAO implements IExerciseDAO
   }
 
   @Override
+  /**
+   * Method gets the connection to the database and executes the sql statement
+   * This method deletes exercise from user_exercise2 table based on given parameters
+   * 
+   * @param name 
+   *        
+   * @param folderId 
+   *        
+   *
+   * @return  true or false, whether the removal was successful or not
+   *        
+   */
   public boolean removeExerciseByName(String name, int folderId) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
@@ -103,7 +133,6 @@ public class ExerciseDAO implements IExerciseDAO
       return true;
     }
     catch (SQLException e){
-      Logger.log(e);
       return false;
     }
     finally
@@ -113,6 +142,13 @@ public class ExerciseDAO implements IExerciseDAO
   }
 
   @Override
+  /**
+   * Method gets the connection to the database and executes the sql statement
+   * 
+   *
+   * @return ArrayList of string with titles of all exercises in exercise_type2 table
+   *        
+   */
   public ArrayList<String> getPossibleExercises() throws SQLException {
     ArrayList<String> list = new ArrayList<>();
     DBConnection db = DBConnection.getInstance();
@@ -134,7 +170,6 @@ public class ExerciseDAO implements IExerciseDAO
       return list;
     }
     catch (SQLException e){
-      Logger.log(e);
       return list;
     }
     finally
@@ -144,78 +179,77 @@ public class ExerciseDAO implements IExerciseDAO
   }
 
   @Override
+  /**
+   * Method gets the connection to the database and executes the sql statement
+   * This method has a few stages in it.
+   * Firstly, it initializes the columnToUpdate in case that exerciseName parameter is equal to any given options
+   * Secondly, if the columnToUpdate is empty it simply insert the parameters into user_exercise2 table and returns true
+   * If the columnToUpdate is not empty it compares if the weight is higher than the max weight in matching column name.
+   * If so, the trainee object is updated with his new personal best, and then it continues into insertion
+   * 
+   * @param username 
+   *        
+   * @param exerciseName 
+   *        
+   * @param folderId 
+   *        
+   * @param weight 
+   *        
+   * @param repetition 
+   *        
+   *
+   * @return  true or false, whether the addition was successful or not
+   *        
+   */
   public boolean addExercise(String username, String exerciseName, int folderId, int weight, int repetition) throws SQLException {
     DBConnection db = DBConnection.getInstance();
     Connection connection = db.getConnection();
-    try
-    {
-      PreparedStatement statement = connection.prepareStatement("insert into user_exercise2(trainee_username,exercise_name,folderid,repetitions,weight) values (?,?,?,?,?);");
-      statement.setString(1,username);
-      statement.setString(2,exerciseName);
+
+    try {
+      String columnToUpdate = "";
+      if (exerciseName.equalsIgnoreCase("deadlift")) {
+        columnToUpdate = "deadlift_best";
+      } else if (exerciseName.equalsIgnoreCase("squat")) {
+        columnToUpdate = "squat_best";
+      } else if (exerciseName.equalsIgnoreCase("bench_press")) {
+        columnToUpdate = "bench_best";
+      }
+
+      // Check if the inserted weight is the biggest
+      if(!columnToUpdate.isEmpty()){
+        PreparedStatement maxWeightStatement = connection.prepareStatement(
+            "SELECT MAX(weight) FROM user_exercise2 WHERE trainee_username = ? and exercise_name=?");
+        maxWeightStatement.setString(1, username);
+        maxWeightStatement.setString(2, exerciseName);
+
+        ResultSet resultSet = maxWeightStatement.executeQuery();
+        if (resultSet.next())
+        {
+          int maxWeight = resultSet.getInt(1);
+          if (weight > maxWeight)
+          {
+            PreparedStatement updateStatement = connection.prepareStatement("UPDATE trainee2 SET " + columnToUpdate + " = ? WHERE username = ?");
+            updateStatement.setInt(1, weight);
+            updateStatement.setString(2, username);
+            updateStatement.executeUpdate();
+          }
+        }
+      }
+
+      PreparedStatement statement = connection.prepareStatement("INSERT INTO user_exercise2 (trainee_username, exercise_name, folderid, repetitions, weight) VALUES (?, ?, ?, ?, ?)");
+      statement.setString(1, username);
+      statement.setString(2, exerciseName);
       statement.setInt(3, folderId);
       statement.setInt(4, repetition);
       statement.setInt(5, weight);
 
-
       statement.executeUpdate();
+
       return true;
-    }
-    catch (SQLException e){
-      Logger.log(e);
+    } catch (SQLException e) {
       return false;
-    }
-    finally
-    {
+    } finally {
       connection.close();
     }
-  }
-
-  @Override
-  public int getBestWeightFromExerciseByName(String username,String name) throws SQLException {
-    DBConnection db = DBConnection.getInstance();
-    Connection connection = db.getConnection();
-
-    try
-    {
-
-      PreparedStatement statement = connection.prepareStatement(
-              "select weight " +
-                      "from user_exercise2 " +
-                      "where trainee_username = '"+ username +"' and exercise_name = '" + name + "'"+
-                      "order by weight desc " +
-                      "limit 1"
-      );
-
-      ResultSet rs = statement.executeQuery();
-
-      int ans = 0;
-      if( rs.next() )
-        ans = rs.getInt(1);
-      return ans;
-
-    }
-    catch (SQLException e){
-      Logger.log(e);
-      return 0;
-    }
-    finally
-    {
-      connection.close();
-    }
-  }
-
-  @Override
-  public int getBestSquat(String username) throws SQLException {
-    return getBestWeightFromExerciseByName(username,"squat");
-  }
-
-  @Override
-  public int getBestDeadlift(String username) throws SQLException {
-    return getBestWeightFromExerciseByName(username,"deadlift");
-  }
-
-  @Override
-  public int getBestBenchPress(String username) throws SQLException {
-    return getBestWeightFromExerciseByName(username,"bench_press");
   }
 }

@@ -4,11 +4,28 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import modelClient.Model;
 
+/**
+ * 
+ * ViewModel for the ManageFolderViewController class.
+ * 
+ * @author Damian Trafialek
+ * @version 1.0
+ */
 public class ManageFolderViewModel extends ViewModel{
     private StringProperty errorProperty, nameProperty, headerLabel;
     private ViewState viewState;
     private Model model;
 
+    /**
+     * 2-argument constructor 
+     * accepts the model and viewstate objects as arguments, and initializes the other bound
+     * properties.
+     * 
+     * @param model for the model layer of MVVM, which communicates with the server
+     *        
+     * @param viewState to store information when switching screens
+     *        
+     */
     public ManageFolderViewModel(Model model, ViewState viewState) {
         this.model = model;
         this.viewState = viewState;
@@ -17,6 +34,13 @@ public class ManageFolderViewModel extends ViewModel{
         headerLabel = new SimpleStringProperty();
     }
 
+    /**
+     * 
+     * method to either create a new folder or edit an existing one's name
+     *
+     * @return boolean to represent success/failure of either function
+     *        
+     */
     public boolean submit() {
         if (viewState.getNewFolder())
             return createFolder();
@@ -34,12 +58,37 @@ public class ManageFolderViewModel extends ViewModel{
         return model.editFolder(viewState.getUsername(), viewState.getFolderId(), newName);
     }
 
+    /**
+     * 
+     * getter for the error text property
+     *
+     * @return StringProperty to represent error text
+     *        
+     */
     public StringProperty getErrorProperty() {return errorProperty;}
+    /**
+     * 
+     * getter for the header property
+     *
+     * @return StringProperty to represent the header
+     *        
+     */
     public StringProperty getHeaderProperty() {return headerLabel;}
+    /**
+     * 
+     * getter for the name property
+     *
+     * @return StringProperty to represent the name of the folder
+     *        
+     */
     public StringProperty getNameProperty() {return nameProperty;}
 
 
     @Override
+    /**
+     * method that refreshes the screen upon controller initialisation and screen swap
+     * 
+     */
     public void clear() {
         errorProperty.set("");
         //change header and name depending on viewstate, clear error label

@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -18,16 +21,37 @@ import viewModel.ViewModel;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * View controller responsible for displaying the in-folder view.
+ *
+ * @author Damian Trafiałek, Julia Gramovicha
+ * @version 1.0
+ */
 public class ManageSpecificExercisesViewController extends ViewController
 {
   @FXML private Label usernameLabel,folderNameLabel,exerciseNameLabel,errorLabel;
   @FXML private VBox exerciseBox;
   @FXML private Button addBtn,backBtn;
 
+  @FXML private NumberAxis x;
+  @FXML private NumberAxis y;
+  @FXML private LineChart<?, ?> lineChart;
+
+
   private ManageSpecificExercisesViewModel exViewModel;
   private Gson gson;
   private boolean isSpecific;
 
+  /**
+   * Method that initialise the controller and sets up all instance variables and bindings.
+   *
+   * @param viewHandler - handles changing views
+   *
+   * @param viewModel - view model related to the controller
+   *
+   * @param root - region that is being displayed
+   *
+   */
   @Override public void init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
     this.viewHandler = viewHandler;
@@ -36,6 +60,16 @@ public class ManageSpecificExercisesViewController extends ViewController
     this.gson = new Gson();
     this.isSpecific=false;
 
+
+    lineChart.setVisible(false);
+    lineChart.setTitle("Exercise Progress");
+    lineChart.setCreateSymbols(false);
+    lineChart.setLegendVisible(false);
+    exViewModel.setLineChart((LineChart<Number, Number>) lineChart);
+    x.setLabel("Repetitions");
+    y.setLabel("Weight");
+
+
     usernameLabel.textProperty().bind(exViewModel.getUsernameProperty() );
     exerciseNameLabel.textProperty().bind(exViewModel.getExerciseNameProperty());
     errorLabel.textProperty().bind(exViewModel.getErrorProperty());
@@ -43,6 +77,14 @@ public class ManageSpecificExercisesViewController extends ViewController
       populateExercises(newVal);
     });
     folderNameLabel.textProperty().bind(exViewModel.getFolderNameProperty());
+
+    exViewModel.getLineChartProperty().addListener((obs, oldChart, newChart) -> {
+      if (newChart != null) {
+        exViewModel.updateLineChart(
+            String.valueOf(exViewModel.getExerciseNameProperty()));
+      }
+    });
+
 
   }
 
@@ -85,6 +127,10 @@ public class ManageSpecificExercisesViewController extends ViewController
   private void openExercisesByName(String name){
     exViewModel.setupOpenExercisesByName(name);
     viewHandler.openView("specificExercises");
+
+    lineChart.setVisible(true);
+    lineChart.setCreateSymbols(true);
+    exViewModel.updateLineChart(name);
   }
 
   @FXML private void addExercise(){
@@ -95,8 +141,13 @@ public class ManageSpecificExercisesViewController extends ViewController
   @FXML private void goBack(){
 
       viewHandler.openView(exViewModel.setupGoBack());
+      lineChart.setVisible(false);
   }
 
+  /**
+   * Reset method that calls view model to trigger the reset.
+   *
+   */
   @Override public void reset()
   {
     exViewModel.clear();
@@ -109,6 +160,7 @@ public class ManageSpecificExercisesViewController extends ViewController
   }
   private void removeExercisesByName(String name){
     exViewModel.removeExercisesByName(name);
+    exViewModel.updateLineChart(name);
     reset();
   }
 

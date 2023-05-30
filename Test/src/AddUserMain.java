@@ -2,8 +2,19 @@ import mediator.RemoteModel;
 
 import java.rmi.Naming;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class AddUserMain
 {
+  /**
+   * 
+   * 
+   */
   public static void main(String[] args)
   {
 //    RemoteModel model;

@@ -2,10 +2,17 @@ package mediator;
 
 import utility.observer.subject.RemoteSubject;
 
-import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Remote Model that serves the communication between the client and server.
+ * 
+ * 
+ * @author Damian Trafiałek, Jakub Cerovsky, Anna Pomerantz
+ * @version 1.0
+ */
 public interface RemoteModel extends RemoteSubject<String,String>
 {
 
@@ -23,9 +30,9 @@ public interface RemoteModel extends RemoteSubject<String,String>
 	ExerciseList getExerciseListByNameAndFolderId(String name, int folderId) throws  RemoteException;
 	ArrayList<String> getPossibleExercises() throws RemoteException;
 
-	int getBestBenchPress(String username) throws RemoteException;
-	int getBestSquat(String username) throws RemoteException;
-	int getBestDeadlift(String username) throws RemoteException;
+//	int getBestBenchPress(String username) throws RemoteException;
+//	int getBestSquat(String username) throws RemoteException;
+//	int getBestDeadlift(String username) throws RemoteException;
 
 	User getTrainee(String username) throws RemoteException;
 
@@ -50,5 +57,21 @@ public interface RemoteModel extends RemoteSubject<String,String>
 	boolean acceptRequest(String traineeUsername, String coachUsername) throws RemoteException;
 	boolean denyRequest(String traineeUsername) throws RemoteException;
 	boolean removeTraineeFromRoster(String traineeUsername) throws RemoteException;
+	TraineeList getTraineeList(String username) throws RemoteException;
+	ArrayList<String> getTraineeRequest(String username) throws RemoteException;
+	ArrayList<String> getMeetingRequests(String coach) throws RemoteException;
+	boolean approveMeeting(String trainee, String coach, LocalDate date) throws RemoteException;
+	boolean denyMeeting(String trainee, String coach, LocalDate date) throws RemoteException;
 
+	ArrayList<String> getCoachMeetings(String coach) throws RemoteException;
+
+
+	ArrayList<String> getTraineeMeetingList(String traineeUsername) throws RemoteException;
+	ArrayList<String> getTraineeMeetingRequests(String traineeUsername) throws RemoteException;
+	boolean sendMeetingRequest(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) throws RemoteException;
+	boolean removeMeeting(String traineeUsername, String coachUsername, LocalDate dateOfMeeting) throws RemoteException;
+	ArrayList<LocalDate> getTakenDates(String coachUsername) throws RemoteException;
+	TraineeList getSquatLeaders() throws RemoteException;
+	TraineeList getDeadliftLeaders() throws RemoteException;
+	TraineeList getBenchLeaders() throws RemoteException;
 }

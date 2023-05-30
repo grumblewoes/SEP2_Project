@@ -14,9 +14,9 @@ create table friendship_request(
 );
 
 
-insert into trainee2 values ('a','a','a','a',null,null,null,null,null,100,100,true,'my status');
-insert into trainee2 values ('e','e','e','e',null,null,null,null,null,100,100,true,'my status');
-insert into trainee2 values ('b','b','b','b',null,null,null,null,null,100,100,true,'my status');
+insert into trainee2 values ('a','a','a','a',null,null,null,null,100,100,true,'my status');
+insert into trainee2 values ('e','e','e','e',null,null,null,null,100,100,true,'my status');
+insert into trainee2 values ('b','b','b','b',null,null,null,null,100,100,true,'my status');
 insert into friendship_list values ('d','a');
 insert into friendship_list values ('d','e');
 insert into friendship_request values ('b','d');

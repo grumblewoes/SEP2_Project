@@ -1,28 +1,48 @@
 import mediator.ExerciseList;
 import modelServer.DAO.implementation.ExerciseDAO;
 import modelServer.DAO.implementation.FolderDAO;
+import modelServer.DAO.implementation.TraineeDAO;
 import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.IExerciseDAO;
 import modelServer.DAO.interfaces.IFolderDAO;
+import modelServer.DAO.interfaces.ITraineeDAO;
 import modelServer.DAO.interfaces.IUserDAO;
+import modelServer.DbContext.DBService;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 
 class DAOExerciseTest {
     private IFolderDAO fao;
-    private IUserDAO uao;
+    private ITraineeDAO uao;
     private IExerciseDAO eao;
+    private DBService service;
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         fao=new FolderDAO();
-        uao=new UserDAO();
+        uao=new TraineeDAO();
         eao=new ExerciseDAO();
+        service = new DBService();
+        SetupTestDatabase();
     }
 
-    @Test public void iAmTiredLetsTestThisShit() throws SQLException {
-        String username = "your_mom"+Math.random();
-        String folderName = "your_dad"+Math.random();
+    @org.junit.jupiter.api.AfterEach
+    void tearDown() {
+        service.switchToProductionDatabase();
+    }
+
+    private void SetupTestDatabase(){
+        service.restartDatabase();
+        service.switchToTestDatabase();
+    }
+
+    /**
+     * 
+     * 
+     */
+    @Test public void ExerciseZombie() throws SQLException {
+        String username = "u"+Math.random();
+        String folderName = "f"+Math.random();
         int folderId = 0;
         String exerciseName = "deadlift";
 
@@ -52,8 +72,8 @@ class DAOExerciseTest {
         eao.addExercise(username,"squat",folderId,11,10);
         eao.addExercise(username,"bench_press",folderId,12,10);
 
-        assert eao.getBestDeadlift(username)==10;
-        assert eao.getBestSquat(username)==11;
-        assert eao.getBestBenchPress(username)==12;
+        assert uao.getTrainee(username).getDeadlift()==10;
+        assert uao.getTrainee(username).getSquat()==11;
+        assert uao.getTrainee(username).getBench()==12;
     }
 }

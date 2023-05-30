@@ -8,9 +8,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import util.Logger;
 import viewModel.ProfileViewModel;
 import viewModel.ViewModel;
 
+/**
+ * View controller responsible for displaying the add exercise view.
+ *
+ * @author Damian Trafiałek, Anna Pomerantz, Jakub Cerovsky
+ * @version 1.0
+ */
 public class profileViewController extends  ViewController{
     @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField, coachField;
     @FXML private RadioButton shareProfileRadio;
@@ -19,6 +26,16 @@ public class profileViewController extends  ViewController{
 
     private ProfileViewModel profileViewModel;
     @Override
+    /**
+     * Method that initialise the controller and sets up all instance variables and bindings.
+     *
+     * @param viewHandler - handles changing views
+     *
+     * @param viewModel - view model related to the controller
+     *
+     * @param root - region that is being displayed
+     *
+     */
     public void init(ViewHandler viewHandler, ViewModel viewModel, Region root) {
         this.viewHandler=viewHandler;
         this.profileViewModel = (ProfileViewModel) viewModel;
@@ -76,10 +93,10 @@ public class profileViewController extends  ViewController{
             statusField.setDisable(!newVal);
             coachField.setDisable(!newVal);
         });
-
-        removeBtn.managedProperty().bind(profileViewModel.editableProperty().not());
+        Logger.log(profileViewModel.isCoachProperty().get());
+        removeBtn.managedProperty().bind(profileViewModel.editableProperty().not().and(profileViewModel.isCoachProperty().not()));
         updateBtn.managedProperty().bind(profileViewModel.editableProperty());
-        removeBtn.visibleProperty().bind(profileViewModel.editableProperty().not());
+        removeBtn.visibleProperty().bind(profileViewModel.editableProperty().not().and(profileViewModel.isCoachProperty().not()));
         updateBtn.visibleProperty().bind(profileViewModel.editableProperty());
 
         //only seen if profile is editable, you have a coach, and you yourself are not a coach
@@ -91,14 +108,30 @@ public class profileViewController extends  ViewController{
     }
 
     @Override
+    /**
+     * Reset method that calls view model to trigger the reset.
+     *
+     */
     public void reset() {
         profileViewModel.clear();
     }
 
+    /**
+     * Method that calls profile view model to update the profile of the user.
+     * 
+     * @param actionEvent - event that is triggered
+     *        
+     */
     public void update(ActionEvent actionEvent) {
         profileViewModel.update();
     }
 
+    /**
+     * Method that calls view handler to switch views.
+     * 
+     * @param actionEvent - event that is triggered
+     *        
+     */
     public void goBack(ActionEvent actionEvent) {
         viewHandler.openView(profileViewModel.getGoBack());
     }

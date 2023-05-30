@@ -1,5 +1,7 @@
 import modelServer.DAO.implementation.ExerciseAdminDAO;
 import modelServer.DAO.interfaces.IExerciseAdminDAO;
+import modelServer.DbContext.DBService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,18 +9,37 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
+ */
 public class DAOExerciseAdminTest
 {
   private IExerciseAdminDAO dao;
+  private DBService service;
 
   @BeforeEach void setUp()
   {
     dao = new ExerciseAdminDAO();
+    service=new DBService();
+    SetupTestDatabase();
+  }
+
+  @AfterEach void tearDown() {
+    service.switchToProductionDatabase();
+  }
+
+  private void SetupTestDatabase(){
+    service.restartDatabase();
+    service.switchToTestDatabase();
   }
 
   @Test void addExerciseZero() throws SQLException
   {
-    assertThrows(SQLException.class, () -> dao.addExercise(null));
+    assertFalse(dao.addExercise(null));
   }
 
   @Test void addExerciseOne()

@@ -1,14 +1,6 @@
  set schema 'valhalla_fitness';
 
 
--- insert into
---     trainee(username, password, first_name, last_name, bench_best, squat_best, deadlift_best, coach_username, date_of_birth, age, bmi, height, weight)
---     values ('d','d','d','d',100,100,200,null,Now(),null,null,180,72);
-
--- select username,password
--- from trainee
--- where username = 'd'
-
 drop table if exists trainee2 cascade ;
 create table trainee2 (
                           username varchar(50) primary key ,
@@ -19,14 +11,13 @@ create table trainee2 (
                           squat_best smallint,
                           deadlift_best smallint,
                           coach_username varchar(50),
-                          dob date,
                           height numeric(5,2),
                           weight numeric(5,2),
                           share_profile boolean,
                           status varchar(50)
 );
 
-insert into trainee2 values ('d','d','d','d',null,null,null,null,null,181,72,true,'my status');
+insert into trainee2 values ('d','d','d','d',null,null,null,null,181,72,true,'my status');
 
 drop table if exists folder2 cascade ;
 create table folder2 (

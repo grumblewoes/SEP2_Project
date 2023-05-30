@@ -10,6 +10,13 @@ import util.Logger;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 
+/**
+ * 
+ * ViewModel for the ProfileViewController class
+ * 
+ * @author Damian Trafialek
+ * @version 1.0
+ */
 public class ProfileViewModel extends ViewModel implements LocalListener<String,String> {
     private Model model;
     private ViewState viewState;
@@ -20,6 +27,15 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
 
     private BooleanProperty shareProfileProperty,editableProperty, coachStateProperty, isCoachProperty;
 
+    /**
+     * 2-argument constructor 
+     * accepts a model and viewstate object as arguments
+     * 
+     * @param model for the model layer of MVVM, which communicates with the server
+     *        
+     * @param viewState to store information while switching screens
+     *        
+     */
     public ProfileViewModel(Model model, ViewState viewState){
         this.model = model;
         this.model.addListener(this);
@@ -46,87 +62,214 @@ public class ProfileViewModel extends ViewModel implements LocalListener<String,
     }
 
 
+    /**
+     * 
+     * getter for the first name property
+     *
+     * @return StringProperty that contains the first name of the user
+     *        
+     */
     public StringProperty firstNameProperty() {
         return firstNameProperty;
     }
 
 
+    /**
+     * 
+     * getter for the last name property
+     *
+     * @return StringProperty for the last name of the user
+     *        
+     */
     public StringProperty lastNameProperty() {
         return lastNameProperty;
     }
 
 
+    /**
+     * 
+     * getter for the username property
+     *
+     * @return StringProperty that contains the username of the user
+     *        
+     */
     public StringProperty usernameProperty() {
         return usernameProperty;
     }
 
 
 
+    /**
+     * 
+     * getter for the status of the current user
+     *
+     * @return StringProperty that contains the status of the user
+     *        
+     */
     public StringProperty statusProperty() {
         return statusProperty;
     }
 
 
 
+    /**
+     * 
+     * getter for the BMI of the current user
+     *
+     * @return StringProperty that contains the BMI
+     *        
+     */
     public StringProperty bmiProperty() {
         return bmiProperty;
     }
+    /**
+     * 
+     * getter for the boolean property for whether the profile is editable
+     *
+     * @return BooleanProperty to determine whether the profile is read-only/editable
+     *        
+     */
     public BooleanProperty editableProperty() {  return editableProperty;  }
 
-public BooleanProperty isCoachProperty() { return isCoachProperty; }
+    /**
+     * 
+     * getter for the coach property to determine if the user is a coach or not
+     *
+     * @return BooleanProperty that contains whether or not the user is a coach
+     *        
+     */
+    public BooleanProperty isCoachProperty() { return isCoachProperty; }
 
+    /**
+     * 
+     * getter for the error property
+     *
+     * @return StringProperty that contains the error label text
+     *        
+     */
     public StringProperty errorProperty() {
         return errorProperty;
     }
 
 
 
+    /**
+     * 
+     * getter for the weight property
+     *
+     * @return IntegerProperty that contains the weight of the user
+     *        
+     */
     public IntegerProperty weightProperty() {
         return weightProperty;
     }
 
 
 
+    /**
+     * 
+     * getter for the height property
+     *
+     * @return IntegerProperty that contains the height of the user
+     *        
+     */
     public IntegerProperty heightProperty() {
         return heightProperty;
     }
+    /**
+     * 
+     * getter for the bench press property
+     *
+     * @return IntegerProperty that contains the record for the bench press weight of the user
+     *        
+     */
     public IntegerProperty benchPressProperty() {
         return benchPressProperty;
     }
 
 
 
+    /**
+     *
+     * getter for the deadlift property
+     *
+     * @return IntegerProperty that contains the record for the deadlift weight of the user
+     *        
+     */
     public IntegerProperty deadliftProperty() {
         return deadliftProperty;
     }
 
 
 
+    /**
+     *
+     * getter for the squat property
+     *
+     * @return IntegerProperty that contains the record for the squat weight of the user
+     *        
+     */
     public IntegerProperty squatProperty() {
         return squatProperty;
     }
+    /**
+     * 
+     * getter for the share property of the current user
+     *
+     * @return BooleanProperty that contains whether the user would like to share their personal information with others
+     * on the leaderboard
+     *        
+     */
     public BooleanProperty shareProfileProperty() {  return shareProfileProperty;  }
+    /**
+     * 
+     * getter for the coach state property, determining if the user has a coach or not
+     *
+     * @return BooleanProperty that contains whether the user has a coach or not
+     *        
+     */
     public BooleanProperty coachStateProperty() { return coachStateProperty; }
+    /**
+     * 
+     * getter for the coach property of the current user
+     *
+     * @return StringProperty that contains the name of the user's coach
+     *        
+     */
     public StringProperty coachProperty() {
         return coachProperty;
     }
 
     @Override
+    /**
+     * refreshes the screen during controller initialisation and screen swap.
+     * If the user is a trainee and is viewing their own profile, the fields will be editable,
+     * and they can update their profile. If the user is a friend of said trainee, the fields will
+     * be read-only, and the update button will be hidden. If the user is a coach, the fields will
+     * be read-only, and they will not have the option to request a coach.
+     * 
+     */
     public void clear() {
         String u = viewState.getProfileUsername();
         //is the user a coach or trainee? -> changes depending on which one
-        User profileUser = viewState.isCoach() ? model.getCoach(u): model.getTrainee(u);
+        User profileUser = null;
+        if( viewState.isCoach() && viewState.getUsername().equals(viewState.getProfileUsername()) )
+            profileUser = model.getCoach(u);
+        else
+            profileUser = model.getTrainee(u);
+
         String pUsername = profileUser.getUsername();
         boolean wantsToShare = profileUser.isShareProfile();
-        boolean owns = viewState.getProfileUsername().equals(viewState.getUsername());
-        editableProperty.set(owns);
-
+        boolean owns = viewState.getProfileUsername().equals(viewState.getUsername()) ;
+        boolean isCoach = viewState.isCoach();
+        editableProperty.set(owns && !isCoach);
+        isCoachProperty.set(isCoach);
 
         if( owns || wantsToShare){
 
-            int benchPressBest = model.getBestBenchPress(u);
-            int squatBest = model.getBestSquat(u);
-            int deadliftBest = model.getBestDeadlift(u);
+            int benchPressBest = profileUser.getBench();
+            int squatBest = profileUser.getSquat();
+            int deadliftBest = profileUser.getDeadlift();
 
             usernameProperty.set(pUsername);
             errorProperty.set("");
@@ -144,7 +287,6 @@ public BooleanProperty isCoachProperty() { return isCoachProperty; }
             weightProperty.set(w);
             shareProfileProperty.set(profileUser.isShareProfile() );
             bmiProperty.set( String.valueOf( 1.0*w/(1.0*h*h/100/100) ) );
-            isCoachProperty.set(viewState.isCoach());
 
             if (model.getCoach(viewState.getProfileUsername()) != null)
             {
@@ -185,8 +327,16 @@ public BooleanProperty isCoachProperty() { return isCoachProperty; }
                 coachProperty.set("");
             }
         }
+
     }
 
+    /**
+     * 
+     * method that requests to the server to update the information on the profile screen
+     *
+     * @return boolean that signifies success/failure of the request
+     *        
+     */
     public boolean update() {
         int h = heightProperty.get();
         int w = weightProperty().get();
@@ -199,6 +349,13 @@ public BooleanProperty isCoachProperty() { return isCoachProperty; }
         return success;
     }
 
+    /**
+     * 
+     * method that requests to the server to remove the person whose profile the user is currently viewing
+     *
+     * @return boolean to signify success/failure of the request
+     *        
+     */
     public boolean removeFriend(){
         String username = viewState.getUsername();
         String friendUsername = viewState.getProfileUsername();
@@ -211,6 +368,13 @@ public BooleanProperty isCoachProperty() { return isCoachProperty; }
         return success;
     }
 
+    /**
+     * 
+     * method fetches the text for the back button
+     *
+     * @return String that contains the text
+     *        
+     */
     public String getGoBack(){
         String b = viewState.getGoBack();
 
@@ -218,6 +382,10 @@ public BooleanProperty isCoachProperty() { return isCoachProperty; }
     }
 
     @Override
+    /**
+     * method that updates the error label with information received from the server
+     * 
+     */
     public void propertyChange(ObserverEvent<String, String> event) {
         String name = event.getPropertyName();
         String value = event.getValue2();
@@ -226,6 +394,10 @@ public BooleanProperty isCoachProperty() { return isCoachProperty; }
         });
     }
 
+    /**
+     * method that makes a request to the server to remove the coach of the current trainee
+     * 
+     */
     public void removeCoach()
     {
         //if the request goes through
@@ -242,6 +414,11 @@ public BooleanProperty isCoachProperty() { return isCoachProperty; }
         }
     }
 
+    /**
+     * method that requests to the server to make the coach by the name of the current coachProperty value
+     * the current trainee's new coach
+     * 
+     */
     public void requestCoach()
     {
         //if the request goes through

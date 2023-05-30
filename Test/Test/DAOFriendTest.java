@@ -2,9 +2,12 @@ import mediator.Friend;
 import mediator.FriendList;
 import mediator.User;
 import modelServer.DAO.implementation.FriendDAO;
+import modelServer.DAO.implementation.TraineeDAO;
 import modelServer.DAO.implementation.UserDAO;
 import modelServer.DAO.interfaces.IFriendDAO;
+import modelServer.DAO.interfaces.ITraineeDAO;
 import modelServer.DAO.interfaces.IUserDAO;
+import modelServer.DbContext.DBService;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -13,15 +16,17 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DAOFriendTest {
-    private IUserDAO dao;
+    private ITraineeDAO dao;
     private IFriendDAO fao;
+    private DBService service;
     private String[] usernames;
     private String password,firstName,lastName;
     private int height,weight;
     @org.junit.jupiter.api.BeforeEach
     void setUp() throws SQLException {
-        dao = new UserDAO();
+        dao = new TraineeDAO();
         fao = new FriendDAO();
+        service=new DBService();
 
         usernames = new String[10];
         for(int i=0;i<10;++i)
@@ -29,6 +34,7 @@ class DAOFriendTest {
         password = "password"+Math.random();
         firstName = "firstName"+Math.random();
         lastName = "lastName"+Math.random();
+        SetupTestDatabase();
         dao.createTrainee(usernames[0],"a",firstName,lastName,height,weight);
         dao.createTrainee(usernames[1],"a",firstName,lastName,height,weight);
         dao.createTrainee(usernames[2],"a",firstName,lastName,height,weight);
@@ -42,15 +48,35 @@ class DAOFriendTest {
 
 
     }
+    private void SetupTestDatabase(){
+        service.restartDatabase();
+        service.switchToTestDatabase();
+    }
+    @org.junit.jupiter.api.AfterEach
+    void tearDown() {
+        service.switchToProductionDatabase();
+    }
 
+    /**
+     * 
+     * 
+     */
     @Test public void getFriendsZero(){
         assertDoesNotThrow(()-> fao.getFriends(null));
     }
+    /**
+     * 
+     * 
+     */
     @Test public void getFriendsOne() throws SQLException {
         fao.sendFriendRequest(usernames[1],usernames[2]);
         fao.acceptFriendRequest(usernames[1],usernames[2]);
         assertEquals(fao.getFriends(usernames[1]).get(0).getUsername(), usernames[2]);
     }
+    /**
+     * 
+     * 
+     */
     @Test public void getFriendsMany() throws SQLException {
         fao.sendFriendRequest(usernames[1],usernames[2]);
         fao.acceptFriendRequest(usernames[1],usernames[2]);
@@ -63,13 +89,25 @@ class DAOFriendTest {
         assertEquals(fao.getFriends(usernames[1]).get(2).getUsername(), usernames[4]);
     }
 
+    /**
+     * 
+     * 
+     */
     @Test public void getFriendsRequestsZero(){
         assertDoesNotThrow(()-> fao.getFriendRequests(null));
     }
+    /**
+     * 
+     * 
+     */
     @Test public void getFriendsRequestsOne() throws SQLException {
         fao.sendFriendRequest(usernames[1],usernames[2]);
         assertEquals(fao.getFriendRequests(usernames[2]).get(0),usernames[1]);
     }
+    /**
+     * 
+     * 
+     */
     @Test public void getFriendsRequestsMany() throws SQLException {
         fao.sendFriendRequest(usernames[1],usernames[2]);
         fao.sendFriendRequest(usernames[1],usernames[3]);
@@ -79,12 +117,20 @@ class DAOFriendTest {
         assertEquals(fao.getFriendRequests(usernames[2]).get(0),usernames[1]);
     }
 
+    /**
+     * 
+     * 
+     */
     @Test public void acceptZero() throws SQLException {
         assertDoesNotThrow(()-> fao.acceptFriendRequest(null,null));
         ArrayList<String> list = fao.getFriendRequests(null);
         for(String s : list)
             assert !s.equals(null);
     }
+    /**
+     * 
+     * 
+     */
     @Test public void acceptOne() throws SQLException {
 
         fao.sendFriendRequest(usernames[0],usernames[1]);
@@ -100,6 +146,10 @@ class DAOFriendTest {
         assert doesExists==true;
 
     }
+    /**
+     * 
+     * 
+     */
     @Test public void acceptMany() throws SQLException {
 
         fao.sendFriendRequest(usernames[0],usernames[1]);
@@ -142,6 +192,10 @@ class DAOFriendTest {
     }
 
 
+    /**
+     * 
+     * 
+     */
     @Test public void rejectZero() throws SQLException {
 
         assertDoesNotThrow(()-> fao.rejectFriendRequest(null,null));
@@ -149,6 +203,10 @@ class DAOFriendTest {
         for(String s : list)
             assert !s.equals(null);
     }
+    /**
+     * 
+     * 
+     */
     @Test public void rejectOne() throws SQLException {
         fao.sendFriendRequest(usernames[0],usernames[1]);
         assertDoesNotThrow(()-> fao.rejectFriendRequest(usernames[0], usernames[1]));
@@ -156,6 +214,10 @@ class DAOFriendTest {
         for(String s : list)
             assert !s.equals(usernames[0]);
     }
+    /**
+     * 
+     * 
+     */
     @Test public void rejectMany() throws SQLException {
         fao.sendFriendRequest(usernames[0],usernames[1]);
         fao.sendFriendRequest(usernames[1],usernames[2]);
@@ -167,6 +229,10 @@ class DAOFriendTest {
         for(String s : list)
             assert !s.equals(usernames[3]);
     }
+    /**
+     * 
+     * 
+     */
     @Test public void sendZOMBIE() throws SQLException{
         //Zero
         assertDoesNotThrow(()-> fao.sendFriendRequest(null,null));
@@ -187,6 +253,10 @@ class DAOFriendTest {
         for(String s : list)
             assert list.size()==3;
     }
+    /**
+     * 
+     * 
+     */
     @Test public void removeZOMBIE() throws SQLException{
         fao.sendFriendRequest(usernames[6], usernames[1]);
         fao.sendFriendRequest(usernames[6], usernames[2]);

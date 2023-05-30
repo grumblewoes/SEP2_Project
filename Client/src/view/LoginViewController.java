@@ -2,20 +2,39 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import viewModel.LoginViewModel;
 import viewModel.ViewModel;
 
+/**
+ * View controller responsible for displaying the login page.
+ *
+ * @author Damian Trafiałek, Anna Pomerantz
+ * @version 1.0
+ */
 public class LoginViewController extends ViewController
 {
-  @FXML private TextField username, password;
+  @FXML private TextField username;
+  @FXML private PasswordField password;
   @FXML private Label errorLabel;
   private ViewHandler viewHandler;
   private LoginViewModel loginViewModel;
 
 
-  @Override public void init(ViewHandler viewHandler, ViewModel viewModel,
+  @Override
+  /**
+   * Method that initialise the controller and sets up all instance variables and bindings.
+   *
+   * @param viewHandler - handles changing views
+   *
+   * @param viewModel - view model related to the controller
+   *
+   * @param root - region that is being displayed
+   *
+   */
+  public void init(ViewHandler viewHandler, ViewModel viewModel,
       Region root)
   {
     this.viewHandler = viewHandler;
@@ -27,6 +46,10 @@ public class LoginViewController extends ViewController
 
   }
 
+  /**
+   * Reset method that calls view model to trigger the reset.
+   *
+   */
   @Override public void reset()
   {
     loginViewModel.clear();
@@ -34,10 +57,11 @@ public class LoginViewController extends ViewController
 
   @FXML private void submitButton() {
     if( loginViewModel.login() ){
-      viewHandler.openView("home");
+      if (!loginViewModel.isCoach())
+        viewHandler.openView("home");
+      else
+        viewHandler.openView("manageRoster");
     }
-
-    //if true, go to next screen
   }
 
   @FXML private void goToSignUpButton() {
