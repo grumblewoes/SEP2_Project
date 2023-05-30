@@ -106,8 +106,8 @@ public class LoginViewModel extends ViewModel
   public void clear(){
     Platform.runLater(() -> {
       errorLabel.set("");
-      passwordProperty.set("d");
-      usernameProperty.set("d");
+      passwordProperty.set("");
+      usernameProperty.set("");
     });
   }
 
