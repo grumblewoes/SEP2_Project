@@ -8,11 +8,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
+ * The Model interface summarizes the model server functionality.
+ * It provides methods for user management, folder management, exercise management, coach management, and meeting management.
+ *
  * 
- * 
- * 
- * @author 
- * @version 
+ * @author Jakub Cerovsky, Damian Trafiałek, Julija Gramovica, Anna Pomerantz
+ * @version 1.0
  */
 public interface Model
 {
@@ -32,12 +33,7 @@ public interface Model
     ExerciseList getExerciseListByNameAndFolderId(String name, int folderId);
 
     ArrayList<String> getPossibleExercises();
-//    int getBestSquat(String username);
-//    int getBestDeadlift(String username) ;
-//    int getBestBenchPress(String username);
     User getTrainee(String username);
-
-
     boolean addExercise(String title);
     boolean removeExercise(String title);
   boolean addCoach(String coachUsername, String coachPassword, String coachName, String coachLName, int coachHeight, int coachWeight, int pbBench,
