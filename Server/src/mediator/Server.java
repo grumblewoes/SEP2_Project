@@ -69,7 +69,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls server to check if the user and password match.
+   * Calls model to check if the user and password match.
    *
    * @param username - string value
    *
@@ -101,7 +101,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls server to remove folder.
+   * Calls model to remove folder.
    *
    * @param username - string value
    *
@@ -117,7 +117,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls server to change the folder name.
+   * Calls model to change the folder name.
    *
    * @param username - string value
    *
@@ -149,7 +149,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls server to add the exercise to the database.
+   * Calls model to add the exercise to the database.
    * @param username - string value
    * @param exerciseName - string value
    * @param folderId - integer value
@@ -221,7 +221,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the list of possible exercises.
+   * Calls the model to get the list of possible exercises.
    *
    *
    * @return array list of possible exercises names
@@ -234,7 +234,7 @@ public class Server implements RemoteModel
 
 
   /**
-   * Gets the trainee from server.
+   * Gets the trainee from model.
    *
    * @param username - stirng value
    *
@@ -248,7 +248,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls server to update the trainee.
+   * Calls model to update the trainee.
    * @param u - trainee username
    * @param h - trainee height
    * @param w - trainee weight
@@ -268,7 +268,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to send the friend request.
+   * Calls the model to send the friend request.
    * @param requesterUsername
    * @param accepterUsername
    * @return boolean if everything went ok
@@ -281,7 +281,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to remove a friend.
+   * Calls the model to remove a friend.
    * @param requesterUsername
    * @param accepterUsername
    * @return boolean if everything went ok
@@ -293,7 +293,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to request the coach for a trainee.
+   * Calls the model to request the coach for a trainee.
    * @param requesterUsername
    * @param accepterUsername
    * @return boolean if everything went ok
@@ -304,7 +304,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the coach of the trainee.
+   * Calls the model to get the coach of the trainee.
    *
    * @param traineeUsername - string value
    *
@@ -318,7 +318,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to check if the user is a coach.
+   * Calls the model to check if the user is a coach.
    *
    * @param username - string value
    *
@@ -332,7 +332,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to remove the coach fromthe trainee
+   * Calls the model to remove the coach fromthe trainee
    *
    * @param traineeUsername - string value
    *
@@ -347,7 +347,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to accept trainee request.
+   * Calls the model to accept trainee request.
    * @param traineeUsername - string value
    * @param coachUsername - string value
    * @return boolean if everything went ok
@@ -359,7 +359,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to deny trainee request.
+   * Calls the model to deny trainee request.
    * @param traineeUsername - string value
    * @return boolean if everything went ok
    */
@@ -370,7 +370,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to remove trainee from a roaster.
+   * Calls the model to remove trainee from a roaster.
    * @param traineeUsername - string value
    * @return boolean if everything went ok
    */
@@ -381,7 +381,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the list of trainees.
+   * Calls the model to get the list of trainees.
    *
    * @param username - string value
    *
@@ -396,7 +396,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the list of trainees requests.
+   * Calls the model to get the list of trainees requests.
    *
    * @param username - string value
    *
@@ -411,7 +411,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to remove the meeting.
+   * Calls the model to remove the meeting.
    * @param traineeUsername - string value
    * @param coachName - string value
    * @param date - localDate value
@@ -439,7 +439,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the list of squat leaders.
+   * Calls the model to get the list of squat leaders.
    *
    *
    * @return TraineeList
@@ -451,7 +451,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the deadlift leaders
+   * Calls the model to get the deadlift leaders
    *
    *
    * @return TraineList
@@ -463,7 +463,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the bench press leaders.
+   * Calls the model to get the bench press leaders.
    *
    *
    * @return TraineeList
@@ -475,7 +475,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the list of meeting requests.
+   * Calls the model to get the list of meeting requests.
    *
    * @param coach - string value
    *
@@ -490,7 +490,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the list of coaches meetings.
+   * Calls the model to get the list of coaches meetings.
    *
    * @param coach - string value
    *
@@ -505,7 +505,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the list of trainee's meetings
+   * Calls the model to get the list of trainee's meetings
    *
    * @param traineeUsername - string value
    *
@@ -520,7 +520,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the list of trainee meeting requests.
+   * Calls the model to get the list of trainee meeting requests.
    *
    * @param traineeUsername - string value
    *
@@ -535,7 +535,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to add the meeting request.
+   * Calls the model to add the meeting request.
    * @param traineeUsername - string value
    * @param coachUsername - string value
    * @param dateOfMeeting - localDate value
@@ -548,7 +548,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to approve the meeting.
+   * Calls the model to approve the meeting.
    * @param trainee - string value
    * @param coach - string value
    * @param date - localDate value
@@ -559,7 +559,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to deny the meeting.
+   * Calls the model to deny the meeting.
    * @param trainee - string value
    * @param coach - string value
    * @param date - localDate value
@@ -604,7 +604,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to accept friend request.
+   * Calls the model to accept friend request.
    * @param requester_username - string value
    * @param accepter_username - string value
    * @return boolean if everything went ok
@@ -616,7 +616,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to reject friend request.
+   * Calls the model to reject friend request.
    * @param requester_username - string value
    * @param accepter_username - string value
    * @return boolean if everything went ok
@@ -627,7 +627,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the list of trainee's friends.
+   * Calls the model to get the list of trainee's friends.
    *
    * @param username - string value
    *
@@ -640,7 +640,7 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Calls the server to get the list of the friend requests.
+   * Calls the model to get the list of the friend requests.
    *
    * @param username - trainee username - string value
    *
