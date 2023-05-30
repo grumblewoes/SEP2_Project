@@ -28,11 +28,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * View controller responsible for displaying the trainee's main page.
+ *
+ * @author Damian Trafiałek, Jakub Cerovsky
+ * @version 1.0
  */
 public class HomeViewController extends ViewController
 {
@@ -45,14 +44,14 @@ public class HomeViewController extends ViewController
   private Gson gson;
 
   /**
-   * 
-   * 
-   * @param viewHandler 
-   *        
-   * @param viewModel 
-   *        
-   * @param root 
-   *        
+   * Method that initialise the controller and sets up all instance variables and bindings.
+   *
+   * @param viewHandler - handles changing views
+   *
+   * @param viewModel - view model related to the controller
+   *
+   * @param root - region that is being displayed
+   *
    */
   @Override public void init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
@@ -155,9 +154,10 @@ public class HomeViewController extends ViewController
   {
     viewHandler.openView("addFriend");
   }
+
   /**
-   * 
-   * 
+   * Reset method that calls view model to trigger the reset.
+   *
    */
   @Override public void reset()
   {

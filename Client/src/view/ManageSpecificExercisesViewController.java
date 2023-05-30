@@ -22,11 +22,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * View controller responsible for displaying the in-folder view.
+ *
+ * @author Damian Trafiałek, Julia Gramovicha
+ * @version 1.0
  */
 public class ManageSpecificExercisesViewController extends ViewController
 {
@@ -44,14 +43,14 @@ public class ManageSpecificExercisesViewController extends ViewController
   private boolean isSpecific;
 
   /**
-   * 
-   * 
-   * @param viewHandler 
-   *        
-   * @param viewModel 
-   *        
-   * @param root 
-   *        
+   * Method that initialise the controller and sets up all instance variables and bindings.
+   *
+   * @param viewHandler - handles changing views
+   *
+   * @param viewModel - view model related to the controller
+   *
+   * @param root - region that is being displayed
+   *
    */
   @Override public void init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
@@ -146,8 +145,8 @@ public class ManageSpecificExercisesViewController extends ViewController
   }
 
   /**
-   * 
-   * 
+   * Reset method that calls view model to trigger the reset.
+   *
    */
   @Override public void reset()
   {

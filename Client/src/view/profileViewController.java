@@ -13,11 +13,10 @@ import viewModel.ProfileViewModel;
 import viewModel.ViewModel;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * View controller responsible for displaying the add exercise view.
+ *
+ * @author Damian Trafiałek, Anna Pomerantz, Jakub Cerovsky
+ * @version 1.0
  */
 public class profileViewController extends  ViewController{
     @FXML private TextField firstNameField, lastNameField,usernameField,statusField,weightField,benchPressField,heightField,squatField,bmiField,deadliftField, coachField;
@@ -28,14 +27,14 @@ public class profileViewController extends  ViewController{
     private ProfileViewModel profileViewModel;
     @Override
     /**
-     * 
-     * 
-     * @param viewHandler 
-     *        
-     * @param viewModel 
-     *        
-     * @param root 
-     *        
+     * Method that initialise the controller and sets up all instance variables and bindings.
+     *
+     * @param viewHandler - handles changing views
+     *
+     * @param viewModel - view model related to the controller
+     *
+     * @param root - region that is being displayed
+     *
      */
     public void init(ViewHandler viewHandler, ViewModel viewModel, Region root) {
         this.viewHandler=viewHandler;
@@ -110,17 +109,17 @@ public class profileViewController extends  ViewController{
 
     @Override
     /**
-     * 
-     * 
+     * Reset method that calls view model to trigger the reset.
+     *
      */
     public void reset() {
         profileViewModel.clear();
     }
 
     /**
+     * Method that calls profile view model to update the profile of the user.
      * 
-     * 
-     * @param actionEvent 
+     * @param actionEvent - event that is triggered
      *        
      */
     public void update(ActionEvent actionEvent) {
@@ -128,9 +127,9 @@ public class profileViewController extends  ViewController{
     }
 
     /**
+     * Method that calls view handler to switch views.
      * 
-     * 
-     * @param actionEvent 
+     * @param actionEvent - event that is triggered
      *        
      */
     public void goBack(ActionEvent actionEvent) {

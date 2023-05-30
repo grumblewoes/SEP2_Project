@@ -22,11 +22,11 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
+ * A class responsible for managing the views and switching them.
  * 
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafiałek, Jakub Cerovsky
+ * @version 1.0
  */
 public class ViewHandler {
 
@@ -57,10 +57,10 @@ public class ViewHandler {
 
 
 /**
- * 1-argument constructor 
+ * 1-argument constructor that sets all instance variables and initialises the current scene.
  * 
  * 
- * @param viewModelFactory 
+ * @param viewModelFactory - class that creates all view models
  *        
  */
 	public ViewHandler(ViewModelFactory viewModelFactory) {
@@ -69,9 +69,9 @@ public class ViewHandler {
 	}
 
 /**
+ * Method that runs start the view.
  * 
- * 
- * @param primaryStage 
+ * @param primaryStage - primary stage of the view
  *        
  */
 	public void start(Stage primaryStage) {
@@ -81,9 +81,9 @@ public class ViewHandler {
 	}
 
 /**
+ * Method that opens certain view.
  * 
- * 
- * @param id 
+ * @param id - unique identifier of the view.
  *        
  */
 	public void openView(String id) {
@@ -202,7 +202,7 @@ public class ViewHandler {
 	}
 
 /**
- * 
+ * Method that open leaderboard view.
  * 
  */
 	public void openLeaderboardView() {

@@ -10,11 +10,10 @@ import viewModel.CreateUserViewModel;
 import viewModel.ViewModel;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * View controller responsible for displaying the create user page.
+ *
+ * @author Damian Trafiałek
+ * @version 1.0
  */
 public class CreateUserViewController extends ViewController
 {
@@ -33,31 +32,25 @@ public class CreateUserViewController extends ViewController
 
 	private IntStringConverter converter;
 
-/**
- * 0-argument constructor 
- * 
- * 
- */
-	public CreateUserViewController() {
-		converter = new IntStringConverter();
-	}
+
 
 	@Override
 /**
- * 
- * 
- * @param viewHandler 
- *        
- * @param viewModel 
- *        
- * @param root 
- *        
+ * Method that initialise the controller and sets up all instance variables and bindings.
+ *
+ * @param viewHandler - handles changing views
+ *
+ * @param viewModel - view model related to the controller
+ *
+ * @param root - region that is being displayed
+ *
  */
 	public void init(ViewHandler viewHandler, ViewModel viewModel, Region root) {
 		this.viewHandler = viewHandler;
 		createUserViewModel = (CreateUserViewModel) viewModel;
 		this.root = root;
 
+		converter = new IntStringConverter();
 		//binding
 		firstName.textProperty().bindBidirectional(createUserViewModel.getFirstNameProperty());
 		lastName.textProperty().bindBidirectional(createUserViewModel.getLastNameProperty());
@@ -70,10 +63,10 @@ public class CreateUserViewController extends ViewController
 
 	}
 
-/**
- * 
- * 
- */
+	/**
+	 * Reset method that calls view model to trigger the reset.
+	 *
+	 */
 	@Override public void reset() {
 		createUserViewModel.clear();
 	}

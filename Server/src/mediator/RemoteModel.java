@@ -3,17 +3,14 @@ package mediator;
 import utility.observer.subject.RemoteSubject;
 
 import java.rmi.RemoteException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * The RemoteModel interface defines the remote methods that can be called on the server-side.
- * It extends the RemoteSubject interface to allow observers to subscribe and unsubscribe from updates.
- * RemoteModel objects are used for remote communication in the application.
- *
- *
- * @author Damian Trafiałek
+ * Remote Model that serves the communication between the client and server.
+ * 
+ * 
+ * @author Damian Trafiałek, Jakub Cerovsky, Anna Pomerantz
  * @version 1.0
  */
 public interface RemoteModel extends RemoteSubject<String,String>

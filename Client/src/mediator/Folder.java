@@ -3,8 +3,7 @@ package mediator;
 import java.io.Serializable;
 
 /**
- * The Folder class represents a folder with its attributes such as id, title, and owner.
- * Folder objects are serializable.
+ * Class that stores folder data.
  *
  *
  * @author Damian Trafiałek
@@ -15,15 +14,15 @@ public class Folder implements Serializable {
     private String title,owner;
 
     /**
-     * 3-argument constructor, creating a Folder object with the specified id, title, and owner.
-     *
-     *
-     * @param id
-     *
-     * @param title
-     *
-     * @param owner
-     *
+     * 3-argument constructor that creates all the instace variables.
+     * 
+     * 
+     * @param id - integer
+     *        
+     * @param title - string
+     *        
+     * @param owner - string
+     *        
      */
     public Folder(int id, String title, String owner) {
         this.id = id;
@@ -31,28 +30,33 @@ public class Folder implements Serializable {
         this.owner = owner;
     }
 
-
     /**
-     * Returns the id of the folder.
+     * Returns the folder's id.
      *
-     * @return the folder id
+     *
+     * @return id
+     *
      */
     public int getId() {
         return id;
     }
+
     /**
      * Sets the id of the folder.
      *
-     * @param id the folder id to set
+     * @param id - integer
+     *
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * Returns the title of the folder.
+     * Returns the folder's title.
      *
-     * @return the folder title
+     *
+     * @return title
+     *
      */
     public String getTitle() {
         return title;
@@ -61,25 +65,29 @@ public class Folder implements Serializable {
     /**
      * Sets the title of the folder.
      *
-     * @param title the folder title to set
+     * @param title - integer
+     *
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-     * Returns the owner of the folder.
+     * Returns folder's owner.
+     * 
      *
-     * @return the folder owner
+     * @return owner string value
+     *        
      */
     public String getOwner() {
         return owner;
     }
 
     /**
-     * Sets the owner of the folder.
-     *
-     * @param owner the folder owner to set
+     * Sets folder's owner.
+     * 
+     * @param owner 
+     *        
      */
     public void setOwner(String owner) {
         this.owner = owner;

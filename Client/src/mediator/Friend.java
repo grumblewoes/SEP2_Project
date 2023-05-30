@@ -3,9 +3,9 @@ package mediator;
 import java.io.Serializable;
 
 /**
- * The Friend class represents a friend with its attributes such as username and status.
- * Friend objects are serializable.
- *
+ * Class that stores friend data.
+ * 
+ * 
  * @author Damian Trafiałek
  * @version 1.0
  */
@@ -13,44 +13,46 @@ public class Friend implements Serializable {
     private String username,status;
 
     /**
-     * 2-argument constructor, creating a Friend object with the specified username and status.
-     *
-     *
-     * @param username
-     *
-     * @param status
-     *
+     * 2-argument constructor that initialises the object.
+     * 
+     * 
+     * @param username -string value
+     *        
+     * @param status -string value
+     *        
      */
     public Friend(String username, String status) {
         this.username = username;
         this.status = status;
     }
     /**
-     * 1-argument constructor, creating a Friend object with the specified username and no status.
-     *
-     *
-     * @param username
-     *
+     * 1-argument constructor that initialises the object with null status.
+     * 
+     * 
+     * @param username - string value
+     *        
      */
     public Friend(String username) {
         this.username = username;
         this.status = null;
     }
 
-
     /**
-     * Returns the username of the friend.
+     * Returns username of the friend.
+     * 
      *
-     * @return the friend's username
+     * @return string
+     *        
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * Sets the username of the friend.
-     *
-     * @param username the friend's username to set
+     * Sets the username of teh friend.
+     * 
+     * @param username - string value
+     *        
      */
     public void setUsername(String username) {
         this.username = username;
@@ -58,16 +60,20 @@ public class Friend implements Serializable {
 
     /**
      * Returns the status of the friend.
+     * 
      *
-     * @return the friend's status
+     * @return string
+     *        
      */
     public String getStatus() {
         return status;
     }
+
     /**
      * Sets the status of the friend.
-     *
-     * @param status the friend's status to set
+     * 
+     * @param status 
+     *        
      */
     public void setStatus(String status) {
         this.status = status;
@@ -75,9 +81,11 @@ public class Friend implements Serializable {
 
     @Override
     /**
-     * Returns a string representation of the Friend object.
+     * Casts object to the string
+     * 
      *
-     * @return a string representation of the Friend object
+     * @return string value
+     *        
      */
     public String toString() {
         return "Friend{" +

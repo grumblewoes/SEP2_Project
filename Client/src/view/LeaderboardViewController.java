@@ -12,11 +12,10 @@ import viewModel.ViewModel;
 
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * View controller responsible for displaying the leaderboards view.
+ *
+ * @author Jakub Cerovsky
+ * @version 1.0
  */
 public class LeaderboardViewController extends ViewController
 {
@@ -39,7 +38,18 @@ public class LeaderboardViewController extends ViewController
   private LeaderboardViewModel leaderboardViewModel;
   private Stage stage = null;
 
-  @Override public void init(ViewHandler viewHandler, ViewModel viewModel,
+  @Override
+  /**
+   * Method that initialise the controller and sets up all instance variables and bindings.
+   *
+   * @param viewHandler - handles changing views
+   *
+   * @param viewModel - view model related to the controller
+   *
+   * @param root - region that is being displayed
+   *
+   */
+  public void init(ViewHandler viewHandler, ViewModel viewModel,
       Region root)
   {
     this.viewHandler=viewHandler;
@@ -66,8 +76,8 @@ public class LeaderboardViewController extends ViewController
   }
 
   /**
-   * 
-   * 
+   * Reset method that calls view model to trigger the reset.
+   *
    */
   @Override public void reset()
   {
@@ -75,9 +85,9 @@ public class LeaderboardViewController extends ViewController
   }
 
   /**
+   * Method that sets the stage of the view.
    * 
-   * 
-   * @param stage 
+   * @param stage - view's stage
    *        
    */
   public void setStage(Stage stage) {

@@ -9,11 +9,10 @@ import viewModel.LoginViewModel;
 import viewModel.ViewModel;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * View controller responsible for displaying the login page.
+ *
+ * @author Damian Trafiałek, Anna Pomerantz
+ * @version 1.0
  */
 public class LoginViewController extends ViewController
 {
@@ -24,7 +23,18 @@ public class LoginViewController extends ViewController
   private LoginViewModel loginViewModel;
 
 
-  @Override public void init(ViewHandler viewHandler, ViewModel viewModel,
+  @Override
+  /**
+   * Method that initialise the controller and sets up all instance variables and bindings.
+   *
+   * @param viewHandler - handles changing views
+   *
+   * @param viewModel - view model related to the controller
+   *
+   * @param root - region that is being displayed
+   *
+   */
+  public void init(ViewHandler viewHandler, ViewModel viewModel,
       Region root)
   {
     this.viewHandler = viewHandler;
@@ -37,8 +47,8 @@ public class LoginViewController extends ViewController
   }
 
   /**
-   * 
-   * 
+   * Reset method that calls view model to trigger the reset.
+   *
    */
   @Override public void reset()
   {
@@ -52,8 +62,6 @@ public class LoginViewController extends ViewController
       else
         viewHandler.openView("manageRoster");
     }
-
-    //if true, go to next screen
   }
 
   @FXML private void goToSignUpButton() {

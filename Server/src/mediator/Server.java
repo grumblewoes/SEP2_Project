@@ -15,24 +15,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * The Server class represents the server-side implementation of the remote model.
- * It provides methods to interact with the model and handle remote method calls.
+ * Class that manages the communication between cleint and server.
  *
- * @author Damian Trafiałek
+ *
+ * @author Damian Trafiałek, Jakub Cerovsky, Anna Pomerantz, Julia Gramovicha
  * @version 1.0
  */
 public class Server implements RemoteModel
 {
   private Model model;
-  private PropertyChangeHandler<String, String> property;
-
+  private PropertyChangeHandler<String,String> property;
   /**
-   * 1-argument constructor creates a Server object with the specified model.
-   *
-   * @param model the model to be used by the server
+   * 1-argument constructor that takes the model and creates association with it.
+   * Starts the server and registry.
+   * 
+   * @param model - Server Model
+   *        
    */
-  public Server(Model model)
-  {
+  public Server(Model model){
     this.model = model;
     this.property = new PropertyChangeHandler<>(this);
     try
@@ -47,42 +47,53 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Creates a new user with the specified details.
+   * Calls model to create a new user.
    *
-   * @param firstName the first name of the user
-   * @param lastName  the last name of the user
-   * @param userName  the username of the user
-   * @param password  the password of the user
-   * @param height    the height of the user
-   * @param weight    the weight of the user
-   * @return true if the user was created successfully, false otherwise
+   * @param firstName - string value
+   *
+   * @param lastName - string value
+   *
+   * @param userName - string value
+   *
+   * @param password - string value
+   *
+   * @param height - integer value
+   *
+   * @param weight - integer value
+   *
+   *
+   * @return boolean if everything went ok
    */
-  public boolean createUser(String firstName, String lastName, String userName,
-      String password, int height, int weight)
-  {
-    return model.createUser(firstName, lastName, userName, password, height,
-        weight);
+  public boolean createUser(String firstName, String lastName, String userName, String password, int height, int weight){
+    return model.createUser(firstName, lastName, userName, password, height, weight);
   }
 
   /**
-   * Logs in a user with the specified username and password.
+   * Calls server to check if the user and password match.
    *
-   * @param username the username of the user
-   * @param password the password of the user
-   * @return true if the login was successful, false otherwise
+   * @param username - string value
+   *
+   * @param password - string value
+   *
+   *
+   * @return boolean if everything went ok
+   *
    */
-  public boolean login(String username, String password)
-  {
+  public boolean login(String username, String password) {
     return model.login(username, password);
 
   }
 
   /**
-   * Creates a new folder for the given user.
+   * Calls sever to create a new folder.
    *
-   * @param username the username of the user
-   * @param name     the name of the folder to be created
-   * @return true if the folder is created successfully, false otherwise
+   * @param username - string value
+   *
+   * @param name - string value
+   *
+   *
+   * @return boolean if everything went ok
+   *
    */
   @Override public boolean createFolder(String username, String name)
   {
@@ -90,11 +101,15 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Removes the folder with the specified folder Id for the given user.
+   * Calls server to remove folder.
    *
-   * @param username the username of the user
-   * @param folderId the ID of the folder to be removed
-   * @return true if the folder is removed successfully, false otherwise
+   * @param username - string value
+   *
+   * @param folderId - integer value
+   *
+   *
+   * @return boolean if everything went ok
+   *
    */
   @Override public boolean removeFolder(String username, int folderId)
   {
@@ -102,25 +117,31 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Renames the folder with the specified folder Id for the given user.
+   * Calls server to change the folder name.
    *
-   * @param username the username of the user
-   * @param folderId the ID of the folder to be renamed
-   * @param newName  the new name for the folder
-   * @return true if the folder is renamed successfully, false otherwise
+   * @param username - string value
+   *
+   * @param folderId - integer value
+   *
+   * @param newName - string value
+   *
+   *
+   * @return boolean if everything went ok
+   *
    */
-
-  @Override public boolean editFolder(String username, int folderId,
-      String newName)
+  @Override public boolean editFolder(String username,int folderId,  String newName)
   {
     return model.editFolder(username, folderId, newName);
   }
 
   /**
-   * Retrieves the list of folders for the given user.
+   * Gets the list of user's folder.
    *
-   * @param username the username of the user
-   * @return the list of folders for the user, or null if SQLException is caught
+   * @param username - string value
+   *
+   *
+   * @return list of folders
+   *
    */
   @Override public FolderList getFolderList(String username)
   {
@@ -128,57 +149,57 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Adds an exercise to the specified folder for the given user.
-   *
-   * @param username     the username of the user
-   * @param exerciseName the name of the exercise to be added
-   * @param folderId     the ID of the folder to which the exercise should be added
-   * @param weight       the weight of the exercise
-   * @param repetitions  the number of repetitions for the exercise
-   * @return true if the exercise is added successfully, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
+   * Calls server to add the exercise to the database.
+   * @param username - string value
+   * @param exerciseName - string value
+   * @param folderId - integer value
+   * @param weight - integer value
+   * @param repetitions - integer value
+   * @return boolean if everything went ok
    */
-
-  @Override public boolean addExercise(String username, String exerciseName,
-      int folderId, int weight, int repetitions) throws RemoteException
+  @Override public boolean addExercise(String username, String exerciseName, int folderId, int weight,int repetitions) throws RemoteException
   {
-    return model.addExercise(username, exerciseName, folderId, weight,
-        repetitions);
+    return model.addExercise(username, exerciseName,folderId,weight,repetitions);
   }
 
   /**
-   * Removes the exercise with the specified exercise Id.
+   * Removes exercises from database.
    *
-   * @param exerciseId the ID of the exercise to be removed
-   * @return true if the exercise is removed successfully, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param exerciseId - integer value
+   *
+   *
+   * @return boolean if everything went ok
+   *
    */
   @Override public boolean removeExercise(int exerciseId) throws RemoteException
   {
     return model.removeExercise(exerciseId);
   }
 
-  @Override
   /**
-   * Removes exercises with the specified name from the given folder.
+   * Removes exercises by name and folder id from database.
    *
-   * @param name     the name of the exercises to be removed
-   * @param folderId the ID of the folder from which the exercises should be removed
-   * @return true if the exercises are removed successfully, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param name - string value
    *
-   */ public boolean removeExercisesByName(String name, int folderId)
-      throws RemoteException
-  {
-    return model.removeExercisesByName(name, folderId);
+   * @param folderId - integer value
+   *
+   *
+   * @return boolean if everything went ok
+   *
+   */
+  @Override
+  public boolean removeExercisesByName(String name, int folderId) throws RemoteException {
+    return model.removeExercisesByName(name,folderId);
   }
 
   /**
-   * Retrieves the list of exercises for the specified folder.
+   * Gets the list of exercises within the folder.
    *
-   * @param folderId the ID of the folder
-   * @return the list of exercises for the folder, or null if an error occurs
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param folderId - integer value
+   *
+   *
+   * @return list of exercises
+   *
    */
   @Override public ExerciseList getExerciseList(int folderId)
       throws RemoteException
@@ -186,143 +207,138 @@ public class Server implements RemoteModel
     return model.getExerciseList(folderId);
   }
 
-  @Override
   /**
-   * Retrieves an ExerciseList by name and folder ID.
+   * Gets the list of exercises by name and folder id.
    *
-   * @param name       the name of the exercise list
-   * @param folderId   the ID of the folder
-   * @return the ExerciseList matching the specified name and folder ID,
+   * @param name - string value
    *
+   * @param folderId - integer value
+   * @return ExerciseList - list of exercises
    */
-
-  public ExerciseList getExerciseListByNameAndFolderId(String name,
-      int folderId)
-  {
-    return model.getExerciseListByNameAndFolderId(name, folderId);
+  @Override
+  public ExerciseList getExerciseListByNameAndFolderId(String name, int folderId) {
+    return model.getExerciseListByNameAndFolderId(name,folderId);
   }
 
-  @Override
   /**
-   * Retrieves a list of possible exercises.
+   * Calls the server to get the list of possible exercises.
    *
-   * @return an ArrayList of possible exercises
    *
-   */ public ArrayList<String> getPossibleExercises()
-  {
+   * @return array list of possible exercises names
+   *
+   */
+  @Override
+  public ArrayList<String> getPossibleExercises() {
     return model.getPossibleExercises();
   }
 
-  @Override
+
   /**
-   * Retrieves a trainee by username.
+   * Gets the trainee from server.
    *
-   * @param username   the username of the trainee
-   * @return the User object representing the trainee
-   * @throws RemoteException if a remote exception occurs during the method call
-   */ public User getTrainee(String username) throws RemoteException
-  {
+   * @param username - stirng value
+   *
+   *
+   * @return User
+   *
+   */
+  @Override
+  public User getTrainee(String username) throws RemoteException {
     return model.getTrainee(username);
   }
 
-  @Override
   /**
-   * Updates the trainee with the specified details.
-   *
-   * @param u          the username of the trainee
-   * @param h          the height of the trainee
-   * @param w          the weight of the trainee
-   * @param s          true if the user's profile is shared, false otherwise
-   * @param st         the status text of the trainee
-   * @return true if the trainee is updated successfully
-   * @throws RemoteException if a remote exception occurs during the method call
-   */ public boolean updateTrainee(String u, int h, int w, boolean s, String st)
-      throws RemoteException
-  {
-    boolean result = model.updateTrainee(u, h, w, s, st);
-    if (!result)
-    {
-      Logger.log("firing property to : " + u);
-      property.firePropertyChange(u, null, "Failed to update profile.");
+   * Calls server to update the trainee.
+   * @param u - trainee username
+   * @param h - trainee height
+   * @param w - trainee weight
+   * @param s - trainee wants to share their profile
+   * @param st - trainee status
+   * @return boolean if everything went ok
+   */
+  @Override
+  public boolean updateTrainee(String u, int h, int w,boolean s,String st) throws RemoteException {
+    boolean result = model.updateTrainee(u,h,w,s,st);
+    if(!result) {
+      Logger.log("firing property to : " + u );
+      property.firePropertyChange(u,null,"Failed to update profile.");
     }
-    else
-      property.firePropertyChange(u, null, "Successfully updated profile.");
+    else property.firePropertyChange(u,null,"Successfully updated profile.");
     return result;
   }
 
   /**
-   * Sends a friend request from the requester to the accepter.
-   *
-   * @param requesterUsername the username of the requester
-   * @param accepterUsername  the username of the accepter
-   * @return true if the friend request is sent successfully
-   * @throws RemoteException if a remote exception occurs during the method call
+   * Calls the server to send the friend request.
+   * @param requesterUsername
+   * @param accepterUsername
+   * @return boolean if everything went ok
    */
-
-  @Override public boolean sendFriendRequest(String requesterUsername,
+  @Override
+  public boolean sendFriendRequest(String requesterUsername,
       String accepterUsername) throws RemoteException
   {
-    return model.sendFriendRequest(requesterUsername, accepterUsername);
+    return model.sendFriendRequest(requesterUsername,accepterUsername);
   }
 
   /**
-   * Removes a friend relationship between two users.
-   *
-   * @param requesterUsername the username of the requester
-   * @param accepterUsername  the username of the accepter
-   * @return true if the friend relationship is removed successfully
-   * @throws RemoteException if a remote exception occurs during the method call
+   * Calls the server to remove a friend.
+   * @param requesterUsername
+   * @param accepterUsername
+   * @return boolean if everything went ok
    */
   @Override public boolean removeFriend(String requesterUsername,
       String accepterUsername) throws RemoteException
   {
-    return model.removeFriend(requesterUsername, accepterUsername);
+    return model.removeFriend(requesterUsername,accepterUsername);
   }
 
-  @Override
   /**
-   * Sends a coach request from the requester to the accepter.
-   *
-   * @param requesterUsername   the username of the requester
-   * @param accepterUsername    the username of the accepter
-   * @return true if the coach request is sent successfully
-   * @throws RemoteException if a remote exception occurs during the method call
-   */ public boolean requestCoach(String requesterUsername,
-      String accepterUsername) throws RemoteException
-  {
+   * Calls the server to request the coach for a trainee.
+   * @param requesterUsername
+   * @param accepterUsername
+   * @return boolean if everything went ok
+   */
+  @Override
+  public boolean requestCoach(String requesterUsername, String accepterUsername) throws RemoteException {
     return model.requestCoach(requesterUsername, accepterUsername);
   }
 
-  @Override
   /**
-   * Retrieves the coach associated with a trainee.
+   * Calls the server to get the coach of the trainee.
    *
-   * @param traineeUsername the username of the trainee
-   * @return the coach associated with the trainee, or null if not found
-   * @throws RemoteException if a remote exception occurs during the method call
-   */ public User getCoach(String traineeUsername) throws RemoteException
-  {
+   * @param traineeUsername - string value
+   *
+   *
+   * @return User
+   *
+   */
+  @Override
+  public User getCoach(String traineeUsername) throws RemoteException {
     return model.getCoach(traineeUsername);
   }
 
-  @Override
   /**
-   * Checks if a user is a coach.
+   * Calls the server to check if the user is a coach.
    *
-   * @param username   the username of the user
-   * @return true if the user is a coach, false otherwise or if an SQLException occurs
-   * @throws RemoteException if a remote exception occurs during the method call
-   */ public boolean isCoach(String username) throws RemoteException
-  {
+   * @param username - string value
+   *
+   *
+   * @return boolean if user is a coach
+   *
+   */
+  @Override
+  public boolean isCoach(String username) throws RemoteException {
     return model.isCoach(username);
   }
 
   /**
-   * Removes the coach for a trainee.
+   * Calls the server to remove the coach fromthe trainee
    *
-   * @param traineeUsername the username of the trainee
-   * @return true if the coach assignment is successfully removed, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param traineeUsername - string value
+   *
+   *
+   * @return boolean if everything went ok
+   *
    */
   @Override public boolean removeCoachAssignment(String traineeUsername)
       throws RemoteException
@@ -331,12 +347,10 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Accepts a coach request from a trainee.
-   *
-   * @param traineeUsername the username of the trainee
-   * @param coachUsername   the username of the coach
-   * @return true if the coach request is successfully accepted, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
+   * Calls the server to accept trainee request.
+   * @param traineeUsername - string value
+   * @param coachUsername - string value
+   * @return boolean if everything went ok
    */
   @Override public boolean acceptRequest(String traineeUsername,
       String coachUsername) throws RemoteException
@@ -345,11 +359,9 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Denies a coach request from a trainee.
-   *
-   * @param traineeUsername the username of the trainee
-   * @return true if the coach request is successfully denied, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
+   * Calls the server to deny trainee request.
+   * @param traineeUsername - string value
+   * @return boolean if everything went ok
    */
   @Override public boolean denyRequest(String traineeUsername)
       throws RemoteException
@@ -358,11 +370,9 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Removes a trainee from the coach's roster.
-   *
-   * @param traineeUsername the username of the trainee
-   * @return true if the trainee is successfully removed, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
+   * Calls the server to remove trainee from a roaster.
+   * @param traineeUsername - string value
+   * @return boolean if everything went ok
    */
   @Override public boolean removeTraineeFromRoster(String traineeUsername)
       throws RemoteException
@@ -371,11 +381,13 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Retrieves the list of trainees associated with a coach.
+   * Calls the server to get the list of trainees.
    *
-   * @param username the username of the coach
-   * @return the list of trainees associated with the coach
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param username - string value
+   *
+   *
+   * @return TraineeList
+   *
    */
   @Override public TraineeList getTraineeList(String username)
       throws RemoteException
@@ -384,11 +396,13 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Retrieves the list of all trainee requests received by a coach.
+   * Calls the server to get the list of trainees requests.
    *
-   * @param username the username of the coach
-   * @return the list of trainee requests received by the coach
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param username - string value
+   *
+   *
+   * @return arraylist of strings (trainees request usernames)
+   *
    */
   @Override public ArrayList<String> getTraineeRequest(String username)
       throws RemoteException
@@ -397,39 +411,39 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Removes an existing meeting between a trainee and a coach for a specified date.
-   *
-   * @param traineeUsername the username of the trainee
-   * @param coachName       the username of the coach
-   * @param date            the date of the meeting
-   * @return true if the meeting removal was approved successfully, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
+   * Calls the server to remove the meeting.
+   * @param traineeUsername - string value
+   * @param coachName - string value
+   * @param date - localDate value
+   * @return boolean if everything went ok
    */
-  @Override public boolean removeMeeting(String traineeUsername,
-      String coachName, LocalDate date) throws RemoteException
+  @Override public boolean removeMeeting(String traineeUsername, String coachName, LocalDate date)
+      throws RemoteException
   {
-    return model.removeMeeting(traineeUsername, coachName, date);
+    return model.removeMeeting( traineeUsername, coachName, date);
   }
 
   /**
-   * Retrieves a list of taken dates for a coach.
+   * Method that gets the dates that are already taken/reserved with the coach.
    *
-   * @param coachUsername the username of the coach
-   * @return the list of taken dates for the coach, or null if an error occurs
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param coachUsername - username
+   *
+   *
+   * @return ArrayList of local Dates
+   *
    */
-  @Override public ArrayList<LocalDate> getTakenDates(String coachUsername)
-      throws RemoteException
+  @Override public ArrayList<LocalDate> getTakenDates(String coachUsername) throws RemoteException
   {
     Logger.log("quering taken dates...");
     return model.getTakenDates(coachUsername);
   }
 
   /**
-   * Retrieves the leaderboard of trainees based on their squat performance.
+   * Calls the server to get the list of squat leaders.
    *
-   * @return the leaderboard of trainees based on squat performance, or null if an error occurs
-   * @throws RemoteException if a remote exception occurs during the method call
+   *
+   * @return TraineeList
+   *
    */
   @Override public TraineeList getSquatLeaders() throws RemoteException
   {
@@ -437,10 +451,11 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Retrieves the leaderboard of trainees based on their deadlift performance.
+   * Calls the server to get the deadlift leaders
    *
-   * @return the leaderboard of trainees based on deadlift performance, or null if an error occurs
-   * @throws RemoteException if a remote exception occurs during the method call
+   *
+   * @return TraineList
+   *
    */
   @Override public TraineeList getDeadliftLeaders() throws RemoteException
   {
@@ -448,10 +463,11 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Retrieves the leaderboard of trainees based on their bench press performance.
+   * Calls the server to get the bench press leaders.
    *
-   * @return the leaderboard of trainees based on bench press performance, or null if an error occurs
-   * @throws RemoteException if a remote exception occurs during the method call
+   *
+   * @return TraineeList
+   *
    */
   @Override public TraineeList getBenchLeaders() throws RemoteException
   {
@@ -459,11 +475,13 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Retrieves the list of meeting requests for a coach.
+   * Calls the server to get the list of meeting requests.
    *
-   * @param coach the username of the coach
-   * @return the list of meeting requests for the coach
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param coach - string value
+   *
+   *
+   * @return arrayList of meeting requests
+   *
    */
   @Override public ArrayList<String> getMeetingRequests(String coach)
       throws RemoteException
@@ -472,11 +490,13 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Retrieves a list of meetings associated with a coach.
+   * Calls the server to get the list of coaches meetings.
    *
-   * @param coach the username of the coach
-   * @return the list of meetings associated with the coach, or null if an error occurs
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param coach - string value
+   *
+   *
+   * @return arrayList of coaches meetings
+   *
    */
   @Override public ArrayList<String> getCoachMeetings(String coach)
       throws RemoteException
@@ -485,11 +505,13 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Retrieves the list of meetings for a trainee.
+   * Calls the server to get the list of trainee's meetings
    *
-   * @param traineeUsername the username of the trainee
-   * @return the list of meetings for the trainee
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param traineeUsername - string value
+   *
+   *
+   * @return arrayList of strings
+   *
    */
   @Override public ArrayList<String> getTraineeMeetingList(
       String traineeUsername) throws RemoteException
@@ -498,13 +520,14 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Retrieves the list of meeting requests for a trainee.
+   * Calls the server to get the list of trainee meeting requests.
    *
-   * @param traineeUsername the username of the trainee
-   * @return the list of meeting requests for the trainee
-   * @throws RemoteException if a remote exception occurs during the method call
+   * @param traineeUsername - string value
+   *
+   *
+   * @return list of meetings requests
+   *
    */
-
   @Override public ArrayList<String> getTraineeMeetingRequests(
       String traineeUsername) throws RemoteException
   {
@@ -512,55 +535,42 @@ public class Server implements RemoteModel
   }
 
   /**
-   * Sends a meeting request from a trainee to a coach for a specified date.
-   *
-   * @param traineeUsername the username of the trainee sending the meeting request
-   * @param coachUsername   the username of the coach receiving the meeting request
-   * @param dateOfMeeting   the date of the meeting
-   * @return true if the meeting request was sent successfully, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
+   * Calls the server to add the meeting request.
+   * @param traineeUsername - string value
+   * @param coachUsername - string value
+   * @param dateOfMeeting - localDate value
+   * @return boolean if everything went ok
    */
-
   @Override public boolean sendMeetingRequest(String traineeUsername,
       String coachUsername, LocalDate dateOfMeeting) throws RemoteException
   {
-    return model.sendMeetingRequest(traineeUsername, coachUsername,
-        dateOfMeeting);
+    return model.sendMeetingRequest(traineeUsername,coachUsername,dateOfMeeting);
   }
 
-  @Override
   /**
-   * Approves a meeting request between a trainee and a coach for a specified date.
-   *
-   * @param trainee the username of the trainee
-   * @param coach the username of the coach
-   * @param date the date of the meeting
-   * @return true if the meeting request was approved successfully, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
-   */ public boolean approveMeeting(String trainee, String coach,
-      LocalDate date) throws RemoteException
-  {
+   * Calls the server to approve the meeting.
+   * @param trainee - string value
+   * @param coach - string value
+   * @param date - localDate value
+   * @return boolean if everything went ok
+   */
+  public boolean approveMeeting(String trainee, String coach, LocalDate date) throws RemoteException {
     return model.approveMeeting(trainee, coach, date);
   }
 
-  @Override
   /**
-   * Denies a meeting request between a trainee and a coach for a specified date.
-   *
-   * @param trainee the username of the trainee
-   * @param coach the username of the coach
-   * @param date the date of the meeting
-   * @return true if the meeting request was denied successfully, false otherwise
-   * @throws RemoteException if a remote exception occurs during the method call
+   * Calls the server to deny the meeting.
+   * @param trainee - string value
+   * @param coach - string value
+   * @param date - localDate value
+   * @return boolean if everything went ok
    */
-  public boolean denyMeeting(String trainee, String coach, LocalDate date)
-      throws RemoteException
-  {
+  @Override
+  public boolean denyMeeting(String trainee, String coach, LocalDate date) throws RemoteException {
     return model.denyMeeting(trainee, coach, date);
   }
 
-  private void startServer()
-  {
+  private void startServer() {
     try
     {
       UnicastRemoteObject.exportObject(this, 0);
@@ -584,97 +594,90 @@ public class Server implements RemoteModel
     System.out.println("Server started...");
   }
 
-  private void startRegistry() throws Exception
-  {
-    try
-    {
+  private void startRegistry() throws Exception {
+    try {
       Registry reg = LocateRegistry.createRegistry(1099);
       System.out.println("Registry started...");
-    }
-    catch (RemoteException e)
-    {
+    } catch (RemoteException e) {
       throw new Exception("Registry already started? " + e.getMessage());
     }
   }
 
-  @Override
   /**
-   * Accepts a friend request between two users.
-   *
-   * @param requester_username   the username of the requester
-   * @param accepter_username    the username of the accepter
-   * @return true if the friend request is accepted successfully
-   */ public boolean acceptFriendRequest(String requester_username,
-      String accepter_username)
-  {
-    return model.acceptFriendRequest(requester_username, accepter_username);
+   * Calls the server to accept friend request.
+   * @param requester_username - string value
+   * @param accepter_username - string value
+   * @return boolean if everything went ok
+   */
+  @Override
+  public boolean acceptFriendRequest(String requester_username, String accepter_username) {
+      return model.acceptFriendRequest(requester_username, accepter_username);
 
   }
 
-  @Override
   /**
-   * Rejects a friend request between two users.
-   *
-   * @param requester_username   the username of the requester
-   * @param accepter_username    the username of the accepter
-   * @return true if the friend request is rejected successfully
-   */ public boolean rejectFriendRequest(String requester_username,
-      String accepter_username)
-  {
-    return model.rejectFriendRequest(requester_username, accepter_username);
+   * Calls the server to reject friend request.
+   * @param requester_username - string value
+   * @param accepter_username - string value
+   * @return boolean if everything went ok
+   */
+  @Override
+  public boolean rejectFriendRequest(String requester_username, String accepter_username) {
+      return model.rejectFriendRequest(requester_username, accepter_username);
   }
 
-  @Override
   /**
-   * Retrieves the list of friends for a given username.
+   * Calls the server to get the list of trainee's friends.
    *
-   * @param username   the username of the user
-   * @return the FriendList object containing the user's friends
-   */ public FriendList getFriends(String username)
-  {
-    return model.getFriends(username);
+   * @param username - string value
+   *
+   * @return list of friends
+   *
+   */
+  @Override
+  public FriendList getFriends(String username) {
+      return model.getFriends(username);
   }
 
-  @Override
   /**
-   * Retrieves the list of friend requests for a given username.
+   * Calls the server to get the list of the friend requests.
    *
-   * @param username   the username of the user
-   * @return an ArrayList of friend requests received by the user
-   */ public ArrayList<String> getFriendRequests(String username)
-  {
-    return model.getFriendRequests(username);
+   * @param username - trainee username - string value
+   *
+   *
+   * @return ArrayList of friend requests usernames
+   *
+   */
+  @Override
+  public ArrayList<String> getFriendRequests(String username) {
+      return model.getFriendRequests(username);
   }
 
-  @Override
   /**
-   * Adds a listener to the server's property change handler.
-   * The listener will be notified when any of the specified properties change.
-   *
-   * @param listener       the general listener to be added
-   * @param propertyNames  the names of the properties to listen for changes
-   * @return true if the listener is successfully added, false otherwise
-   * @throws RemoteException if a remote communication error occurs
-   */ public boolean addListener(GeneralListener<String, String> listener,
-      String... propertyNames) throws RemoteException
-  {
-    property.addListener(listener, propertyNames);
+   * Add the listener to the subject.
+   * @param listener the listener to be added
+   * @param propertyNames a var-args list of property names. If empty, then the
+   *                      listener should be added as a lister for all events.
+   * @return
+   * @throws RemoteException
+   */
+  @Override
+  public boolean addListener(GeneralListener<String, String> listener, String... propertyNames) throws RemoteException {
+    property.addListener(listener,propertyNames);
     return true;
   }
 
-  @Override
   /**
-   * Removes a listener from the server's property change handler.
-   * The listener will no longer be notified of property changes.
-   *
-   * @param listener       the general listener to be removed
-   * @param propertyNames  the names of the properties to stop listening for changes
-   * @return true if the listener is successfully removed, false otherwise
-   * @throws RemoteException if a remote communication error occurs
-   */ public boolean removeListener(GeneralListener<String, String> listener,
-      String... propertyNames) throws RemoteException
-  {
-    property.removeListener(listener, propertyNames);
+   * Remove the listener to the subject.
+   * @param listener the listener to be removed
+   * @param propertyNames a var-args list of property names. If empty, then the
+   *                      listener should be removed as a lister for all events.
+   * @return
+   * @throws RemoteException
+   */
+  @Override
+  public boolean removeListener(GeneralListener<String, String> listener, String... propertyNames) throws RemoteException {
+    property.removeListener(listener,propertyNames);
     return true;
   }
 }

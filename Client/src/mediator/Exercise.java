@@ -3,11 +3,9 @@ package mediator;
 import java.io.Serializable;
 
 /**
- * The Exercise class represents an exercise performed during a workout.
- * It contains information such as weight, repetitions, name and id of the exercise.
- *
- * The Exercise class implements the Serializable interface to support serialization.
- *
+ * Class that stores exercise data.
+ * 
+ * 
  * @author Damian Trafiałek
  * @version 1.0
  */
@@ -16,13 +14,19 @@ public class Exercise implements Serializable {
     private int repetitions,id;
     private String name;
 
+
     /**
-     * 4-argument constructor, creating an Exercise object with the specified ID, weight, repetitions, and name.
-     *
-     * @param id           the ID of the exercise
-     * @param weight       the weight used for the exercise
-     * @param repetitions  the number of repetitions performed
-     * @param name         the name of the exercise
+     * 4-argument constructor that creates the exercise.
+     * 
+     * 
+     * @param id - id of the exercises in the database
+     *        
+     * @param weight - weight of the exercise performed
+     *        
+     * @param repetitions - number of repetitions performed
+     *        
+     * @param name - the name of the exercise
+     *        
      */
     public Exercise(int id,double weight, int repetitions, String name) {
         this.id=id;
@@ -32,72 +36,84 @@ public class Exercise implements Serializable {
     }
 
     /**
-     * Retrieves the ID of the exercise.
+     * Returns the exercise's id.
+     * 
      *
-     * @return the ID of the exercise
+     * @return id
+     *        
      */
     public int getId() {
         return id;
     }
+
     /**
-     * Sets the ID of the exercise.
-     *
-     * @param id the ID of the exercise
+     * Sets the id of the exercise.
+     * 
+     * @param id - integer
+     *        
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * Retrieves the weight used for the exercise.
+     * Returns the exercise's weight.
+     * 
      *
-     * @return the weight used for the exercise
+     * @return weight
+     *        
      */
     public double getWeight() {
         return weight;
     }
 
     /**
-     * Sets the weight used for the exercise.
-     *
-     * @param weight the weight used for the exercise
+     * Sets the exercise's weight.
+     * 
+     * @param weight - integer
+     *        
      */
     public void setWeight(double weight) {
         this.weight = weight;
     }
 
     /**
-     * Retrieves the number of repetitions performed for the exercise.
+     * Returns the exercise's repetitions.
+     * 
      *
-     * @return the number of repetitions performed
+     * @return repetitions
+     *        
      */
     public int getRepetitions() {
         return repetitions;
     }
 
     /**
-     * Sets the number of repetitions performed for the exercise.
-     *
-     * @param repetitions the number of repetitions performed
+     * Sets the exercise's repetitions.
+     * 
+     * @param repetitions - inteher
+     *        
      */
     public void setRepetitions(int repetitions) {
         this.repetitions = repetitions;
     }
 
-
     /**
-     * Retrieves the name of the exercise.
+     * Returns the exercise's name.
+     * 
      *
-     * @return the name of the exercise
+     * @return name - string value
+     *        
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Sets the name of the exercise.
-     *
-     * @param name the name of the exercise
+     * Sets the exercise's name.
+     * 
+     * @param name - string value
+     *        
      */
     public void setName(String name) {
         this.name = name;
@@ -105,9 +121,11 @@ public class Exercise implements Serializable {
 
     @Override
     /**
-     * Returns a String representation of the Exercise object.
+     * Method that casts the objects to string and returns it.
+     * 
      *
-     * @return a String representation of the Exercise object
+     * @return String - object casted to String
+     *        
      */
     public String toString() {
         return "Exercise{" +
@@ -117,12 +135,15 @@ public class Exercise implements Serializable {
                 ", name='" + name + '\'' +
                 '}';
     }
+
     /**
-     * Checks if the Exercise object is equal to another object.
-     * It checks if they have the same ID, name, weight, and repetitions.
+     * Method that compares the objects if they are the same.
+     * 
+     * @param o - some object
+     *        
      *
-     * @param o the object to compare with
-     * @return true if the objects are equal, false otherwise
+     * @return boolean value
+     *        
      */
     @Override public boolean equals(Object o){
         if(o==null || !(o instanceof Exercise)) return false;

@@ -13,10 +13,10 @@ import java.net.DatagramSocket;
 
 /**
  * 
+ * ViewModel class for the ManageSpecificExercisesViewController class.
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class ManageSpecificExercisesViewModel extends ViewModel{
     private Model model;
@@ -28,11 +28,12 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
 
     /**
      * 2-argument constructor 
+     * accepts the model and viewstate objects as arguments, and initialises the rest of the
+     * bound properties, along with a Gson interpreter
      * 
-     * 
-     * @param model 
+     * @param model for the model layer of MVVM, which communicates with the server
      *        
-     * @param viewState 
+     * @param viewState to store information when switcing screens
      *        
      */
     public ManageSpecificExercisesViewModel(Model model, ViewState viewState) {
@@ -62,8 +63,9 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
     }
     @Override
     /**
-     * 
-     * 
+     * refreshes the screen upon controller initialisation and screen swap,
+     * and requests updated exercise information from the server to update the
+     * progress graph
      */
     public void clear() {
         exerciseNameProperty.set(viewState.getExerciseName());
@@ -74,9 +76,9 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
     }
 
     /**
+     * method that prepares to switch to the screen to modify a selected exercise
      * 
-     * 
-     * @param name 
+     * @param name String for the name of the exercise
      *        
      */
     public void setupOpenExercisesByName(String name){
@@ -85,9 +87,10 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
     }
     /**
      * 
-     * 
+     * method that prepares the viewstate to display text unique to the previous screen
+     * upon pressing the back button
      *
-     * @return 
+     * @return String for the text value
      *        
      */
     public String setupGoBack(){
@@ -103,9 +106,9 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
 
     /**
      * 
-     * 
+     * getter for the username property
      *
-     * @return 
+     * @return StringProperty that contains the name
      *        
      */
     public StringProperty getUsernameProperty() {
@@ -114,9 +117,9 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
 
     /**
      * 
-     * 
+     * getter for the line chart property
      *
-     * @return 
+     * @return ObjectProperty that contains the line chart
      *        
      */
     public ObjectProperty getLineChartProperty() {
@@ -125,9 +128,9 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
 
     /**
      * 
-     * 
+     * getter for the JSON string that has the list of exercises from the server
      *
-     * @return 
+     * @return StringProperty that contains the list of exercises
      *        
      */
     public StringProperty getExercisesListProperty() {
@@ -137,9 +140,9 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
 
     /**
      * 
-     * 
+     * getter for the error property
      *
-     * @return 
+     * @return StringProperty for the error text
      *        
      */
     public StringProperty getErrorProperty() {
@@ -147,9 +150,9 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
     }
     /**
      * 
-     * 
+     * getter for the exercise name property
      *
-     * @return 
+     * @return StringProperty that contains the name of the specified exercise
      *        
      */
     public StringProperty getExerciseNameProperty() {
@@ -157,35 +160,37 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
     }
     /**
      * 
-     * 
+     * getter for the folder name property
      *
-     * @return 
+     * @return StringProperty for the name of the folder
      *        
      */
     public StringProperty getFolderNameProperty() { return folderNameProperty; }
     /**
      * 
-     * 
+     * getter for the isSpecificProperty
      *
-     * @return 
+     * @return BooleanProperty that contains whether an exercise is selected or not
      *        
      */
     public BooleanProperty getIsSpecificProperty() { return isSpecificProperty; }
 
 
     /**
+     * method that requests to the server to remove a specific exercise from the trainee's
+     * folder by its ID
      * 
-     * 
-     * @param exerciseId 
+     * @param exerciseId integer for the ID of the exercise
      *        
      */
     public void removeExercise(int exerciseId) {
         model.removeExercise(exerciseId);
     }
     /**
+     * method that requests to the server to remove a specific exercise from the trainee's
+     * folder by its name
      * 
-     * 
-     * @param name 
+     * @param name String to represent the name of the exercise
      *        
      */
     public void removeExercisesByName(String name) {
@@ -193,7 +198,8 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
         updateLineChart(name);
     }
     /**
-     * 
+     * method that prepares the viewstate so that upon switching to the "Add Exercise"
+     * screen, the back button will display the correct text
      * 
      */
     public void setupAddExercise() {
@@ -207,7 +213,9 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
     }
 
     /**
-     * 
+     * method that prepares the viewstate so that upon switching to the "Profile"
+     * screen, the back button will display the correct text and the profile
+     * will display the correct username
      * 
      */
     public void setupProfile() {
@@ -217,7 +225,7 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
 
 
     /**
-     * 
+     * method that sets the properties for the displayed line chart showing workout progress
      * 
      */
     public void setLineChart(LineChart<Number, Number> lineChart) {
@@ -225,9 +233,11 @@ public class ManageSpecificExercisesViewModel extends ViewModel{
     }
 
     /**
+     * method that adds a new entry into the line chart depending on the exercise. A request
+     * is made to the server to fetch information on the exercise's history, and updates it
+     * accordingly
      * 
-     * 
-     * @param exerciseName 
+     * @param exerciseName String for the name of the exercise
      *        
      */
     public void updateLineChart(String exerciseName)

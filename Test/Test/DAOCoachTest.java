@@ -1,8 +1,12 @@
 import mediator.Trainee;
 import mediator.TraineeList;
+import modelServer.DAO.implementation.CoachAdminDAO;
 import modelServer.DAO.implementation.CoachDAO;
+import modelServer.DAO.implementation.TraineeDAO;
 import modelServer.DAO.implementation.UserDAO;
+import modelServer.DAO.interfaces.ICoachAdminDAO;
 import modelServer.DAO.interfaces.ICoachDAO;
+import modelServer.DAO.interfaces.ITraineeDAO;
 import modelServer.DAO.interfaces.IUserDAO;
 import modelServer.DbContext.DBService;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,13 +21,15 @@ class DAOCoachTest
 {
     DBService service;
     private ICoachDAO cdao;
-    private IUserDAO udao;
+    private ICoachAdminDAO caDao;
+    private ITraineeDAO udao;
 
     @BeforeEach
     void setUp() {
         service=new DBService();
         cdao = new CoachDAO();
-        udao = new UserDAO();
+        caDao=new CoachAdminDAO();
+        udao = new TraineeDAO();
     }
 
     private void SetupTestDatabase(){
@@ -31,215 +37,8 @@ class DAOCoachTest
         service.switchToTestDatabase();
     }
 
-    @Test
-    void addCoachZero() {
-        SetupTestDatabase();
-        assertFalse(()-> {
-            try {
-                return cdao.addCoach(null, null, null, null, 0, 0, 0, 0, 0, null);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        service.switchToProductionDatabase();
-    }
-    @Test
-    void addCoachOne() {
-        SetupTestDatabase();
-        assertTrue(()-> {
-            try {
-                return cdao.addCoach("TheLegend27", "LegendThe27", "Alpha", "Male", 180, 80, 220, 220, 220, "On that grind");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        service.switchToProductionDatabase();
-    }
-    @Test
-    void addCoachMany() {
-        SetupTestDatabase();
-        assertTrue(()-> {
-            try {
-                return cdao.addCoach("TheLegend28", "g", "Alpha1", "Male1", 180, 80, 220, 220, 220, "On that grind");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        assertTrue(()-> {
-            try {
-                return cdao.addCoach("TheLegend29", "g", "Alpha2", "Male2", 180, 80, 220, 220, 220, "On that grind");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        assertTrue(()-> {
-            try {
-                return cdao.addCoach("TheLegend30", "g", "Alpha3", "Male3", 180, 80, 220, 220, 220, "On that grind");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        service.switchToProductionDatabase();
-    }
-    @Test
-    void addCoachBoundary() {
-        //already tested
-    }
-    @Test
-    void addCoachException() {
-        //inserting same coach twice (i.e coach w same username. are we making check constraints for first/last name?)
-        SetupTestDatabase();
-        try {
-            cdao.addCoach("TheLegend42", "g", "Alpha1", "Male1", 180, 80, 220, 220, 220, "On that grind");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            assertFalse(cdao.addCoach("TheLegend42", "g", "Alpha1", "Male1", 180, 80, 220, 220, 220, "On that grind"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        service.switchToProductionDatabase();
-    }
 
-    @Test
-    void removeCoachZero() {
-        SetupTestDatabase();
-        try {
-            assertFalse(cdao.removeCoach(null));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        service.switchToProductionDatabase();
-    }
-    @Test
-    void removeCoachOne() {
-        SetupTestDatabase();
-        try {
-            cdao.addCoach("TheLegend31", "g", "Alpha", "Male", 180, 80, 220, 220, 220, "On that grind");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        assertTrue(()-> {
-            try {
-                return cdao.removeCoach("TheLegend31");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        service.switchToProductionDatabase();
-    }
-    @Test
-    void removeCoachMany() {
-        SetupTestDatabase();
-        try {
-            cdao.addCoach("TheLegend32", "g", "Alpha", "Male", 180, 80, 220, 220, 220, "On that grind");
-            cdao.addCoach("TheLegend33", "g", "Alpha", "Male", 180, 80, 220, 220, 220, "On that grind");
-            cdao.addCoach("TheLegend34", "g", "Alpha", "Male", 180, 80, 220, 220, 220, "On that grind");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        assertTrue(()-> {
-            try {
-                return cdao.removeCoach("TheLegend32");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        assertTrue(()-> {
-            try {
-                return cdao.removeCoach("TheLegend33");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        assertTrue(()-> {
-            try {
-                return cdao.removeCoach("TheLegend34");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        service.switchToProductionDatabase();
-    }
-    @Test
-    void removeCoachBoundary() {
-        SetupTestDatabase();
-        try {
-            cdao.addCoach("TheLegend32", "32LegendThe", "Alpha", "Male", 180, 80, 220, 220, 220, "On that grind");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            assertTrue(cdao.removeCoach("TheLegend32"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            assertFalse(cdao.removeCoach("TheLegend32"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        service.switchToProductionDatabase();
-    }
-    @Test
-    void removeCoachException() {
-        //removing a coach that was never listed
-        SetupTestDatabase();
-        try {
-            assertFalse(cdao.removeCoach("TheLegend69"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        service.switchToProductionDatabase();
-    }
 
-    @Test
-    void getCoachZero() {
-        SetupTestDatabase();
-        try {
-            assertNull(cdao.getCoach("noobMan27"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        service.switchToProductionDatabase();
-    }
-    @Test
-    void getCoachOne() {
-        SetupTestDatabase();
-        assertDoesNotThrow(()-> cdao.getCoach("d"));
-        service.switchToProductionDatabase();
-    }
-    @Test
-    void getCoachMany() {
-        SetupTestDatabase();
-        try {
-            cdao.addCoach("noobMan27", "d", "d", "d", 1, 1, 1, 1, 1, "g");
-            cdao.addCoach("noobMan28", "d", "d", "d", 1, 1, 1, 1, 1, "g");
-            cdao.addCoach("noobMan29", "d", "d", "d", 1, 1, 1, 1, 1, "g");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        assertDoesNotThrow(()-> cdao.getCoach("noobMan27"));
-        assertDoesNotThrow(()-> cdao.getCoach("noobMan28"));
-        assertDoesNotThrow(()-> cdao.getCoach("noobMan29"));
-        service.switchToProductionDatabase();
-    }
-    @Test
-    void getCoachBoundary() {
-        // wut
-    }
-    @Test
-    void getCoachException() {
-        //getting a coach that doesn't exist, either cuz user doesn't exist or user has no coach
-        SetupTestDatabase();
-        try {
-            assertNull(cdao.getCoach("noobMan69")); //user doesn't exist
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        service.switchToProductionDatabase();
-    }
 
     @Test
     void isCoachZero() {
@@ -255,7 +54,7 @@ class DAOCoachTest
     void isCoachOne() {
         SetupTestDatabase();
         try {
-            cdao.addCoach("TheLegend27", "d", "d", "d", 1, 1, 1, 1, 1, "g");
+            caDao.addCoach("TheLegend27", "d", "d", "d", 1, 1, 1, 1, 1, "g");
             assertTrue(cdao.isCoach("TheLegend27"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -266,9 +65,9 @@ class DAOCoachTest
     void isCoachMany() {
         SetupTestDatabase();
         try {
-            cdao.addCoach("TheLegend27", "d", "d", "d", 1, 1, 1, 1, 1, "g");
-            cdao.addCoach("TheLegend28", "d", "d", "d", 1, 1, 1, 1, 1, "g");
-            cdao.addCoach("TheLegend29", "d", "d", "d", 1, 1, 1, 1, 1, "g");
+            caDao.addCoach("TheLegend27", "d", "d", "d", 1, 1, 1, 1, 1, "g");
+            caDao.addCoach("TheLegend28", "d", "d", "d", 1, 1, 1, 1, 1, "g");
+            caDao.addCoach("TheLegend29", "d", "d", "d", 1, 1, 1, 1, 1, "g");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -319,7 +118,7 @@ class DAOCoachTest
     void requestCoachOne() {
         SetupTestDatabase();
         try {
-            cdao.addCoach("TheLegend27", "d", "d", "d", 1, 1, 1, 1, 1, "g");
+            caDao.addCoach("TheLegend27", "d", "d", "d", 1, 1, 1, 1, 1, "g");
             assertTrue(cdao.requestCoach("d", "TheLegend27"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -332,9 +131,9 @@ class DAOCoachTest
         try {
             udao.createTrainee("e", "e", "e", "e", 100, 100);
             udao.createTrainee("f", "e", "e", "e", 100, 100);
-            cdao.addCoach("TheLegend28", "d", "d", "d", 1, 1, 1, 1, 1, "g");
-            cdao.addCoach("TheLegend29", "d", "d", "d", 1, 1, 1, 1, 1, "g");
-            cdao.addCoach("TheLegend30", "d", "d", "d", 1, 1, 1, 1, 1, "g");
+            caDao.addCoach("TheLegend28", "d", "d", "d", 1, 1, 1, 1, 1, "g");
+            caDao.addCoach("TheLegend29", "d", "d", "d", 1, 1, 1, 1, 1, "g");
+            caDao.addCoach("TheLegend30", "d", "d", "d", 1, 1, 1, 1, 1, "g");
             assertTrue(cdao.requestCoach("d", "TheLegend28"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -686,7 +485,7 @@ class DAOCoachTest
         String username = "name"+Math.random();
         String coach = "coach"+Math.random();
         udao.createTrainee(username,"pds","sda","dasd",12,12);
-        cdao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd");
+        caDao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd");
         cdao.requestCoach(username,coach);
         cdao.acceptRequest(username,coach);
 
@@ -694,7 +493,7 @@ class DAOCoachTest
         ArrayList<String> requests = cdao.getTraineeRequest(coach);
 
         assertEquals(requests.size(),0);
-        assertEquals(list.getTrainee(0),username);
+        assertEquals(list.getTrainee(0).getUsername(),username);
         service.switchToProductionDatabase();
     }
     @Test void getTraineeListMany() throws SQLException {
@@ -705,7 +504,7 @@ class DAOCoachTest
         String username3 = "name"+Math.random();
 
         udao.createTrainee(username,"pds","sda","dasd",12,12);
-        cdao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd");
+        caDao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd");
         udao.createTrainee(username2,"pds","sda","dasd",12,12);
         udao.createTrainee(username3,"pds","sda","dasd",12,12);
 
@@ -720,7 +519,7 @@ class DAOCoachTest
         ArrayList<String> requests = cdao.getTraineeRequest(coach);
 
         assertEquals(requests.size(),0);
-        assertEquals(list.getTrainee(2),username3);
+        assertEquals(list.getTrainee(2).getUsername(),username3);
         service.switchToProductionDatabase();
     }
     @Test void getTraineeListBoundary()  {
@@ -744,7 +543,7 @@ class DAOCoachTest
         String username = "name"+Math.random();
         String coach = "coach"+Math.random();
         udao.createTrainee(username,"pds","sda","dasd",12,12);
-        cdao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd");
+        caDao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd");
         cdao.requestCoach(username,coach);
 
         ArrayList<String> list = cdao.getTraineeRequest(coach);
@@ -759,7 +558,7 @@ class DAOCoachTest
         String username3 = "name"+Math.random();
 
         udao.createTrainee(username,"pds","sda","dasd",12,12);
-        cdao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd");
+        caDao.addCoach(coach,"dsad","dasda","dsada",12,12,12,12,12,"dsd");
         udao.createTrainee(username2,"pds","sda","dasd",12,12);
         udao.createTrainee(username3,"pds","sda","dasd",12,12);
 

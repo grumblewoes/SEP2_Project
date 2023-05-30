@@ -3,11 +3,9 @@ package mediator;
 import java.io.Serializable;
 
 /**
- * The Trainee class represents a trainee in the application.
- * It contains information about the trainee such as username, status, and lifted weight.
- * Trainee objects are serializable.
- *
- *
+ * Class that stores data of trainee.
+ * 
+ * 
  * @author Damian Trafiałek
  * @version 1.0
  */
@@ -18,76 +16,91 @@ public class Trainee implements Serializable
   private int liftedWeight;
 
   /**
-   * 1-argument constructor creates a Trainee object with the specified username.
-   *
-   *   @param username the trainee's username
-   *
+   * 1-argument constructor that initialises username leaving status and liftedWeight with default value.
+   * 
+   * 
+   * @param username - string value
+   *        
    */
   public Trainee(String username){
     this.username = username;
   }
   /**
-   * 2-argument constructor creates a Trainee object with the specified username and status.
-   *
-   * @param username the trainee's username
-   * @param status the trainee's status
+   * 2-argument constructor that initialises username and status leaving and liftedWeight with default value
+   * 
+   * 
+   * @param username -string value
+   *        
+   * @param status -string value
+   *        
    */
   public Trainee(String username, String status){
     this(username);
     this.status=status;
   }
   /**
-   * 2-argument constructor creates a Trainee object with the specified username and lifted weight.
-   *
-   * @param username the trainee's username
-   * @param liftedWeight the trainee's lifted weight
-   *
+   * 2-argument constructor that initialises username and liftedWeight leaving status with default value
+   * 
+   * 
+   * @param username - string value
+   *        
+   * @param liftedWeight - integer value
+   *        
    */
   public Trainee(String username, int liftedWeight){
     this(username);
     this.liftedWeight=liftedWeight;
   }
+
   /**
-   * Returns the trainee's username.
+   * Method that get the username.
+   * 
    *
-   * @return the trainee's username
+   * @return string username
+   *        
    */
   public String getUsername(){
     return username;
   }
 
   /**
-   * Returns the trainee's status.
+   * Method that getsw the status string.
+   * 
    *
-   * @return the trainee's status
+   * @return status string
+   *        
    */
   public String getStatus() {
     return status;
   }
 
-
   /**
-   * Sets the trainee's status.
-   *
-   * @param status the trainee's status to set
+   * Method that sets the string
+   * 
+   * @param status -string
+   *        
    */
   public void setStatus(String status) {
     this.status = status;
   }
 
   /**
-   * Returns a string representation of the trainee object.
+   * Casts the object to string.
+   * 
    *
-   * @return a string representation of the trainee object
+   * @return string
+   *        
    */
   public String toString(){
     return "The trainee's username: " + username;
   }
 
   /**
-   * Returns the trainee's lifted weight.
+   * Returns the lifted weight of the user.
+   * 
    *
-   * @return the trainee's lifted weight
+   * @return lifted weight integer
+   *        
    */
   public int getLiftedWeight()
   {

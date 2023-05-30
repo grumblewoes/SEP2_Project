@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * The ExerciseList class represents a list of exercises.
- * ExerciseList objects are serializable.
+ * Class that stores the list of exercises data.
+ *
  *
  * @author Damian Trafiałek
  * @version 1.0
@@ -13,41 +13,50 @@ import java.util.ArrayList;
 public class ExerciseList implements Serializable {
     private ArrayList<Exercise> list;
     /**
-     * 0-argument constructor initializes the Array List of exercises.
+     * 0-argument constructor that initialises the list.
+     * 
+     * 
      */
     public ExerciseList(){
         list= new ArrayList<>();
     }
 
     /**
-     * Adds an exercise to the list.
-     *
-     * @param exercise the exercise to add
+     * Method that adds the exercises to the list.
+     * 
+     * @param exercise - exercise class
+     *        
      */
     public void add(Exercise exercise){
         list.add(exercise);
     }
-
     /**
-     * Retrieves the exercise at the specified index.
+     * Method that returns the exercises under given index in the list.
+     * 
+     * @param i - integer
+     *        
      *
-     * @param i the index of the exercise to retrieve
-     * @return the exercise at the specified index
+     * @return exercise
+     *        
      */
     public Exercise get(int i){return list.get(i);}
-
     /**
-     * Returns the number of exercises in the list.
+     * Method that returns the size of the list.
+     * 
      *
-     * @return the size of the exercise list
+     * @return integer
+     *        
      */
     public int size(){return list.size();}
 
     /**
-     * Filters the exercises in the list by the given name.
+     * Method that filters the exercises in the list and returns the exerciseList of those that match the name.
+     * 
+     * @param name - string value
+     *        
      *
-     * @param name the name to filter by
-     * @return a new ExerciseList object containing the filtered exercises
+     * @return ExercsieList
+     *        
      */
     public ExerciseList filterByName(String name){
         ExerciseList filteredList = new ExerciseList();
@@ -62,9 +71,11 @@ public class ExerciseList implements Serializable {
 
     @Override
     /**
-     * Returns a string representation of the ExerciseList object.
+     * Method that casts the objects to string and returns it.
      *
-     * @return a string representation of the ExerciseList object
+     *
+     * @return String - object casted to String
+     *
      */
     public String toString() {
         return "ExerciseList{" +
@@ -73,11 +84,13 @@ public class ExerciseList implements Serializable {
     }
 
     /**
-     * Checks if the specified object is equal to this ExerciseList.
-     * Checks if they have the same size and contain the same exercises in the same order.
+     * Method that compares the objects if they are the same.
      *
-     * @param o the object to compare
-     * @return true if the specified object is equal to this ExerciseList, false otherwise
+     * @param o - some object
+     *
+     *
+     * @return boolean value
+     *
      */
     @Override public boolean equals(Object o){
         if( o == null || !(o instanceof ExerciseList)) return false;

@@ -3,11 +3,11 @@ package mediator;
 import java.io.Serializable;
 
 /**
- * The User class represents a user in the application.
- *
- *
- * @author Damian Trafiałek
- * @version 1.0
+ * 
+ * 
+ * 
+ * @author 
+ * @version 
  */
 public class User implements Serializable {
     private int height,weight, bench, deadlift, squat;
@@ -15,15 +15,23 @@ public class User implements Serializable {
     private boolean shareProfile;
 
     /**
-     * 7-argument constructor creating a User object with the specified details.
-     *
-     * @param height the user's height
-     * @param weight the user's weight
-     * @param firstName the user's first name
-     * @param lastName the user's last name
-     * @param username the user's username
-     * @param status the user's status
-     * @param shareProfile true if the user's profile is shared, false otherwise
+     * 7-argument constructor initialising instance variables without the bench,deadlift and squat.
+     * 
+     * 
+     * @param height - integer value
+     *        
+     * @param weight - integer value
+     *        
+     * @param firstName - string value
+     *        
+     * @param lastName - string value
+     *        
+     * @param username - string value
+     *        
+     * @param status - string value
+     *        
+     * @param shareProfile - boolean value
+     *        
      */
     public User(int height, int weight, String firstName, String lastName, String username, String status,boolean shareProfile) {
         this.height = height;
@@ -36,18 +44,29 @@ public class User implements Serializable {
     }
 
     /**
-     * 10-argument constructor creating a User object with the specified details including exercise statistics.
+     * 10-argument constructor initialising all instance variables.
+     * 
      *
-     * @param height the user's height
-     * @param weight the user's weight
-     * @param firstName the user's first name
-     * @param lastName the user's last name
-     * @param username the user's username
-     * @param status the user's status
-     * @param shareProfile true if the user's profile is shared, false otherwise
-     * @param deadlift the user's deadlift weight
-     * @param squat the user's squat weight
-     * @param bench the user's bench press weight
+     * @param height - integer value
+     *
+     * @param weight - integer value
+     *
+     * @param firstName - string value
+     *
+     * @param lastName - string value
+     *
+     * @param username - string value
+     *
+     * @param status - string value
+     *
+     * @param shareProfile - boolean value
+     *        
+     * @param deadlift - integer value
+     *        
+     * @param squat - integer value
+     *        
+     * @param bench - integer value
+     *        
      */
     public User(int height, int weight, String firstName, String lastName, String username, String status,boolean shareProfile, int deadlift, int squat, int bench) {
         this.height = height;
@@ -63,130 +82,164 @@ public class User implements Serializable {
     }
 
     /**
-     * Returns the user's height.
+     * Returns the height.
+     * 
      *
-     * @return the user's height
+     * @return height integer
+     *        
      */
     public int getHeight() {
         return height;
     }
+
     /**
-     * Sets the user's height.
-     *
-     * @param height the user's height to set
+     * Sets the height.
+     * 
+     * @param height - integer value
+     *        
      */
     public void setHeight(int height) {
         this.height = height;
     }
+
     /**
-     * Returns the user's weight.
+     * Returns weight.
+     * 
      *
-     * @return the user's weight
+     * @return weight integer
+     *        
      */
     public int getWeight() {
         return weight;
     }
 
     /**
-     * Sets the user's weight.
-     *
-     * @param weight the user's weight to set
+     * Sets the weight.
+     * 
+     * @param weight - integer value
+     *        
      */
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
     /**
-     * Returns the user's first name.
+     * Returns the first name.
+     * 
      *
-     * @return the user's first name
+     * @return first name string
+     *        
      */
     public String getFirstName() {
         return firstName;
     }
+
     /**
-     * Sets the user's first name.
-     *
-     * @param firstName the user's first name to set
+     * Sets the first name.
+     * 
+     * @param firstName - string value
+     *        
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
     /**
-     * Returns the user's last name.
+     * 
+     * 
      *
-     * @return the user's last name
+     * @return 
+     *        
      */
     public String getLastName() {
         return lastName;
     }
+
     /**
-     * Sets the user's last name.
-     *
-     * @param lastName the user's last name to set
+     * 
+     * 
+     * @param lastName 
+     *        
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
     /**
-     * Returns the user's username.
+     * 
+     * 
      *
-     * @return the user's username
+     * @return 
+     *        
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * Sets the user's username.
-     *
-     * @param username the user's username to set
+     * 
+     * 
+     * @param username 
+     *        
      */
     public void setUsername(String username) {
         this.username = username;
     }
+
     /**
-     * Returns the user's status.
+     * 
+     * 
      *
-     * @return the user's status
+     * @return 
+     *        
      */
     public String getStatus() {
         return status;
     }
-    /**
-     * Sets the user's status.
-     *
-     * @param status the user's status to set
-     */
-    public void setStatus(String status) {this.status = status;}
 
     /**
-     * Returns whether the user's profile is shared.
+     * 
+     * 
+     * @param status 
+     *        
+     */
+    public void setStatus(String status) {this.status = status;  }
+
+    /**
+     * 
+     * 
      *
-     * @return true if the user's profile is shared, false otherwise
+     * @return 
+     *        
      */
     public boolean isShareProfile() { return shareProfile; }
+
     /**
-     * Sets whether the user's profile is shared.
-     *
-     * @param shareProfile true if the user's profile is shared, false otherwise
+     * 
+     * 
+     * @param shareProfile 
+     *        
      */
     public void setShareProfile(boolean shareProfile) {  this.shareProfile = shareProfile;  }
 
     /**
-     * Returns the user's bench press weight.
+     * 
+     * 
      *
-     * @return the user's bench press weight
+     * @return 
+     *        
      */
     public int getBench()
     {
         return bench;
     }
+
     /**
-     * Returns the user's deadlift weight.
+     * 
+     * 
      *
-     * @return the user's deadlift weight
+     * @return 
+     *        
      */
     public int getDeadlift()
     {
@@ -194,9 +247,11 @@ public class User implements Serializable {
     }
 
     /**
-     * Returns the user's squat weight.
+     * 
+     * 
      *
-     * @return the user's squat weight
+     * @return 
+     *        
      */
     public int getSquat()
     {

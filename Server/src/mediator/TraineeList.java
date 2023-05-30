@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- *
- * The TraineeList class represents a list of trainees.
- * TraineeList objects are serializable.
- *
+ * 
+ * 
+ * 
  * @author Damian Trafiałek
  * @version 1.0
  */
@@ -16,80 +15,99 @@ public class TraineeList implements Serializable
   private ArrayList<Trainee> traineeList;
 
   /**
-   * 0-argument constructor creates an empty TraineeList object.
+   * 0-argument constructor initialises a new array list.
    * 
    * 
    */
   public TraineeList(){
     traineeList = new ArrayList<>();
   }
+
   /**
-   * Adds a trainee to the list.
-   *
-   * @param t the trainee to add
+   * Add the trainee to the list.
+   * 
+   * @param t - Trainee
+   *        
    */
   public void addTrainee(Trainee t) {
     traineeList.add(t);
   }
 
   /**
-   * Returns the number of trainees in the list.
+   * Returns the size of the list.
+   * 
    *
-   * @return the size of the trainee list
+   * @return integer size
+   *        
    */
   public int getSize(){
     return traineeList.size();
   }
-
   /**
-   * Returns the list of trainees.
+   * Returns the arrayList of trainees.
+   * 
    *
-   * @return the list of trainees
+   * @return ArrayList of trainees
+   *        
    */
   public ArrayList<Trainee> getList(){
     return traineeList;
   }
+
   /**
-   * Returns the trainee at the specified index in the list.
+   * Gets the trainee under given index in the list.
+   * 
+   * @param i - integer index
+   *        
    *
-   * @param i the index of the trainee to retrieve
-   * @return the trainee at the specified index
+   * @return Trainee
+   *        
    */
   public Trainee getTrainee(int i)
   {
     return traineeList.get(i);
   }
   /**
-   * Returns the username of the trainee at the specified index in the list.
+   * Gets the username of the trainee under given index in the list.
+   * 
+   * @param i - integer index
+   *        
    *
-   * @param i the index of the trainee
-   * @return the username of the trainee at the specified index
+   * @return String username
+   *        
    */
   public String getTraineeUsername(int i){return traineeList.get(i).getUsername();}
-
   /**
-   * Returns the status of the trainee at the specified index in the list.
+   * Gets the staus of the trainee under given index in the list.
    *
-   * @param i the index of the trainee
-   * @return the status of the trainee at the specified index
+   * @param i - integer index
+   *
+   *
+   * @return string status
+   *
    */
   public String getTraineeStatus(int i){return traineeList.get(i).getStatus();}
 
+
   /**
-   * Returns the username of the trainee at the specified index in the list.
-   * (Equivalent to getTraineeUsername(int i))
+   * Gets the staus of the trainee under given index in the list.
+   * 
+   * @param i - integer index
+   *        
    *
-   * @param i the index of the trainee
-   * @return the username of the trainee at the specified index
+   * @return string status
+   *        
    */
   public String getUsername(int i){
     return traineeList.get(i).getUsername();
   }
 
   /**
-   * Returns a string representation of the trainee list.
+   * Casts object to string.
+   * 
    *
-   * @return a string representation of the trainee list
+   * @return string
+   *        
    */
   public String toString(){
     return "The trainee's list: " + traineeList;

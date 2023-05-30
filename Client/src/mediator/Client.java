@@ -7,7 +7,6 @@ import utility.observer.listener.GeneralListener;
 import utility.observer.listener.RemoteListener;
 import utility.observer.subject.LocalSubject;
 import utility.observer.subject.PropertyChangeHandler;
-
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -16,9 +15,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * The Client class represents a client that implements the Model interface and acts as a RemoteListener and LocalSubject.
- *
- * @author Damian Trafiałek
+ * Class that manages the communication between cleint and server.
+ * 
+ * 
+ * @author Damian Trafiałek, Jakub Cerovsky, Anna Pomerantz, Julia Gramovicha
  * @version 1.0
  */
 public class Client implements Model, RemoteListener<String, String>,
@@ -29,8 +29,9 @@ public class Client implements Model, RemoteListener<String, String>,
   private PropertyChangeHandler<String, String> property;
 
   /**
-   * 0-argument constructor creating a Client object with no arguments.
-   * Initializes the property change handler and establishes a connection with the remote server.
+   * 0-argument constructor that initialises the object. Creates the connection with server.
+   * 
+   * 
    */
   public Client()
   {
@@ -49,9 +50,10 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Connects the listener to the server using the specified username.
-   *
-   * @param username the username to connect the listener with
+   * Sets up the remote listener
+   * 
+   * @param username - string value to which it is listening
+   *        
    */
   public void connectListener(String username)
   {
@@ -66,9 +68,10 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Disconnects the listener from the server using the specified username.
-   *
-   * @param username the username to disconnect the listener from
+   * Removes the remote listener.
+   * 
+   * @param username - string value
+   *        
    */
   public void disconnectListener(String username)
   {
@@ -83,7 +86,8 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Starts the client by exporting itself as a remote object.
+   * Starts the client.
+   * 
    */
   public void start()
   {
@@ -98,16 +102,22 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Creates a new user with the specified details.
+   * Calls server to create a new user.
    *
-   * @param firstName the first name of the user
-   * @param lastName  the last name of the user
-   * @param userName  the username of the user
-   * @param password  the password of the user
-   * @param height    the height of the user
-   * @param weight    the weight of the user
-   * @return true if the user was created successfully, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @param firstName - string value
+   *
+   * @param lastName - string value
+   *
+   * @param userName - string value
+   *
+   * @param password - string value
+   *
+   * @param height - integer value
+   *
+   * @param weight - integer value
+   *
+   *
+   * @return boolean if everything went ok
    */
   public boolean createUser(String firstName, String lastName, String userName,
       String password, int height, int weight)
@@ -124,12 +134,15 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Logs in a user with the specified username and password.
+   * Calls server to check if the user and password match.
+   * 
+   * @param username - string value
+   *        
+   * @param password - string value
+   *        
    *
-   * @param username the username of the user
-   * @param password the password of the user
-   * @return true if the login was successful, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return boolean if everything went ok
+   *        
    */
   public boolean login(String username, String password)
   {
@@ -147,12 +160,15 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Creates a new folder for the given user.
+   * Calls sever to create a new folder.
+   * 
+   * @param username - string value
+   *        
+   * @param name - string value
+   *        
    *
-   * @param username the username of the user
-   * @param name     the name of the folder to be created
-   * @return true if the folder is created successfully, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return boolean if everything went ok
+   *        
    */
   public boolean createFolder(String username, String name)
   {
@@ -167,12 +183,15 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Removes the folder with the specified folder Id for the given user.
+   * Calls server to remove folder.
+   * 
+   * @param username - string value
+   *        
+   * @param folderId - integer value
+   *        
    *
-   * @param username the username of the user
-   * @param folderId the ID of the folder to be removed
-   * @return true if the folder is removed successfully, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return boolean if everything went ok
+   *        
    */
   public boolean removeFolder(String username, int folderId)
   {
@@ -187,13 +206,17 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Renames the folder with the specified folder Id for the given user.
+   * Calls server to change the folder name.
+   * 
+   * @param username - string value
+   *        
+   * @param folderId - integer value
+   *        
+   * @param newName - string value
+   *        
    *
-   * @param username the username of the user
-   * @param folderId the ID of the folder to be renamed
-   * @param newName  the new name for the folder
-   * @return true if the folder is renamed successfully, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return boolean if everything went ok
+   *        
    */
   public boolean editFolder(String username, int folderId, String newName)
   {
@@ -209,11 +232,13 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves the list of folders for the given user.
+   * Gets the list of user's folder.
+   * 
+   * @param username - string value
+   *        
    *
-   * @param username the username of the user
-   * @return the list of folders for the user, or null if SQLException is caught
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return list of folders
+   *        
    */
   public FolderList getFolderList(String username)
   {
@@ -229,11 +254,13 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves the list of exercises for the specified folder.
+   * Gets the list of exercises within the folder.
+   * 
+   * @param folderId - integer value
+   *        
    *
-   * @param folderId the ID of the folder
-   * @return the list of exercises for the folder, or null if an error occurs
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return list of exercises
+   *        
    */
   public ExerciseList getExerciseList(int folderId)
   {
@@ -247,15 +274,16 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+  @Override
   /**
-   * Retrieves an ExerciseList by name and folder ID.
+   * Gets the list of exercises by name and folder id.
    *
-   * @param name     the name of the exercise list
-   * @param folderId the ID of the folder
-   * @return the ExerciseList matching the specified name and folder ID,
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @param name - string value
+   *
+   * @param folderId - integer value
+   * @return ExerciseList - list of exercises
    */
-  @Override public ExerciseList getExerciseListByNameAndFolderId(String name,
+  public ExerciseList getExerciseListByNameAndFolderId(String name,
       int folderId)
   {
     try
@@ -269,11 +297,13 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Removes the exercise with the specified exercise Id.
+   * Removes exercises from database.
+   * 
+   * @param exerciseId - integer value
+   *        
    *
-   * @param exerciseId the ID of the exercise to be removed
-   * @return true if the exercise is removed successfully, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return boolean if everything went ok
+   *        
    */
   @Override public boolean removeExercise(int exerciseId)
   {
@@ -288,12 +318,15 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Removes exercises with the specified name from the given folder.
+   * Removes exercises by name and folder id from database.
+   * 
+   * @param name - string value
+   *        
+   * @param folderId - integer value
+   *        
    *
-   * @param name     the name of the exercises to be removed
-   * @param folderId the ID of the folder from which the exercises should be removed
-   * @return true if the exercises are removed successfully, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return boolean if everything went ok
+   *        
    */
   @Override public boolean removeExercisesByName(String name, int folderId)
   {
@@ -309,15 +342,13 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Adds an exercise to the specified folder for the given user.
-   *
-   * @param username     the username of the user
-   * @param exerciseName the name of the exercise to be added
-   * @param folderId     the ID of the folder to which the exercise should be added
-   * @param weight       the weight of the exercise
-   * @param repetitions  the number of repetitions for the exercise
-   * @return true if the exercise is added successfully, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * Calls server to add the exercise to the database.
+   * @param username - string value
+   * @param exerciseName - string value
+   * @param folderId - integer value
+   * @param weight - integer value
+   * @param repetitions - integer value
+   * @return boolean if everything went ok
    */
   @Override public boolean addExercise(String username, String exerciseName,
       int folderId, int weight, int repetitions)
@@ -334,10 +365,11 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves a list of possible exercises.
+   * Calls the server to get the list of possible exercises.
+   * 
    *
-   * @return an ArrayList of possible exercises
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return array list of possible exercises names
+   *        
    */
   @Override public ArrayList<String> getPossibleExercises()
   {
@@ -351,12 +383,15 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
+
   /**
-   * Retrieves a trainee by username.
+   * Gets the trainee from server.
+   * 
+   * @param username - stirng value
+   *        
    *
-   * @param username the username of the trainee
-   * @return the User object representing the trainee
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return User
+   *        
    */
   @Override public User getTrainee(String username)
   {
@@ -371,17 +406,14 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Updates the trainee with the specified details.
-   *
-   * @param u  the username of the trainee
-   * @param h  the height of the trainee
-   * @param w  the weight of the trainee
-   * @param s  true if the user's profile is shared, false otherwise
-   * @param st the status text of the trainee
-   * @return true if the trainee is updated successfully
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * Calls server to update the trainee.
+   * @param u - trainee username
+   * @param h - trainee height
+   * @param w - trainee weight
+   * @param s - trainee wants to share their profile
+   * @param st - trainee status
+   * @return boolean if everything went ok
    */
-
   @Override public boolean updateTrainee(String u, int h, int w, boolean s,
       String st)
   {
@@ -396,12 +428,10 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Accepts a friend request between two users.
-   *
-   * @param requester_username the username of the requester
-   * @param accepter_username  the username of the accepter
-   * @return true if the friend request is accepted successfully
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * Calls the server to accept friend request.
+   * @param requester_username - string value
+   * @param accepter_username - string value
+   * @return boolean if everything went ok
    */
   @Override public boolean acceptFriendRequest(String requester_username,
       String accepter_username)
@@ -415,16 +445,12 @@ public class Client implements Model, RemoteListener<String, String>,
       throw new RuntimeException(e);
     }
   }
-
   /**
-   * Rejects a friend request between two users.
-   *
-   * @param requester_username the username of the requester
-   * @param accepter_username  the username of the accepter
-   * @return true if the friend request is rejected successfully
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * Calls the server to reject friend request.
+   * @param requester_username - string value
+   * @param accepter_username - string value
+   * @return boolean if everything went ok
    */
-
   @Override public boolean rejectFriendRequest(String requester_username,
       String accepter_username)
   {
@@ -439,11 +465,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves the list of friends for a given username.
+   * Calls the server to get the list of trainee's friends.
+   * 
+   * @param username - string value
    *
-   * @param username the username of the user
-   * @return the FriendList object containing the user's friends
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return list of friends
+   *        
    */
   @Override public FriendList getFriends(String username)
   {
@@ -458,11 +485,13 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves the list of friend requests for a given username.
+   * Calls the server to get the list of the friend requests.
+   * 
+   * @param username - trainee username - string value
+   *        
    *
-   * @param username the username of the user
-   * @return an ArrayList of friend requests received by the user
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return ArrayList of friend requests usernames
+   *        
    */
   @Override public ArrayList<String> getFriendRequests(String username)
   {
@@ -477,9 +506,8 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * This method is invoked when a property change event occurs.
-   *
-   * @param event the ObserverEvent representing the property change event
+   * Listens to remote notifications.
+   * 
    */
   @Override public void propertyChange(ObserverEvent<String, String> event)
   {
@@ -491,11 +519,11 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Adds a listener to the property change handler for the specified property names.
-   *
-   * @param listener      the listener to add
-   * @param propertyNames the names of the properties to listen for
-   * @return true if the listener was added successfully, false otherwise
+   * Add the listener to the subject.
+   * @param listener the listener to be added
+   * @param propertyNames a var-args list of property names. If empty, then the
+   *                      listener should be added as a lister for all events.
+   * @return boolean if everything went ok
    */
   @Override public boolean addListener(GeneralListener<String, String> listener,
       String... propertyNames)
@@ -505,13 +533,12 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Removes a listener from the property change handler for the specified property names.
-   *
-   * @param listener      the listener to remove
-   * @param propertyNames the names of the properties to stop listening for
-   * @return true if the listener was removed successfully, false otherwise
+   * Removes the listener from the subject.
+   * @param listener the listener to be removed
+   * @param propertyNames a var-args list of property names. If empty, then the
+   *                      listener should be removed as a lister for all events.
+   * @return boolean if everything went ok
    */
-
   @Override public boolean removeListener(
       GeneralListener<String, String> listener, String... propertyNames)
   {
@@ -520,11 +547,10 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Sends a friend request from the requester to the accepter.
-   *
-   * @param requesterUsername the username of the requester
-   * @param accepterUsername  the username of the accepter
-   * @return true if the friend request is sent successfully, false otherwise
+   * Calls the server to send the friend request.
+   * @param requesterUsername
+   * @param accepterUsername
+   * @return boolean if everything went ok
    */
   @Override public boolean sendFriendRequest(String requesterUsername,
       String accepterUsername)
@@ -540,13 +566,11 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Removes a friend relationship between two users.
-   *
-   * @param requesterUsername the username of the requester
-   * @param accepterUsername  the username of the accepter
-   * @return true if the friend relationship is removed successfully, false otherwise
+   * Calls the server to remove a friend.
+   * @param requesterUsername
+   * @param accepterUsername
+   * @return boolean if everything went ok
    */
-
   @Override public boolean removeFriend(String requesterUsername,
       String accepterUsername)
   {
@@ -561,13 +585,11 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Sends a coach request from the requester to the accepter.
-   *
-   * @param requesterUsername the username of the requester
-   * @param accepterUsername  the username of the accepter
-   * @return true if the coach request is sent successfully, false otherwise
+   * Calls the server to request the coach for a trainee.
+   * @param requesterUsername
+   * @param accepterUsername
+   * @return boolean if everything went ok
    */
-
   @Override public boolean requestCoach(String requesterUsername,
       String accepterUsername)
   {
@@ -582,10 +604,13 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves the coach associated with a trainee.
+   * Calls the server to get the coach of the trainee.
+   * 
+   * @param traineeUsername - string value
+   *        
    *
-   * @param traineeUsername the username of the trainee
-   * @return the coach associated with the trainee, or null if not found
+   * @return User
+   *        
    */
   @Override public User getCoach(String traineeUsername)
   {
@@ -601,10 +626,13 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Checks if a user is a coach.
+   * Calls the server to check if the user is a coach.
+   * 
+   * @param username - string value
+   *        
    *
-   * @param username the username of the user
-   * @return true if the user is a coach, false otherwise
+   * @return boolean if user is a coach
+   *        
    */
   @Override public boolean isCoach(String username)
   {
@@ -619,30 +647,33 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Removes the coach for a trainee.
+   * Calls the server to remove the coach fromthe trainee
+   * 
+   * @param traineeUsername - string value
+   *        
    *
-   * @param traineeUsername the username of the trainee
-   * @return true if the coach assignment is successfully removed, false otherwise
+   * @return boolean if everything went ok
+   *        
    */
   @Override public boolean removeCoachAssignment(String traineeUsername)
   {
-    try
-    {
+    try{
       return server.removeCoachAssignment(traineeUsername);
-    }
-    catch (RemoteException e)
-    {
+    }catch(RemoteException e){
       return false;
     }
   }
+
   /**
-   * Retrieves the list of meetings for a trainee.
+   * Calls the server to get the list of trainee's meetings
+   * 
+   * @param traineeUsername - string value
+   *        
    *
-   * @param traineeUsername the username of the trainee
-   * @return the list of meetings for the trainee, null otherwise
+   * @return arrayList of strings
+   *        
    */
-  @Override public ArrayList<String> getTraineeMeetingList(
-      String traineeUsername)
+  @Override public ArrayList<String> getTraineeMeetingList(String traineeUsername)
   {
     try
     {
@@ -654,15 +685,16 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
-
   /**
-   * Retrieves the list of meeting requests for a trainee.
+   * Calls the server to get the list of trainee meeting requests.
+   * 
+   * @param traineeUsername - string value
+   *        
    *
-   * @param traineeUsername the username of the trainee
-   * @return the list of meeting requests for the trainee, null otherwise
+   * @return list of meetings requests
+   *        
    */
-  @Override public ArrayList<String> getTraineeMeetingRequests(
-      String traineeUsername)
+  @Override public ArrayList<String> getTraineeMeetingRequests(String traineeUsername)
   {
     try
     {
@@ -675,42 +707,38 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Sends a meeting request from a trainee to a coach for a specified date.
-   *
-   * @param traineeUsername the username of the trainee sending the meeting request
-   * @param coachUsername the username of the coach receiving the meeting request
-   * @param dateOfMeeting the date of the meeting
-   * @return true if the meeting request was sent successfully, false otherwise
+   * Calls the server to add the meeting request.
+   * @param traineeUsername - string value
+   * @param coachUsername - string value
+   * @param dateOfMeeting - localDate value
+   * @return boolean if everything went ok
    */
   @Override public boolean sendMeetingRequest(String traineeUsername,
       String coachUsername, LocalDate dateOfMeeting)
   {
     try
     {
-      return server.sendMeetingRequest(traineeUsername, coachUsername,
-          dateOfMeeting);
+      return server.sendMeetingRequest(traineeUsername,coachUsername,dateOfMeeting);
     }
     catch (RemoteException e)
     {
       return false;
     }
   }
-  /**
-   * Removes an existing meeting between a trainee and a coach for a specified date.
-   *
-   * @param traineeUsername the username of the trainee
-   * @param coachUsername the username of the coach
-   * @param dateOfMeeting the date of the meeting
-   * @return true if the meeting removal was approved successfully, false otherwise
-   */
 
+  /**
+   * Calls the server to remove the meeting.
+   * @param traineeUsername - string value
+   * @param coachUsername - string value
+   * @param dateOfMeeting - localDate value
+   * @return boolean if everything went ok
+   */
   @Override public boolean removeMeeting(String traineeUsername,
       String coachUsername, LocalDate dateOfMeeting)
   {
     try
     {
-      return server.removeMeeting(traineeUsername, coachUsername,
-          dateOfMeeting);
+      return server.removeMeeting(traineeUsername,coachUsername,dateOfMeeting);
     }
     catch (RemoteException e)
     {
@@ -719,14 +747,11 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Accepts a coach request from a trainee.
-   *
-   * @param traineeUsername the username of the trainee
-   * @param coachUsername the username of the coach
-   * @return true if the coach request is successfully accepted, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * Calls the server to accept trainee request.
+   * @param traineeUsername - string value
+   * @param coachUsername - string value
+   * @return boolean if everything went ok
    */
-
   @Override public boolean acceptRequest(String traineeUsername,
       String coachUsername)
   {
@@ -740,13 +765,10 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
-
   /**
-   * Denies a coach request from a trainee.
-   *
-   * @param traineeUsername the username of the trainee
-   * @return true if the coach request is successfully denied, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * Calls the server to deny trainee request.
+   * @param traineeUsername - string value
+   * @return boolean if everything went ok
    */
   @Override public boolean denyRequest(String traineeUsername)
   {
@@ -760,13 +782,10 @@ public class Client implements Model, RemoteListener<String, String>,
     }
   }
 
-
   /**
-   * Removes a trainee from the coach's roster.
-   *
-   * @param traineeUsername the username of the trainee
-   * @return true if the trainee is successfully removed, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * Calls the server to remove trainee from a roaster.
+   * @param traineeUsername - string value
+   * @return boolean if everything went ok
    */
   @Override public boolean removeTraineeFromRoster(String traineeUsername)
   {
@@ -781,11 +800,13 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves the list of trainees associated with a coach.
+   * Calls the server to get the list of trainees.
+   * 
+   * @param username - string value
+   *        
    *
-   * @param username the username of the coach
-   * @return the list of trainees associated with the coach
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return TraineeList
+   *        
    */
   public TraineeList getTraineeList(String username)
   {
@@ -798,12 +819,15 @@ public class Client implements Model, RemoteListener<String, String>,
       throw new RuntimeException(e);
     }
   }
+
   /**
-   * Retrieves the list of all trainee requests received by a coach.
+   * Calls the server to get the list of trainees requests.
+   * 
+   * @param username - string value
+   *        
    *
-   * @param username the username of the coach
-   * @return the list of trainee requests received by the coach
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return arraylist of strings (trainees request usernames)
+   *        
    */
   public ArrayList<String> getTraineeRequest(String username)
   {
@@ -818,11 +842,13 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves the list of meeting requests for a coach.
+   * Calls the server to get the list of meeting requests.
+   * 
+   * @param coach - string value
+   *        
    *
-   * @param coach the username of the coach
-   * @return the list of meeting requests for the coach
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return arrayList of meeting requests
+   *        
    */
   public ArrayList<String> getMeetingRequests(String coach)
   {
@@ -837,11 +863,13 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves a list of meetings associated with a coach.
+   * Calls the server to get the list of coaches meetings.
+   * 
+   * @param coach - string value
+   *        
    *
-   * @param coach the username of the coach
-   * @return the list of meetings associated with the coach, or null if an error occurs
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return arrayList of coaches meetings
+   *        
    */
   public ArrayList<String> getCoachMeetings(String coach)
   {
@@ -854,14 +882,13 @@ public class Client implements Model, RemoteListener<String, String>,
       throw new RuntimeException(e);
     }
   }
+
   /**
-   * Approves a meeting request between a trainee and a coach for a specified date.
-   *
-   * @param trainee the username of the trainee
-   * @param coach the username of the coach
-   * @param date the date of the meeting
-   * @return true if the meeting request was approved successfully, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * Calls the server to approve the meeting.
+   * @param trainee - string value
+   * @param coach - string value
+   * @param date - localDate value
+   * @return boolean if everything went ok
    */
   @Override public boolean approveMeeting(String trainee, String coach,
       LocalDate date)
@@ -875,14 +902,13 @@ public class Client implements Model, RemoteListener<String, String>,
       throw new RuntimeException(e);
     }
   }
+
   /**
-   * Denies a meeting request between a trainee and a coach for a specified date.
-   *
-   * @param trainee the username of the trainee
-   * @param coach the username of the coach
-   * @param date the date of the meeting
-   * @return true if the meeting request was denied successfully, false otherwise
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * Calls the server to deny the meeting.
+   * @param trainee - string value
+   * @param coach - string value
+   * @param date - localDate value
+   * @return boolean if everything went ok
    */
   @Override public boolean denyMeeting(String trainee, String coach,
       LocalDate date)
@@ -898,14 +924,15 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves a list of taken dates for a coach.
+   * Method that gets the dates that are already taken/reserved with the coach.
+   * 
+   * @param coachUsername - username
+   *        
    *
-   * @param coachUsername the username of the coach
-   * @return the list of taken dates for the coach, or null if an error occurs
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return ArrayList of local Dates
+   *        
    */
-  @Override public ArrayList<LocalDate> getTakenDates(String coachUsername)
-  {
+  @Override public ArrayList<LocalDate> getTakenDates(String coachUsername){
     try
     {
       return server.getTakenDates(coachUsername);
@@ -915,11 +942,13 @@ public class Client implements Model, RemoteListener<String, String>,
       throw new RuntimeException(e);
     }
   }
+
   /**
-   * Retrieves the leaderboard of trainees based on their squat performance.
+   * Calls the server to get the list of squat leaders.
+   * 
    *
-   * @return the leaderboard of trainees based on squat performance, or null if an error occurs
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return TraineeList
+   *        
    */
   @Override public TraineeList getSquatLeaders()
   {
@@ -934,11 +963,11 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves the leaderboard of trainees based on their deadlift performance.
+   * Calls the server to get the deadlift leaders
+   * 
    *
-   * @return the leaderboard of trainees based on deadlift performance, or null if an error occurs
-   * @throws RuntimeException if a runtime exception occurs during the method call
-   *
+   * @return TraineList
+   *        
    */
   @Override public TraineeList getDeadliftLeaders()
   {
@@ -953,10 +982,11 @@ public class Client implements Model, RemoteListener<String, String>,
   }
 
   /**
-   * Retrieves the leaderboard of trainees based on their bench press performance.
+   * Calls the server to get the bench press leaders.
+   * 
    *
-   * @return the leaderboard of trainees based on bench press performance, or null if an error occurs
-   * @throws RuntimeException if a runtime exception occurs during the method call
+   * @return TraineeList
+   *        
    */
   @Override public TraineeList getBenchLeaders()
   {

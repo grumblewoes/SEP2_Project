@@ -8,10 +8,10 @@ import mediator.Trainee;
 
 /**
  * 
+ * ViewModel class for SimpleLeaderboardViewModel view. This represents one row in the list on the leaderbaord.
  * 
- * 
- * @author 
- * @version 
+ * @author Jakub Cerovsky
+ * @version 1.0
  */
 public class SimpleLeaderboardViewModel
 {
@@ -20,9 +20,9 @@ public class SimpleLeaderboardViewModel
 
   /**
    * 1-argument constructor 
+   * Takes the name of the trainee to be displayed
    * 
-   * 
-   * @param trainee 
+   * @param trainee Trainee to be displayed
    *        
    */
   public SimpleLeaderboardViewModel(Trainee trainee)
@@ -34,9 +34,9 @@ public class SimpleLeaderboardViewModel
 
   /**
    * 
-   * 
+   * getter for the username of the trainee
    *
-   * @return 
+   * @return StringProperty that represents the trainee's name
    *        
    */
   public StringProperty usernamePropertyProperty()
@@ -47,9 +47,9 @@ public class SimpleLeaderboardViewModel
 
   /**
    * 
-   * 
+   * getter for the weight record of the trainee
    *
-   * @return 
+   * @return StringProperty that represents the value of the weight
    *        
    */
   public StringProperty weightPropertyProperty()

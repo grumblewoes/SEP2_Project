@@ -27,11 +27,11 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 
 /**
+ * View controller responsible for displaying the coach's main page.
  * 
  * 
- * 
- * @author 
- * @version 
+ * @author Anna Pomerantz, Damian Trafiałek, Julia Gramovicha
+ * @version 1.0
  */
 public class EditRosterViewController extends ViewController
 {
@@ -47,14 +47,14 @@ public class EditRosterViewController extends ViewController
   private Gson gson;
 
   /**
-   * 
-   * 
-   * @param viewHandler 
-   *        
-   * @param viewModel 
-   *        
-   * @param root 
-   *        
+   * Method that initialise the controller and sets up all instance variables and bindings.
+   *
+   * @param viewHandler - handles changing views
+   *
+   * @param viewModel - view model related to the controller
+   *
+   * @param root - region that is being displayed
+   *
    */
   public void init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
@@ -341,8 +341,8 @@ public class EditRosterViewController extends ViewController
   }
 
   /**
-   * 
-   * 
+   * Reset method that calls view model to trigger the reset.
+   *
    */
   @Override public void reset()
   {
@@ -350,13 +350,7 @@ public class EditRosterViewController extends ViewController
     editRosterViewModel.clear();
   }
 
-  /**
-   * 
-   * 
-   * @param mouseEvent 
-   *        
-   */
-  public void logout(MouseEvent mouseEvent)
+  @FXML private void logout(MouseEvent mouseEvent)
   {
     editRosterViewModel.logout();
     viewHandler.openView("logIn");

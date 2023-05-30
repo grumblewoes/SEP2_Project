@@ -8,11 +8,10 @@ import modelClient.Model;
 import java.util.ArrayList;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * The viewmodel class for the AddExerciseViewController class.
+ *
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class AddExerciseViewModel extends ViewModel {
     private IntegerProperty repetitionsProperty;
@@ -26,11 +25,12 @@ public class AddExerciseViewModel extends ViewModel {
 
     /**
      * 2-argument constructor 
+     * Properties for each of the info fields are initialized, and viewState is passed so info
+     * can be displayed.
      * 
-     * 
-     * @param model 
+     * @param model from the model layer
      *        
-     * @param viewState 
+     * @param viewState stores info from previous screen
      *        
      */
     public AddExerciseViewModel(Model model, ViewState viewState){
@@ -48,9 +48,9 @@ public class AddExerciseViewModel extends ViewModel {
 
     /**
      * 
-     * 
+     * returns the errorLabel text
      *
-     * @return 
+     * @return StringProperty for the errorLabel
      *        
      */
     public StringProperty getErrorProperty(){
@@ -58,9 +58,9 @@ public class AddExerciseViewModel extends ViewModel {
     }
     /**
      * 
-     * 
+     * returns the number of repetitions for that specific exercise
      *
-     * @return 
+     * @return IntegerProperty for the repetitions
      *        
      */
     public IntegerProperty getRepetitionsProperty(){
@@ -68,25 +68,25 @@ public class AddExerciseViewModel extends ViewModel {
     }
     /**
      * 
-     * 
+     * returns the different available exercises to add.
      *
-     * @return 
+     * @return StringProperty for the list of exercises
      *        
      */
     public StringProperty getExerciseListProperty(){ return exerciseListProperty;    }
     /**
      * 
-     * 
+     * returns the name of the user-inputted exercise
      *
-     * @return 
+     * @return StringProperty for that specific exercise
      *        
      */
     public StringProperty getExerciseProperty(){ return exerciseProperty;    }
     /**
      * 
-     * 
+     * returns the weight for the user-inputted weight
      *
-     * @return 
+     * @return IntegerProperty for the amount of weight chosen
      *        
      */
     public IntegerProperty getWeightProperty(){
@@ -94,26 +94,26 @@ public class AddExerciseViewModel extends ViewModel {
     }
     /**
      * 
-     * 
+     * returns whether the exercise field is editable
      *
-     * @return 
+     * @return BooleanProperty for the editable field
      *        
      */
     public BooleanProperty getEditableProperty(){ return editableProperty; }
     /**
      * 
-     * 
+     * returns the go back string
      *
-     * @return 
+     * @return StringProperty that is bound to the view controller
      *        
      */
     public StringProperty getGoBackProperty(){ return goBackProperty; }
 
     /**
      * 
-     * 
+     * returns true or false depending on whether the exercise was successfully added to the user's folder
      *
-     * @return 
+     * @return boolean for success/failure
      *        
      */
     public boolean addExercise(){
@@ -134,7 +134,7 @@ public class AddExerciseViewModel extends ViewModel {
 
     @Override
     /**
-     * 
+     * refreshes the screen upon initial load and when the screen is accessed by the user
      * 
      */
     public void clear() {

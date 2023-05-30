@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * The FriendList class represents a list of friends.
- * FriendList objects are serializable.
+ * Class that stores list of friends data.
+ *
  *
  * @author Damian Trafiałek
  * @version 1.0
@@ -13,41 +13,49 @@ import java.util.ArrayList;
 public class FriendList implements Serializable {
     private ArrayList<Friend> list;
     /**
-     * 0-argument constructor, creating a new FriendList object with an empty list of friends.
-     *
-     *
+     * 0-argument constructor that initialises the list.
+     * 
+     * 
      */
     public FriendList(){
         list= new ArrayList<>();
     }
 
     /**
-     * Adds a friend to the list.
-     *
-     * @param friend the friend to add
+     * Method that adds the friend to the list.
+     * 
+     * @param friend Friend
+     *        
      */
     public void add(Friend friend){
         list.add(friend);
     }
     /**
-     * Retrieves the friend at the specified index.
+     * Method that returns the friend under given index in the list.
+     * 
+     * @param i - integer
+     *        
      *
-     * @param i the index of the friend to retrieve
-     * @return the friend at the specified index
+     * @return Friend
+     *        
      */
     public Friend get(int i){return list.get(i);}
     /**
-     * Returns the number of friends in the list.
+     * Returns the size of the list.
+     * 
      *
-     * @return the size of the friend list
+     * @return integer
+     *        
      */
     public int size(){return list.size();}
 
     @Override
     /**
-     * Returns a string representation of the FriendList object.
+     * Casts the object to string
+     * 
      *
-     * @return a string representation of the FriendList object
+     * @return string value.
+     *        
      */
     public String toString() {
         return "FriendList{" +

@@ -6,10 +6,10 @@ import modelClient.Model;
 
 /**
  * 
+ * ViewModel for the ManageFolderViewController class.
  * 
- * 
- * @author 
- * @version 
+ * @author Damian Trafialek
+ * @version 1.0
  */
 public class ManageFolderViewModel extends ViewModel{
     private StringProperty errorProperty, nameProperty, headerLabel;
@@ -18,11 +18,12 @@ public class ManageFolderViewModel extends ViewModel{
 
     /**
      * 2-argument constructor 
+     * accepts the model and viewstate objects as arguments, and initializes the other bound
+     * properties.
      * 
-     * 
-     * @param model 
+     * @param model for the model layer of MVVM, which communicates with the server
      *        
-     * @param viewState 
+     * @param viewState to store information when switching screens
      *        
      */
     public ManageFolderViewModel(Model model, ViewState viewState) {
@@ -35,9 +36,9 @@ public class ManageFolderViewModel extends ViewModel{
 
     /**
      * 
-     * 
+     * method to either create a new folder or edit an existing one's name
      *
-     * @return 
+     * @return boolean to represent success/failure of either function
      *        
      */
     public boolean submit() {
@@ -59,25 +60,25 @@ public class ManageFolderViewModel extends ViewModel{
 
     /**
      * 
-     * 
+     * getter for the error text property
      *
-     * @return 
+     * @return StringProperty to represent error text
      *        
      */
     public StringProperty getErrorProperty() {return errorProperty;}
     /**
      * 
-     * 
+     * getter for the header property
      *
-     * @return 
+     * @return StringProperty to represent the header
      *        
      */
     public StringProperty getHeaderProperty() {return headerLabel;}
     /**
      * 
-     * 
+     * getter for the name property
      *
-     * @return 
+     * @return StringProperty to represent the name of the folder
      *        
      */
     public StringProperty getNameProperty() {return nameProperty;}
@@ -85,7 +86,7 @@ public class ManageFolderViewModel extends ViewModel{
 
     @Override
     /**
-     * 
+     * method that refreshes the screen upon controller initialisation and screen swap
      * 
      */
     public void clear() {

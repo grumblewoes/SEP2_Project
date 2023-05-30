@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * The FolderList class represents a list of folders.
- * FolderList objects are serializable.
+ * Class that stores the list of folders data.
  *
  *
  * @author Damian Trafiałek
@@ -14,32 +13,39 @@ import java.util.ArrayList;
 public class FolderList implements Serializable {
     private ArrayList<Folder> list;
     /**
-     * 0-argument constructor, creating a new FolderList object with an empty list of folders.
-     *
-     *
+     * 0-argument constructor that initialises the list.
+     * 
+     * 
      */
     public FolderList(){
         list= new ArrayList<>();
     }
+
     /**
-     * Adds a folder to the list.
-     *
-     * @param folder the folder to add
+     * Add the folder to the list.
+     * 
+     * @param folder - Folder
+     *        
      */
     public void add(Folder folder){
         list.add(folder);
     }
     /**
-     * Retrieves the folder at the specified index.
+     * Retunrs the folder under given index in the list.
+     * 
+     * @param i - integer
+     *        
      *
-     * @param i the index of the folder to retrieve
-     * @return the folder at the specified index
+     * @return Folder
+     *        
      */
     public Folder get(int i){return list.get(i);}
     /**
-     * Returns the number of folders in the list.
+     * Returns the size of the list.
+     * 
      *
-     * @return the size of the folder list
+     * @return integer
+     *        
      */
     public int size(){return list.size();}
 }

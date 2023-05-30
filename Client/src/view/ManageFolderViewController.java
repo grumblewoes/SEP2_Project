@@ -9,11 +9,10 @@ import viewModel.ManageFolderViewModel;
 import viewModel.ViewModel;
 
 /**
- * 
- * 
- * 
- * @author 
- * @version 
+ * View controller responsible for displaying the add, rename folder view.
+ *
+ * @author Damian Trafiałek
+ * @version 1.0
  */
 public class ManageFolderViewController extends ViewController
 {
@@ -25,14 +24,14 @@ public class ManageFolderViewController extends ViewController
 
 
   /**
-   * 
-   * 
-   * @param viewHandler 
-   *        
-   * @param viewModel 
-   *        
-   * @param root 
-   *        
+   * Method that initialise the controller and sets up all instance variables and bindings.
+   *
+   * @param viewHandler - handles changing views
+   *
+   * @param viewModel - view model related to the controller
+   *
+   * @param root - region that is being displayed
+   *
    */
   @Override public void  init(ViewHandler viewHandler, ViewModel viewModel, Region root)
   {
@@ -56,8 +55,8 @@ public class ManageFolderViewController extends ViewController
   }
 
   /**
-   * 
-   * 
+   * Reset method that calls view model to trigger the reset.
+   *
    */
   @Override public void reset()
   {
