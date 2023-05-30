@@ -1,0 +1,10 @@
+unnamed package
+mediator
+modelClient
+modelServer
+modelServer.DAO.implementation
+modelServer.DAO.interfaces
+modelServer.DbContext
+util
+view
+viewModel

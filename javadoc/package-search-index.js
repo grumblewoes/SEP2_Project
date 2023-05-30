@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"mediator"},{"l":"modelClient"},{"l":"modelServer"},{"l":"modelServer.DAO.implementation"},{"l":"modelServer.DAO.interfaces"},{"l":"modelServer.DbContext"},{"l":"util"},{"l":"view"},{"l":"viewModel"}];updateSearchResults();
